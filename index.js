@@ -1,13 +1,43 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+class EventDispatcher {
+    constructor() {
+        this.events = {};
+    }
+    RegisterEvent(frame, event) {
+        let events = this.events[event];
+        if (!events) {
+            this.events[event] = events = [];
+        }
+        events.push(frame);
+    }
+    DispatchEvent(event, ...params) {
+        const events = this.events[event];
+        if (!events)
+            return;
+        for (const frame of events) {
+            const handler = frame.scriptHandlers["OnEvent"];
+            if (handler)
+                continue;
+            handler(frame, event, ...params);
+        }
+    }
+}
+exports.EventDispatcher = EventDispatcher;
+exports.eventDispatcher = new EventDispatcher();
 class FakeFrame {
     constructor() {
+        this.scriptHandlers = {};
         this.shown = true;
+    }
+    RegisterEvent(event) {
+        exports.eventDispatcher.RegisterEvent(this, event);
     }
     SetAlpha(value) {
         this.alpha = value;
     }
     SetScript(event, func) {
+        this.scriptHandlers[event] = func;
     }
     StartMoving() {
     }
@@ -80,6 +110,7 @@ class FakeFrame {
         throw new Error("Method not implemented.");
     }
 }
+exports.FakeFrame = FakeFrame;
 // WOW global functions
 function debugprofilestop() { return 10; }
 exports.debugprofilestop = debugprofilestop;
@@ -413,7 +444,4 @@ function AceGUIRegisterAsContainer(widget) {
     widget.SetLayout("List");
 }
 exports.AceGUIRegisterAsContainer = AceGUIRegisterAsContainer;
-exports.DBM = {};
-exports.Bartender4 = {};
-exports.BigWigsLoader = {};
 //# sourceMappingURL=index.js.map

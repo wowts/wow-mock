@@ -18,7 +18,8 @@ export interface UIRegion {
 }
 export interface UIFrame extends UIRegion {
     SetAlpha(value: number): void;
-    SetScript(event: "OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate", func: () => void): void;
+    SetScript(event: "OnEvent", func: (frame: UIFrame, event: string, ...args: any[]) => void): void;
+    SetScript(event: "OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate" | "OnEvent", func: (frame: UIFrame, ...args: any[]) => void): void;
     StartMoving(): void;
     StopMovingOrSizing(): void;
     SetMovable(movable: boolean): void;
@@ -32,6 +33,7 @@ export interface UIFrame extends UIRegion {
     SetAttribute(key: string, value: string): void;
     SetScale(scale: number): void;
     IsVisible(): boolean;
+    RegisterEvent(event: string): void;
 }
 export interface UIMessageFrame extends UIFrame {
     AddMessage(message: string): void;
@@ -70,6 +72,53 @@ export interface UICooldown extends UIFrame {
     SetDrawEdge(enable: boolean): void;
     SetSwipeColor(r: number, g: number, b: number, alpha?: number): void;
     SetCooldown(start: number, duration: number): void;
+}
+export declare class EventDispatcher {
+    events: {
+        [key: string]: FakeFrame[];
+    };
+    RegisterEvent(frame: FakeFrame, event: string): void;
+    DispatchEvent(event: string, ...params: any[]): void;
+}
+export declare const eventDispatcher: EventDispatcher;
+export declare class FakeFrame implements UIFrame {
+    scriptHandlers: {
+        [script: string]: (frame: UIFrame, ...parameters: any[]) => void;
+    };
+    RegisterEvent(event: string): void;
+    mouseEnabled: boolean;
+    shown: boolean;
+    strata: string;
+    movable: boolean;
+    alpha: number;
+    SetAlpha(value: number): void;
+    SetScript(event: string, func: (frame: UIFrame, ...parameters: any[]) => void): void;
+    StartMoving(): void;
+    StopMovingOrSizing(): void;
+    SetMovable(movable: boolean): void;
+    SetFrameStrata(strata: "MEDIUM"): void;
+    Show(): void;
+    Hide(): void;
+    IsShown(): boolean;
+    CreateTexture(): UITexture;
+    EnableMouse(enabled: boolean): void;
+    CreateFontString(name: string, layer?: "OVERLAY" | undefined, inherits?: string | undefined): UIFontString;
+    SetAttribute(key: string, value: string): void;
+    SetScale(scale: number): void;
+    IsVisible(): boolean;
+    CanChangeProtectedState(): boolean;
+    ClearAllPoints(): void;
+    GetCenter(): [number, number];
+    GetWidth(): number;
+    GetHeight(): number;
+    GetParent(): UIRegion;
+    SetParent(parent: UIRegion): void;
+    SetParent(parent: UIFrame): void;
+    SetAllPoints(around: UIFrame): void;
+    SetPoint(anchor: UIPosition, x: number, y: number): void;
+    SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
+    SetWidth(width: number): void;
+    SetHeight(height: number): void;
 }
 export declare function debugprofilestop(): number;
 export declare function GetActionInfo(slot: string): string[];
@@ -281,6 +330,3 @@ export declare const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 export declare const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 export declare const COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
 export declare function AceGUIRegisterAsContainer(widget: any): void;
-export declare const DBM: any;
-export declare const Bartender4: any;
-export declare const BigWigsLoader: any;

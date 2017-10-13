@@ -21,7 +21,8 @@ export interface UIRegion {
 
 export interface UIFrame  extends UIRegion {
     SetAlpha(value:number):void;
-    SetScript(event:"OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate", func: () => void):void;
+    SetScript(event:"OnEvent", func: (frame: UIFrame, event: string, ...args:any[]) => void):void;
+    SetScript(event:"OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate" | "OnEvent", func: (frame: UIFrame, ...args:any[]) => void):void;
     StartMoving():void;
     StopMovingOrSizing():void;
     SetMovable(movable:boolean):void;
@@ -35,6 +36,7 @@ export interface UIFrame  extends UIRegion {
     SetAttribute(key: string, value: string):void;
     SetScale(scale: number):void;
     IsVisible():boolean;
+    RegisterEvent(event: string):void;
 }
 
 export interface UIMessageFrame extends UIFrame {
@@ -81,7 +83,36 @@ export interface UICooldown extends UIFrame {
     SetCooldown(start: number, duration: number):void;
 }
 
-class FakeFrame implements UIFrame {
+export class EventDispatcher {
+    events: {[key:string]: FakeFrame[]} = {}
+
+    RegisterEvent(frame: FakeFrame, event: string) {
+        let events = this.events[event];
+        if (!events) {
+            this.events[event] = events = [];
+        }
+        events.push(frame);
+    }
+
+    DispatchEvent(event: string, ...params: any[]) {
+        const events = this.events[event];
+        if (!events) return;
+        for (const frame of events) {
+            const handler = frame.scriptHandlers["OnEvent"];
+            if (handler) continue;
+            handler(frame, event, ...params);
+        }
+    }
+}
+
+export const eventDispatcher = new EventDispatcher();
+
+export class FakeFrame implements UIFrame {
+    scriptHandlers: {[script:string]:(frame:UIFrame, ...parameters:any[]) => void } = {}
+
+    RegisterEvent(event: string): void {
+        eventDispatcher.RegisterEvent(this, event);
+    }
     mouseEnabled: boolean;
     shown: boolean = true;
     strata: string;
@@ -90,7 +121,8 @@ class FakeFrame implements UIFrame {
     SetAlpha(value: number): void {
         this.alpha = value;
     }
-    SetScript(event: "OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate", func: any): void {
+    SetScript(event: string, func: (frame:UIFrame, ...parameters:any[]) => void): void {
+        this.scriptHandlers[event] = func;
     }
     StartMoving(): void {
     }
@@ -405,7 +437,3 @@ export function AceGUIRegisterAsContainer(widget: any) {
     widget.frame.SetScript("OnSizeChanged", widget.FrameResize)
     widget.SetLayout("List")
 }
-
-export const DBM: any = {};
-export const Bartender4: any = {};
-export const BigWigsLoader: any = {};
