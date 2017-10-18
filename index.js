@@ -17,7 +17,7 @@ class EventDispatcher {
             return;
         for (const frame of events) {
             const handler = frame.scriptHandlers["OnEvent"];
-            if (handler)
+            if (!handler)
                 continue;
             handler(frame, event, ...params);
         }
