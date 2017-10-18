@@ -247,16 +247,16 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 // WOW global functions
 export function debugprofilestop() {return 10; }
 export function GetActionInfo(slot: string) { return ["a", "b", "c"]; }
-export function GetActionText(slot: string) { return "ActioNText"; }
+export function GetActionText(slot: string) { return "ActionText"; }
 export function GetBindingKey(key:string){ return "a"; }
 export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
-export function GetMacroItem(spellId: number){ return []; }
-export function GetMacroSpell(spellId: number){ return [] }
-export function GetSpellInfo(spellId: number|string, bookType?: number) { return []; }
+export function GetMacroItem(spellId: number):any[]{ return []; }
+export function GetMacroSpell(spellId: number):any[]{ return [] }
+export function GetSpellInfo(spellId: number|string, bookType?: number):any[] { return []; }
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
-export function UnitAura(unitId: string, i:number, filter: string) { return []; }
+export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
 export function UnitCanAttack(unit:string, target: string) { return false; }
 export function UnitClass(unit:string):[string, "WARRIOR" | "PRIEST"] { return ["Warrior", "WARRIOR"]; }
 export function UnitExists(unit:string) { return false; }
@@ -307,7 +307,7 @@ export function UnitIsUnit(unit1: string, unit2: string){ return true}
 export function UnitPowerMax(unit: string, power: number, segment: number): number{ return 0}
 export function UnitRace(unit: string):any[]{return []}
 export function UnitStagger(unit: string){return 0}
-export function GetSpellCharges(spellId: number) {return []}
+export function GetSpellCharges(spellId: number):any[] {return []}
 export function GetSpellCooldown(type:string|number, book?: string):[number, number, boolean]{ return [0, 0, false]}
 export function GetLocale() { return "en-US"}
 export function CreateFrame(type:"GameTooltip", id?:string, parent?:UIFrame, template?:string):UIGameTooltip;
@@ -360,22 +360,22 @@ export function GetRuneCooldown(slot: number){return [0, 0, 0]}
 export function SendAddonMessage(MSG_PREFIX: string, message: string, channel: string){}
 //export function print(s: string):void {}
 export function GetActiveSpecGroup() {return 0;}
-export function GetFlyoutInfo(flyoutId: number) {return[]}
-export function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number) {return[]}
-export function GetSpellBookItemInfo(index: number|string, bookType?: string) {return[]}
+export function GetFlyoutInfo(flyoutId: number):any[] {return[]}
+export function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number):any[] {return[]}
+export function GetSpellBookItemInfo(index: number|string, bookType?: string):any[] {return[]}
 export function GetSpellCount(index: number|string, bookType?: string){}
 export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
-export function GetSpellTabInfo(tab: number) { return []}
-export function GetTalentInfo(i: number, j: number, activeTalentGroup: number){ return []; }
+export function GetSpellTabInfo(tab: number):any[] { return []}
+export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):any[] { return []; }
 export function HasPetSpells():[number, string] {return[0, "a"]}
 export function IsHarmfulSpell(index: number|string, bookType?: string){}
 export function IsHelpfulSpell(index: number|string, bookType?: string){}
 export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return false;}
-export function IsUsableSpell(index: number|string, bookType?: string){return [];}
+export function IsUsableSpell(index: number|string, bookType?: string):any[] {return [];}
 export function GetNumShapeshiftForms() {return 0}
 export function GetShapeshiftForm(){}
-export function GetShapeshiftFormInfo(index:number){return []}
-export function GetTotemInfo(slot: number) {return[]}
+export function GetShapeshiftFormInfo(index:number):any[] {return []}
+export function GetTotemInfo(slot: number):any[] {return[]}
 
 export const UIParent: UIFrame = new FakeFrame();
 

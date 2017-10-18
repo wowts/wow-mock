@@ -162,7 +162,7 @@ function debugprofilestop() { return 10; }
 exports.debugprofilestop = debugprofilestop;
 function GetActionInfo(slot) { return ["a", "b", "c"]; }
 exports.GetActionInfo = GetActionInfo;
-function GetActionText(slot) { return "ActioNText"; }
+function GetActionText(slot) { return "ActionText"; }
 exports.GetActionText = GetActionText;
 function GetBindingKey(key) { return "a"; }
 exports.GetBindingKey = GetBindingKey;
