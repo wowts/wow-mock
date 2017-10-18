@@ -203,6 +203,12 @@ export class FakeFrame implements UIFrame {
     
 }
 
+export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
+    AddMessage(message:string):void {
+        console.log(message);
+    }
+}
+
 export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
     private text: string;
     private lines: string[] = [];
@@ -374,10 +380,10 @@ export function GetTotemInfo(slot: number) {return[]}
 export const UIParent: UIFrame = new FakeFrame();
 
 // WoW global variables
-export const GameTooltip:UIGameTooltip = <UIGameTooltip>{}
+export const GameTooltip:UIGameTooltip = new FakeGameTooltip();
 export const MAX_COMBO_POINTS = 5;
 export const UNKNOWN = -1;
-export const DEFAULT_CHAT_FRAME:UIMessageFrame = <UIMessageFrame>{};
+export const DEFAULT_CHAT_FRAME:UIMessageFrame = new FakeMessageFrame();
 export const SCHOOL_MASK_NONE = 0;
 export const SCHOOL_MASK_ARCANE = 1;
 export const SCHOOL_MASK_FIRE = 2;

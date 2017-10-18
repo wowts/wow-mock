@@ -111,6 +111,12 @@ class FakeFrame {
     }
 }
 exports.FakeFrame = FakeFrame;
+class FakeMessageFrame extends FakeFrame {
+    AddMessage(message) {
+        console.log(message);
+    }
+}
+exports.FakeMessageFrame = FakeMessageFrame;
 class FakeGameTooltip extends FakeFrame {
     constructor() {
         super(...arguments);
@@ -396,10 +402,10 @@ function GetTotemInfo(slot) { return []; }
 exports.GetTotemInfo = GetTotemInfo;
 exports.UIParent = new FakeFrame();
 // WoW global variables
-exports.GameTooltip = {};
+exports.GameTooltip = new FakeGameTooltip();
 exports.MAX_COMBO_POINTS = 5;
 exports.UNKNOWN = -1;
-exports.DEFAULT_CHAT_FRAME = {};
+exports.DEFAULT_CHAT_FRAME = new FakeMessageFrame();
 exports.SCHOOL_MASK_NONE = 0;
 exports.SCHOOL_MASK_ARCANE = 1;
 exports.SCHOOL_MASK_FIRE = 2;

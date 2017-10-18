@@ -122,6 +122,9 @@ export declare class FakeFrame implements UIFrame {
     SetWidth(width: number): void;
     SetHeight(height: number): void;
 }
+export declare class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
+    AddMessage(message: string): void;
+}
 export declare class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
     private text;
     private lines;
