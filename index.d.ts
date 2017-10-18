@@ -343,7 +343,80 @@ export declare const BOOKTYPE_PET = 2;
 export declare const MAX_TALENT_TIERS = 5;
 export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
-export declare const RAID_CLASS_COLORS: {};
+export declare const RAID_CLASS_COLORS: {
+    ["HUNTER"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["WARLOCK"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["PRIEST"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["PALADIN"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["MAGE"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["ROGUE"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DRUID"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["SHAMAN"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["WARRIOR"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DEATHKNIGHT"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["MONK"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DEMONHUNTER"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+};
 export declare const AIR_TOTEM_SLOT = 1;
 export declare const EARTH_TOTEM_SLOT = 2;
 export declare const FIRE_TOTEM_SLOT = 3;
