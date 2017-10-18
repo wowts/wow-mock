@@ -53,6 +53,8 @@ export interface UICheckButton extends UIFrame {
     GetChecked(): boolean;
     RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"): void;
 }
+export interface UIDropdown extends UIFrame {
+}
 export interface UITexture extends UIFrame {
     SetTexture(name: string): void;
     SetTexture(r: number, g: number, b: number, alpha?: number): void;
@@ -119,6 +121,25 @@ export declare class FakeFrame implements UIFrame {
     SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
     SetWidth(width: number): void;
     SetHeight(height: number): void;
+}
+export declare class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
+    private text;
+    private lines;
+    SetOwner(frame: UIFrame, anchor: UIAnchor): void;
+    SetText(text: string, r?: number, g?: number, b?: number): void;
+    AddLine(text: string, r?: number, g?: number, b?: number): void;
+    ClearLines(): void;
+    SetInventoryItem(unit: string, slot: number): void;
+    NumLines(): number;
+    GetText(): string;
+}
+export declare class FakeCheckButton extends FakeFrame implements UICheckButton {
+    private isChecked;
+    SetChecked(checked: boolean): void;
+    GetChecked(): boolean;
+    RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"): void;
+}
+export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 export declare function debugprofilestop(): number;
 export declare function GetActionInfo(slot: string): string[];
@@ -190,7 +211,7 @@ export declare function GetSpellCooldown(type: string | number, book?: string): 
 export declare function GetLocale(): string;
 export declare function CreateFrame(type: "GameTooltip", id?: string, parent?: UIFrame, template?: string): UIGameTooltip;
 export declare function CreateFrame(type: "CheckButton", id?: string, parent?: UIFrame, template?: string): UICheckButton;
-export declare function CreateFrame(type: "Dropdown", id?: string, parent?: UIFrame, template?: string): UIFrame;
+export declare function CreateFrame(type: "Dropdown", id?: string, parent?: UIFrame, template?: string): UIDropdown;
 export declare function CreateFrame(type: "Frame", id?: string, parent?: UIFrame, template?: string): UIFrame;
 export declare function EasyMenu(menu: any, menuFrame: UIFrame, cursor: string | UIRegion, x: number, y: number, menuType: string, autoHideDelay?: number): void;
 export declare function IsShiftKeyDown(): void;

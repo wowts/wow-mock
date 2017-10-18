@@ -60,6 +60,8 @@ export interface UICheckButton extends UIFrame {
     RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"):void;
 }
 
+export interface UIDropdown extends UIFrame {}
+
 export interface UITexture extends UIFrame {
     SetTexture(name: string):void;
     SetTexture(r: number, g: number, b: number, alpha?:number):void;
@@ -201,6 +203,41 @@ export class FakeFrame implements UIFrame {
     
 }
 
+export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
+    private text: string;
+    private lines: string[] = [];
+    SetOwner(frame: UIFrame, anchor: UIAnchor):void {}
+    SetText(text: string, r?: number, g?: number, b?: number):void {
+        this.text = text;
+    }
+    AddLine(text: string, r?: number, g?: number, b?: number):void {
+        this.lines.push(text);
+    }
+    ClearLines():void {}
+    SetInventoryItem(unit: string, slot: number):void {}
+    NumLines():number {
+        return this.lines.length; 
+    }
+    GetText():string {
+        return this.text;
+    }
+}
+
+export class FakeCheckButton extends FakeFrame implements UICheckButton {
+    private isChecked: boolean = false;
+    SetChecked(checked: boolean):void {
+        this.isChecked = checked;
+    }
+    GetChecked():boolean {
+        return this.isChecked;
+    }
+    RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"):void {
+    }
+}
+
+export class FakeDropdown extends FakeFrame implements UIDropdown {
+}
+
 // WOW global functions
 export function debugprofilestop() {return 10; }
 export function GetActionInfo(slot: string) { return ["a", "b", "c"]; }
@@ -269,9 +306,20 @@ export function GetSpellCooldown(type:string|number, book?: string):[number, num
 export function GetLocale() { return "en-US"}
 export function CreateFrame(type:"GameTooltip", id?:string, parent?:UIFrame, template?:string):UIGameTooltip;
 export function CreateFrame(type:"CheckButton", id?:string, parent?:UIFrame, template?:string):UICheckButton;
-export function CreateFrame(type:"Dropdown", id?:string, parent?:UIFrame, template?:string):UIFrame;
+export function CreateFrame(type:"Dropdown", id?:string, parent?:UIFrame, template?:string):UIDropdown;
 export function CreateFrame(type:"Frame", id?:string, parent?:UIFrame, template?:string):UIFrame;
-export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:string):UIFrame { return new FakeFrame()}
+export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:string):UIFrame { 
+    switch (type) {
+        case "GameTooltip":
+            return new FakeGameTooltip();
+        case "CheckButton":
+            return new FakeCheckButton();
+        case "DropDown":
+            return new FakeDropdown();
+        default:
+            return new FakeFrame();
+    }
+}
 export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:number, y:number, menuType:string, autoHideDelay?:number) {}
 export function IsShiftKeyDown(){}
 export function GetSpecialization(){return "havoc"}

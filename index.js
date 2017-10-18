@@ -111,6 +111,46 @@ class FakeFrame {
     }
 }
 exports.FakeFrame = FakeFrame;
+class FakeGameTooltip extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.lines = [];
+    }
+    SetOwner(frame, anchor) { }
+    SetText(text, r, g, b) {
+        this.text = text;
+    }
+    AddLine(text, r, g, b) {
+        this.lines.push(text);
+    }
+    ClearLines() { }
+    SetInventoryItem(unit, slot) { }
+    NumLines() {
+        return this.lines.length;
+    }
+    GetText() {
+        return this.text;
+    }
+}
+exports.FakeGameTooltip = FakeGameTooltip;
+class FakeCheckButton extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.isChecked = false;
+    }
+    SetChecked(checked) {
+        this.isChecked = checked;
+    }
+    GetChecked() {
+        return this.isChecked;
+    }
+    RegisterForClicks(type) {
+    }
+}
+exports.FakeCheckButton = FakeCheckButton;
+class FakeDropdown extends FakeFrame {
+}
+exports.FakeDropdown = FakeDropdown;
 // WOW global functions
 function debugprofilestop() { return 10; }
 exports.debugprofilestop = debugprofilestop;
@@ -242,7 +282,18 @@ function GetSpellCooldown(type, book) { return [0, 0, false]; }
 exports.GetSpellCooldown = GetSpellCooldown;
 function GetLocale() { return "en-US"; }
 exports.GetLocale = GetLocale;
-function CreateFrame(type, id, parent, template) { return new FakeFrame(); }
+function CreateFrame(type, id, parent, template) {
+    switch (type) {
+        case "GameTooltip":
+            return new FakeGameTooltip();
+        case "CheckButton":
+            return new FakeCheckButton();
+        case "DropDown":
+            return new FakeDropdown();
+        default:
+            return new FakeFrame();
+    }
+}
 exports.CreateFrame = CreateFrame;
 function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
