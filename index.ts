@@ -253,7 +253,7 @@ export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
 export function GetMacroItem(spellId: number):any[]{ return []; }
 export function GetMacroSpell(spellId: number):any[]{ return [] }
-export function GetSpellInfo(spellId: number|string, bookType?: number):any[] { return []; }
+export function GetSpellInfo(spellId: number|string, bookType?: string):any[] { return []; }
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
 export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
@@ -366,7 +366,9 @@ export function GetSpellBookItemInfo(index: number|string, bookType?: string):an
 export function GetSpellCount(index: number|string, bookType?: string){}
 export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
 export function GetSpellTabInfo(tab: number):any[] { return []}
-export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):any[] { return []; }
+export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] { 
+    return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
+}
 export function HasPetSpells():[number, string] {return[0, "a"]}
 export function IsHarmfulSpell(index: number|string, bookType?: string){}
 export function IsHelpfulSpell(index: number|string, bookType?: string){}
@@ -460,10 +462,10 @@ export const LE_PARTY_CATEGORY_INSTANCE = 1;
 export const LE_PARTY_CATEGORY_HOME = 2;
 export const _G: any = {};
 
-export const BOOKTYPE_SPELL = 1;
-export const BOOKTYPE_PET = 2;
+export const BOOKTYPE_SPELL = "spell";
+export const BOOKTYPE_PET = "pet";
 
-export const MAX_TALENT_TIERS = 5;
+export const MAX_TALENT_TIERS = 7;
 export const NUM_TALENT_COLUMNS = 3;
 
 export const RUNE_NAME = {};

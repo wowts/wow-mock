@@ -380,7 +380,9 @@ function GetSpellLink(index, bookType) { return "aa"; }
 exports.GetSpellLink = GetSpellLink;
 function GetSpellTabInfo(tab) { return []; }
 exports.GetSpellTabInfo = GetSpellTabInfo;
-function GetTalentInfo(i, j, activeTalentGroup) { return []; }
+function GetTalentInfo(i, j, activeTalentGroup) {
+    return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
+}
 exports.GetTalentInfo = GetTalentInfo;
 function HasPetSpells() { return [0, "a"]; }
 exports.HasPetSpells = HasPetSpells;
@@ -475,9 +477,9 @@ exports.ITEM_LEVEL = "ITEM_LEVEL";
 exports.LE_PARTY_CATEGORY_INSTANCE = 1;
 exports.LE_PARTY_CATEGORY_HOME = 2;
 exports._G = {};
-exports.BOOKTYPE_SPELL = 1;
-exports.BOOKTYPE_PET = 2;
-exports.MAX_TALENT_TIERS = 5;
+exports.BOOKTYPE_SPELL = "spell";
+exports.BOOKTYPE_PET = "pet";
+exports.MAX_TALENT_TIERS = 7;
 exports.NUM_TALENT_COLUMNS = 3;
 exports.RUNE_NAME = {};
 exports.RAID_CLASS_COLORS = {
