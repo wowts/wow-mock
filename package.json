@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/wowts/wow-mock#readme",
   "dependencies": {
-    "@wowts/lua": "^1.0.2"
+    "@wowts/lua": "^1.0.5"
   },
   "devDependencies": {
     "typescript": "^2.5.3",
