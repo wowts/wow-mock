@@ -378,7 +378,7 @@ export function GetNumShapeshiftForms() {return 0}
 export function GetShapeshiftForm(){}
 export function GetShapeshiftFormInfo(index:number):any[] {return []}
 export function GetTotemInfo(slot: number):any[] {return[]}
-
+export function IsLoggedIn() { return true; }
 export const UIParent: UIFrame = new FakeFrame();
 
 // WoW global variables
@@ -495,14 +495,3 @@ export const COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 export const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 export const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 export const COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
-
-export function AceGUIRegisterAsContainer(widget: any) {
-    widget.children = {}
-    widget.userdata = {}
-    widget.events = {}
-    widget.content.obj = widget
-    widget.frame.obj = widget
-    widget.content.SetScript("OnSizeChanged", widget.ContentResize)
-    widget.frame.SetScript("OnSizeChanged", widget.FrameResize)
-    widget.SetLayout("List")
-}

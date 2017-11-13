@@ -402,6 +402,8 @@ function GetShapeshiftFormInfo(index) { return []; }
 exports.GetShapeshiftFormInfo = GetShapeshiftFormInfo;
 function GetTotemInfo(slot) { return []; }
 exports.GetTotemInfo = GetTotemInfo;
+function IsLoggedIn() { return true; }
+exports.IsLoggedIn = IsLoggedIn;
 exports.UIParent = new FakeFrame();
 // WoW global variables
 exports.GameTooltip = new FakeGameTooltip();
@@ -505,15 +507,4 @@ exports.COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 exports.COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 exports.COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 exports.COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
-function AceGUIRegisterAsContainer(widget) {
-    widget.children = {};
-    widget.userdata = {};
-    widget.events = {};
-    widget.content.obj = widget;
-    widget.frame.obj = widget;
-    widget.content.SetScript("OnSizeChanged", widget.ContentResize);
-    widget.frame.SetScript("OnSizeChanged", widget.FrameResize);
-    widget.SetLayout("List");
-}
-exports.AceGUIRegisterAsContainer = AceGUIRegisterAsContainer;
 //# sourceMappingURL=index.js.map
