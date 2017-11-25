@@ -248,6 +248,7 @@ export declare function UnitSpellHaste(unitId: string): number;
 export declare function UnitStat(unitId: string, stat: number): number;
 export declare function GetRuneCooldown(slot: number): number[];
 export declare function SendAddonMessage(MSG_PREFIX: string, message: string, channel: string): void;
+export declare function print(s: any): void;
 export declare function GetActiveSpecGroup(): number;
 export declare function GetFlyoutInfo(flyoutId: number): any[];
 export declare function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number): any[];
@@ -262,7 +263,7 @@ export declare function IsHelpfulSpell(index: number | string, bookType?: string
 export declare function IsSpellInRange(index: number | string, bookType?: string, unitId?: string): boolean;
 export declare function IsUsableSpell(index: number | string, bookType?: string): any[];
 export declare function GetNumShapeshiftForms(): number;
-export declare function GetShapeshiftForm(): void;
+export declare function GetShapeshiftForm(): number;
 export declare function GetShapeshiftFormInfo(index: number): any[];
 export declare function GetTotemInfo(slot: number): any[];
 export declare function IsLoggedIn(): boolean;

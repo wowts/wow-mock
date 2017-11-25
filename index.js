@@ -365,7 +365,8 @@ function GetRuneCooldown(slot) { return [0, 0, 0]; }
 exports.GetRuneCooldown = GetRuneCooldown;
 function SendAddonMessage(MSG_PREFIX, message, channel) { }
 exports.SendAddonMessage = SendAddonMessage;
-//export function print(s: string):void {}
+function print(s) { }
+exports.print = print;
 function GetActiveSpecGroup() { return 0; }
 exports.GetActiveSpecGroup = GetActiveSpecGroup;
 function GetFlyoutInfo(flyoutId) { return []; }
@@ -396,7 +397,7 @@ function IsUsableSpell(index, bookType) { return []; }
 exports.IsUsableSpell = IsUsableSpell;
 function GetNumShapeshiftForms() { return 0; }
 exports.GetNumShapeshiftForms = GetNumShapeshiftForms;
-function GetShapeshiftForm() { }
+function GetShapeshiftForm() { return 0; }
 exports.GetShapeshiftForm = GetShapeshiftForm;
 function GetShapeshiftFormInfo(index) { return []; }
 exports.GetShapeshiftFormInfo = GetShapeshiftFormInfo;

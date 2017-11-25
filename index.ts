@@ -358,7 +358,7 @@ export function UnitSpellHaste(unitId:string){return 0}
 export function UnitStat(unitId:string, stat:number){return 0}
 export function GetRuneCooldown(slot: number){return [0, 0, 0]}
 export function SendAddonMessage(MSG_PREFIX: string, message: string, channel: string){}
-//export function print(s: string):void {}
+export function print(s: any):void {}
 export function GetActiveSpecGroup() {return 0;}
 export function GetFlyoutInfo(flyoutId: number):any[] {return[]}
 export function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number):any[] {return[]}
@@ -375,7 +375,7 @@ export function IsHelpfulSpell(index: number|string, bookType?: string){}
 export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return false;}
 export function IsUsableSpell(index: number|string, bookType?: string):any[] {return [];}
 export function GetNumShapeshiftForms() {return 0}
-export function GetShapeshiftForm(){}
+export function GetShapeshiftForm(){return 0;}
 export function GetShapeshiftFormInfo(index:number):any[] {return []}
 export function GetTotemInfo(slot: number):any[] {return[]}
 export function IsLoggedIn() { return true; }
