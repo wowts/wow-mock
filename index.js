@@ -254,7 +254,7 @@ function HasFullControl() { return false; }
 exports.HasFullControl = HasFullControl;
 function IsSpellOverlayed() { }
 exports.IsSpellOverlayed = IsSpellOverlayed;
-function IsStealthed() { }
+function IsStealthed() { return false; }
 exports.IsStealthed = IsStealthed;
 function UnitCastingInfo(target) { return []; }
 exports.UnitCastingInfo = UnitCastingInfo;

@@ -64,7 +64,7 @@ export interface UIDropdown extends UIFrame {}
 
 export interface UITexture extends UIFrame {
     SetTexture(name: string):void;
-    SetTexture(r: number, g: number, b: number, alpha?:number):void;
+    SetColorTexture(r: number, g: number, b: number, alpha?:number):void;
     SetVertexColor(r: number, g: number, b: number, alpha?:number):void;
 }
 
@@ -293,7 +293,7 @@ export function GetUnitSpeed(unit: string):number { return 0;}
 export function GetWeaponEnchantInfo():any[] {return []}
 export function HasFullControl() {return false}
 export function IsSpellOverlayed() {}
-export function IsStealthed() {}
+export function IsStealthed() { return false; }
 export function UnitCastingInfo(target: string):any[] { return [] }
 export function UnitChannelInfo(target: string):any[] {return  [] }
 export function UnitClassification(target: string){}
