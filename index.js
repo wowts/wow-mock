@@ -327,6 +327,8 @@ function PlaySoundFile(file) { }
 exports.PlaySoundFile = PlaySoundFile;
 function GetCombatRating(combatRatingIdentifier) { return 0; }
 exports.GetCombatRating = GetCombatRating;
+function GetCombatRatingBonus(combatRatingIdentifier) { return 0; }
+exports.GetCombatRatingBonus = GetCombatRatingBonus;
 function GetCritChance() { return 0; }
 exports.GetCritChance = GetCritChance;
 function GetMastery() { return 0; }
@@ -476,6 +478,7 @@ exports.PAIN_COST = "";
 exports.FURY_COST = "";
 exports.CR_CRIT_MELEE = 1;
 exports.CR_HASTE_MELEE = 2;
+exports.CR_VERSATILITY_DAMAGE_DONE = 3;
 exports.ITEM_LEVEL = "ITEM_LEVEL";
 exports.LE_PARTY_CATEGORY_INSTANCE = 1;
 exports.LE_PARTY_CATEGORY_HOME = 2;

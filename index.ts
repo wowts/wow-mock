@@ -246,8 +246,8 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 
 // WOW global functions
 export function debugprofilestop() {return 10; }
-export function GetActionInfo(slot: string) { return ["a", "b", "c"]; }
-export function GetActionText(slot: string) { return "ActionText"; }
+export function GetActionInfo(slot: number) { return ["a", "b", "c"]; }
+export function GetActionText(slot: number) { return "ActionText"; }
 export function GetBindingKey(key:string){ return "a"; }
 export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
@@ -264,16 +264,16 @@ export function UnitGUID(unit:string) { return "aaaa"; }
 export function UnitHasVehicleUI(unit: string) { return false; }
 export function UnitIsDead(unit: string) { return false; }
 export function UnitName(unitId: string) { return "Esside"; }
-export function GetActionCooldown(action: string):[number, number, boolean] { return [0, 0, false]; }
-export function GetActionTexture(action: string){ }
+export function GetActionCooldown(action: number):[number, number, boolean] { return [0, 0, false]; }
+export function GetActionTexture(action: number){ }
 export function GetItemIcon(itemId: number){}
 export function GetItemCooldown(itemId: number): [number, number, boolean]{ return [0, 0, false]; }
 export function GetItemSpell(itemId: number){}
 export function GetSpellTexture(spellId: number, bookType?: number){}
-export function IsActionInRange(action: string, target: string){}
-export function IsCurrentAction(action: string){}
+export function IsActionInRange(action: number, target: string){}
+export function IsCurrentAction(action: number){}
 export function IsItemInRange(itemId: number, target: string){ return false;}
-export function IsUsableAction(action: string): boolean{ return false;}
+export function IsUsableAction(action: number): boolean{ return false;}
 export function IsUsableItem(itemId: number): boolean { return false;}
 export function GetNumGroupMembers(filter: number) {return 0;}
 export function UnitPower(unit: string, type: number, segments?: number) { return 0;}
@@ -339,6 +339,7 @@ export function UnitHealth(unit:string){return 0}
 export function UnitHealthMax(unit:string){return 0}
 export function PlaySoundFile(file:string){}
 export function GetCombatRating(combatRatingIdentifier:number){ return 0}
+export function GetCombatRatingBonus(combatRatingIdentifier:number) {return 0;}
 export function GetCritChance(){return 0}
 export function GetMastery(){return 0}
 export function GetMasteryEffect(){return 0}
@@ -455,6 +456,7 @@ export const FURY_COST = "";
 
 export const CR_CRIT_MELEE = 1;
 export const CR_HASTE_MELEE = 2;
+export const CR_VERSATILITY_DAMAGE_DONE = 3;
 
 export const ITEM_LEVEL = "ITEM_LEVEL";
 
