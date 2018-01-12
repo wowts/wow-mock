@@ -174,7 +174,7 @@ function GetMacroItem(spellId) { return []; }
 exports.GetMacroItem = GetMacroItem;
 function GetMacroSpell(spellId) { return []; }
 exports.GetMacroSpell = GetMacroSpell;
-function GetSpellInfo(spellId, bookType) { return []; }
+function GetSpellInfo(spellId, bookType) { return ["a", "b", "c", 0, 1, 2, 3]; }
 exports.GetSpellInfo = GetSpellInfo;
 function GetTime() { return 10; }
 exports.GetTime = GetTime;
@@ -224,6 +224,8 @@ function UnitPower(unit, type, segments) { return 0; }
 exports.UnitPower = UnitPower;
 function GetPowerRegen() { return [0, 0]; }
 exports.GetPowerRegen = GetPowerRegen;
+function GetManaRegen() { return [0, 0]; }
+exports.GetManaRegen = GetManaRegen;
 function GetSpellPowerCost(spellId) { return { 1: { cost: 0, type: 0 } }; }
 exports.GetSpellPowerCost = GetSpellPowerCost;
 function UnitPowerType(unit) { return [0, 0]; }
@@ -377,7 +379,7 @@ function GetFlyoutSlotInfo(flyoutId, flyoutIndex) { return []; }
 exports.GetFlyoutSlotInfo = GetFlyoutSlotInfo;
 function GetSpellBookItemInfo(index, bookType) { return []; }
 exports.GetSpellBookItemInfo = GetSpellBookItemInfo;
-function GetSpellCount(index, bookType) { }
+function GetSpellCount(index, bookType) { return 0; }
 exports.GetSpellCount = GetSpellCount;
 function GetSpellLink(index, bookType) { return "aa"; }
 exports.GetSpellLink = GetSpellLink;
@@ -393,9 +395,9 @@ function IsHarmfulSpell(index, bookType) { }
 exports.IsHarmfulSpell = IsHarmfulSpell;
 function IsHelpfulSpell(index, bookType) { }
 exports.IsHelpfulSpell = IsHelpfulSpell;
-function IsSpellInRange(index, bookType, unitId) { return false; }
+function IsSpellInRange(index, bookType, unitId) { return 0; }
 exports.IsSpellInRange = IsSpellInRange;
-function IsUsableSpell(index, bookType) { return []; }
+function IsUsableSpell(index, bookType) { return [true, false]; }
 exports.IsUsableSpell = IsUsableSpell;
 function GetNumShapeshiftForms() { return 0; }
 exports.GetNumShapeshiftForms = GetNumShapeshiftForms;
@@ -511,4 +513,27 @@ exports.COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 exports.COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 exports.COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 exports.COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
+exports.Enum = {
+    PowerType: {
+        Mana: 0,
+        Rage: 1,
+        Focus: 2,
+        Energy: 3,
+        ComboPoints: 4,
+        Runes: 5,
+        RunicPower: 6,
+        SoulShards: 7,
+        LunarPower: 8,
+        HolyPower: 9,
+        Alternate: 10,
+        Maelstrom: 11,
+        Chi: 12,
+        Insanity: 13,
+        Obsolete: 14,
+        Obsolete2: 15,
+        ArcaneCharges: 16,
+        Fury: 17,
+        Pain: 18
+    }
+};
 //# sourceMappingURL=index.js.map

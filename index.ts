@@ -1,4 +1,4 @@
-import { LuaArray } from "@wowts/lua";
+import { LuaArray, LuaObj } from "@wowts/lua";
 
 export type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
@@ -253,7 +253,7 @@ export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
 export function GetMacroItem(spellId: number):any[]{ return []; }
 export function GetMacroSpell(spellId: number):any[]{ return [] }
-export function GetSpellInfo(spellId: number|string, bookType?: string):any[] { return []; }
+export function GetSpellInfo(spellId: number|string, bookType?: string): [string, string, string, number, number, number, number] { return ["a", "b", "c", 0, 1, 2, 3]; }
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
 export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
@@ -269,7 +269,7 @@ export function GetActionTexture(action: number){ }
 export function GetItemIcon(itemId: number){}
 export function GetItemCooldown(itemId: number): [number, number, boolean]{ return [0, 0, false]; }
 export function GetItemSpell(itemId: number){}
-export function GetSpellTexture(spellId: number, bookType?: number){}
+export function GetSpellTexture(spellId: number, bookType?: string){}
 export function IsActionInRange(action: number, target: string){}
 export function IsCurrentAction(action: number){}
 export function IsItemInRange(itemId: number, target: string){ return false;}
@@ -278,6 +278,7 @@ export function IsUsableItem(itemId: number): boolean { return false;}
 export function GetNumGroupMembers(filter: number) {return 0;}
 export function UnitPower(unit: string, type: number, segments?: number) { return 0;}
 export function GetPowerRegen():[number, number] {return [0, 0]}
+export function GetManaRegen():[number, number] { return [0, 0]}
 export function GetSpellPowerCost(spellId:number): LuaArray<{cost:number, type:number}> { return {1:{cost:0, type: 0}}}
 export function UnitPowerType(unit: string):[number,number] { return [0,0]}
 export function IsInGroup(filter?: number){ return false}
@@ -364,7 +365,7 @@ export function GetActiveSpecGroup() {return 0;}
 export function GetFlyoutInfo(flyoutId: number):any[] {return[]}
 export function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number):any[] {return[]}
 export function GetSpellBookItemInfo(index: number|string, bookType?: string):any[] {return[]}
-export function GetSpellCount(index: number|string, bookType?: string){}
+export function GetSpellCount(index: number|string, bookType?: string): number { return 0}
 export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
 export function GetSpellTabInfo(tab: number):any[] { return []}
 export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] { 
@@ -373,8 +374,8 @@ export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[
 export function HasPetSpells():[number, string] {return[0, "a"]}
 export function IsHarmfulSpell(index: number|string, bookType?: string){}
 export function IsHelpfulSpell(index: number|string, bookType?: string){}
-export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return false;}
-export function IsUsableSpell(index: number|string, bookType?: string):any[] {return [];}
+export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return 0;}
+export function IsUsableSpell(index: number|string, bookType?: string):[boolean, boolean] {return [true, false];}
 export function GetNumShapeshiftForms() {return 0}
 export function GetShapeshiftForm(){return 0;}
 export function GetShapeshiftFormInfo(index:number):any[] {return []}
@@ -472,7 +473,7 @@ export const NUM_TALENT_COLUMNS = 3;
 
 export const RUNE_NAME = {};
 
-export const RAID_CLASS_COLORS = {
+export const RAID_CLASS_COLORS:LuaObj<{r:number, g: number, b:number, colorStr: string}> = {
     ["HUNTER"]: { r: 0.67, g: 0.83, b: 0.45, colorStr: "ffabd473" },
     ["WARLOCK"]: { r: 0.53, g: 0.53, b: 0.93, colorStr: "ff8788ee" },
     ["PRIEST"]: { r: 1.0, g: 1.0, b: 1.0, colorStr: "ffffffff" },
@@ -497,3 +498,27 @@ export const COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 export const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 export const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 export const COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
+
+export const Enum = {
+    PowerType: { 
+        Mana: 0,
+        Rage: 1,
+        Focus: 2,
+        Energy: 3,
+        ComboPoints: 4,
+        Runes: 5,
+        RunicPower: 6,
+        SoulShards: 7,
+        LunarPower: 8,
+        HolyPower: 9,
+        Alternate: 10,
+        Maelstrom: 11,
+        Chi: 12,
+        Insanity: 13,
+        Obsolete: 14,
+        Obsolete2: 15,
+        ArcaneCharges: 16,
+        Fury: 17,
+        Pain: 18
+    }
+};

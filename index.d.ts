@@ -1,4 +1,4 @@
-import { LuaArray } from "@wowts/lua";
+import { LuaArray, LuaObj } from "@wowts/lua";
 export declare type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export declare type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
 export interface UIRegion {
@@ -152,7 +152,7 @@ export declare function GetBonusBarIndex(): void;
 export declare function GetItemInfo(itemId: number | string): any[];
 export declare function GetMacroItem(spellId: number): any[];
 export declare function GetMacroSpell(spellId: number): any[];
-export declare function GetSpellInfo(spellId: number | string, bookType?: string): any[];
+export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string, string, string, number, number, number, number];
 export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
 export declare function UnitAura(unitId: string, i: number, filter: string): any[];
@@ -168,7 +168,7 @@ export declare function GetActionTexture(action: number): void;
 export declare function GetItemIcon(itemId: number): void;
 export declare function GetItemCooldown(itemId: number): [number, number, boolean];
 export declare function GetItemSpell(itemId: number): void;
-export declare function GetSpellTexture(spellId: number, bookType?: number): void;
+export declare function GetSpellTexture(spellId: number, bookType?: string): void;
 export declare function IsActionInRange(action: number, target: string): void;
 export declare function IsCurrentAction(action: number): void;
 export declare function IsItemInRange(itemId: number, target: string): boolean;
@@ -177,6 +177,7 @@ export declare function IsUsableItem(itemId: number): boolean;
 export declare function GetNumGroupMembers(filter: number): number;
 export declare function UnitPower(unit: string, type: number, segments?: number): number;
 export declare function GetPowerRegen(): [number, number];
+export declare function GetManaRegen(): [number, number];
 export declare function GetSpellPowerCost(spellId: number): LuaArray<{
     cost: number;
     type: number;
@@ -254,15 +255,15 @@ export declare function GetActiveSpecGroup(): number;
 export declare function GetFlyoutInfo(flyoutId: number): any[];
 export declare function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number): any[];
 export declare function GetSpellBookItemInfo(index: number | string, bookType?: string): any[];
-export declare function GetSpellCount(index: number | string, bookType?: string): void;
+export declare function GetSpellCount(index: number | string, bookType?: string): number;
 export declare function GetSpellLink(index: number | string, bookType?: string): string;
 export declare function GetSpellTabInfo(tab: number): any[];
 export declare function GetTalentInfo(i: number, j: number, activeTalentGroup: number): [number, string, string, number, number, number, number, number, number, number, number];
 export declare function HasPetSpells(): [number, string];
 export declare function IsHarmfulSpell(index: number | string, bookType?: string): void;
 export declare function IsHelpfulSpell(index: number | string, bookType?: string): void;
-export declare function IsSpellInRange(index: number | string, bookType?: string, unitId?: string): boolean;
-export declare function IsUsableSpell(index: number | string, bookType?: string): any[];
+export declare function IsSpellInRange(index: number | string, bookType?: string, unitId?: string): number;
+export declare function IsUsableSpell(index: number | string, bookType?: string): [boolean, boolean];
 export declare function GetNumShapeshiftForms(): number;
 export declare function GetShapeshiftForm(): number;
 export declare function GetShapeshiftFormInfo(index: number): any[];
@@ -347,80 +348,12 @@ export declare const BOOKTYPE_PET = "pet";
 export declare const MAX_TALENT_TIERS = 7;
 export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
-export declare const RAID_CLASS_COLORS: {
-    ["HUNTER"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["WARLOCK"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["PRIEST"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["PALADIN"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["MAGE"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["ROGUE"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["DRUID"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["SHAMAN"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["WARRIOR"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["DEATHKNIGHT"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["MONK"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-    ["DEMONHUNTER"]: {
-        r: number;
-        g: number;
-        b: number;
-        colorStr: string;
-    };
-};
+export declare const RAID_CLASS_COLORS: LuaObj<{
+    r: number;
+    g: number;
+    b: number;
+    colorStr: string;
+}>;
 export declare const AIR_TOTEM_SLOT = 1;
 export declare const EARTH_TOTEM_SLOT = 2;
 export declare const FIRE_TOTEM_SLOT = 3;
@@ -430,3 +363,26 @@ export declare const COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 export declare const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 export declare const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 export declare const COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
+export declare const Enum: {
+    PowerType: {
+        Mana: number;
+        Rage: number;
+        Focus: number;
+        Energy: number;
+        ComboPoints: number;
+        Runes: number;
+        RunicPower: number;
+        SoulShards: number;
+        LunarPower: number;
+        HolyPower: number;
+        Alternate: number;
+        Maelstrom: number;
+        Chi: number;
+        Insanity: number;
+        Obsolete: number;
+        Obsolete2: number;
+        ArcaneCharges: number;
+        Fury: number;
+        Pain: number;
+    };
+};
