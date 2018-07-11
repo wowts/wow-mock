@@ -245,6 +245,7 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 
 // WOW global functions
+export function CombatLogGetCurrentEventInfo():any[]{ return[]; }
 export function debugprofilestop() {return 10; }
 export function GetActionInfo(slot: number) { return ["a", "b", "c"]; }
 export function GetActionText(slot: number) { return "ActionText"; }

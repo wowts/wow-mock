@@ -158,6 +158,8 @@ class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
 // WOW global functions
+function CombatLogGetCurrentEventInfo() { return []; }
+exports.CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo;
 function debugprofilestop() { return 10; }
 exports.debugprofilestop = debugprofilestop;
 function GetActionInfo(slot) { return ["a", "b", "c"]; }

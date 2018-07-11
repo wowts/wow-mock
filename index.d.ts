@@ -144,6 +144,7 @@ export declare class FakeCheckButton extends FakeFrame implements UICheckButton 
 }
 export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 }
+export declare function CombatLogGetCurrentEventInfo(): any[];
 export declare function debugprofilestop(): number;
 export declare function GetActionInfo(slot: number): string[];
 export declare function GetActionText(slot: number): string;
