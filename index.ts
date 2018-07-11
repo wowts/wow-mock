@@ -253,7 +253,7 @@ export function GetBindingKey(key:string){ return "a"; }
 export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
 export function GetMacroItem(spellId: number):any[]{ return []; }
-export function GetMacroSpell(spellId: number):any[]{ return [] }
+export function GetMacroSpell(spellId: number):number{ return 0; }
 export function GetSpellInfo(spellId: number|string, bookType?: string): [string, string, string, number, number, number, number] { return ["a", "b", "c", 0, 1, 2, 3]; }
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }

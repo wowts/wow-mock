@@ -174,7 +174,7 @@ function GetItemInfo(itemId) { return []; }
 exports.GetItemInfo = GetItemInfo;
 function GetMacroItem(spellId) { return []; }
 exports.GetMacroItem = GetMacroItem;
-function GetMacroSpell(spellId) { return []; }
+function GetMacroSpell(spellId) { return 0; }
 exports.GetMacroSpell = GetMacroSpell;
 function GetSpellInfo(spellId, bookType) { return ["a", "b", "c", 0, 1, 2, 3]; }
 exports.GetSpellInfo = GetSpellInfo;

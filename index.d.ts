@@ -152,7 +152,7 @@ export declare function GetBindingKey(key: string): string;
 export declare function GetBonusBarIndex(): void;
 export declare function GetItemInfo(itemId: number | string): any[];
 export declare function GetMacroItem(spellId: number): any[];
-export declare function GetMacroSpell(spellId: number): any[];
+export declare function GetMacroSpell(spellId: number): number;
 export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string, string, string, number, number, number, number];
 export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
