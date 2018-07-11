@@ -115,11 +115,11 @@ export class FakeFrame implements UIFrame {
     RegisterEvent(event: string): void {
         eventDispatcher.RegisterEvent(this, event);
     }
-    mouseEnabled: boolean;
+    mouseEnabled!: boolean;
     shown: boolean = true;
-    strata: string;
-    movable: boolean;
-    alpha: number;
+    strata!: string;
+    movable!: boolean;
+    alpha!: number;
     SetAlpha(value: number): void {
         this.alpha = value;
     }
@@ -210,7 +210,7 @@ export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
 }
 
 export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
-    private text: string;
+    private text!: string;
     private lines: string[] = [];
     SetOwner(frame: UIFrame, anchor: UIAnchor):void {}
     SetText(text: string, r?: number, g?: number, b?: number):void {
