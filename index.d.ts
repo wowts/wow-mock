@@ -387,3 +387,33 @@ export declare const Enum: {
         Pain: number;
     };
 };
+export interface ItemLocationMixin {
+    Clear(): void;
+    SetBagAndSlot(bagID: number, slotIndex: number): void;
+    GetBagAndSlot(): [number | null, number | null];
+    SetEquipmentSlot(equipmentSlotIndex: number): void;
+    GetEquipmentSlot(): number | null;
+    IsEquipmentSlot(): boolean;
+    IsBagAndSlot(): boolean;
+    HasAnyLocation(): boolean;
+    IsEqualToBagAndSlot(otherBagID: number, otherSlotIndex: number): boolean;
+    IsEqualToEquipmentSlot(otherEquipmentSlotIndex: number): boolean;
+    IsEqualTo(otherItemLocation: ItemLocationMixin): boolean;
+}
+export declare class FakeItemLocation {
+    CreateFromEquipmentSlot(equipmentSlotIndex: number): ItemLocationMixin;
+}
+export declare const ItemLocation: FakeItemLocation;
+export declare const C_Item: {
+    DoesItemExist: (emptiableItemLocation: ItemLocationMixin) => boolean;
+};
+export interface AzeritePowerInfo {
+    spellID: number;
+    azeritePowerId: number;
+}
+export declare const C_AzeriteEmpoweredItem: {
+    IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin) => boolean;
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin) => any[];
+    IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number) => boolean;
+    GetPowerInfo: (powerId: number) => AzeritePowerInfo;
+};

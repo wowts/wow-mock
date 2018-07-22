@@ -538,4 +538,30 @@ exports.Enum = {
         Pain: 18
     }
 };
+class FakeItemLocation {
+    CreateFromEquipmentSlot(equipmentSlotIndex) {
+        throw new Error("Method not implemented.");
+    }
+}
+exports.FakeItemLocation = FakeItemLocation;
+exports.ItemLocation = new FakeItemLocation();
+exports.C_Item = {
+    DoesItemExist: (emptiableItemLocation) => {
+        throw new Error("Method not implemented.");
+    }
+};
+exports.C_AzeriteEmpoweredItem = {
+    IsAzeriteEmpoweredItem: (itemLocation) => {
+        throw new Error("Method not implemented.");
+    },
+    GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
+        throw new Error("Method not implemented.");
+    },
+    IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
+        throw new Error("Method not implemented.");
+    },
+    GetPowerInfo: (powerId) => {
+        throw new Error("Method not implemented.");
+    }
+};
 //# sourceMappingURL=index.js.map

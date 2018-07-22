@@ -523,3 +523,50 @@ export const Enum = {
         Pain: 18
     }
 };
+
+export interface ItemLocationMixin{
+    Clear(): void;
+    SetBagAndSlot(bagID:number, slotIndex:number):void
+    GetBagAndSlot(): [number|null, number|null]
+    SetEquipmentSlot(equipmentSlotIndex:number):void
+    GetEquipmentSlot():number|null
+    IsEquipmentSlot():boolean
+    IsBagAndSlot():boolean
+    HasAnyLocation(): boolean
+    IsEqualToBagAndSlot(otherBagID:number, otherSlotIndex:number): boolean
+    IsEqualToEquipmentSlot(otherEquipmentSlotIndex:number):boolean
+    IsEqualTo(otherItemLocation:ItemLocationMixin): boolean
+}
+
+export class FakeItemLocation{
+    CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
+        throw new Error("Method not implemented.");
+    }
+}
+export const ItemLocation = new FakeItemLocation()
+
+export const C_Item = {
+    DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
+        throw new Error("Method not implemented.");
+    }
+};
+
+export interface AzeritePowerInfo{
+    spellID: number;
+    azeritePowerId:number;
+}
+
+export const C_AzeriteEmpoweredItem = {
+    IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
+        throw new Error("Method not implemented.");
+    },
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):any[] => {
+        throw new Error("Method not implemented.");
+    },
+    IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
+        throw new Error("Method not implemented.");
+    },
+    GetPowerInfo: (powerId: number):AzeritePowerInfo => {
+        throw new Error("Method not implemented.");
+    }
+}
