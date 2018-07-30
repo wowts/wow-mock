@@ -225,7 +225,7 @@ export declare function GetSpecialization(): string;
 export declare function GetSpecializationInfo(spec: string): number;
 export declare function GetTalentInfoByID(talent: number, spec: number): any[];
 export declare function GetAuctionItemSubClasses(item: number): any[];
-export declare function GetInventoryItemID(unit: string, slot: number): void;
+export declare function GetInventoryItemID(unit: string, slot: number): number;
 export declare function GetInventoryItemGems(): void;
 export declare function RegisterStateDriver(frame: UIFrame, property: string, state: any): void;
 export declare function UnitHealth(unit: string): number;

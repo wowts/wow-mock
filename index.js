@@ -320,7 +320,7 @@ function GetTalentInfoByID(talent, spec) { return []; }
 exports.GetTalentInfoByID = GetTalentInfoByID;
 function GetAuctionItemSubClasses(item) { return []; }
 exports.GetAuctionItemSubClasses = GetAuctionItemSubClasses;
-function GetInventoryItemID(unit, slot) { }
+function GetInventoryItemID(unit, slot) { return 0; }
 exports.GetInventoryItemID = GetInventoryItemID;
 function GetInventoryItemGems() { }
 exports.GetInventoryItemGems = GetInventoryItemGems;

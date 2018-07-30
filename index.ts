@@ -335,7 +335,7 @@ export function GetSpecialization(){return "havoc"}
 export function GetSpecializationInfo(spec: string){ return 1}
 export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
 export function GetAuctionItemSubClasses(item:number):any[]{return []}
-export function GetInventoryItemID(unit:string, slot:number){}
+export function GetInventoryItemID(unit:string, slot:number):number {return 0;}
 export function GetInventoryItemGems(){}
 export function RegisterStateDriver(frame: UIFrame, property: string, state:any){}
 export function UnitHealth(unit:string){return 0}
