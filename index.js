@@ -158,6 +158,8 @@ class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
 // WOW global functions
+function UnitRangedDamage(player) { return [0, 0, 0, 0, 0, 0]; }
+exports.UnitRangedDamage = UnitRangedDamage;
 function GetItemInfoInstant(item) { return [0, '', '', '', 0, 0, 0]; }
 exports.GetItemInfoInstant = GetItemInfoInstant;
 ;
