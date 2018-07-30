@@ -158,6 +158,8 @@ class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
 // WOW global functions
+function CombatLogGetCurrentEventInfo() { return []; }
+exports.CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo;
 function debugprofilestop() { return 10; }
 exports.debugprofilestop = debugprofilestop;
 function GetActionInfo(slot) { return ["a", "b", "c"]; }
@@ -172,7 +174,7 @@ function GetItemInfo(itemId) { return []; }
 exports.GetItemInfo = GetItemInfo;
 function GetMacroItem(spellId) { return []; }
 exports.GetMacroItem = GetMacroItem;
-function GetMacroSpell(spellId) { return []; }
+function GetMacroSpell(spellId) { return 0; }
 exports.GetMacroSpell = GetMacroSpell;
 function GetSpellInfo(spellId, bookType) { return ["a", "b", "c", 0, 1, 2, 3]; }
 exports.GetSpellInfo = GetSpellInfo;
@@ -534,6 +536,32 @@ exports.Enum = {
         ArcaneCharges: 16,
         Fury: 17,
         Pain: 18
+    }
+};
+class FakeItemLocation {
+    CreateFromEquipmentSlot(equipmentSlotIndex) {
+        throw new Error("Method not implemented.");
+    }
+}
+exports.FakeItemLocation = FakeItemLocation;
+exports.ItemLocation = new FakeItemLocation();
+exports.C_Item = {
+    DoesItemExist: (emptiableItemLocation) => {
+        throw new Error("Method not implemented.");
+    }
+};
+exports.C_AzeriteEmpoweredItem = {
+    IsAzeriteEmpoweredItem: (itemLocation) => {
+        throw new Error("Method not implemented.");
+    },
+    GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
+        throw new Error("Method not implemented.");
+    },
+    IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
+        throw new Error("Method not implemented.");
+    },
+    GetPowerInfo: (powerId) => {
+        throw new Error("Method not implemented.");
     }
 };
 //# sourceMappingURL=index.js.map

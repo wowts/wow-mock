@@ -115,11 +115,11 @@ export class FakeFrame implements UIFrame {
     RegisterEvent(event: string): void {
         eventDispatcher.RegisterEvent(this, event);
     }
-    mouseEnabled: boolean;
+    mouseEnabled!: boolean;
     shown: boolean = true;
-    strata: string;
-    movable: boolean;
-    alpha: number;
+    strata!: string;
+    movable!: boolean;
+    alpha!: number;
     SetAlpha(value: number): void {
         this.alpha = value;
     }
@@ -210,7 +210,7 @@ export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
 }
 
 export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
-    private text: string;
+    private text!: string;
     private lines: string[] = [];
     SetOwner(frame: UIFrame, anchor: UIAnchor):void {}
     SetText(text: string, r?: number, g?: number, b?: number):void {
@@ -245,6 +245,7 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 
 // WOW global functions
+export function CombatLogGetCurrentEventInfo():any[]{ return[]; }
 export function debugprofilestop() {return 10; }
 export function GetActionInfo(slot: number) { return ["a", "b", "c"]; }
 export function GetActionText(slot: number) { return "ActionText"; }
@@ -252,7 +253,7 @@ export function GetBindingKey(key:string){ return "a"; }
 export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
 export function GetMacroItem(spellId: number):any[]{ return []; }
-export function GetMacroSpell(spellId: number):any[]{ return [] }
+export function GetMacroSpell(spellId: number):number{ return 0; }
 export function GetSpellInfo(spellId: number|string, bookType?: string): [string, string, string, number, number, number, number] { return ["a", "b", "c", 0, 1, 2, 3]; }
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
@@ -522,3 +523,50 @@ export const Enum = {
         Pain: 18
     }
 };
+
+export interface ItemLocationMixin{
+    Clear(): void;
+    SetBagAndSlot(bagID:number, slotIndex:number):void
+    GetBagAndSlot(): [number|null, number|null]
+    SetEquipmentSlot(equipmentSlotIndex:number):void
+    GetEquipmentSlot():number|null
+    IsEquipmentSlot():boolean
+    IsBagAndSlot():boolean
+    HasAnyLocation(): boolean
+    IsEqualToBagAndSlot(otherBagID:number, otherSlotIndex:number): boolean
+    IsEqualToEquipmentSlot(otherEquipmentSlotIndex:number):boolean
+    IsEqualTo(otherItemLocation:ItemLocationMixin): boolean
+}
+
+export class FakeItemLocation{
+    CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
+        throw new Error("Method not implemented.");
+    }
+}
+export const ItemLocation = new FakeItemLocation()
+
+export const C_Item = {
+    DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
+        throw new Error("Method not implemented.");
+    }
+};
+
+export interface AzeritePowerInfo{
+    spellID: number;
+    azeritePowerId:number;
+}
+
+export const C_AzeriteEmpoweredItem = {
+    IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
+        throw new Error("Method not implemented.");
+    },
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):any[] => {
+        throw new Error("Method not implemented.");
+    },
+    IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
+        throw new Error("Method not implemented.");
+    },
+    GetPowerInfo: (powerId: number):AzeritePowerInfo => {
+        throw new Error("Method not implemented.");
+    }
+}
