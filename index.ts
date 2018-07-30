@@ -298,7 +298,7 @@ export function IsSpellOverlayed() {}
 export function IsStealthed() { return false; }
 export function UnitCastingInfo(target: string):any[] { return [] }
 export function UnitChannelInfo(target: string):any[] {return  [] }
-export function UnitClassification(target: string){}
+export function UnitClassification(target: string) { return "worldboss";}
 export function UnitCreatureFamily(target: string){}
 export function UnitCreatureType(target: string){}
 export function UnitDetailedThreatSituation(unit: string, target: string):any[]{ return []}

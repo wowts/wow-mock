@@ -264,7 +264,7 @@ function UnitCastingInfo(target) { return []; }
 exports.UnitCastingInfo = UnitCastingInfo;
 function UnitChannelInfo(target) { return []; }
 exports.UnitChannelInfo = UnitChannelInfo;
-function UnitClassification(target) { }
+function UnitClassification(target) { return "worldboss"; }
 exports.UnitClassification = UnitClassification;
 function UnitCreatureFamily(target) { }
 exports.UnitCreatureFamily = UnitCreatureFamily;

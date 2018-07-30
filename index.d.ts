@@ -200,7 +200,7 @@ export declare function IsSpellOverlayed(): void;
 export declare function IsStealthed(): boolean;
 export declare function UnitCastingInfo(target: string): any[];
 export declare function UnitChannelInfo(target: string): any[];
-export declare function UnitClassification(target: string): void;
+export declare function UnitClassification(target: string): string;
 export declare function UnitCreatureFamily(target: string): void;
 export declare function UnitCreatureType(target: string): void;
 export declare function UnitDetailedThreatSituation(unit: string, target: string): any[];
