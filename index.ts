@@ -245,6 +245,8 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 
 // WOW global functions
+export function UnitRangedDamage(player: string): [number, number, number, number, number, number] {return [0, 0, 0, 0, 0, 0];}
+export function GetItemInfoInstant(item: string|number):[number,string,string,string,number,number,number]{ return [0, '', '', '', 0, 0, 0]};
 export function CombatLogGetCurrentEventInfo():any[]{ return[]; }
 export function debugprofilestop() {return 10; }
 export function GetActionInfo(slot: number) { return ["a", "b", "c"]; }
@@ -334,7 +336,7 @@ export function GetSpecialization(){return "havoc"}
 export function GetSpecializationInfo(spec: string){ return 1}
 export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
 export function GetAuctionItemSubClasses(item:number):any[]{return []}
-export function GetInventoryItemID(unit:string, slot:number){}
+export function GetInventoryItemID(unit:string, slot:number):number {return 0;}
 export function GetInventoryItemGems(){}
 export function RegisterStateDriver(frame: UIFrame, property: string, state:any){}
 export function UnitHealth(unit:string){return 0}

@@ -144,6 +144,8 @@ export declare class FakeCheckButton extends FakeFrame implements UICheckButton 
 }
 export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 }
+export declare function UnitRangedDamage(player: string): [number, number, number, number, number, number];
+export declare function GetItemInfoInstant(item: string | number): [number, string, string, string, number, number, number];
 export declare function CombatLogGetCurrentEventInfo(): any[];
 export declare function debugprofilestop(): number;
 export declare function GetActionInfo(slot: number): string[];
@@ -224,7 +226,7 @@ export declare function GetSpecialization(): string;
 export declare function GetSpecializationInfo(spec: string): number;
 export declare function GetTalentInfoByID(talent: number, spec: number): any[];
 export declare function GetAuctionItemSubClasses(item: number): any[];
-export declare function GetInventoryItemID(unit: string, slot: number): void;
+export declare function GetInventoryItemID(unit: string, slot: number): number;
 export declare function GetInventoryItemGems(): void;
 export declare function RegisterStateDriver(frame: UIFrame, property: string, state: any): void;
 export declare function UnitHealth(unit: string): number;

@@ -158,6 +158,11 @@ class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
 // WOW global functions
+function UnitRangedDamage(player) { return [0, 0, 0, 0, 0, 0]; }
+exports.UnitRangedDamage = UnitRangedDamage;
+function GetItemInfoInstant(item) { return [0, '', '', '', 0, 0, 0]; }
+exports.GetItemInfoInstant = GetItemInfoInstant;
+;
 function CombatLogGetCurrentEventInfo() { return []; }
 exports.CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo;
 function debugprofilestop() { return 10; }
@@ -317,7 +322,7 @@ function GetTalentInfoByID(talent, spec) { return []; }
 exports.GetTalentInfoByID = GetTalentInfoByID;
 function GetAuctionItemSubClasses(item) { return []; }
 exports.GetAuctionItemSubClasses = GetAuctionItemSubClasses;
-function GetInventoryItemID(unit, slot) { }
+function GetInventoryItemID(unit, slot) { return 0; }
 exports.GetInventoryItemID = GetInventoryItemID;
 function GetInventoryItemGems() { }
 exports.GetInventoryItemGems = GetInventoryItemGems;
