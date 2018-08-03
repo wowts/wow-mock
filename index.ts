@@ -245,6 +245,10 @@ export class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 
 // WOW global functions
+export function GetInventorySlotInfo(slotName: string): [number, string] { return [0, '']; }
+export function GetItemStats(itemLink: string, statTable?: any[]): any[] {return [];}
+export function GetInventoryItemLink(unitId: string, slotId: number) : string { return '';}
+export function GetHaste(): number { return 0; }
 export function UnitRangedDamage(player: string): [number, number, number, number, number, number] {return [0, 0, 0, 0, 0, 0];}
 export function GetItemInfoInstant(item: string|number):[number,string,string,string,number,number,number]{ return [0, '', '', '', 0, 0, 0]};
 export function CombatLogGetCurrentEventInfo():any[]{ return[]; }
