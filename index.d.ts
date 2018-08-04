@@ -144,6 +144,10 @@ export declare class FakeCheckButton extends FakeFrame implements UICheckButton 
 }
 export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 }
+export declare function GetInventorySlotInfo(slotName: string): [number, string];
+export declare function GetItemStats(itemLink: string, statTable?: any[]): any[];
+export declare function GetInventoryItemLink(unitId: string, slotId: number): string;
+export declare function GetHaste(): number;
 export declare function UnitRangedDamage(player: string): [number, number, number, number, number, number];
 export declare function GetItemInfoInstant(item: string | number): [number, string, string, string, number, number, number];
 export declare function CombatLogGetCurrentEventInfo(): any[];

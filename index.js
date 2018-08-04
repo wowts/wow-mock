@@ -158,6 +158,14 @@ class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
 // WOW global functions
+function GetInventorySlotInfo(slotName) { return [0, '']; }
+exports.GetInventorySlotInfo = GetInventorySlotInfo;
+function GetItemStats(itemLink, statTable) { return []; }
+exports.GetItemStats = GetItemStats;
+function GetInventoryItemLink(unitId, slotId) { return ''; }
+exports.GetInventoryItemLink = GetInventoryItemLink;
+function GetHaste() { return 0; }
+exports.GetHaste = GetHaste;
 function UnitRangedDamage(player) { return [0, 0, 0, 0, 0, 0]; }
 exports.UnitRangedDamage = UnitRangedDamage;
 function GetItemInfoInstant(item) { return [0, '', '', '', 0, 0, 0]; }
