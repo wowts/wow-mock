@@ -338,7 +338,6 @@ export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:
 export function IsShiftKeyDown(){}
 export function GetSpecialization(){return "havoc"}
 export function GetSpecializationInfo(spec: string){ return 1}
-export function GetNumSpecializations(isInspect: boolean, isPet: boolean):number {return 0;}
 export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
 export function GetAuctionItemSubClasses(item:number):any[]{return []}
 export function GetInventoryItemID(unit:string, slot:number):number {return 0;}
