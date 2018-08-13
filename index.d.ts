@@ -228,6 +228,7 @@ export declare function EasyMenu(menu: any, menuFrame: UIFrame, cursor: string |
 export declare function IsShiftKeyDown(): void;
 export declare function GetSpecialization(): string;
 export declare function GetSpecializationInfo(spec: string): number;
+export declare function GetNumSpecializations(isInspect: boolean, isPet: boolean): number;
 export declare function GetTalentInfoByID(talent: number, spec: number): any[];
 export declare function GetAuctionItemSubClasses(item: number): any[];
 export declare function GetInventoryItemID(unit: string, slot: number): number;
