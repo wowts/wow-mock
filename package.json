@@ -23,7 +23,7 @@
     "@wowts/lua": "^1.2.0"
   },
   "devDependencies": {
-    "typescript": "^2.9.2",
+    "typescript": "^3.0.1",
     "ava": "^0.22.0"
   }
 }
