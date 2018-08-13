@@ -326,6 +326,8 @@ function GetSpecialization() { return "havoc"; }
 exports.GetSpecialization = GetSpecialization;
 function GetSpecializationInfo(spec) { return 1; }
 exports.GetSpecializationInfo = GetSpecializationInfo;
+function GetNumSpecializations(isInspect, isPet) { return 0; }
+exports.GetNumSpecializations = GetNumSpecializations;
 function GetTalentInfoByID(talent, spec) { return []; }
 exports.GetTalentInfoByID = GetTalentInfoByID;
 function GetAuctionItemSubClasses(item) { return []; }
