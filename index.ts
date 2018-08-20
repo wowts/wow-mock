@@ -1,4 +1,4 @@
-import { LuaArray, LuaObj } from "@wowts/lua";
+import { LuaArray } from "@wowts/lua";
 
 export type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
@@ -244,9 +244,13 @@ export class FakeCheckButton extends FakeFrame implements UICheckButton {
 export class FakeDropdown extends FakeFrame implements UIDropdown {
 }
 
+export interface ItemStats {
+    ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
+}
+
 // WOW global functions
 export function GetInventorySlotInfo(slotName: string): [number, string] { return [0, '']; }
-export function GetItemStats(itemLink: string, statTable?: any[]): any[] {return [];}
+export function GetItemStats(itemLink: string, statTable?: any[]): ItemStats {return {};}
 export function GetInventoryItemLink(unitId: string, slotId: number) : string { return '';}
 export function GetHaste(): number { return 0; }
 export function UnitRangedDamage(player: string): [number, number, number, number, number, number] {return [0, 0, 0, 0, 0, 0];}
@@ -265,20 +269,20 @@ export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
 export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
 export function UnitCanAttack(unit:string, target: string) { return false; }
-export function UnitClass(unit:string):[string, "WARRIOR" | "PRIEST"] { return ["Warrior", "WARRIOR"]; }
+export function UnitClass(unit:string):[string, ClassId] { return ["Warrior", "WARRIOR"]; }
 export function UnitExists(unit:string) { return false; }
 export function UnitGUID(unit:string) { return "aaaa"; }
 export function UnitHasVehicleUI(unit: string) { return false; }
 export function UnitIsDead(unit: string) { return false; }
 export function UnitName(unitId: string) { return "Esside"; }
 export function GetActionCooldown(action: number):[number, number, boolean] { return [0, 0, false]; }
-export function GetActionTexture(action: number){ }
-export function GetItemIcon(itemId: number){}
+export function GetActionTexture(action: number){ return "filepath" }
+export function GetItemIcon(itemId: number){ return "fakeicon"}
 export function GetItemCooldown(itemId: number): [number, number, boolean]{ return [0, 0, false]; }
-export function GetItemSpell(itemId: number){}
-export function GetSpellTexture(spellId: number, bookType?: string){}
-export function IsActionInRange(action: number, target: string){}
-export function IsCurrentAction(action: number){}
+export function GetItemSpell(itemId: number): [string, string, number] { return ["spellName", "spellRank", 100]}
+export function GetSpellTexture(spellId: number, bookType?: string){ return "filepath"}
+export function IsActionInRange(action: number, target: string){ return true }
+export function IsCurrentAction(action: number){ return false;}
 export function IsItemInRange(itemId: number, target: string){ return false;}
 export function IsUsableAction(action: number): boolean{ return false;}
 export function IsUsableItem(itemId: number): boolean { return false;}
@@ -294,7 +298,7 @@ export function IsInInstance(){return false}
 export function IsInRaid(filter?: number){return false}
 export function UnitLevel(target:string){ return 0;}
 export function GetBuildInfo():any[] { return []}
-export function GetItemCount(item:string, first?: boolean, second?: boolean){}
+export function GetItemCount(item:string, first?: boolean, second?: boolean){ return 0;}
 export function GetNumTrackingTypes() {return 0}
 export function GetTrackingInfo(i:number):any[] {return []}
 export function GetUnitSpeed(unit: string):number { return 0;}
@@ -305,8 +309,8 @@ export function IsStealthed() { return false; }
 export function UnitCastingInfo(target: string):any[] { return [] }
 export function UnitChannelInfo(target: string):any[] {return  [] }
 export function UnitClassification(target: string) { return "worldboss";}
-export function UnitCreatureFamily(target: string){}
-export function UnitCreatureType(target: string){}
+export function UnitCreatureFamily(target: string){return "Bat"}
+export function UnitCreatureType(target: string){return "Beast"}
 export function UnitDetailedThreatSituation(unit: string, target: string):any[]{ return []}
 export function UnitInRaid(unit: string){return false}
 export function UnitIsFriend(unit: string, target: string){return 0}
@@ -336,8 +340,9 @@ export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:
 }
 export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:number, y:number, menuType:string, autoHideDelay?:number) {}
 export function IsShiftKeyDown(){}
-export function GetSpecialization(){return "havoc"}
-export function GetSpecializationInfo(spec: string){ return 1}
+export type SpecializationIndex = 1 | 2 | 3 | 4;
+export function GetSpecialization(): SpecializationIndex {return 1;}
+export function GetSpecializationInfo(spec: number){ return 1}
 export function GetNumSpecializations(isInspect: boolean, isPet: boolean):number {return 0;}
 export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
 export function GetAuctionItemSubClasses(item:number):any[]{return []}
@@ -380,8 +385,8 @@ export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[
     return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
 }
 export function HasPetSpells():[number, string] {return[0, "a"]}
-export function IsHarmfulSpell(index: number|string, bookType?: string){}
-export function IsHelpfulSpell(index: number|string, bookType?: string){}
+export function IsHarmfulSpell(index: number|string, bookType?: string){ return false}
+export function IsHelpfulSpell(index: number|string, bookType?: string){return false}
 export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return 0;}
 export function IsUsableSpell(index: number|string, bookType?: string):[boolean, boolean] {return [true, false];}
 export function GetNumShapeshiftForms() {return 0}
@@ -481,7 +486,9 @@ export const NUM_TALENT_COLUMNS = 3;
 
 export const RUNE_NAME = {};
 
-export const RAID_CLASS_COLORS:LuaObj<{r:number, g: number, b:number, colorStr: string}> = {
+export type ClassId = keyof typeof RAID_CLASS_COLORS;
+
+export const RAID_CLASS_COLORS = {
     ["HUNTER"]: { r: 0.67, g: 0.83, b: 0.45, colorStr: "ffabd473" },
     ["WARLOCK"]: { r: 0.53, g: 0.53, b: 0.93, colorStr: "ff8788ee" },
     ["PRIEST"]: { r: 1.0, g: 1.0, b: 1.0, colorStr: "ffffffff" },
@@ -563,11 +570,15 @@ export interface AzeritePowerInfo{
     azeritePowerId:number;
 }
 
+export interface AzeriteTierInfo {
+    azeritePowerIDs: LuaArray<number>;
+}
+
 export const C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
         throw new Error("Method not implemented.");
     },
-    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):any[] => {
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):AzeriteTierInfo[] => {
         throw new Error("Method not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{

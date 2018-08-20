@@ -160,7 +160,7 @@ exports.FakeDropdown = FakeDropdown;
 // WOW global functions
 function GetInventorySlotInfo(slotName) { return [0, '']; }
 exports.GetInventorySlotInfo = GetInventorySlotInfo;
-function GetItemStats(itemLink, statTable) { return []; }
+function GetItemStats(itemLink, statTable) { return {}; }
 exports.GetItemStats = GetItemStats;
 function GetInventoryItemLink(unitId, slotId) { return ''; }
 exports.GetInventoryItemLink = GetInventoryItemLink;
@@ -213,19 +213,19 @@ function UnitName(unitId) { return "Esside"; }
 exports.UnitName = UnitName;
 function GetActionCooldown(action) { return [0, 0, false]; }
 exports.GetActionCooldown = GetActionCooldown;
-function GetActionTexture(action) { }
+function GetActionTexture(action) { return "filepath"; }
 exports.GetActionTexture = GetActionTexture;
-function GetItemIcon(itemId) { }
+function GetItemIcon(itemId) { return "fakeicon"; }
 exports.GetItemIcon = GetItemIcon;
 function GetItemCooldown(itemId) { return [0, 0, false]; }
 exports.GetItemCooldown = GetItemCooldown;
-function GetItemSpell(itemId) { }
+function GetItemSpell(itemId) { return ["spellName", "spellRank", 100]; }
 exports.GetItemSpell = GetItemSpell;
-function GetSpellTexture(spellId, bookType) { }
+function GetSpellTexture(spellId, bookType) { return "filepath"; }
 exports.GetSpellTexture = GetSpellTexture;
-function IsActionInRange(action, target) { }
+function IsActionInRange(action, target) { return true; }
 exports.IsActionInRange = IsActionInRange;
-function IsCurrentAction(action) { }
+function IsCurrentAction(action) { return false; }
 exports.IsCurrentAction = IsCurrentAction;
 function IsItemInRange(itemId, target) { return false; }
 exports.IsItemInRange = IsItemInRange;
@@ -257,7 +257,7 @@ function UnitLevel(target) { return 0; }
 exports.UnitLevel = UnitLevel;
 function GetBuildInfo() { return []; }
 exports.GetBuildInfo = GetBuildInfo;
-function GetItemCount(item, first, second) { }
+function GetItemCount(item, first, second) { return 0; }
 exports.GetItemCount = GetItemCount;
 function GetNumTrackingTypes() { return 0; }
 exports.GetNumTrackingTypes = GetNumTrackingTypes;
@@ -279,9 +279,9 @@ function UnitChannelInfo(target) { return []; }
 exports.UnitChannelInfo = UnitChannelInfo;
 function UnitClassification(target) { return "worldboss"; }
 exports.UnitClassification = UnitClassification;
-function UnitCreatureFamily(target) { }
+function UnitCreatureFamily(target) { return "Bat"; }
 exports.UnitCreatureFamily = UnitCreatureFamily;
-function UnitCreatureType(target) { }
+function UnitCreatureType(target) { return "Beast"; }
 exports.UnitCreatureType = UnitCreatureType;
 function UnitDetailedThreatSituation(unit, target) { return []; }
 exports.UnitDetailedThreatSituation = UnitDetailedThreatSituation;
@@ -322,7 +322,7 @@ function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
 function IsShiftKeyDown() { }
 exports.IsShiftKeyDown = IsShiftKeyDown;
-function GetSpecialization() { return "havoc"; }
+function GetSpecialization() { return 1; }
 exports.GetSpecialization = GetSpecialization;
 function GetSpecializationInfo(spec) { return 1; }
 exports.GetSpecializationInfo = GetSpecializationInfo;
@@ -408,9 +408,9 @@ function GetTalentInfo(i, j, activeTalentGroup) {
 exports.GetTalentInfo = GetTalentInfo;
 function HasPetSpells() { return [0, "a"]; }
 exports.HasPetSpells = HasPetSpells;
-function IsHarmfulSpell(index, bookType) { }
+function IsHarmfulSpell(index, bookType) { return false; }
 exports.IsHarmfulSpell = IsHarmfulSpell;
-function IsHelpfulSpell(index, bookType) { }
+function IsHelpfulSpell(index, bookType) { return false; }
 exports.IsHelpfulSpell = IsHelpfulSpell;
 function IsSpellInRange(index, bookType, unitId) { return 0; }
 exports.IsSpellInRange = IsSpellInRange;
