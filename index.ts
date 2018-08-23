@@ -1,4 +1,5 @@
 import { LuaArray } from "@wowts/lua";
+import { spellInfos } from "./spells";
 
 export type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
@@ -9,7 +10,7 @@ export interface UIRegion {
     GetCenter():[number, number];
     GetWidth():number;
     GetHeight():number;
-    GetParent():UIRegion;
+    GetParent():UIRegion | undefined;
     SetParent(parent: UIRegion):void;
     SetAllPoints(around: UIFrame):void;
     SetParent(parent:UIFrame):void;
@@ -115,11 +116,19 @@ export class FakeFrame implements UIFrame {
     RegisterEvent(event: string): void {
         eventDispatcher.RegisterEvent(this, event);
     }
-    mouseEnabled!: boolean;
+    mouseEnabled: boolean = true;
     shown: boolean = true;
-    strata!: string;
-    movable!: boolean;
-    alpha!: number;
+    strata?: string;
+    movable: boolean = true;
+    alpha: number = 1;
+    width = 0;
+    height = 0;
+    scale = 1;
+    visible = true;
+    parent?: UIRegion = undefined;
+    x = 0;
+    y = 0;
+
     SetAlpha(value: number): void {
         this.alpha = value;
     }
@@ -146,7 +155,7 @@ export class FakeFrame implements UIFrame {
         return this.shown;
     }
     CreateTexture(): UITexture {
-        throw new Error("Method not implemented.");
+        return new FakeUITexture();
     }
     EnableMouse(enabled: boolean): void {
         this.mouseEnabled = enabled;
@@ -158,10 +167,10 @@ export class FakeFrame implements UIFrame {
         throw new Error("Method not implemented.");
     }
     SetScale(scale: number): void {
-        throw new Error("Method not implemented.");
+        this.scale = scale;
     }
     IsVisible(): boolean {
-        throw new Error("Method not implemented.");
+        return this.visible;
     }
     CanChangeProtectedState(): boolean {
         throw new Error("Method not implemented.");
@@ -173,34 +182,60 @@ export class FakeFrame implements UIFrame {
         throw new Error("Method not implemented.");
     }
     GetWidth(): number {
-        throw new Error("Method not implemented.");
+        return this.width;
     }
     GetHeight(): number {
-        throw new Error("Method not implemented.");
+        return this.height;
     }
-    GetParent(): UIRegion {
-        throw new Error("Method not implemented.");
+    GetParent(): UIRegion | undefined {
+        return this.parent;
     }
     SetParent(parent: UIRegion): void;
     SetParent(parent: UIFrame): void;
     SetParent(parent: any) {
-        throw new Error("Method not implemented.");
+        this.parent = parent;
     }
     SetAllPoints(around: UIFrame): void {
-        throw new Error("Method not implemented.");
     }
     SetPoint(anchor: UIPosition, x: number, y: number): void;
     SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
     SetPoint(anchor: any, reference: any, refAnchor: any, x?: any, y?: any) {
-        throw new Error("Method not implemented.");
+        this.x = x;
+        this.y = y;
     }
     SetWidth(width: number): void {
-        throw new Error("Method not implemented.");
+        this.width = width;
     }
     SetHeight(height: number): void {
-        throw new Error("Method not implemented.");
+        this.height = height;
     }
     
+}
+
+export class FakeUITexture extends FakeFrame implements UITexture {
+    texture?: string;
+    r = 0;
+    g = 0;
+    b = 0;
+
+
+    SetTexture(name: string): void {
+        this.texture = name;
+    }
+    SetColorTexture(r: number, g: number, b: number, alpha?: number | undefined): void {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+
+
 }
 
 export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
@@ -264,7 +299,16 @@ export function GetBonusBarIndex() { }
 export function GetItemInfo(itemId: number|string):any[] { return []; }
 export function GetMacroItem(spellId: number):any[]{ return []; }
 export function GetMacroSpell(spellId: number):number{ return 0; }
-export function GetSpellInfo(spellId: number|string, bookType?: string): [string, string, string, number, number, number, number] { return ["a", "b", "c", 0, 1, 2, 3]; }
+export function GetSpellInfo(spellId: number | string, bookType?: string): [string | undefined, string | undefined, string, number, number, number, number] {
+    if (typeof (spellId) === "number") {
+        const spell = spellInfos[spellId];
+        if (spell) {
+            return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
+        }
+        return [undefined, undefined, "none", 0, 0, 0, 0];
+    }
+    return ["a", "b", "c", 0, 1, 2, 3];
+}
 export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
 export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
@@ -554,14 +598,14 @@ export interface ItemLocationMixin{
 
 export class FakeItemLocation{
     CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
-        throw new Error("Method not implemented.");
+        throw new Error("Method CreateFromEquipmentSlot not implemented.");
     }
 }
 export const ItemLocation = new FakeItemLocation()
 
 export const C_Item = {
     DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method DoesItemExist not implemented.");
     }
 };
 
@@ -576,15 +620,15 @@ export interface AzeriteTierInfo {
 
 export const C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsAzeriteEmpoweredItem not implemented.");
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):AzeriteTierInfo[] => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetAllTierInfo not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsPowerSelected not implemented.");
     },
     GetPowerInfo: (powerId: number):AzeritePowerInfo => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetPowerInfo not implemented.");
     }
 }

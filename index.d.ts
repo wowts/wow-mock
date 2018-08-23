@@ -7,7 +7,7 @@ export interface UIRegion {
     GetCenter(): [number, number];
     GetWidth(): number;
     GetHeight(): number;
-    GetParent(): UIRegion;
+    GetParent(): UIRegion | undefined;
     SetParent(parent: UIRegion): void;
     SetAllPoints(around: UIFrame): void;
     SetParent(parent: UIFrame): void;
@@ -90,9 +90,16 @@ export declare class FakeFrame implements UIFrame {
     RegisterEvent(event: string): void;
     mouseEnabled: boolean;
     shown: boolean;
-    strata: string;
+    strata?: string;
     movable: boolean;
     alpha: number;
+    width: number;
+    height: number;
+    scale: number;
+    visible: boolean;
+    parent?: UIRegion;
+    x: number;
+    y: number;
     SetAlpha(value: number): void;
     SetScript(event: string, func: (frame: UIFrame, ...parameters: any[]) => void): void;
     StartMoving(): void;
@@ -113,7 +120,7 @@ export declare class FakeFrame implements UIFrame {
     GetCenter(): [number, number];
     GetWidth(): number;
     GetHeight(): number;
-    GetParent(): UIRegion;
+    GetParent(): UIRegion | undefined;
     SetParent(parent: UIRegion): void;
     SetParent(parent: UIFrame): void;
     SetAllPoints(around: UIFrame): void;
@@ -121,6 +128,15 @@ export declare class FakeFrame implements UIFrame {
     SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
     SetWidth(width: number): void;
     SetHeight(height: number): void;
+}
+export declare class FakeUITexture extends FakeFrame implements UITexture {
+    texture?: string;
+    r: number;
+    g: number;
+    b: number;
+    SetTexture(name: string): void;
+    SetColorTexture(r: number, g: number, b: number, alpha?: number | undefined): void;
+    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void;
 }
 export declare class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
     AddMessage(message: string): void;
@@ -162,7 +178,7 @@ export declare function GetBonusBarIndex(): void;
 export declare function GetItemInfo(itemId: number | string): any[];
 export declare function GetMacroItem(spellId: number): any[];
 export declare function GetMacroSpell(spellId: number): number;
-export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string, string, string, number, number, number, number];
+export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string | undefined, string | undefined, string, number, number, number, number];
 export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
 export declare function UnitAura(unitId: string, i: number, filter: string): any[];

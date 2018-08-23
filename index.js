@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const spells_1 = require("./spells");
 class EventDispatcher {
     constructor() {
         this.events = {};
@@ -28,7 +29,17 @@ exports.eventDispatcher = new EventDispatcher();
 class FakeFrame {
     constructor() {
         this.scriptHandlers = {};
+        this.mouseEnabled = true;
         this.shown = true;
+        this.movable = true;
+        this.alpha = 1;
+        this.width = 0;
+        this.height = 0;
+        this.scale = 1;
+        this.visible = true;
+        this.parent = undefined;
+        this.x = 0;
+        this.y = 0;
     }
     RegisterEvent(event) {
         exports.eventDispatcher.RegisterEvent(this, event);
@@ -59,7 +70,7 @@ class FakeFrame {
         return this.shown;
     }
     CreateTexture() {
-        throw new Error("Method not implemented.");
+        return new FakeUITexture();
     }
     EnableMouse(enabled) {
         this.mouseEnabled = enabled;
@@ -71,10 +82,10 @@ class FakeFrame {
         throw new Error("Method not implemented.");
     }
     SetScale(scale) {
-        throw new Error("Method not implemented.");
+        this.scale = scale;
     }
     IsVisible() {
-        throw new Error("Method not implemented.");
+        return this.visible;
     }
     CanChangeProtectedState() {
         throw new Error("Method not implemented.");
@@ -86,31 +97,55 @@ class FakeFrame {
         throw new Error("Method not implemented.");
     }
     GetWidth() {
-        throw new Error("Method not implemented.");
+        return this.width;
     }
     GetHeight() {
-        throw new Error("Method not implemented.");
+        return this.height;
     }
     GetParent() {
-        throw new Error("Method not implemented.");
+        return this.parent;
     }
     SetParent(parent) {
-        throw new Error("Method not implemented.");
+        this.parent = parent;
     }
     SetAllPoints(around) {
-        throw new Error("Method not implemented.");
     }
     SetPoint(anchor, reference, refAnchor, x, y) {
-        throw new Error("Method not implemented.");
+        this.x = x;
+        this.y = y;
     }
     SetWidth(width) {
-        throw new Error("Method not implemented.");
+        this.width = width;
     }
     SetHeight(height) {
-        throw new Error("Method not implemented.");
+        this.height = height;
     }
 }
 exports.FakeFrame = FakeFrame;
+class FakeUITexture extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.r = 0;
+        this.g = 0;
+        this.b = 0;
+    }
+    SetTexture(name) {
+        this.texture = name;
+    }
+    SetColorTexture(r, g, b, alpha) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+    SetVertexColor(r, g, b, alpha) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+}
+exports.FakeUITexture = FakeUITexture;
 class FakeMessageFrame extends FakeFrame {
     AddMessage(message) {
         console.log(message);
@@ -189,7 +224,16 @@ function GetMacroItem(spellId) { return []; }
 exports.GetMacroItem = GetMacroItem;
 function GetMacroSpell(spellId) { return 0; }
 exports.GetMacroSpell = GetMacroSpell;
-function GetSpellInfo(spellId, bookType) { return ["a", "b", "c", 0, 1, 2, 3]; }
+function GetSpellInfo(spellId, bookType) {
+    if (typeof (spellId) === "number") {
+        const spell = spells_1.spellInfos[spellId];
+        if (spell) {
+            return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
+        }
+        return [undefined, undefined, "none", 0, 0, 0, 0];
+    }
+    return ["a", "b", "c", 0, 1, 2, 3];
+}
 exports.GetSpellInfo = GetSpellInfo;
 function GetTime() { return 10; }
 exports.GetTime = GetTime;
@@ -555,28 +599,28 @@ exports.Enum = {
 };
 class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex) {
-        throw new Error("Method not implemented.");
+        throw new Error("Method CreateFromEquipmentSlot not implemented.");
     }
 }
 exports.FakeItemLocation = FakeItemLocation;
 exports.ItemLocation = new FakeItemLocation();
 exports.C_Item = {
     DoesItemExist: (emptiableItemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method DoesItemExist not implemented.");
     }
 };
 exports.C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsAzeriteEmpoweredItem not implemented.");
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetAllTierInfo not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsPowerSelected not implemented.");
     },
     GetPowerInfo: (powerId) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetPowerInfo not implemented.");
     }
 };
 //# sourceMappingURL=index.js.map
