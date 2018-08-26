@@ -331,7 +331,7 @@ function UnitDetailedThreatSituation(unit, target) { return []; }
 exports.UnitDetailedThreatSituation = UnitDetailedThreatSituation;
 function UnitInRaid(unit) { return false; }
 exports.UnitInRaid = UnitInRaid;
-function UnitIsFriend(unit, target) { return 0; }
+function UnitIsFriend(unit, target) { return false; }
 exports.UnitIsFriend = UnitIsFriend;
 function UnitIsPVP(unit) { return false; }
 exports.UnitIsPVP = UnitIsPVP;

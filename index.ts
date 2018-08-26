@@ -357,7 +357,7 @@ export function UnitCreatureFamily(target: string){return "Bat"}
 export function UnitCreatureType(target: string){return "Beast"}
 export function UnitDetailedThreatSituation(unit: string, target: string):any[]{ return []}
 export function UnitInRaid(unit: string){return false}
-export function UnitIsFriend(unit: string, target: string){return 0}
+export function UnitIsFriend(unit: string, target: string){return false}
 export function UnitIsPVP(unit: string){return false}
 export function UnitIsUnit(unit1: string, unit2: string){ return true}
 export function UnitPowerMax(unit: string, power: number, segment: number): number{ return 0}
