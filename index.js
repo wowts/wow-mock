@@ -337,6 +337,8 @@ function UnitIsPVP(unit) { return false; }
 exports.UnitIsPVP = UnitIsPVP;
 function UnitIsUnit(unit1, unit2) { return true; }
 exports.UnitIsUnit = UnitIsUnit;
+function UnitInParty(unit) { return false; }
+exports.UnitInParty = UnitInParty;
 function UnitPowerMax(unit, power, segment) { return 0; }
 exports.UnitPowerMax = UnitPowerMax;
 function UnitRace(unit) { return []; }

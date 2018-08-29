@@ -233,6 +233,7 @@ export declare function UnitInRaid(unit: string): boolean;
 export declare function UnitIsFriend(unit: string, target: string): boolean;
 export declare function UnitIsPVP(unit: string): boolean;
 export declare function UnitIsUnit(unit1: string, unit2: string): boolean;
+export declare function UnitInParty(unit: string): boolean;
 export declare function UnitPowerMax(unit: string, power: number, segment: number): number;
 export declare function UnitRace(unit: string): any[];
 export declare function UnitStagger(unit: string): number;
