@@ -626,10 +626,10 @@ exports.C_AzeriteEmpoweredItem = {
     }
 };
 exports.C_LossOfControl = {
-    GetEventInfo(eventIndex) {
+    GetEventInfo: (eventIndex) => {
         return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
     },
-    GetNumEvents() {
+    GetNumEvents: () => {
         return 0;
     }
 };
