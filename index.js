@@ -625,4 +625,12 @@ exports.C_AzeriteEmpoweredItem = {
         throw new Error("Method GetPowerInfo not implemented.");
     }
 };
+exports.C_LossOfControl = {
+    GetEventInfo(eventIndex) {
+        return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
+    },
+    GetNumEvents() {
+        return 0;
+    }
+};
 //# sourceMappingURL=index.js.map

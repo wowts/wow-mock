@@ -517,3 +517,7 @@ export declare const C_AzeriteEmpoweredItem: {
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number) => boolean;
     GetPowerInfo: (powerId: number) => AzeritePowerInfo;
 };
+export declare const C_LossOfControl: {
+    GetEventInfo(eventIndex: number): [string, number, string, string, number, number, number, number, number, number];
+    GetNumEvents(): number;
+};

@@ -633,3 +633,12 @@ export const C_AzeriteEmpoweredItem = {
         throw new Error("Method GetPowerInfo not implemented.");
     }
 }
+
+export const C_LossOfControl = {
+    GetEventInfo(eventIndex: number): [string, number, string, string, number, number, number, number, number, number] {
+        return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
+    },
+    GetNumEvents() {
+        return 0;
+    }
+}
