@@ -552,7 +552,7 @@ export const AIR_TOTEM_SLOT = 1;
 export const EARTH_TOTEM_SLOT = 2;
 export const FIRE_TOTEM_SLOT = 3;
 export const WATER_TOTEM_SLOT = 4;
-export const MAX_TOTEMS = 3;
+export const MAX_TOTEMS = 4;
 
 export const COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 export const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
