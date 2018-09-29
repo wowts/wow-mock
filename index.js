@@ -366,7 +366,7 @@ function CreateFrame(type, id, parent, template) {
 exports.CreateFrame = CreateFrame;
 function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
-function IsShiftKeyDown() { }
+function IsShiftKeyDown() { return false; }
 exports.IsShiftKeyDown = IsShiftKeyDown;
 function GetSpecialization() { return 1; }
 exports.GetSpecialization = GetSpecialization;

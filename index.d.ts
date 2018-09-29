@@ -245,7 +245,7 @@ export declare function CreateFrame(type: "CheckButton", id?: string, parent?: U
 export declare function CreateFrame(type: "Dropdown", id?: string, parent?: UIFrame, template?: string): UIDropdown;
 export declare function CreateFrame(type: "Frame", id?: string, parent?: UIFrame, template?: string): UIFrame;
 export declare function EasyMenu(menu: any, menuFrame: UIFrame, cursor: string | UIRegion, x: number, y: number, menuType: string, autoHideDelay?: number): void;
-export declare function IsShiftKeyDown(): void;
+export declare function IsShiftKeyDown(): boolean;
 export declare type SpecializationIndex = 1 | 2 | 3 | 4;
 export declare function GetSpecialization(): SpecializationIndex;
 export declare function GetSpecializationInfo(spec: number): number;
