@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const spells_1 = require("./spells");
 class EventDispatcher {
     constructor() {
         this.events = {};
@@ -28,7 +29,17 @@ exports.eventDispatcher = new EventDispatcher();
 class FakeFrame {
     constructor() {
         this.scriptHandlers = {};
+        this.mouseEnabled = true;
         this.shown = true;
+        this.movable = true;
+        this.alpha = 1;
+        this.width = 0;
+        this.height = 0;
+        this.scale = 1;
+        this.visible = true;
+        this.parent = undefined;
+        this.x = 0;
+        this.y = 0;
     }
     RegisterEvent(event) {
         exports.eventDispatcher.RegisterEvent(this, event);
@@ -59,7 +70,7 @@ class FakeFrame {
         return this.shown;
     }
     CreateTexture() {
-        throw new Error("Method not implemented.");
+        return new FakeUITexture();
     }
     EnableMouse(enabled) {
         this.mouseEnabled = enabled;
@@ -71,10 +82,10 @@ class FakeFrame {
         throw new Error("Method not implemented.");
     }
     SetScale(scale) {
-        throw new Error("Method not implemented.");
+        this.scale = scale;
     }
     IsVisible() {
-        throw new Error("Method not implemented.");
+        return this.visible;
     }
     CanChangeProtectedState() {
         throw new Error("Method not implemented.");
@@ -86,31 +97,55 @@ class FakeFrame {
         throw new Error("Method not implemented.");
     }
     GetWidth() {
-        throw new Error("Method not implemented.");
+        return this.width;
     }
     GetHeight() {
-        throw new Error("Method not implemented.");
+        return this.height;
     }
     GetParent() {
-        throw new Error("Method not implemented.");
+        return this.parent;
     }
     SetParent(parent) {
-        throw new Error("Method not implemented.");
+        this.parent = parent;
     }
     SetAllPoints(around) {
-        throw new Error("Method not implemented.");
     }
     SetPoint(anchor, reference, refAnchor, x, y) {
-        throw new Error("Method not implemented.");
+        this.x = x;
+        this.y = y;
     }
     SetWidth(width) {
-        throw new Error("Method not implemented.");
+        this.width = width;
     }
     SetHeight(height) {
-        throw new Error("Method not implemented.");
+        this.height = height;
     }
 }
 exports.FakeFrame = FakeFrame;
+class FakeUITexture extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.r = 0;
+        this.g = 0;
+        this.b = 0;
+    }
+    SetTexture(name) {
+        this.texture = name;
+    }
+    SetColorTexture(r, g, b, alpha) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+    SetVertexColor(r, g, b, alpha) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.alpha = alpha || 1;
+    }
+}
+exports.FakeUITexture = FakeUITexture;
 class FakeMessageFrame extends FakeFrame {
     AddMessage(message) {
         console.log(message);
@@ -160,7 +195,7 @@ exports.FakeDropdown = FakeDropdown;
 // WOW global functions
 function GetInventorySlotInfo(slotName) { return [0, '']; }
 exports.GetInventorySlotInfo = GetInventorySlotInfo;
-function GetItemStats(itemLink, statTable) { return []; }
+function GetItemStats(itemLink, statTable) { return {}; }
 exports.GetItemStats = GetItemStats;
 function GetInventoryItemLink(unitId, slotId) { return ''; }
 exports.GetInventoryItemLink = GetInventoryItemLink;
@@ -189,7 +224,16 @@ function GetMacroItem(spellId) { return []; }
 exports.GetMacroItem = GetMacroItem;
 function GetMacroSpell(spellId) { return 0; }
 exports.GetMacroSpell = GetMacroSpell;
-function GetSpellInfo(spellId, bookType) { return ["a", "b", "c", 0, 1, 2, 3]; }
+function GetSpellInfo(spellId, bookType) {
+    if (typeof (spellId) === "number") {
+        const spell = spells_1.spellInfos[spellId];
+        if (spell) {
+            return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
+        }
+        return [undefined, undefined, "none", 0, 0, 0, 0];
+    }
+    return ["a", "b", "c", 0, 1, 2, 3];
+}
 exports.GetSpellInfo = GetSpellInfo;
 function GetTime() { return 10; }
 exports.GetTime = GetTime;
@@ -213,19 +257,19 @@ function UnitName(unitId) { return "Esside"; }
 exports.UnitName = UnitName;
 function GetActionCooldown(action) { return [0, 0, false]; }
 exports.GetActionCooldown = GetActionCooldown;
-function GetActionTexture(action) { }
+function GetActionTexture(action) { return "filepath"; }
 exports.GetActionTexture = GetActionTexture;
-function GetItemIcon(itemId) { }
+function GetItemIcon(itemId) { return "fakeicon"; }
 exports.GetItemIcon = GetItemIcon;
 function GetItemCooldown(itemId) { return [0, 0, false]; }
 exports.GetItemCooldown = GetItemCooldown;
-function GetItemSpell(itemId) { }
+function GetItemSpell(itemId) { return ["spellName", "spellRank", 100]; }
 exports.GetItemSpell = GetItemSpell;
-function GetSpellTexture(spellId, bookType) { }
+function GetSpellTexture(spellId, bookType) { return "filepath"; }
 exports.GetSpellTexture = GetSpellTexture;
-function IsActionInRange(action, target) { }
+function IsActionInRange(action, target) { return true; }
 exports.IsActionInRange = IsActionInRange;
-function IsCurrentAction(action) { }
+function IsCurrentAction(action) { return false; }
 exports.IsCurrentAction = IsCurrentAction;
 function IsItemInRange(itemId, target) { return false; }
 exports.IsItemInRange = IsItemInRange;
@@ -257,7 +301,7 @@ function UnitLevel(target) { return 0; }
 exports.UnitLevel = UnitLevel;
 function GetBuildInfo() { return []; }
 exports.GetBuildInfo = GetBuildInfo;
-function GetItemCount(item, first, second) { }
+function GetItemCount(item, first, second) { return 0; }
 exports.GetItemCount = GetItemCount;
 function GetNumTrackingTypes() { return 0; }
 exports.GetNumTrackingTypes = GetNumTrackingTypes;
@@ -279,20 +323,22 @@ function UnitChannelInfo(target) { return []; }
 exports.UnitChannelInfo = UnitChannelInfo;
 function UnitClassification(target) { return "worldboss"; }
 exports.UnitClassification = UnitClassification;
-function UnitCreatureFamily(target) { }
+function UnitCreatureFamily(target) { return "Bat"; }
 exports.UnitCreatureFamily = UnitCreatureFamily;
-function UnitCreatureType(target) { }
+function UnitCreatureType(target) { return "Beast"; }
 exports.UnitCreatureType = UnitCreatureType;
 function UnitDetailedThreatSituation(unit, target) { return []; }
 exports.UnitDetailedThreatSituation = UnitDetailedThreatSituation;
 function UnitInRaid(unit) { return false; }
 exports.UnitInRaid = UnitInRaid;
-function UnitIsFriend(unit, target) { return 0; }
+function UnitIsFriend(unit, target) { return false; }
 exports.UnitIsFriend = UnitIsFriend;
 function UnitIsPVP(unit) { return false; }
 exports.UnitIsPVP = UnitIsPVP;
 function UnitIsUnit(unit1, unit2) { return true; }
 exports.UnitIsUnit = UnitIsUnit;
+function UnitInParty(unit) { return false; }
+exports.UnitInParty = UnitInParty;
 function UnitPowerMax(unit, power, segment) { return 0; }
 exports.UnitPowerMax = UnitPowerMax;
 function UnitRace(unit) { return []; }
@@ -322,7 +368,7 @@ function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
 function IsShiftKeyDown() { }
 exports.IsShiftKeyDown = IsShiftKeyDown;
-function GetSpecialization() { return "havoc"; }
+function GetSpecialization() { return 1; }
 exports.GetSpecialization = GetSpecialization;
 function GetSpecializationInfo(spec) { return 1; }
 exports.GetSpecializationInfo = GetSpecializationInfo;
@@ -408,9 +454,9 @@ function GetTalentInfo(i, j, activeTalentGroup) {
 exports.GetTalentInfo = GetTalentInfo;
 function HasPetSpells() { return [0, "a"]; }
 exports.HasPetSpells = HasPetSpells;
-function IsHarmfulSpell(index, bookType) { }
+function IsHarmfulSpell(index, bookType) { return false; }
 exports.IsHarmfulSpell = IsHarmfulSpell;
-function IsHelpfulSpell(index, bookType) { }
+function IsHelpfulSpell(index, bookType) { return false; }
 exports.IsHelpfulSpell = IsHelpfulSpell;
 function IsSpellInRange(index, bookType, unitId) { return 0; }
 exports.IsSpellInRange = IsSpellInRange;
@@ -525,7 +571,7 @@ exports.AIR_TOTEM_SLOT = 1;
 exports.EARTH_TOTEM_SLOT = 2;
 exports.FIRE_TOTEM_SLOT = 3;
 exports.WATER_TOTEM_SLOT = 4;
-exports.MAX_TOTEMS = 3;
+exports.MAX_TOTEMS = 4;
 exports.COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 exports.COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 exports.COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
@@ -555,28 +601,36 @@ exports.Enum = {
 };
 class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex) {
-        throw new Error("Method not implemented.");
+        throw new Error("Method CreateFromEquipmentSlot not implemented.");
     }
 }
 exports.FakeItemLocation = FakeItemLocation;
 exports.ItemLocation = new FakeItemLocation();
 exports.C_Item = {
     DoesItemExist: (emptiableItemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method DoesItemExist not implemented.");
     }
 };
 exports.C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsAzeriteEmpoweredItem not implemented.");
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetAllTierInfo not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method IsPowerSelected not implemented.");
     },
     GetPowerInfo: (powerId) => {
-        throw new Error("Method not implemented.");
+        throw new Error("Method GetPowerInfo not implemented.");
+    }
+};
+exports.C_LossOfControl = {
+    GetEventInfo: (eventIndex) => {
+        return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
+    },
+    GetNumEvents: () => {
+        return 0;
     }
 };
 //# sourceMappingURL=index.js.map

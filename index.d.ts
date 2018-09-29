@@ -1,4 +1,4 @@
-import { LuaArray, LuaObj } from "@wowts/lua";
+import { LuaArray } from "@wowts/lua";
 export declare type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export declare type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
 export interface UIRegion {
@@ -7,7 +7,7 @@ export interface UIRegion {
     GetCenter(): [number, number];
     GetWidth(): number;
     GetHeight(): number;
-    GetParent(): UIRegion;
+    GetParent(): UIRegion | undefined;
     SetParent(parent: UIRegion): void;
     SetAllPoints(around: UIFrame): void;
     SetParent(parent: UIFrame): void;
@@ -90,9 +90,16 @@ export declare class FakeFrame implements UIFrame {
     RegisterEvent(event: string): void;
     mouseEnabled: boolean;
     shown: boolean;
-    strata: string;
+    strata?: string;
     movable: boolean;
     alpha: number;
+    width: number;
+    height: number;
+    scale: number;
+    visible: boolean;
+    parent?: UIRegion;
+    x: number;
+    y: number;
     SetAlpha(value: number): void;
     SetScript(event: string, func: (frame: UIFrame, ...parameters: any[]) => void): void;
     StartMoving(): void;
@@ -113,7 +120,7 @@ export declare class FakeFrame implements UIFrame {
     GetCenter(): [number, number];
     GetWidth(): number;
     GetHeight(): number;
-    GetParent(): UIRegion;
+    GetParent(): UIRegion | undefined;
     SetParent(parent: UIRegion): void;
     SetParent(parent: UIFrame): void;
     SetAllPoints(around: UIFrame): void;
@@ -121,6 +128,15 @@ export declare class FakeFrame implements UIFrame {
     SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
     SetWidth(width: number): void;
     SetHeight(height: number): void;
+}
+export declare class FakeUITexture extends FakeFrame implements UITexture {
+    texture?: string;
+    r: number;
+    g: number;
+    b: number;
+    SetTexture(name: string): void;
+    SetColorTexture(r: number, g: number, b: number, alpha?: number | undefined): void;
+    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void;
 }
 export declare class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
     AddMessage(message: string): void;
@@ -144,8 +160,11 @@ export declare class FakeCheckButton extends FakeFrame implements UICheckButton 
 }
 export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 }
+export interface ItemStats {
+    ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
+}
 export declare function GetInventorySlotInfo(slotName: string): [number, string];
-export declare function GetItemStats(itemLink: string, statTable?: any[]): any[];
+export declare function GetItemStats(itemLink: string, statTable?: any[]): ItemStats;
 export declare function GetInventoryItemLink(unitId: string, slotId: number): string;
 export declare function GetHaste(): number;
 export declare function UnitRangedDamage(player: string): [number, number, number, number, number, number];
@@ -159,25 +178,25 @@ export declare function GetBonusBarIndex(): void;
 export declare function GetItemInfo(itemId: number | string): any[];
 export declare function GetMacroItem(spellId: number): any[];
 export declare function GetMacroSpell(spellId: number): number;
-export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string, string, string, number, number, number, number];
+export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string | undefined, string | undefined, string, number, number, number, number];
 export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
 export declare function UnitAura(unitId: string, i: number, filter: string): any[];
 export declare function UnitCanAttack(unit: string, target: string): boolean;
-export declare function UnitClass(unit: string): [string, "WARRIOR" | "PRIEST"];
+export declare function UnitClass(unit: string): [string, ClassId];
 export declare function UnitExists(unit: string): boolean;
 export declare function UnitGUID(unit: string): string;
 export declare function UnitHasVehicleUI(unit: string): boolean;
 export declare function UnitIsDead(unit: string): boolean;
 export declare function UnitName(unitId: string): string;
 export declare function GetActionCooldown(action: number): [number, number, boolean];
-export declare function GetActionTexture(action: number): void;
-export declare function GetItemIcon(itemId: number): void;
+export declare function GetActionTexture(action: number): string;
+export declare function GetItemIcon(itemId: number): string;
 export declare function GetItemCooldown(itemId: number): [number, number, boolean];
-export declare function GetItemSpell(itemId: number): void;
-export declare function GetSpellTexture(spellId: number, bookType?: string): void;
-export declare function IsActionInRange(action: number, target: string): void;
-export declare function IsCurrentAction(action: number): void;
+export declare function GetItemSpell(itemId: number): [string, string, number];
+export declare function GetSpellTexture(spellId: number, bookType?: string): string;
+export declare function IsActionInRange(action: number, target: string): boolean;
+export declare function IsCurrentAction(action: number): boolean;
 export declare function IsItemInRange(itemId: number, target: string): boolean;
 export declare function IsUsableAction(action: number): boolean;
 export declare function IsUsableItem(itemId: number): boolean;
@@ -196,7 +215,7 @@ export declare function IsInInstance(): boolean;
 export declare function IsInRaid(filter?: number): boolean;
 export declare function UnitLevel(target: string): number;
 export declare function GetBuildInfo(): any[];
-export declare function GetItemCount(item: string, first?: boolean, second?: boolean): void;
+export declare function GetItemCount(item: string, first?: boolean, second?: boolean): number;
 export declare function GetNumTrackingTypes(): number;
 export declare function GetTrackingInfo(i: number): any[];
 export declare function GetUnitSpeed(unit: string): number;
@@ -207,13 +226,14 @@ export declare function IsStealthed(): boolean;
 export declare function UnitCastingInfo(target: string): any[];
 export declare function UnitChannelInfo(target: string): any[];
 export declare function UnitClassification(target: string): string;
-export declare function UnitCreatureFamily(target: string): void;
-export declare function UnitCreatureType(target: string): void;
+export declare function UnitCreatureFamily(target: string): string;
+export declare function UnitCreatureType(target: string): string;
 export declare function UnitDetailedThreatSituation(unit: string, target: string): any[];
 export declare function UnitInRaid(unit: string): boolean;
-export declare function UnitIsFriend(unit: string, target: string): number;
+export declare function UnitIsFriend(unit: string, target: string): boolean;
 export declare function UnitIsPVP(unit: string): boolean;
 export declare function UnitIsUnit(unit1: string, unit2: string): boolean;
+export declare function UnitInParty(unit: string): boolean;
 export declare function UnitPowerMax(unit: string, power: number, segment: number): number;
 export declare function UnitRace(unit: string): any[];
 export declare function UnitStagger(unit: string): number;
@@ -226,8 +246,9 @@ export declare function CreateFrame(type: "Dropdown", id?: string, parent?: UIFr
 export declare function CreateFrame(type: "Frame", id?: string, parent?: UIFrame, template?: string): UIFrame;
 export declare function EasyMenu(menu: any, menuFrame: UIFrame, cursor: string | UIRegion, x: number, y: number, menuType: string, autoHideDelay?: number): void;
 export declare function IsShiftKeyDown(): void;
-export declare function GetSpecialization(): string;
-export declare function GetSpecializationInfo(spec: string): number;
+export declare type SpecializationIndex = 1 | 2 | 3 | 4;
+export declare function GetSpecialization(): SpecializationIndex;
+export declare function GetSpecializationInfo(spec: number): number;
 export declare function GetNumSpecializations(isInspect: boolean, isPet: boolean): number;
 export declare function GetTalentInfoByID(talent: number, spec: number): any[];
 export declare function GetAuctionItemSubClasses(item: number): any[];
@@ -268,8 +289,8 @@ export declare function GetSpellLink(index: number | string, bookType?: string):
 export declare function GetSpellTabInfo(tab: number): any[];
 export declare function GetTalentInfo(i: number, j: number, activeTalentGroup: number): [number, string, string, number, number, number, number, number, number, number, number];
 export declare function HasPetSpells(): [number, string];
-export declare function IsHarmfulSpell(index: number | string, bookType?: string): void;
-export declare function IsHelpfulSpell(index: number | string, bookType?: string): void;
+export declare function IsHarmfulSpell(index: number | string, bookType?: string): boolean;
+export declare function IsHelpfulSpell(index: number | string, bookType?: string): boolean;
 export declare function IsSpellInRange(index: number | string, bookType?: string, unitId?: string): number;
 export declare function IsUsableSpell(index: number | string, bookType?: string): [boolean, boolean];
 export declare function GetNumShapeshiftForms(): number;
@@ -356,17 +377,86 @@ export declare const BOOKTYPE_PET = "pet";
 export declare const MAX_TALENT_TIERS = 7;
 export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
-export declare const RAID_CLASS_COLORS: LuaObj<{
-    r: number;
-    g: number;
-    b: number;
-    colorStr: string;
-}>;
+export declare type ClassId = keyof typeof RAID_CLASS_COLORS;
+export declare const RAID_CLASS_COLORS: {
+    ["HUNTER"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["WARLOCK"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["PRIEST"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["PALADIN"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["MAGE"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["ROGUE"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DRUID"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["SHAMAN"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["WARRIOR"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DEATHKNIGHT"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["MONK"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+    ["DEMONHUNTER"]: {
+        r: number;
+        g: number;
+        b: number;
+        colorStr: string;
+    };
+};
 export declare const AIR_TOTEM_SLOT = 1;
 export declare const EARTH_TOTEM_SLOT = 2;
 export declare const FIRE_TOTEM_SLOT = 3;
 export declare const WATER_TOTEM_SLOT = 4;
-export declare const MAX_TOTEMS = 3;
+export declare const MAX_TOTEMS = 4;
 export declare const COMBATLOG_OBJECT_AFFILIATION_MINE = 1;
 export declare const COMBATLOG_OBJECT_AFFILIATION_PARTY = 2;
 export declare const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
@@ -418,9 +508,16 @@ export interface AzeritePowerInfo {
     spellID: number;
     azeritePowerId: number;
 }
+export interface AzeriteTierInfo {
+    azeritePowerIDs: LuaArray<number>;
+}
 export declare const C_AzeriteEmpoweredItem: {
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin) => boolean;
-    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin) => any[];
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin) => AzeriteTierInfo[];
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number) => boolean;
     GetPowerInfo: (powerId: number) => AzeritePowerInfo;
+};
+export declare const C_LossOfControl: {
+    GetEventInfo: (eventIndex: number) => [string, number, string, string, number, number, number, number, number, number];
+    GetNumEvents: () => number;
 };
