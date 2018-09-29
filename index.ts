@@ -29,7 +29,7 @@ export interface UIFrame  extends UIRegion {
     SetMovable(movable:boolean):void;
     SetFrameStrata(strata: "MEDIUM"):void;
     Show():void;
-    Hide():void;   
+    Hide():void;
     IsShown():boolean;
     CreateTexture(): UITexture;
     EnableMouse(enabled: boolean):void;
@@ -209,7 +209,7 @@ export class FakeFrame implements UIFrame {
     SetHeight(height: number): void {
         this.height = height;
     }
-    
+
 }
 
 export class FakeUITexture extends FakeFrame implements UITexture {
@@ -257,7 +257,7 @@ export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
     ClearLines():void {}
     SetInventoryItem(unit: string, slot: number):void {}
     NumLines():number {
-        return this.lines.length; 
+        return this.lines.length;
     }
     GetText():string {
         return this.text;
@@ -371,7 +371,7 @@ export function CreateFrame(type:"GameTooltip", id?:string, parent?:UIFrame, tem
 export function CreateFrame(type:"CheckButton", id?:string, parent?:UIFrame, template?:string):UICheckButton;
 export function CreateFrame(type:"Dropdown", id?:string, parent?:UIFrame, template?:string):UIDropdown;
 export function CreateFrame(type:"Frame", id?:string, parent?:UIFrame, template?:string):UIFrame;
-export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:string):UIFrame { 
+export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:string):UIFrame {
     switch (type) {
         case "GameTooltip":
             return new FakeGameTooltip();
@@ -384,7 +384,7 @@ export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:
     }
 }
 export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:number, y:number, menuType:string, autoHideDelay?:number) {}
-export function IsShiftKeyDown(){}
+export function IsShiftKeyDown(){return false}
 export type SpecializationIndex = 1 | 2 | 3 | 4;
 export function GetSpecialization(): SpecializationIndex {return 1;}
 export function GetSpecializationInfo(spec: number){ return 1}
@@ -426,7 +426,7 @@ export function GetSpellBookItemInfo(index: number|string, bookType?: string):an
 export function GetSpellCount(index: number|string, bookType?: string): number { return 0}
 export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
 export function GetSpellTabInfo(tab: number):any[] { return []}
-export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] { 
+export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] {
     return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
 }
 export function HasPetSpells():[number, string] {return[0, "a"]}
@@ -560,7 +560,7 @@ export const COMBATLOG_OBJECT_AFFILIATION_RAID = 3;
 export const COMBATLOG_OBJECT_REACTION_FRIENDLY = 4;
 
 export const Enum = {
-    PowerType: { 
+    PowerType: {
         Mana: 0,
         Rage: 1,
         Focus: 2,
