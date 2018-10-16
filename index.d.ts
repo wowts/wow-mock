@@ -257,6 +257,8 @@ export declare function GetInventoryItemGems(): void;
 export declare function RegisterStateDriver(frame: UIFrame, property: string, state: any): void;
 export declare function UnitHealth(unit: string): number;
 export declare function UnitHealthMax(unit: string): number;
+export declare function UnitGetTotalHealAbsorbs(unit: string): number;
+export declare function UnitGetTotalAbsorbs(unit: string): number;
 export declare function PlaySoundFile(file: string): void;
 export declare function GetCombatRating(combatRatingIdentifier: number): number;
 export declare function GetCombatRatingBonus(combatRatingIdentifier: number): number;

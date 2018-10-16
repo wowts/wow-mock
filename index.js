@@ -388,6 +388,10 @@ function UnitHealth(unit) { return 0; }
 exports.UnitHealth = UnitHealth;
 function UnitHealthMax(unit) { return 0; }
 exports.UnitHealthMax = UnitHealthMax;
+function UnitGetTotalHealAbsorbs(unit) { return 0; }
+exports.UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs;
+function UnitGetTotalAbsorbs(unit) { return 0; }
+exports.UnitGetTotalAbsorbs = UnitGetTotalAbsorbs;
 function PlaySoundFile(file) { }
 exports.PlaySoundFile = PlaySoundFile;
 function GetCombatRating(combatRatingIdentifier) { return 0; }

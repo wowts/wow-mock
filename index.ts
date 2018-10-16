@@ -396,6 +396,8 @@ export function GetInventoryItemGems(){}
 export function RegisterStateDriver(frame: UIFrame, property: string, state:any){}
 export function UnitHealth(unit:string){return 0}
 export function UnitHealthMax(unit:string){return 0}
+export function UnitGetTotalHealAbsorbs(unit:string){return 0}
+export function UnitGetTotalAbsorbs(unit:string){return 0}
 export function PlaySoundFile(file:string){}
 export function GetCombatRating(combatRatingIdentifier:number){ return 0}
 export function GetCombatRatingBonus(combatRatingIdentifier:number) {return 0;}
