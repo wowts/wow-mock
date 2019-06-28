@@ -636,6 +636,30 @@ export const C_AzeriteEmpoweredItem = {
     }
 }
 
+export interface AzeriteMilestoneInfo {
+    ID: number,
+    unlocked: boolean;
+    slot: number;
+}
+export interface AzeriteEssenceInfo {
+    name: string,
+    rank: number,
+}
+export declare const C_AzeriteEssence: {
+    GetMilestones: ():AzeriteMilestoneInfo[] => {
+        throw new Error("Method GetMilestones not implemented.");
+    },
+    GetMilestoneInfo: (milestoneId: number):AzeriteMilestoneInfo => {
+        throw new Error("Method GetMilestoneInfo not implemented.");
+    },
+    GetMilestoneEssence: (milestoneId: number):number => {
+        throw new Error("Method GetMilestoneEssence not implemented.");
+    },
+    GetEssenceInfo: (essenceId: number):AzeriteEssenceInfo => {
+        throw new Error("Method GetEssenceInfo not implemented.");
+    },
+};
+
 export const C_LossOfControl = {
     GetEventInfo: (eventIndex: number): [string, number, string, string, number, number, number, number, number, number] => {
         return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
