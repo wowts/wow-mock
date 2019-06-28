@@ -305,7 +305,7 @@ export function GetSpellInfo(spellId: number | string, bookType?: string): [stri
         if (spell) {
             return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
         }
-        return [undefined, undefined, "none", 0, 0, 0, 0];
+        return [spellId, undefined, "none", 0, 0, 0, spellId];
     }
     return ["a", "b", "c", 0, 1, 2, 3];
 }
