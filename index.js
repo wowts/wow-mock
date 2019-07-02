@@ -629,6 +629,20 @@ exports.C_AzeriteEmpoweredItem = {
         throw new Error("Method GetPowerInfo not implemented.");
     }
 };
+exports.C_AzeriteEssence = {
+    GetMilestones: () => {
+        throw new Error("Method GetMilestones not implemented.");
+    },
+    GetMilestoneInfo: (milestoneId: number) => {
+        throw new Error("Method GetMilestoneInfo not implemented.");
+    },
+    GetMilestoneEssence: (milestoneId: number) => {
+        throw new Error("Method GetMilestoneEssence not implemented.");
+    },
+    GetEssenceInfo: (essenceId: number) => {
+        throw new Error("Method GetEssenceInfo not implemented.");
+    },
+};
 exports.C_LossOfControl = {
     GetEventInfo: (eventIndex) => {
         return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];

@@ -519,6 +519,21 @@ export declare const C_AzeriteEmpoweredItem: {
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number) => boolean;
     GetPowerInfo: (powerId: number) => AzeritePowerInfo;
 };
+export interface AzeriteMilestoneInfo {
+    ID: number,
+    unlocked: boolean;
+    slot: number;
+}
+export interface AzeriteEssenceInfo {
+    name: string,
+    rank: number,
+}
+export declare const C_AzeriteEssence: {
+    GetMilestones: () => AzeriteMilestoneInfo[];
+    GetMilestoneInfo: (milestoneId: number) => AzeriteMilestoneInfo;
+    GetMilestoneEssence: (milestoneId: number) => number;
+    GetEssenceInfo: (essenceId: number) => AzeriteEssenceInfo;
+};
 export declare const C_LossOfControl: {
     GetEventInfo: (eventIndex: number) => [string, number, string, string, number, number, number, number, number, number];
     GetNumEvents: () => number;
