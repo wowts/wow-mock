@@ -429,7 +429,7 @@ export function GetSpellCount(index: number|string, bookType?: string): number {
 export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
 export function GetSpellTabInfo(tab: number):any[] { return []}
 export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] {
-    return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
+    return [123, "A Talent", "Texture/Path", 1, 1, 12345, 1, 1, 1, 1, 1];
 }
 export function HasPetSpells():[number, string] {return[0, "a"]}
 export function IsHarmfulSpell(index: number|string, bookType?: string){ return false}
