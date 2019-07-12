@@ -453,7 +453,7 @@ exports.GetSpellLink = GetSpellLink;
 function GetSpellTabInfo(tab) { return []; }
 exports.GetSpellTabInfo = GetSpellTabInfo;
 function GetTalentInfo(i, j, activeTalentGroup) {
-    return [123, "A Talent", "Texture/Path", 0, 1, 12345, 1, 1, 1, 1, 1];
+    return [123, "A Talent", "Texture/Path", 1, 1, 12345, 1, 1, 1, 1, 1];
 }
 exports.GetTalentInfo = GetTalentInfo;
 function HasPetSpells() { return [0, "a"]; }
@@ -605,42 +605,42 @@ exports.Enum = {
 };
 class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex) {
-        throw new Error("Method CreateFromEquipmentSlot not implemented.");
+        throw Error("Method CreateFromEquipmentSlot not implemented.");
     }
 }
 exports.FakeItemLocation = FakeItemLocation;
 exports.ItemLocation = new FakeItemLocation();
 exports.C_Item = {
     DoesItemExist: (emptiableItemLocation) => {
-        throw new Error("Method DoesItemExist not implemented.");
+        throw Error("Method DoesItemExist not implemented.");
     }
 };
 exports.C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation) => {
-        throw new Error("Method IsAzeriteEmpoweredItem not implemented.");
+        throw Error("Method IsAzeriteEmpoweredItem not implemented.");
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
-        throw new Error("Method GetAllTierInfo not implemented.");
+        throw Error("Method GetAllTierInfo not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
-        throw new Error("Method IsPowerSelected not implemented.");
+        throw Error("Method IsPowerSelected not implemented.");
     },
     GetPowerInfo: (powerId) => {
-        throw new Error("Method GetPowerInfo not implemented.");
+        throw Error("Method GetPowerInfo not implemented.");
     }
 };
 exports.C_AzeriteEssence = {
     GetMilestones: () => {
-        throw new Error("Method GetMilestones not implemented.");
+        throw Error("Method GetMilestones not implemented.");
     },
-    GetMilestoneInfo: (milestoneId: number) => {
-        throw new Error("Method GetMilestoneInfo not implemented.");
+    GetMilestoneInfo: (milestoneId) => {
+        throw Error("Method GetMilestoneInfo not implemented.");
     },
-    GetMilestoneEssence: (milestoneId: number) => {
-        throw new Error("Method GetMilestoneEssence not implemented.");
+    GetMilestoneEssence: (milestoneId) => {
+        throw Error("Method GetMilestoneEssence not implemented.");
     },
-    GetEssenceInfo: (essenceId: number) => {
-        throw new Error("Method GetEssenceInfo not implemented.");
+    GetEssenceInfo: (essenceId) => {
+        throw Error("Method GetEssenceInfo not implemented.");
     },
 };
 exports.C_LossOfControl = {

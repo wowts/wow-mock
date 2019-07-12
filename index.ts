@@ -601,14 +601,14 @@ export interface ItemLocationMixin{
 
 export class FakeItemLocation{
     CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
-        throw new Error("Method CreateFromEquipmentSlot not implemented.");
+        throw Error("Method CreateFromEquipmentSlot not implemented.");
     }
 }
 export const ItemLocation = new FakeItemLocation()
 
 export const C_Item = {
     DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
-        throw new Error("Method DoesItemExist not implemented.");
+        throw Error("Method DoesItemExist not implemented.");
     }
 };
 
@@ -623,16 +623,16 @@ export interface AzeriteTierInfo {
 
 export const C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
-        throw new Error("Method IsAzeriteEmpoweredItem not implemented.");
+        throw Error("Method IsAzeriteEmpoweredItem not implemented.");
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):AzeriteTierInfo[] => {
-        throw new Error("Method GetAllTierInfo not implemented.");
+        throw Error("Method GetAllTierInfo not implemented.");
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
-        throw new Error("Method IsPowerSelected not implemented.");
+        throw Error("Method IsPowerSelected not implemented.");
     },
     GetPowerInfo: (powerId: number):AzeritePowerInfo => {
-        throw new Error("Method GetPowerInfo not implemented.");
+        throw Error("Method GetPowerInfo not implemented.");
     }
 }
 
@@ -645,18 +645,18 @@ export interface AzeriteEssenceInfo {
     name: string,
     rank: number,
 }
-export declare const C_AzeriteEssence: {
+export const C_AzeriteEssence = {
     GetMilestones: ():AzeriteMilestoneInfo[] => {
-        throw new Error("Method GetMilestones not implemented.");
+        throw Error("Method GetMilestones not implemented.");
     },
     GetMilestoneInfo: (milestoneId: number):AzeriteMilestoneInfo => {
-        throw new Error("Method GetMilestoneInfo not implemented.");
+        throw Error("Method GetMilestoneInfo not implemented.");
     },
     GetMilestoneEssence: (milestoneId: number):number => {
-        throw new Error("Method GetMilestoneEssence not implemented.");
+        throw Error("Method GetMilestoneEssence not implemented.");
     },
     GetEssenceInfo: (essenceId: number):AzeriteEssenceInfo => {
-        throw new Error("Method GetEssenceInfo not implemented.");
+        throw Error("Method GetEssenceInfo not implemented.");
     },
 };
 

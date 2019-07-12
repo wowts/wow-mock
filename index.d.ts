@@ -381,73 +381,73 @@ export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
 export declare type ClassId = keyof typeof RAID_CLASS_COLORS;
 export declare const RAID_CLASS_COLORS: {
-    ["HUNTER"]: {
+    HUNTER: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["WARLOCK"]: {
+    WARLOCK: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["PRIEST"]: {
+    PRIEST: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["PALADIN"]: {
+    PALADIN: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["MAGE"]: {
+    MAGE: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["ROGUE"]: {
+    ROGUE: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DRUID"]: {
+    DRUID: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["SHAMAN"]: {
+    SHAMAN: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["WARRIOR"]: {
+    WARRIOR: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DEATHKNIGHT"]: {
+    DEATHKNIGHT: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["MONK"]: {
+    MONK: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DEMONHUNTER"]: {
+    DEMONHUNTER: {
         r: number;
         g: number;
         b: number;
@@ -520,13 +520,13 @@ export declare const C_AzeriteEmpoweredItem: {
     GetPowerInfo: (powerId: number) => AzeritePowerInfo;
 };
 export interface AzeriteMilestoneInfo {
-    ID: number,
+    ID: number;
     unlocked: boolean;
     slot: number;
 }
 export interface AzeriteEssenceInfo {
-    name: string,
-    rank: number,
+    name: string;
+    rank: number;
 }
 export declare const C_AzeriteEssence: {
     GetMilestones: () => AzeriteMilestoneInfo[];
