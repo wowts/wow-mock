@@ -40,6 +40,7 @@ class FakeFrame {
         this.parent = undefined;
         this.x = 0;
         this.y = 0;
+        this.attributes = new Map();
     }
     RegisterEvent(event) {
         exports.eventDispatcher.RegisterEvent(this, event);
@@ -76,10 +77,10 @@ class FakeFrame {
         this.mouseEnabled = enabled;
     }
     CreateFontString(name, layer, inherits) {
-        throw new Error("Method not implemented.");
+        return new FakeFontString();
     }
     SetAttribute(key, value) {
-        throw new Error("Method not implemented.");
+        this.attributes.set(key, value);
     }
     SetScale(scale) {
         this.scale = scale;
@@ -88,13 +89,16 @@ class FakeFrame {
         return this.visible;
     }
     CanChangeProtectedState() {
-        throw new Error("Method not implemented.");
+        return true;
     }
     ClearAllPoints() {
-        throw new Error("Method not implemented.");
+        this.x = 0;
+        this.y = 0;
+        this.height = 0;
+        this.width = 0;
     }
     GetCenter() {
-        throw new Error("Method not implemented.");
+        return [this.width / 2 + this.x, this.height / 2 + this.y];
     }
     GetWidth() {
         return this.width;
@@ -122,6 +126,35 @@ class FakeFrame {
     }
 }
 exports.FakeFrame = FakeFrame;
+class FakeFontString extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.text = "";
+        this.font = { font: "", height: 0, flags: 0 };
+    }
+    SetText(text) {
+        this.text = text;
+    }
+    SetFont(font, height, flags) {
+        this.font.font = font;
+        this.font.height = height;
+        this.font.flags = flags;
+    }
+    SetFontObject(name) {
+    }
+    SetTextColor(r, g, b, alpha) {
+    }
+    SetFormattedText(text, ...args) {
+    }
+    SetVertexColor(r, g, b, alpha) {
+    }
+    SetJustifyH(justify) {
+    }
+    GetFont() {
+        return [this.font.font, this.font.height, this.font.flags];
+    }
+}
+exports.FakeFontString = FakeFontString;
 class FakeUITexture extends FakeFrame {
     constructor() {
         super(...arguments);

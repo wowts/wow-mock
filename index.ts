@@ -128,6 +128,7 @@ export class FakeFrame implements UIFrame {
     parent?: UIRegion = undefined;
     x = 0;
     y = 0;
+    private attributes = new Map<string, string>();
 
     SetAlpha(value: number): void {
         this.alpha = value;
@@ -161,10 +162,10 @@ export class FakeFrame implements UIFrame {
         this.mouseEnabled = enabled;
     }
     CreateFontString(name: string, layer?: "OVERLAY" | undefined, inherits?: string | undefined): UIFontString {
-        throw new Error("Method not implemented.");
+        return new FakeFontString();
     }
     SetAttribute(key: string, value: string): void {
-        throw new Error("Method not implemented.");
+        this.attributes.set(key, value);
     }
     SetScale(scale: number): void {
         this.scale = scale;
@@ -173,13 +174,16 @@ export class FakeFrame implements UIFrame {
         return this.visible;
     }
     CanChangeProtectedState(): boolean {
-        throw new Error("Method not implemented.");
+        return true;
     }
     ClearAllPoints(): void {
-        throw new Error("Method not implemented.");
+        this.x = 0;
+        this.y = 0;
+        this.height = 0;
+        this.width = 0;
     }
     GetCenter(): [number, number] {
-        throw new Error("Method not implemented.");
+        return [this.width / 2 + this.x, this.height / 2 + this.y];
     }
     GetWidth(): number {
         return this.width;
@@ -210,6 +214,32 @@ export class FakeFrame implements UIFrame {
         this.height = height;
     }
 
+}
+
+export class FakeFontString extends FakeFrame implements UIFontString {
+    text: string = "";
+    private font = { font: "", height: 0, flags: 0 };
+    SetText(text: string): void {
+        this.text =text;
+    }    
+    SetFont(font: string, height: number, flags: number): void {
+        this.font.font = font;
+        this.font.height = height;
+        this.font.flags = flags;
+    }
+    SetFontObject(name: "GameFontNormalSmall"): void {
+    }
+    SetTextColor(r: number, g: number, b: number, alpha?: number | undefined): void {
+    }
+    SetFormattedText(text: string, ...args: any[]): void {
+    }
+    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void {
+    }
+    SetJustifyH(justify: "left" | "right"): void {
+    }
+    GetFont(): [string, number, number] {
+        return [this.font.font, this.font.height, this.font.flags];
+    }
 }
 
 export class FakeUITexture extends FakeFrame implements UITexture {

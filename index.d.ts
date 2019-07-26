@@ -100,6 +100,7 @@ export declare class FakeFrame implements UIFrame {
     parent?: UIRegion;
     x: number;
     y: number;
+    private attributes;
     SetAlpha(value: number): void;
     SetScript(event: string, func: (frame: UIFrame, ...parameters: any[]) => void): void;
     StartMoving(): void;
@@ -128,6 +129,18 @@ export declare class FakeFrame implements UIFrame {
     SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
     SetWidth(width: number): void;
     SetHeight(height: number): void;
+}
+export declare class FakeFontString extends FakeFrame implements UIFontString {
+    text: string;
+    private font;
+    SetText(text: string): void;
+    SetFont(font: string, height: number, flags: number): void;
+    SetFontObject(name: "GameFontNormalSmall"): void;
+    SetTextColor(r: number, g: number, b: number, alpha?: number | undefined): void;
+    SetFormattedText(text: string, ...args: any[]): void;
+    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void;
+    SetJustifyH(justify: "left" | "right"): void;
+    GetFont(): [string, number, number];
 }
 export declare class FakeUITexture extends FakeFrame implements UITexture {
     texture?: string;
@@ -381,73 +394,73 @@ export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
 export declare type ClassId = keyof typeof RAID_CLASS_COLORS;
 export declare const RAID_CLASS_COLORS: {
-    HUNTER: {
+    ["HUNTER"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    WARLOCK: {
+    ["WARLOCK"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    PRIEST: {
+    ["PRIEST"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    PALADIN: {
+    ["PALADIN"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    MAGE: {
+    ["MAGE"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ROGUE: {
+    ["ROGUE"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    DRUID: {
+    ["DRUID"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    SHAMAN: {
+    ["SHAMAN"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    WARRIOR: {
+    ["WARRIOR"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    DEATHKNIGHT: {
+    ["DEATHKNIGHT"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    MONK: {
+    ["MONK"]: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    DEMONHUNTER: {
+    ["DEMONHUNTER"]: {
         r: number;
         g: number;
         b: number;
