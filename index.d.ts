@@ -29,7 +29,7 @@ export interface UIFrame extends UIRegion {
     IsShown(): boolean;
     CreateTexture(): UITexture;
     EnableMouse(enabled: boolean): void;
-    CreateFontString(name: string, layer?: "OVERLAY", inherits?: string): UIFontString;
+    CreateFontString(name: string | undefined, layer?: "OVERLAY", inherits?: string): UIFontString;
     SetAttribute(key: string, value: string): void;
     SetScale(scale: number): void;
     IsVisible(): boolean;
@@ -37,9 +37,11 @@ export interface UIFrame extends UIRegion {
 }
 export interface UIMessageFrame extends UIFrame {
     AddMessage(message: string): void;
+    GetNumMessages(): number;
+    GetMessageInfo(messageIndex: number): string;
 }
 export interface UIFontString extends UIFrame {
-    SetText(text: string): void;
+    SetText(text: string | undefined): void;
     SetFont(font: string, height: number, flags: number): void;
     SetFontObject(name: "GameFontNormalSmall"): void;
     SetTextColor(r: number, g: number, b: number, alpha?: number): void;
@@ -56,7 +58,7 @@ export interface UICheckButton extends UIFrame {
 export interface UIDropdown extends UIFrame {
 }
 export interface UITexture extends UIFrame {
-    SetTexture(name: string): void;
+    SetTexture(name: string | undefined): void;
     SetColorTexture(r: number, g: number, b: number, alpha?: number): void;
     SetVertexColor(r: number, g: number, b: number, alpha?: number): void;
 }
@@ -152,7 +154,10 @@ export declare class FakeUITexture extends FakeFrame implements UITexture {
     SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void;
 }
 export declare class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
+    messages: string[];
     AddMessage(message: string): void;
+    GetNumMessages(): number;
+    GetMessageInfo(i: number): string;
 }
 export declare class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
     private text;
@@ -236,7 +241,7 @@ export declare function GetWeaponEnchantInfo(): any[];
 export declare function HasFullControl(): boolean;
 export declare function IsSpellOverlayed(): void;
 export declare function IsStealthed(): boolean;
-export declare function UnitCastingInfo(target: string): any[];
+export declare function UnitCastingInfo(target: string): [string | undefined, string, string, number, number, boolean, string, boolean, number];
 export declare function UnitChannelInfo(target: string): any[];
 export declare function UnitClassification(target: string): string;
 export declare function UnitCreatureFamily(target: string): string;
@@ -247,7 +252,7 @@ export declare function UnitIsFriend(unit: string, target: string): boolean;
 export declare function UnitIsPVP(unit: string): boolean;
 export declare function UnitIsUnit(unit1: string, unit2: string): boolean;
 export declare function UnitInParty(unit: string): boolean;
-export declare function UnitPowerMax(unit: string, power: number, segment: number): number;
+export declare function UnitPowerMax(unit: string, power: number, segment?: number): number;
 export declare function UnitRace(unit: string): any[];
 export declare function UnitStagger(unit: string): number;
 export declare function GetSpellCharges(spellId: number): any[];
@@ -394,73 +399,73 @@ export declare const NUM_TALENT_COLUMNS = 3;
 export declare const RUNE_NAME: {};
 export declare type ClassId = keyof typeof RAID_CLASS_COLORS;
 export declare const RAID_CLASS_COLORS: {
-    ["HUNTER"]: {
+    HUNTER: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["WARLOCK"]: {
+    WARLOCK: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["PRIEST"]: {
+    PRIEST: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["PALADIN"]: {
+    PALADIN: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["MAGE"]: {
+    MAGE: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["ROGUE"]: {
+    ROGUE: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DRUID"]: {
+    DRUID: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["SHAMAN"]: {
+    SHAMAN: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["WARRIOR"]: {
+    WARRIOR: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DEATHKNIGHT"]: {
+    DEATHKNIGHT: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["MONK"]: {
+    MONK: {
         r: number;
         g: number;
         b: number;
         colorStr: string;
     };
-    ["DEMONHUNTER"]: {
+    DEMONHUNTER: {
         r: number;
         g: number;
         b: number;

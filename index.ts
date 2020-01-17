@@ -33,7 +33,7 @@ export interface UIFrame  extends UIRegion {
     IsShown():boolean;
     CreateTexture(): UITexture;
     EnableMouse(enabled: boolean):void;
-    CreateFontString(name: string, layer?: "OVERLAY", inherits?: string): UIFontString;
+    CreateFontString(name: string | undefined, layer?: "OVERLAY", inherits?: string): UIFontString;
     SetAttribute(key: string, value: string):void;
     SetScale(scale: number):void;
     IsVisible():boolean;
@@ -42,10 +42,12 @@ export interface UIFrame  extends UIRegion {
 
 export interface UIMessageFrame extends UIFrame {
     AddMessage(message:string):void;
+    GetNumMessages(): number;
+    GetMessageInfo(messageIndex: number):string;
 }
 
 export interface UIFontString extends UIFrame {
-    SetText(text: string):void;
+    SetText(text: string | undefined):void;
     SetFont(font: string, height: number, flags: number):void;
     SetFontObject(name: "GameFontNormalSmall"):void;
     SetTextColor(r:number, g:number, b: number, alpha?:number):void;
@@ -64,7 +66,7 @@ export interface UICheckButton extends UIFrame {
 export interface UIDropdown extends UIFrame {}
 
 export interface UITexture extends UIFrame {
-    SetTexture(name: string):void;
+    SetTexture(name: string | undefined):void;
     SetColorTexture(r: number, g: number, b: number, alpha?:number):void;
     SetVertexColor(r: number, g: number, b: number, alpha?:number):void;
 }
@@ -269,8 +271,16 @@ export class FakeUITexture extends FakeFrame implements UITexture {
 }
 
 export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
+    messages: string[] = [];
     AddMessage(message:string):void {
+        this.messages.push(message);
         console.log(message);
+    }
+    GetNumMessages() {
+        return this.messages.length;
+    }
+    GetMessageInfo(i: number) {
+        return this.messages[i];
     }
 }
 
@@ -380,7 +390,7 @@ export function GetWeaponEnchantInfo():any[] {return []}
 export function HasFullControl() {return false}
 export function IsSpellOverlayed() {}
 export function IsStealthed() { return false; }
-export function UnitCastingInfo(target: string):any[] { return [] }
+export function UnitCastingInfo(target: string):[string|undefined, string, string, number, number, boolean, string, boolean, number] { return [undefined, "text", "texture", 0, 0, false, "", false, 0] }
 export function UnitChannelInfo(target: string):any[] {return  [] }
 export function UnitClassification(target: string) { return "worldboss";}
 export function UnitCreatureFamily(target: string){return "Bat"}
@@ -391,7 +401,7 @@ export function UnitIsFriend(unit: string, target: string){return false}
 export function UnitIsPVP(unit: string){return false}
 export function UnitIsUnit(unit1: string, unit2: string) { return true }
 export function UnitInParty(unit: string) { return false;}
-export function UnitPowerMax(unit: string, power: number, segment: number): number{ return 0}
+export function UnitPowerMax(unit: string, power: number, segment?: number): number{ return 0}
 export function UnitRace(unit: string):any[]{return []}
 export function UnitStagger(unit: string){return 0}
 export function GetSpellCharges(spellId: number):any[] {return []}

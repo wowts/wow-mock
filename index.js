@@ -180,8 +180,19 @@ class FakeUITexture extends FakeFrame {
 }
 exports.FakeUITexture = FakeUITexture;
 class FakeMessageFrame extends FakeFrame {
+    constructor() {
+        super(...arguments);
+        this.messages = [];
+    }
     AddMessage(message) {
+        this.messages.push(message);
         console.log(message);
+    }
+    GetNumMessages() {
+        return this.messages.length;
+    }
+    GetMessageInfo(i) {
+        return this.messages[i];
     }
 }
 exports.FakeMessageFrame = FakeMessageFrame;
@@ -350,7 +361,7 @@ function IsSpellOverlayed() { }
 exports.IsSpellOverlayed = IsSpellOverlayed;
 function IsStealthed() { return false; }
 exports.IsStealthed = IsStealthed;
-function UnitCastingInfo(target) { return []; }
+function UnitCastingInfo(target) { return [undefined, "text", "texture", 0, 0, false, "", false, 0]; }
 exports.UnitCastingInfo = UnitCastingInfo;
 function UnitChannelInfo(target) { return []; }
 exports.UnitChannelInfo = UnitChannelInfo;
