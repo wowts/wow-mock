@@ -323,6 +323,41 @@ export interface ItemStats {
     ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
 }
 
+export interface FakeUnit {
+    classId: ClassId;
+    specializationIndex: 1 | 2 | 3 | 4;
+    guid: string;
+    unitId: string;
+    name: string;
+    dead: boolean;
+    health: number;
+    maxHealth: number;
+}
+
+export const fakePlayer: FakeUnit = {
+    classId: "WARRIOR",
+    guid: "dza849844",
+    name: "Player",
+    unitId: "player",
+    specializationIndex: 1,
+    dead: false,
+    health: 1000,
+    maxHealth: 2000
+}
+export const fakeTarget: FakeUnit = {
+    classId: "SHAMAN",
+    guid: "adzdaza9898",
+    name: "Target",
+    unitId: "target",
+    dead: false,
+    specializationIndex: 1,
+    health: 1000,
+    maxHealth: 2000
+}
+export const fakeUnits = new Map<string, FakeUnit>();
+fakeUnits.set("player", fakePlayer);
+fakeUnits.set("target", fakeTarget);
+
 // WOW global functions
 export function GetInventorySlotInfo(slotName: string): [number, string] { return [0, '']; }
 export function GetItemStats(itemLink: string, statTable?: any[]): ItemStats {return {};}
@@ -353,12 +388,18 @@ export function GetTime() { return 10; }
 export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
 export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
 export function UnitCanAttack(unit:string, target: string) { return false; }
-export function UnitClass(unit:string):[string, ClassId] { return ["Warrior", "WARRIOR"]; }
-export function UnitExists(unit:string) { return false; }
-export function UnitGUID(unit:string) { return "aaaa"; }
+export function UnitClass(unit: string): [string?, ClassId?] {
+    const fakeUnit = fakeUnits.get(unit);
+    if (!fakeUnit) return [];
+    return [fakeUnit.classId.toLowerCase(), fakeUnit.classId];
+}
+export function UnitExists(unit:string) { return fakeUnits.get(unit) !== undefined; }
+export function UnitGUID(unit: string) {
+    return fakeUnits.get(unit)?.guid;
+}
 export function UnitHasVehicleUI(unit: string) { return false; }
-export function UnitIsDead(unit: string) { return false; }
-export function UnitName(unitId: string) { return "Esside"; }
+export function UnitIsDead(unit: string) { return fakeUnits.get(unit)?.dead; }
+export function UnitName(unitId: string) { return fakeUnits.get(unitId)?.name; }
 export function GetActionCooldown(action: number):[number, number, boolean] { return [0, 0, false]; }
 export function GetActionTexture(action: number){ return "filepath" }
 export function GetItemIcon(itemId: number){ return "fakeicon"}
@@ -426,7 +467,7 @@ export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:
 export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:number, y:number, menuType:string, autoHideDelay?:number) {}
 export function IsShiftKeyDown(){return false}
 export type SpecializationIndex = 1 | 2 | 3 | 4;
-export function GetSpecialization(): SpecializationIndex {return 1;}
+export function GetSpecialization(): SpecializationIndex {return fakePlayer.specializationIndex;}
 export function GetSpecializationInfo(spec: number){ return 1}
 export function GetNumSpecializations(isInspect: boolean, isPet: boolean):number {return 0;}
 export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
@@ -434,8 +475,8 @@ export function GetAuctionItemSubClasses(item:number):any[]{return []}
 export function GetInventoryItemID(unit:string, slot:number):number {return 0;}
 export function GetInventoryItemGems(){}
 export function RegisterStateDriver(frame: UIFrame, property: string, state:any){}
-export function UnitHealth(unit:string){return 0}
-export function UnitHealthMax(unit:string){return 0}
+export function UnitHealth(unit:string){return fakeUnits.get(unit)?.health}
+export function UnitHealthMax(unit:string){return fakeUnits.get(unit)?.maxHealth}
 export function UnitGetTotalHealAbsorbs(unit:string){return 0}
 export function UnitGetTotalAbsorbs(unit:string){return 0}
 export function PlaySoundFile(file:string){}
@@ -641,14 +682,44 @@ export interface ItemLocationMixin{
 
 export class FakeItemLocation{
     CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
-        throw Error("Method CreateFromEquipmentSlot not implemented.");
+        return {
+            Clear() { },
+            GetBagAndSlot() {
+                return [null, null];
+            },
+            GetEquipmentSlot() {
+                return 0;
+            },
+            HasAnyLocation() {
+                return false;
+            },
+            IsBagAndSlot() {
+                return false;
+            },
+            IsEqualTo(other: ItemLocationMixin) {
+                return false;
+            },
+            IsEqualToBagAndSlot(otherBagId: number, otherSlotIndex: number) {
+                return false;
+            },
+            IsEqualToEquipmentSlot(otherEquipmentSlotIndex: number) {
+                return false;
+            },
+            IsEquipmentSlot() {
+                return true;
+            },
+            SetBagAndSlot(bagID: number, slotIndex: number) {
+            },
+            SetEquipmentSlot(equipmentSlotIndex: number) {
+            }
+        };
     }
 }
 export const ItemLocation = new FakeItemLocation()
 
 export const C_Item = {
     DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
-        throw Error("Method DoesItemExist not implemented.");
+        return false;
     }
 };
 
@@ -663,16 +734,19 @@ export interface AzeriteTierInfo {
 
 export const C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
-        throw Error("Method IsAzeriteEmpoweredItem not implemented.");
+        return false;
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):AzeriteTierInfo[] => {
-        throw Error("Method GetAllTierInfo not implemented.");
+        return [];
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
-        throw Error("Method IsPowerSelected not implemented.");
+        return false;
     },
     GetPowerInfo: (powerId: number):AzeritePowerInfo => {
-        throw Error("Method GetPowerInfo not implemented.");
+        return {
+            azeritePowerId: powerId,
+            spellID: 1
+        };
     }
 }
 
@@ -687,16 +761,23 @@ export interface AzeriteEssenceInfo {
 }
 export const C_AzeriteEssence = {
     GetMilestones: ():AzeriteMilestoneInfo[] => {
-        throw Error("Method GetMilestones not implemented.");
+        return [];
     },
     GetMilestoneInfo: (milestoneId: number):AzeriteMilestoneInfo => {
-        throw Error("Method GetMilestoneInfo not implemented.");
+        return {
+            ID: 1,
+            slot: 1,
+            unlocked: false
+        };
     },
     GetMilestoneEssence: (milestoneId: number):number => {
-        throw Error("Method GetMilestoneEssence not implemented.");
+        return 0;
     },
     GetEssenceInfo: (essenceId: number):AzeriteEssenceInfo => {
-        throw Error("Method GetEssenceInfo not implemented.");
+        return {
+            name: "Name",
+            rank: 1
+        };
     },
 };
 

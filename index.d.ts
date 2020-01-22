@@ -181,6 +181,19 @@ export declare class FakeDropdown extends FakeFrame implements UIDropdown {
 export interface ItemStats {
     ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
 }
+export interface FakeUnit {
+    classId: ClassId;
+    specializationIndex: 1 | 2 | 3 | 4;
+    guid: string;
+    unitId: string;
+    name: string;
+    dead: boolean;
+    health: number;
+    maxHealth: number;
+}
+export declare const fakePlayer: FakeUnit;
+export declare const fakeTarget: FakeUnit;
+export declare const fakeUnits: Map<string, FakeUnit>;
 export declare function GetInventorySlotInfo(slotName: string): [number, string];
 export declare function GetItemStats(itemLink: string, statTable?: any[]): ItemStats;
 export declare function GetInventoryItemLink(unitId: string, slotId: number): string;
@@ -201,12 +214,12 @@ export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
 export declare function UnitAura(unitId: string, i: number, filter: string): any[];
 export declare function UnitCanAttack(unit: string, target: string): boolean;
-export declare function UnitClass(unit: string): [string, ClassId];
+export declare function UnitClass(unit: string): [string?, ClassId?];
 export declare function UnitExists(unit: string): boolean;
-export declare function UnitGUID(unit: string): string;
+export declare function UnitGUID(unit: string): string | undefined;
 export declare function UnitHasVehicleUI(unit: string): boolean;
-export declare function UnitIsDead(unit: string): boolean;
-export declare function UnitName(unitId: string): string;
+export declare function UnitIsDead(unit: string): boolean | undefined;
+export declare function UnitName(unitId: string): string | undefined;
 export declare function GetActionCooldown(action: number): [number, number, boolean];
 export declare function GetActionTexture(action: number): string;
 export declare function GetItemIcon(itemId: number): string;
@@ -273,8 +286,8 @@ export declare function GetAuctionItemSubClasses(item: number): any[];
 export declare function GetInventoryItemID(unit: string, slot: number): number;
 export declare function GetInventoryItemGems(): void;
 export declare function RegisterStateDriver(frame: UIFrame, property: string, state: any): void;
-export declare function UnitHealth(unit: string): number;
-export declare function UnitHealthMax(unit: string): number;
+export declare function UnitHealth(unit: string): number | undefined;
+export declare function UnitHealthMax(unit: string): number | undefined;
 export declare function UnitGetTotalHealAbsorbs(unit: string): number;
 export declare function UnitGetTotalAbsorbs(unit: string): number;
 export declare function PlaySoundFile(file: string): void;

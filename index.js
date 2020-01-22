@@ -236,6 +236,29 @@ exports.FakeCheckButton = FakeCheckButton;
 class FakeDropdown extends FakeFrame {
 }
 exports.FakeDropdown = FakeDropdown;
+exports.fakePlayer = {
+    classId: "WARRIOR",
+    guid: "dza849844",
+    name: "Player",
+    unitId: "player",
+    specializationIndex: 1,
+    dead: false,
+    health: 1000,
+    maxHealth: 2000
+};
+exports.fakeTarget = {
+    classId: "SHAMAN",
+    guid: "adzdaza9898",
+    name: "Target",
+    unitId: "target",
+    dead: false,
+    specializationIndex: 1,
+    health: 1000,
+    maxHealth: 2000
+};
+exports.fakeUnits = new Map();
+exports.fakeUnits.set("player", exports.fakePlayer);
+exports.fakeUnits.set("target", exports.fakeTarget);
 // WOW global functions
 function GetInventorySlotInfo(slotName) { return [0, '']; }
 exports.GetInventorySlotInfo = GetInventorySlotInfo;
@@ -287,17 +310,25 @@ function UnitAura(unitId, i, filter) { return []; }
 exports.UnitAura = UnitAura;
 function UnitCanAttack(unit, target) { return false; }
 exports.UnitCanAttack = UnitCanAttack;
-function UnitClass(unit) { return ["Warrior", "WARRIOR"]; }
+function UnitClass(unit) {
+    const fakeUnit = exports.fakeUnits.get(unit);
+    if (!fakeUnit)
+        return [];
+    return [fakeUnit.classId.toLowerCase(), fakeUnit.classId];
+}
 exports.UnitClass = UnitClass;
-function UnitExists(unit) { return false; }
+function UnitExists(unit) { return exports.fakeUnits.get(unit) !== undefined; }
 exports.UnitExists = UnitExists;
-function UnitGUID(unit) { return "aaaa"; }
+function UnitGUID(unit) {
+    var _a;
+    return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.guid;
+}
 exports.UnitGUID = UnitGUID;
 function UnitHasVehicleUI(unit) { return false; }
 exports.UnitHasVehicleUI = UnitHasVehicleUI;
-function UnitIsDead(unit) { return false; }
+function UnitIsDead(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.dead; }
 exports.UnitIsDead = UnitIsDead;
-function UnitName(unitId) { return "Esside"; }
+function UnitName(unitId) { var _a; return (_a = exports.fakeUnits.get(unitId)) === null || _a === void 0 ? void 0 : _a.name; }
 exports.UnitName = UnitName;
 function GetActionCooldown(action) { return [0, 0, false]; }
 exports.GetActionCooldown = GetActionCooldown;
@@ -412,7 +443,7 @@ function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
 function IsShiftKeyDown() { return false; }
 exports.IsShiftKeyDown = IsShiftKeyDown;
-function GetSpecialization() { return 1; }
+function GetSpecialization() { return exports.fakePlayer.specializationIndex; }
 exports.GetSpecialization = GetSpecialization;
 function GetSpecializationInfo(spec) { return 1; }
 exports.GetSpecializationInfo = GetSpecializationInfo;
@@ -428,9 +459,9 @@ function GetInventoryItemGems() { }
 exports.GetInventoryItemGems = GetInventoryItemGems;
 function RegisterStateDriver(frame, property, state) { }
 exports.RegisterStateDriver = RegisterStateDriver;
-function UnitHealth(unit) { return 0; }
+function UnitHealth(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.health; }
 exports.UnitHealth = UnitHealth;
-function UnitHealthMax(unit) { return 0; }
+function UnitHealthMax(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.maxHealth; }
 exports.UnitHealthMax = UnitHealthMax;
 function UnitGetTotalHealAbsorbs(unit) { return 0; }
 exports.UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs;
@@ -649,42 +680,82 @@ exports.Enum = {
 };
 class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex) {
-        throw Error("Method CreateFromEquipmentSlot not implemented.");
+        return {
+            Clear() { },
+            GetBagAndSlot() {
+                return [null, null];
+            },
+            GetEquipmentSlot() {
+                return 0;
+            },
+            HasAnyLocation() {
+                return false;
+            },
+            IsBagAndSlot() {
+                return false;
+            },
+            IsEqualTo(other) {
+                return false;
+            },
+            IsEqualToBagAndSlot(otherBagId, otherSlotIndex) {
+                return false;
+            },
+            IsEqualToEquipmentSlot(otherEquipmentSlotIndex) {
+                return false;
+            },
+            IsEquipmentSlot() {
+                return true;
+            },
+            SetBagAndSlot(bagID, slotIndex) {
+            },
+            SetEquipmentSlot(equipmentSlotIndex) {
+            }
+        };
     }
 }
 exports.FakeItemLocation = FakeItemLocation;
 exports.ItemLocation = new FakeItemLocation();
 exports.C_Item = {
     DoesItemExist: (emptiableItemLocation) => {
-        throw Error("Method DoesItemExist not implemented.");
+        return false;
     }
 };
 exports.C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation) => {
-        throw Error("Method IsAzeriteEmpoweredItem not implemented.");
+        return false;
     },
     GetAllTierInfo: (azeriteEmpoweredItemLocation) => {
-        throw Error("Method GetAllTierInfo not implemented.");
+        return [];
     },
     IsPowerSelected: (azeriteEmpoweredItemLocation, powerID) => {
-        throw Error("Method IsPowerSelected not implemented.");
+        return false;
     },
     GetPowerInfo: (powerId) => {
-        throw Error("Method GetPowerInfo not implemented.");
+        return {
+            azeritePowerId: powerId,
+            spellID: 1
+        };
     }
 };
 exports.C_AzeriteEssence = {
     GetMilestones: () => {
-        throw Error("Method GetMilestones not implemented.");
+        return [];
     },
     GetMilestoneInfo: (milestoneId) => {
-        throw Error("Method GetMilestoneInfo not implemented.");
+        return {
+            ID: 1,
+            slot: 1,
+            unlocked: false
+        };
     },
     GetMilestoneEssence: (milestoneId) => {
-        throw Error("Method GetMilestoneEssence not implemented.");
+        return 0;
     },
     GetEssenceInfo: (essenceId) => {
-        throw Error("Method GetEssenceInfo not implemented.");
+        return {
+            name: "Name",
+            rank: 1
+        };
     },
 };
 exports.C_LossOfControl = {
