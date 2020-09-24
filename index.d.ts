@@ -1,4 +1,8 @@
 import { LuaArray } from "@wowts/lua";
+export interface MockOptions {
+    silentMessageFrame?: boolean;
+}
+export declare function setMockOptions(options: MockOptions): void;
 export declare type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export declare type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
 export interface UIRegion {

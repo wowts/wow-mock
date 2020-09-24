@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const spells_1 = require("./spells");
+let mockOptions = {};
+function setMockOptions(options) {
+    mockOptions = options;
+}
+exports.setMockOptions = setMockOptions;
 class EventDispatcher {
     constructor() {
         this.events = {};
@@ -51,10 +56,8 @@ class FakeFrame {
     SetScript(event, func) {
         this.scriptHandlers[event] = func;
     }
-    StartMoving() {
-    }
-    StopMovingOrSizing() {
-    }
+    StartMoving() { }
+    StopMovingOrSizing() { }
     SetMovable(movable) {
         this.movable = movable;
     }
@@ -112,8 +115,7 @@ class FakeFrame {
     SetParent(parent) {
         this.parent = parent;
     }
-    SetAllPoints(around) {
-    }
+    SetAllPoints(around) { }
     SetPoint(anchor, reference, refAnchor, x, y) {
         this.x = x;
         this.y = y;
@@ -140,16 +142,11 @@ class FakeFontString extends FakeFrame {
         this.font.height = height;
         this.font.flags = flags;
     }
-    SetFontObject(name) {
-    }
-    SetTextColor(r, g, b, alpha) {
-    }
-    SetFormattedText(text, ...args) {
-    }
-    SetVertexColor(r, g, b, alpha) {
-    }
-    SetJustifyH(justify) {
-    }
+    SetFontObject(name) { }
+    SetTextColor(r, g, b, alpha) { }
+    SetFormattedText(text, ...args) { }
+    SetVertexColor(r, g, b, alpha) { }
+    SetJustifyH(justify) { }
     GetFont() {
         return [this.font.font, this.font.height, this.font.flags];
     }
@@ -186,7 +183,8 @@ class FakeMessageFrame extends FakeFrame {
     }
     AddMessage(message) {
         this.messages.push(message);
-        console.log(message);
+        if (!mockOptions.silentMessageFrame)
+            console.log(message);
     }
     GetNumMessages() {
         return this.messages.length;
@@ -229,8 +227,7 @@ class FakeCheckButton extends FakeFrame {
     GetChecked() {
         return this.isChecked;
     }
-    RegisterForClicks(type) {
-    }
+    RegisterForClicks(type) { }
 }
 exports.FakeCheckButton = FakeCheckButton;
 class FakeDropdown extends FakeFrame {
@@ -244,7 +241,7 @@ exports.fakePlayer = {
     specializationIndex: 1,
     dead: false,
     health: 1000,
-    maxHealth: 2000
+    maxHealth: 2000,
 };
 exports.fakeTarget = {
     classId: "SHAMAN",
@@ -254,61 +251,102 @@ exports.fakeTarget = {
     dead: false,
     specializationIndex: 1,
     health: 1000,
-    maxHealth: 2000
+    maxHealth: 2000,
 };
 exports.fakeUnits = new Map();
 exports.fakeUnits.set("player", exports.fakePlayer);
 exports.fakeUnits.set("target", exports.fakeTarget);
 // WOW global functions
-function GetInventorySlotInfo(slotName) { return [0, '']; }
+function GetInventorySlotInfo(slotName) {
+    return [0, ""];
+}
 exports.GetInventorySlotInfo = GetInventorySlotInfo;
-function GetItemStats(itemLink, statTable) { return {}; }
+function GetItemStats(itemLink, statTable) {
+    return {};
+}
 exports.GetItemStats = GetItemStats;
-function GetInventoryItemLink(unitId, slotId) { return ''; }
+function GetInventoryItemLink(unitId, slotId) {
+    return "";
+}
 exports.GetInventoryItemLink = GetInventoryItemLink;
-function GetHaste() { return 0; }
+function GetHaste() {
+    return 0;
+}
 exports.GetHaste = GetHaste;
-function UnitRangedDamage(player) { return [0, 0, 0, 0, 0, 0]; }
+function UnitRangedDamage(player) {
+    return [0, 0, 0, 0, 0, 0];
+}
 exports.UnitRangedDamage = UnitRangedDamage;
-function GetItemInfoInstant(item) { return [0, '', '', '', 0, 0, 0]; }
+function GetItemInfoInstant(item) {
+    return [0, "", "", "", 0, 0, 0];
+}
 exports.GetItemInfoInstant = GetItemInfoInstant;
-;
-function CombatLogGetCurrentEventInfo() { return []; }
+function CombatLogGetCurrentEventInfo() {
+    return [];
+}
 exports.CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo;
-function debugprofilestop() { return 10; }
+function debugprofilestop() {
+    return 10;
+}
 exports.debugprofilestop = debugprofilestop;
-function GetActionInfo(slot) { return ["a", "b", "c"]; }
+function GetActionInfo(slot) {
+    return ["a", "b", "c"];
+}
 exports.GetActionInfo = GetActionInfo;
-function GetActionText(slot) { return "ActionText"; }
+function GetActionText(slot) {
+    return "ActionText";
+}
 exports.GetActionText = GetActionText;
-function GetBindingKey(key) { return "a"; }
+function GetBindingKey(key) {
+    return "a";
+}
 exports.GetBindingKey = GetBindingKey;
 function GetBonusBarIndex() { }
 exports.GetBonusBarIndex = GetBonusBarIndex;
-function GetItemInfo(itemId) { return []; }
+function GetItemInfo(itemId) {
+    return [];
+}
 exports.GetItemInfo = GetItemInfo;
-function GetMacroItem(spellId) { return []; }
+function GetMacroItem(spellId) {
+    return [];
+}
 exports.GetMacroItem = GetMacroItem;
-function GetMacroSpell(spellId) { return 0; }
+function GetMacroSpell(spellId) {
+    return 0;
+}
 exports.GetMacroSpell = GetMacroSpell;
 function GetSpellInfo(spellId, bookType) {
-    if (typeof (spellId) === "number") {
+    if (typeof spellId === "number") {
         const spell = spells_1.spellInfos[spellId];
         if (spell) {
-            return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
+            return [
+                spell.name,
+                undefined,
+                "fake_icon",
+                spell.castTime,
+                spell.minRange,
+                spell.maxRange,
+                spellId,
+            ];
         }
         return [undefined, undefined, "none", 0, 0, 0, 0];
     }
     return ["a", "b", "c", 0, 1, 2, 3];
 }
 exports.GetSpellInfo = GetSpellInfo;
-function GetTime() { return 10; }
+function GetTime() {
+    return 10;
+}
 exports.GetTime = GetTime;
 function InterfaceOptionsFrame_OpenToCategory(frameName) { }
 exports.InterfaceOptionsFrame_OpenToCategory = InterfaceOptionsFrame_OpenToCategory;
-function UnitAura(unitId, i, filter) { return []; }
+function UnitAura(unitId, i, filter) {
+    return [];
+}
 exports.UnitAura = UnitAura;
-function UnitCanAttack(unit, target) { return false; }
+function UnitCanAttack(unit, target) {
+    return false;
+}
 exports.UnitCanAttack = UnitCanAttack;
 function UnitClass(unit) {
     const fakeUnit = exports.fakeUnits.get(unit);
@@ -317,114 +355,218 @@ function UnitClass(unit) {
     return [fakeUnit.classId.toLowerCase(), fakeUnit.classId];
 }
 exports.UnitClass = UnitClass;
-function UnitExists(unit) { return exports.fakeUnits.get(unit) !== undefined; }
+function UnitExists(unit) {
+    return exports.fakeUnits.get(unit) !== undefined;
+}
 exports.UnitExists = UnitExists;
 function UnitGUID(unit) {
     var _a;
     return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.guid;
 }
 exports.UnitGUID = UnitGUID;
-function UnitHasVehicleUI(unit) { return false; }
+function UnitHasVehicleUI(unit) {
+    return false;
+}
 exports.UnitHasVehicleUI = UnitHasVehicleUI;
-function UnitIsDead(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.dead; }
+function UnitIsDead(unit) {
+    var _a;
+    return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.dead;
+}
 exports.UnitIsDead = UnitIsDead;
-function UnitName(unitId) { var _a; return (_a = exports.fakeUnits.get(unitId)) === null || _a === void 0 ? void 0 : _a.name; }
+function UnitName(unitId) {
+    var _a;
+    return (_a = exports.fakeUnits.get(unitId)) === null || _a === void 0 ? void 0 : _a.name;
+}
 exports.UnitName = UnitName;
-function GetActionCooldown(action) { return [0, 0, false]; }
+function GetActionCooldown(action) {
+    return [0, 0, false];
+}
 exports.GetActionCooldown = GetActionCooldown;
-function GetActionTexture(action) { return "filepath"; }
+function GetActionTexture(action) {
+    return "filepath";
+}
 exports.GetActionTexture = GetActionTexture;
-function GetItemIcon(itemId) { return "fakeicon"; }
+function GetItemIcon(itemId) {
+    return "fakeicon";
+}
 exports.GetItemIcon = GetItemIcon;
-function GetItemCooldown(itemId) { return [0, 0, false]; }
+function GetItemCooldown(itemId) {
+    return [0, 0, false];
+}
 exports.GetItemCooldown = GetItemCooldown;
-function GetItemSpell(itemId) { return ["spellName", "spellRank", 100]; }
+function GetItemSpell(itemId) {
+    return ["spellName", "spellRank", 100];
+}
 exports.GetItemSpell = GetItemSpell;
-function GetSpellTexture(spellId, bookType) { return "filepath"; }
+function GetSpellTexture(spellId, bookType) {
+    return "filepath";
+}
 exports.GetSpellTexture = GetSpellTexture;
-function IsActionInRange(action, target) { return true; }
+function IsActionInRange(action, target) {
+    return true;
+}
 exports.IsActionInRange = IsActionInRange;
-function IsCurrentAction(action) { return false; }
+function IsCurrentAction(action) {
+    return false;
+}
 exports.IsCurrentAction = IsCurrentAction;
-function IsItemInRange(itemId, target) { return false; }
+function IsItemInRange(itemId, target) {
+    return false;
+}
 exports.IsItemInRange = IsItemInRange;
-function IsUsableAction(action) { return false; }
+function IsUsableAction(action) {
+    return false;
+}
 exports.IsUsableAction = IsUsableAction;
-function IsUsableItem(itemId) { return false; }
+function IsUsableItem(itemId) {
+    return false;
+}
 exports.IsUsableItem = IsUsableItem;
-function GetNumGroupMembers(filter) { return 0; }
+function GetNumGroupMembers(filter) {
+    return 0;
+}
 exports.GetNumGroupMembers = GetNumGroupMembers;
-function UnitPower(unit, type, segments) { return 0; }
+function UnitPower(unit, type, segments) {
+    return 0;
+}
 exports.UnitPower = UnitPower;
-function GetPowerRegen() { return [0, 0]; }
+function GetPowerRegen() {
+    return [0, 0];
+}
 exports.GetPowerRegen = GetPowerRegen;
-function GetManaRegen() { return [0, 0]; }
+function GetManaRegen() {
+    return [0, 0];
+}
 exports.GetManaRegen = GetManaRegen;
-function GetSpellPowerCost(spellId) { return { 1: { cost: 0, type: 0 } }; }
+function GetSpellPowerCost(spellId) {
+    return { 1: { cost: 0, type: 0 } };
+}
 exports.GetSpellPowerCost = GetSpellPowerCost;
-function UnitPowerType(unit) { return [0, 0]; }
+function UnitPowerType(unit) {
+    return [0, 0];
+}
 exports.UnitPowerType = UnitPowerType;
-function IsInGroup(filter) { return false; }
+function IsInGroup(filter) {
+    return false;
+}
 exports.IsInGroup = IsInGroup;
-function IsInGuild() { return false; }
+function IsInGuild() {
+    return false;
+}
 exports.IsInGuild = IsInGuild;
-function IsInInstance() { return false; }
+function IsInInstance() {
+    return false;
+}
 exports.IsInInstance = IsInInstance;
-function IsInRaid(filter) { return false; }
+function IsInRaid(filter) {
+    return false;
+}
 exports.IsInRaid = IsInRaid;
-function UnitLevel(target) { return 0; }
+function UnitLevel(target) {
+    return 0;
+}
 exports.UnitLevel = UnitLevel;
-function GetBuildInfo() { return []; }
+function GetBuildInfo() {
+    return [];
+}
 exports.GetBuildInfo = GetBuildInfo;
-function GetItemCount(item, first, second) { return 0; }
+function GetItemCount(item, first, second) {
+    return 0;
+}
 exports.GetItemCount = GetItemCount;
-function GetNumTrackingTypes() { return 0; }
+function GetNumTrackingTypes() {
+    return 0;
+}
 exports.GetNumTrackingTypes = GetNumTrackingTypes;
-function GetTrackingInfo(i) { return []; }
+function GetTrackingInfo(i) {
+    return [];
+}
 exports.GetTrackingInfo = GetTrackingInfo;
-function GetUnitSpeed(unit) { return 0; }
+function GetUnitSpeed(unit) {
+    return 0;
+}
 exports.GetUnitSpeed = GetUnitSpeed;
-function GetWeaponEnchantInfo() { return []; }
+function GetWeaponEnchantInfo() {
+    return [];
+}
 exports.GetWeaponEnchantInfo = GetWeaponEnchantInfo;
-function HasFullControl() { return false; }
+function HasFullControl() {
+    return false;
+}
 exports.HasFullControl = HasFullControl;
 function IsSpellOverlayed() { }
 exports.IsSpellOverlayed = IsSpellOverlayed;
-function IsStealthed() { return false; }
+function IsStealthed() {
+    return false;
+}
 exports.IsStealthed = IsStealthed;
-function UnitCastingInfo(target) { return [undefined, "text", "texture", 0, 0, false, "", false, 0]; }
+function UnitCastingInfo(target) {
+    return [undefined, "text", "texture", 0, 0, false, "", false, 0];
+}
 exports.UnitCastingInfo = UnitCastingInfo;
-function UnitChannelInfo(target) { return []; }
+function UnitChannelInfo(target) {
+    return [];
+}
 exports.UnitChannelInfo = UnitChannelInfo;
-function UnitClassification(target) { return "worldboss"; }
+function UnitClassification(target) {
+    return "worldboss";
+}
 exports.UnitClassification = UnitClassification;
-function UnitCreatureFamily(target) { return "Bat"; }
+function UnitCreatureFamily(target) {
+    return "Bat";
+}
 exports.UnitCreatureFamily = UnitCreatureFamily;
-function UnitCreatureType(target) { return "Beast"; }
+function UnitCreatureType(target) {
+    return "Beast";
+}
 exports.UnitCreatureType = UnitCreatureType;
-function UnitDetailedThreatSituation(unit, target) { return []; }
+function UnitDetailedThreatSituation(unit, target) {
+    return [];
+}
 exports.UnitDetailedThreatSituation = UnitDetailedThreatSituation;
-function UnitInRaid(unit) { return false; }
+function UnitInRaid(unit) {
+    return false;
+}
 exports.UnitInRaid = UnitInRaid;
-function UnitIsFriend(unit, target) { return false; }
+function UnitIsFriend(unit, target) {
+    return false;
+}
 exports.UnitIsFriend = UnitIsFriend;
-function UnitIsPVP(unit) { return false; }
+function UnitIsPVP(unit) {
+    return false;
+}
 exports.UnitIsPVP = UnitIsPVP;
-function UnitIsUnit(unit1, unit2) { return true; }
+function UnitIsUnit(unit1, unit2) {
+    return true;
+}
 exports.UnitIsUnit = UnitIsUnit;
-function UnitInParty(unit) { return false; }
+function UnitInParty(unit) {
+    return false;
+}
 exports.UnitInParty = UnitInParty;
-function UnitPowerMax(unit, power, segment) { return 0; }
+function UnitPowerMax(unit, power, segment) {
+    return 0;
+}
 exports.UnitPowerMax = UnitPowerMax;
-function UnitRace(unit) { return []; }
+function UnitRace(unit) {
+    return [];
+}
 exports.UnitRace = UnitRace;
-function UnitStagger(unit) { return 0; }
+function UnitStagger(unit) {
+    return 0;
+}
 exports.UnitStagger = UnitStagger;
-function GetSpellCharges(spellId) { return []; }
+function GetSpellCharges(spellId) {
+    return [];
+}
 exports.GetSpellCharges = GetSpellCharges;
-function GetSpellCooldown(type, book) { return [0, 0, false]; }
+function GetSpellCooldown(type, book) {
+    return [0, 0, false];
+}
 exports.GetSpellCooldown = GetSpellCooldown;
-function GetLocale() { return "en-US"; }
+function GetLocale() {
+    return "en-US";
+}
 exports.GetLocale = GetLocale;
 function CreateFrame(type, id, parent, template) {
     switch (type) {
@@ -441,115 +583,213 @@ function CreateFrame(type, id, parent, template) {
 exports.CreateFrame = CreateFrame;
 function EasyMenu(menu, menuFrame, cursor, x, y, menuType, autoHideDelay) { }
 exports.EasyMenu = EasyMenu;
-function IsShiftKeyDown() { return false; }
+function IsShiftKeyDown() {
+    return false;
+}
 exports.IsShiftKeyDown = IsShiftKeyDown;
-function GetSpecialization() { return exports.fakePlayer.specializationIndex; }
+function GetSpecialization() {
+    return exports.fakePlayer.specializationIndex;
+}
 exports.GetSpecialization = GetSpecialization;
-function GetSpecializationInfo(spec) { return 1; }
+function GetSpecializationInfo(spec) {
+    return 1;
+}
 exports.GetSpecializationInfo = GetSpecializationInfo;
-function GetNumSpecializations(isInspect, isPet) { return 0; }
+function GetNumSpecializations(isInspect, isPet) {
+    return 0;
+}
 exports.GetNumSpecializations = GetNumSpecializations;
-function GetTalentInfoByID(talent, spec) { return []; }
+function GetTalentInfoByID(talent, spec) {
+    return [];
+}
 exports.GetTalentInfoByID = GetTalentInfoByID;
-function GetAuctionItemSubClasses(item) { return []; }
+function GetAuctionItemSubClasses(item) {
+    return [];
+}
 exports.GetAuctionItemSubClasses = GetAuctionItemSubClasses;
-function GetInventoryItemID(unit, slot) { return 0; }
+function GetInventoryItemID(unit, slot) {
+    return 0;
+}
 exports.GetInventoryItemID = GetInventoryItemID;
 function GetInventoryItemGems() { }
 exports.GetInventoryItemGems = GetInventoryItemGems;
 function RegisterStateDriver(frame, property, state) { }
 exports.RegisterStateDriver = RegisterStateDriver;
-function UnitHealth(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.health; }
+function UnitHealth(unit) {
+    var _a;
+    return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.health;
+}
 exports.UnitHealth = UnitHealth;
-function UnitHealthMax(unit) { var _a; return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.maxHealth; }
+function UnitHealthMax(unit) {
+    var _a;
+    return (_a = exports.fakeUnits.get(unit)) === null || _a === void 0 ? void 0 : _a.maxHealth;
+}
 exports.UnitHealthMax = UnitHealthMax;
-function UnitGetTotalHealAbsorbs(unit) { return 0; }
+function UnitGetTotalHealAbsorbs(unit) {
+    return 0;
+}
 exports.UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs;
-function UnitGetTotalAbsorbs(unit) { return 0; }
+function UnitGetTotalAbsorbs(unit) {
+    return 0;
+}
 exports.UnitGetTotalAbsorbs = UnitGetTotalAbsorbs;
 function PlaySoundFile(file) { }
 exports.PlaySoundFile = PlaySoundFile;
-function GetCombatRating(combatRatingIdentifier) { return 0; }
+function GetCombatRating(combatRatingIdentifier) {
+    return 0;
+}
 exports.GetCombatRating = GetCombatRating;
-function GetCombatRatingBonus(combatRatingIdentifier) { return 0; }
+function GetCombatRatingBonus(combatRatingIdentifier) {
+    return 0;
+}
 exports.GetCombatRatingBonus = GetCombatRatingBonus;
-function GetCritChance() { return 0; }
+function GetCritChance() {
+    return 0;
+}
 exports.GetCritChance = GetCritChance;
-function GetMastery() { return 0; }
+function GetMastery() {
+    return 0;
+}
 exports.GetMastery = GetMastery;
-function GetMasteryEffect() { return 0; }
+function GetMasteryEffect() {
+    return 0;
+}
 exports.GetMasteryEffect = GetMasteryEffect;
-function GetMeleeHaste() { return 0; }
+function GetMeleeHaste() {
+    return 0;
+}
 exports.GetMeleeHaste = GetMeleeHaste;
-function GetMultistrike() { return 0; }
+function GetMultistrike() {
+    return 0;
+}
 exports.GetMultistrike = GetMultistrike;
-function GetMultistrikeEffect() { return 0; }
+function GetMultistrikeEffect() {
+    return 0;
+}
 exports.GetMultistrikeEffect = GetMultistrikeEffect;
-function GetRangedCritChance() { return 0; }
+function GetRangedCritChance() {
+    return 0;
+}
 exports.GetRangedCritChance = GetRangedCritChance;
-function GetRangedHaste() { return 0; }
+function GetRangedHaste() {
+    return 0;
+}
 exports.GetRangedHaste = GetRangedHaste;
-function GetSpellBonusDamage(school) { return 0; }
+function GetSpellBonusDamage(school) {
+    return 0;
+}
 exports.GetSpellBonusDamage = GetSpellBonusDamage;
-function GetSpellBonusHealing() { return 0; }
+function GetSpellBonusHealing() {
+    return 0;
+}
 exports.GetSpellBonusHealing = GetSpellBonusHealing;
-function GetSpellCritChance(school) { return 0; }
+function GetSpellCritChance(school) {
+    return 0;
+}
 exports.GetSpellCritChance = GetSpellCritChance;
-function UnitAttackPower(unitId) { return [0, 0, 0]; }
+function UnitAttackPower(unitId) {
+    return [0, 0, 0];
+}
 exports.UnitAttackPower = UnitAttackPower;
-function UnitAttackSpeed(unitId) { return [0, 0]; }
+function UnitAttackSpeed(unitId) {
+    return [0, 0];
+}
 exports.UnitAttackSpeed = UnitAttackSpeed;
-function UnitDamage(unitId) { return []; }
+function UnitDamage(unitId) {
+    return [];
+}
 exports.UnitDamage = UnitDamage;
-function UnitRangedAttackPower(unitId) { return [0, 0, 0]; }
+function UnitRangedAttackPower(unitId) {
+    return [0, 0, 0];
+}
 exports.UnitRangedAttackPower = UnitRangedAttackPower;
-function UnitSpellHaste(unitId) { return 0; }
+function UnitSpellHaste(unitId) {
+    return 0;
+}
 exports.UnitSpellHaste = UnitSpellHaste;
-function UnitStat(unitId, stat) { return 0; }
+function UnitStat(unitId, stat) {
+    return 0;
+}
 exports.UnitStat = UnitStat;
-function GetRuneCooldown(slot) { return [0, 0, 0]; }
+function GetRuneCooldown(slot) {
+    return [0, 0, 0];
+}
 exports.GetRuneCooldown = GetRuneCooldown;
 function SendAddonMessage(MSG_PREFIX, message, channel) { }
 exports.SendAddonMessage = SendAddonMessage;
 function print(s) { }
 exports.print = print;
-function GetActiveSpecGroup() { return 0; }
+function GetActiveSpecGroup() {
+    return 0;
+}
 exports.GetActiveSpecGroup = GetActiveSpecGroup;
-function GetFlyoutInfo(flyoutId) { return []; }
+function GetFlyoutInfo(flyoutId) {
+    return [];
+}
 exports.GetFlyoutInfo = GetFlyoutInfo;
-function GetFlyoutSlotInfo(flyoutId, flyoutIndex) { return []; }
+function GetFlyoutSlotInfo(flyoutId, flyoutIndex) {
+    return [];
+}
 exports.GetFlyoutSlotInfo = GetFlyoutSlotInfo;
-function GetSpellBookItemInfo(index, bookType) { return []; }
+function GetSpellBookItemInfo(index, bookType) {
+    return [];
+}
 exports.GetSpellBookItemInfo = GetSpellBookItemInfo;
-function GetSpellCount(index, bookType) { return 0; }
+function GetSpellCount(index, bookType) {
+    return 0;
+}
 exports.GetSpellCount = GetSpellCount;
-function GetSpellLink(index, bookType) { return "aa"; }
+function GetSpellLink(index, bookType) {
+    return "aa";
+}
 exports.GetSpellLink = GetSpellLink;
-function GetSpellTabInfo(tab) { return []; }
+function GetSpellTabInfo(tab) {
+    return [];
+}
 exports.GetSpellTabInfo = GetSpellTabInfo;
 function GetTalentInfo(i, j, activeTalentGroup) {
     return [123, "A Talent", "Texture/Path", 1, 1, 12345, 1, 1, 1, 1, 1];
 }
 exports.GetTalentInfo = GetTalentInfo;
-function HasPetSpells() { return [0, "a"]; }
+function HasPetSpells() {
+    return [0, "a"];
+}
 exports.HasPetSpells = HasPetSpells;
-function IsHarmfulSpell(index, bookType) { return false; }
+function IsHarmfulSpell(index, bookType) {
+    return false;
+}
 exports.IsHarmfulSpell = IsHarmfulSpell;
-function IsHelpfulSpell(index, bookType) { return false; }
+function IsHelpfulSpell(index, bookType) {
+    return false;
+}
 exports.IsHelpfulSpell = IsHelpfulSpell;
-function IsSpellInRange(index, bookType, unitId) { return 0; }
+function IsSpellInRange(index, bookType, unitId) {
+    return 0;
+}
 exports.IsSpellInRange = IsSpellInRange;
-function IsUsableSpell(index, bookType) { return [true, false]; }
+function IsUsableSpell(index, bookType) {
+    return [true, false];
+}
 exports.IsUsableSpell = IsUsableSpell;
-function GetNumShapeshiftForms() { return 0; }
+function GetNumShapeshiftForms() {
+    return 0;
+}
 exports.GetNumShapeshiftForms = GetNumShapeshiftForms;
-function GetShapeshiftForm() { return 0; }
+function GetShapeshiftForm() {
+    return 0;
+}
 exports.GetShapeshiftForm = GetShapeshiftForm;
-function GetShapeshiftFormInfo(index) { return []; }
+function GetShapeshiftFormInfo(index) {
+    return [];
+}
 exports.GetShapeshiftFormInfo = GetShapeshiftFormInfo;
-function GetTotemInfo(slot) { return []; }
+function GetTotemInfo(slot) {
+    return [];
+}
 exports.GetTotemInfo = GetTotemInfo;
-function IsLoggedIn() { return true; }
+function IsLoggedIn() {
+    return true;
+}
 exports.IsLoggedIn = IsLoggedIn;
 exports.UIParent = new FakeFrame();
 // WoW global variables
@@ -643,7 +883,7 @@ exports.RAID_CLASS_COLORS = {
     ["SHAMAN"]: { r: 0.0, g: 0.44, b: 0.87, colorStr: "ff0070de" },
     ["WARRIOR"]: { r: 0.78, g: 0.61, b: 0.43, colorStr: "ffc79c6e" },
     ["DEATHKNIGHT"]: { r: 0.77, g: 0.12, b: 0.23, colorStr: "ffc41f3b" },
-    ["MONK"]: { r: 0.0, g: 1.00, b: 0.59, colorStr: "ff00ff96" },
+    ["MONK"]: { r: 0.0, g: 1.0, b: 0.59, colorStr: "ff00ff96" },
     ["DEMONHUNTER"]: { r: 0.64, g: 0.19, b: 0.79, colorStr: "ffa330c9" },
 };
 exports.AIR_TOTEM_SLOT = 1;
@@ -675,8 +915,8 @@ exports.Enum = {
         Obsolete2: 15,
         ArcaneCharges: 16,
         Fury: 17,
-        Pain: 18
-    }
+        Pain: 18,
+    },
 };
 class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex) {
@@ -706,10 +946,8 @@ class FakeItemLocation {
             IsEquipmentSlot() {
                 return true;
             },
-            SetBagAndSlot(bagID, slotIndex) {
-            },
-            SetEquipmentSlot(equipmentSlotIndex) {
-            }
+            SetBagAndSlot(bagID, slotIndex) { },
+            SetEquipmentSlot(equipmentSlotIndex) { },
         };
     }
 }
@@ -718,7 +956,7 @@ exports.ItemLocation = new FakeItemLocation();
 exports.C_Item = {
     DoesItemExist: (emptiableItemLocation) => {
         return false;
-    }
+    },
 };
 exports.C_AzeriteEmpoweredItem = {
     IsAzeriteEmpoweredItem: (itemLocation) => {
@@ -733,9 +971,9 @@ exports.C_AzeriteEmpoweredItem = {
     GetPowerInfo: (powerId) => {
         return {
             azeritePowerId: powerId,
-            spellID: 1
+            spellID: 1,
         };
-    }
+    },
 };
 exports.C_AzeriteEssence = {
     GetMilestones: () => {
@@ -745,7 +983,7 @@ exports.C_AzeriteEssence = {
         return {
             ID: 1,
             slot: 1,
-            unlocked: false
+            unlocked: false,
         };
     },
     GetMilestoneEssence: (milestoneId) => {
@@ -754,16 +992,27 @@ exports.C_AzeriteEssence = {
     GetEssenceInfo: (essenceId) => {
         return {
             name: "Name",
-            rank: 1
+            rank: 1,
         };
     },
 };
 exports.C_LossOfControl = {
     GetEventInfo: (eventIndex) => {
-        return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
+        return [
+            "SCHOOL_INTERRUPT",
+            33786,
+            "Interrupted",
+            "texture",
+            0,
+            7,
+            8,
+            1,
+            0,
+            2,
+        ];
     },
     GetNumEvents: () => {
         return 0;
-    }
+    },
 };
 //# sourceMappingURL=index.js.map

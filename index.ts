@@ -1,95 +1,139 @@
 import { LuaArray } from "@wowts/lua";
 import { spellInfos } from "./spells";
 
+export interface MockOptions {
+    silentMessageFrame?: boolean;
+}
+
+let mockOptions: MockOptions = {};
+
+export function setMockOptions(options: MockOptions) {
+    mockOptions = options;
+}
+
 export type UIPosition = "TOPLEFT" | "CENTER" | "BOTTOMLEFT";
 export type UIAnchor = "ANCHOR_BOTTOMLEFT" | "ANCHOR_NONE";
 
 export interface UIRegion {
-    CanChangeProtectedState():boolean;
-    ClearAllPoints():void;
-    GetCenter():[number, number];
-    GetWidth():number;
-    GetHeight():number;
-    GetParent():UIRegion | undefined;
-    SetParent(parent: UIRegion):void;
-    SetAllPoints(around: UIFrame):void;
-    SetParent(parent:UIFrame):void;
-    SetPoint(anchor: UIPosition, x:number, y: number):void;
-    SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x:number, y: number):void;
-    SetWidth(width:number):void;
-    SetHeight(height:number):void;
+    CanChangeProtectedState(): boolean;
+    ClearAllPoints(): void;
+    GetCenter(): [number, number];
+    GetWidth(): number;
+    GetHeight(): number;
+    GetParent(): UIRegion | undefined;
+    SetParent(parent: UIRegion): void;
+    SetAllPoints(around: UIFrame): void;
+    SetParent(parent: UIFrame): void;
+    SetPoint(anchor: UIPosition, x: number, y: number): void;
+    SetPoint(
+        anchor: UIPosition,
+        reference: UIFrame,
+        refAnchor: UIPosition,
+        x: number,
+        y: number
+    ): void;
+    SetWidth(width: number): void;
+    SetHeight(height: number): void;
 }
 
-export interface UIFrame  extends UIRegion {
-    SetAlpha(value:number):void;
-    SetScript(event:"OnEvent", func: (frame: UIFrame, event: string, ...args:any[]) => void):void;
-    SetScript(event:"OnSizeChanged" | "OnMouseUp" | "OnEnter" | "OnLeave" | "OnMouseDown" | "OnHide" | "OnUpdate" | "OnEvent", func: (frame: UIFrame, ...args:any[]) => void):void;
-    StartMoving():void;
-    StopMovingOrSizing():void;
-    SetMovable(movable:boolean):void;
-    SetFrameStrata(strata: "MEDIUM"):void;
-    Show():void;
-    Hide():void;
-    IsShown():boolean;
+export interface UIFrame extends UIRegion {
+    SetAlpha(value: number): void;
+    SetScript(
+        event: "OnEvent",
+        func: (frame: UIFrame, event: string, ...args: any[]) => void
+    ): void;
+    SetScript(
+        event:
+            | "OnSizeChanged"
+            | "OnMouseUp"
+            | "OnEnter"
+            | "OnLeave"
+            | "OnMouseDown"
+            | "OnHide"
+            | "OnUpdate"
+            | "OnEvent",
+        func: (frame: UIFrame, ...args: any[]) => void
+    ): void;
+    StartMoving(): void;
+    StopMovingOrSizing(): void;
+    SetMovable(movable: boolean): void;
+    SetFrameStrata(strata: "MEDIUM"): void;
+    Show(): void;
+    Hide(): void;
+    IsShown(): boolean;
     CreateTexture(): UITexture;
-    EnableMouse(enabled: boolean):void;
-    CreateFontString(name: string | undefined, layer?: "OVERLAY", inherits?: string): UIFontString;
-    SetAttribute(key: string, value: string):void;
-    SetScale(scale: number):void;
-    IsVisible():boolean;
-    RegisterEvent(event: string):void;
+    EnableMouse(enabled: boolean): void;
+    CreateFontString(
+        name: string | undefined,
+        layer?: "OVERLAY",
+        inherits?: string
+    ): UIFontString;
+    SetAttribute(key: string, value: string): void;
+    SetScale(scale: number): void;
+    IsVisible(): boolean;
+    RegisterEvent(event: string): void;
 }
 
 export interface UIMessageFrame extends UIFrame {
-    AddMessage(message:string):void;
+    AddMessage(message: string): void;
     GetNumMessages(): number;
-    GetMessageInfo(messageIndex: number):string;
+    GetMessageInfo(messageIndex: number): string;
 }
 
 export interface UIFontString extends UIFrame {
-    SetText(text: string | undefined):void;
-    SetFont(font: string, height: number, flags: number):void;
-    SetFontObject(name: "GameFontNormalSmall"):void;
-    SetTextColor(r:number, g:number, b: number, alpha?:number):void;
-    SetFormattedText(text: string, ...args:any[]):void;
-    SetVertexColor(r: number, g: number, b: number, alpha?:number):void;
-    SetJustifyH(justify: "left" | "right"):void;
-    GetFont():[string, number, number];
+    SetText(text: string | undefined): void;
+    SetFont(font: string, height: number, flags: number): void;
+    SetFontObject(name: "GameFontNormalSmall"): void;
+    SetTextColor(r: number, g: number, b: number, alpha?: number): void;
+    SetFormattedText(text: string, ...args: any[]): void;
+    SetVertexColor(r: number, g: number, b: number, alpha?: number): void;
+    SetJustifyH(justify: "left" | "right"): void;
+    GetFont(): [string, number, number];
 }
 
 export interface UICheckButton extends UIFrame {
-    SetChecked(checked: boolean):void;
-    GetChecked():boolean;
-    RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"):void;
+    SetChecked(checked: boolean): void;
+    GetChecked(): boolean;
+    RegisterForClicks(
+        type:
+            | "AnyUp"
+            | "AnyDown"
+            | "LeftButtonDown"
+            | "LeftButtonUp"
+            | "MiddleButtonDown"
+            | "MiddleButtonUp"
+            | "RightButtonDown"
+            | "RightButtonUp"
+    ): void;
 }
 
 export interface UIDropdown extends UIFrame {}
 
 export interface UITexture extends UIFrame {
-    SetTexture(name: string | undefined):void;
-    SetColorTexture(r: number, g: number, b: number, alpha?:number):void;
-    SetVertexColor(r: number, g: number, b: number, alpha?:number):void;
+    SetTexture(name: string | undefined): void;
+    SetColorTexture(r: number, g: number, b: number, alpha?: number): void;
+    SetVertexColor(r: number, g: number, b: number, alpha?: number): void;
 }
 
 export interface UIGameTooltip extends UIFrame {
-    SetOwner(frame: UIFrame, anchor: UIAnchor):void;
-    SetText(text: string, r?: number, g?: number, b?: number):void;
-    AddLine(text: string, r?: number, g?: number, b?: number):void;
-    ClearLines():void;
-    SetInventoryItem(unit: string, slot: number):void;
-    NumLines():number;
-    GetText():string;
+    SetOwner(frame: UIFrame, anchor: UIAnchor): void;
+    SetText(text: string, r?: number, g?: number, b?: number): void;
+    AddLine(text: string, r?: number, g?: number, b?: number): void;
+    ClearLines(): void;
+    SetInventoryItem(unit: string, slot: number): void;
+    NumLines(): number;
+    GetText(): string;
 }
 
 export interface UICooldown extends UIFrame {
     GetCooldownDuration(): number;
     SetDrawEdge(enable: boolean): void;
-    SetSwipeColor(r: number, g: number, b: number, alpha?:number):void;
-    SetCooldown(start: number, duration: number):void;
+    SetSwipeColor(r: number, g: number, b: number, alpha?: number): void;
+    SetCooldown(start: number, duration: number): void;
 }
 
 export class EventDispatcher {
-    events: {[key:string]: FakeFrame[]} = {}
+    events: { [key: string]: FakeFrame[] } = {};
 
     RegisterEvent(frame: FakeFrame, event: string) {
         let events = this.events[event];
@@ -113,7 +157,9 @@ export class EventDispatcher {
 export const eventDispatcher = new EventDispatcher();
 
 export class FakeFrame implements UIFrame {
-    scriptHandlers: {[script:string]:(frame:UIFrame, ...parameters:any[]) => void } = {}
+    scriptHandlers: {
+        [script: string]: (frame: UIFrame, ...parameters: any[]) => void;
+    } = {};
 
     RegisterEvent(event: string): void {
         eventDispatcher.RegisterEvent(this, event);
@@ -135,13 +181,14 @@ export class FakeFrame implements UIFrame {
     SetAlpha(value: number): void {
         this.alpha = value;
     }
-    SetScript(event: string, func: (frame:UIFrame, ...parameters:any[]) => void): void {
+    SetScript(
+        event: string,
+        func: (frame: UIFrame, ...parameters: any[]) => void
+    ): void {
         this.scriptHandlers[event] = func;
     }
-    StartMoving(): void {
-    }
-    StopMovingOrSizing(): void {
-    }
+    StartMoving(): void {}
+    StopMovingOrSizing(): void {}
     SetMovable(movable: boolean): void {
         this.movable = movable;
     }
@@ -163,7 +210,11 @@ export class FakeFrame implements UIFrame {
     EnableMouse(enabled: boolean): void {
         this.mouseEnabled = enabled;
     }
-    CreateFontString(name: string, layer?: "OVERLAY" | undefined, inherits?: string | undefined): UIFontString {
+    CreateFontString(
+        name: string,
+        layer?: "OVERLAY" | undefined,
+        inherits?: string | undefined
+    ): UIFontString {
         return new FakeFontString();
     }
     SetAttribute(key: string, value: string): void {
@@ -201,10 +252,15 @@ export class FakeFrame implements UIFrame {
     SetParent(parent: any) {
         this.parent = parent;
     }
-    SetAllPoints(around: UIFrame): void {
-    }
+    SetAllPoints(around: UIFrame): void {}
     SetPoint(anchor: UIPosition, x: number, y: number): void;
-    SetPoint(anchor: UIPosition, reference: UIFrame, refAnchor: UIPosition, x: number, y: number): void;
+    SetPoint(
+        anchor: UIPosition,
+        reference: UIFrame,
+        refAnchor: UIPosition,
+        x: number,
+        y: number
+    ): void;
     SetPoint(anchor: any, reference: any, refAnchor: any, x?: any, y?: any) {
         this.x = x;
         this.y = y;
@@ -215,30 +271,34 @@ export class FakeFrame implements UIFrame {
     SetHeight(height: number): void {
         this.height = height;
     }
-
 }
 
 export class FakeFontString extends FakeFrame implements UIFontString {
     text: string = "";
     private font = { font: "", height: 0, flags: 0 };
     SetText(text: string): void {
-        this.text =text;
-    }    
+        this.text = text;
+    }
     SetFont(font: string, height: number, flags: number): void {
         this.font.font = font;
         this.font.height = height;
         this.font.flags = flags;
     }
-    SetFontObject(name: "GameFontNormalSmall"): void {
-    }
-    SetTextColor(r: number, g: number, b: number, alpha?: number | undefined): void {
-    }
-    SetFormattedText(text: string, ...args: any[]): void {
-    }
-    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void {
-    }
-    SetJustifyH(justify: "left" | "right"): void {
-    }
+    SetFontObject(name: "GameFontNormalSmall"): void {}
+    SetTextColor(
+        r: number,
+        g: number,
+        b: number,
+        alpha?: number | undefined
+    ): void {}
+    SetFormattedText(text: string, ...args: any[]): void {}
+    SetVertexColor(
+        r: number,
+        g: number,
+        b: number,
+        alpha?: number | undefined
+    ): void {}
+    SetJustifyH(justify: "left" | "right"): void {}
     GetFont(): [string, number, number] {
         return [this.font.font, this.font.height, this.font.flags];
     }
@@ -250,31 +310,38 @@ export class FakeUITexture extends FakeFrame implements UITexture {
     g = 0;
     b = 0;
 
-
     SetTexture(name: string): void {
         this.texture = name;
     }
-    SetColorTexture(r: number, g: number, b: number, alpha?: number | undefined): void {
+    SetColorTexture(
+        r: number,
+        g: number,
+        b: number,
+        alpha?: number | undefined
+    ): void {
         this.r = r;
         this.g = g;
         this.b = b;
         this.alpha = alpha || 1;
     }
-    SetVertexColor(r: number, g: number, b: number, alpha?: number | undefined): void {
+    SetVertexColor(
+        r: number,
+        g: number,
+        b: number,
+        alpha?: number | undefined
+    ): void {
         this.r = r;
         this.g = g;
         this.b = b;
         this.alpha = alpha || 1;
     }
-
-
 }
 
 export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
     messages: string[] = [];
-    AddMessage(message:string):void {
+    AddMessage(message: string): void {
         this.messages.push(message);
-        console.log(message);
+        if (!mockOptions.silentMessageFrame) console.log(message);
     }
     GetNumMessages() {
         return this.messages.length;
@@ -287,37 +354,45 @@ export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
 export class FakeGameTooltip extends FakeFrame implements UIGameTooltip {
     private text!: string;
     private lines: string[] = [];
-    SetOwner(frame: UIFrame, anchor: UIAnchor):void {}
-    SetText(text: string, r?: number, g?: number, b?: number):void {
+    SetOwner(frame: UIFrame, anchor: UIAnchor): void {}
+    SetText(text: string, r?: number, g?: number, b?: number): void {
         this.text = text;
     }
-    AddLine(text: string, r?: number, g?: number, b?: number):void {
+    AddLine(text: string, r?: number, g?: number, b?: number): void {
         this.lines.push(text);
     }
-    ClearLines():void {}
-    SetInventoryItem(unit: string, slot: number):void {}
-    NumLines():number {
+    ClearLines(): void {}
+    SetInventoryItem(unit: string, slot: number): void {}
+    NumLines(): number {
         return this.lines.length;
     }
-    GetText():string {
+    GetText(): string {
         return this.text;
     }
 }
 
 export class FakeCheckButton extends FakeFrame implements UICheckButton {
     private isChecked: boolean = false;
-    SetChecked(checked: boolean):void {
+    SetChecked(checked: boolean): void {
         this.isChecked = checked;
     }
-    GetChecked():boolean {
+    GetChecked(): boolean {
         return this.isChecked;
     }
-    RegisterForClicks(type: "AnyUp" | "AnyDown" | "LeftButtonDown" | "LeftButtonUp" | "MiddleButtonDown" | "MiddleButtonUp" | "RightButtonDown" | "RightButtonUp"):void {
-    }
+    RegisterForClicks(
+        type:
+            | "AnyUp"
+            | "AnyDown"
+            | "LeftButtonDown"
+            | "LeftButtonUp"
+            | "MiddleButtonDown"
+            | "MiddleButtonUp"
+            | "RightButtonDown"
+            | "RightButtonUp"
+    ): void {}
 }
 
-export class FakeDropdown extends FakeFrame implements UIDropdown {
-}
+export class FakeDropdown extends FakeFrame implements UIDropdown {}
 
 export interface ItemStats {
     ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
@@ -342,8 +417,8 @@ export const fakePlayer: FakeUnit = {
     specializationIndex: 1,
     dead: false,
     health: 1000,
-    maxHealth: 2000
-}
+    maxHealth: 2000,
+};
 export const fakeTarget: FakeUnit = {
     classId: "SHAMAN",
     guid: "adzdaza9898",
@@ -352,107 +427,315 @@ export const fakeTarget: FakeUnit = {
     dead: false,
     specializationIndex: 1,
     health: 1000,
-    maxHealth: 2000
-}
+    maxHealth: 2000,
+};
 export const fakeUnits = new Map<string, FakeUnit>();
 fakeUnits.set("player", fakePlayer);
 fakeUnits.set("target", fakeTarget);
 
 // WOW global functions
-export function GetInventorySlotInfo(slotName: string): [number, string] { return [0, '']; }
-export function GetItemStats(itemLink: string, statTable?: any[]): ItemStats {return {};}
-export function GetInventoryItemLink(unitId: string, slotId: number) : string { return '';}
-export function GetHaste(): number { return 0; }
-export function UnitRangedDamage(player: string): [number, number, number, number, number, number] {return [0, 0, 0, 0, 0, 0];}
-export function GetItemInfoInstant(item: string|number):[number,string,string,string,number,number,number]{ return [0, '', '', '', 0, 0, 0]};
-export function CombatLogGetCurrentEventInfo():any[]{ return[]; }
-export function debugprofilestop() {return 10; }
-export function GetActionInfo(slot: number) { return ["a", "b", "c"]; }
-export function GetActionText(slot: number) { return "ActionText"; }
-export function GetBindingKey(key:string){ return "a"; }
-export function GetBonusBarIndex() { }
-export function GetItemInfo(itemId: number|string):any[] { return []; }
-export function GetMacroItem(spellId: number):any[]{ return []; }
-export function GetMacroSpell(spellId: number):number{ return 0; }
-export function GetSpellInfo(spellId: number | string, bookType?: string): [string | undefined, string | undefined, string, number, number, number, number] {
-    if (typeof (spellId) === "number") {
+export function GetInventorySlotInfo(slotName: string): [number, string] {
+    return [0, ""];
+}
+export function GetItemStats(itemLink: string, statTable?: any[]): ItemStats {
+    return {};
+}
+export function GetInventoryItemLink(unitId: string, slotId: number): string {
+    return "";
+}
+export function GetHaste(): number {
+    return 0;
+}
+export function UnitRangedDamage(
+    player: string
+): [number, number, number, number, number, number] {
+    return [0, 0, 0, 0, 0, 0];
+}
+export function GetItemInfoInstant(
+    item: string | number
+): [number, string, string, string, number, number, number] {
+    return [0, "", "", "", 0, 0, 0];
+}
+export function CombatLogGetCurrentEventInfo(): any[] {
+    return [];
+}
+export function debugprofilestop() {
+    return 10;
+}
+export function GetActionInfo(slot: number) {
+    return ["a", "b", "c"];
+}
+export function GetActionText(slot: number) {
+    return "ActionText";
+}
+export function GetBindingKey(key: string) {
+    return "a";
+}
+export function GetBonusBarIndex() {}
+export function GetItemInfo(itemId: number | string): any[] {
+    return [];
+}
+export function GetMacroItem(spellId: number): any[] {
+    return [];
+}
+export function GetMacroSpell(spellId: number): number {
+    return 0;
+}
+export function GetSpellInfo(
+    spellId: number | string,
+    bookType?: string
+): [
+    string | undefined,
+    string | undefined,
+    string,
+    number,
+    number,
+    number,
+    number
+] {
+    if (typeof spellId === "number") {
         const spell = spellInfos[spellId];
         if (spell) {
-            return [spell.name, undefined, "fake_icon", spell.castTime, spell.minRange, spell.maxRange, spellId];
+            return [
+                spell.name,
+                undefined,
+                "fake_icon",
+                spell.castTime,
+                spell.minRange,
+                spell.maxRange,
+                spellId,
+            ];
         }
         return [undefined, undefined, "none", 0, 0, 0, 0];
     }
     return ["a", "b", "c", 0, 1, 2, 3];
 }
-export function GetTime() { return 10; }
-export function InterfaceOptionsFrame_OpenToCategory(frameName:string) { }
-export function UnitAura(unitId: string, i:number, filter: string):any[] { return []; }
-export function UnitCanAttack(unit:string, target: string) { return false; }
+export function GetTime() {
+    return 10;
+}
+export function InterfaceOptionsFrame_OpenToCategory(frameName: string) {}
+export function UnitAura(unitId: string, i: number, filter: string): any[] {
+    return [];
+}
+export function UnitCanAttack(unit: string, target: string) {
+    return false;
+}
 export function UnitClass(unit: string): [string?, ClassId?] {
     const fakeUnit = fakeUnits.get(unit);
     if (!fakeUnit) return [];
     return [fakeUnit.classId.toLowerCase(), fakeUnit.classId];
 }
-export function UnitExists(unit:string) { return fakeUnits.get(unit) !== undefined; }
+export function UnitExists(unit: string) {
+    return fakeUnits.get(unit) !== undefined;
+}
 export function UnitGUID(unit: string) {
     return fakeUnits.get(unit)?.guid;
 }
-export function UnitHasVehicleUI(unit: string) { return false; }
-export function UnitIsDead(unit: string) { return fakeUnits.get(unit)?.dead; }
-export function UnitName(unitId: string) { return fakeUnits.get(unitId)?.name; }
-export function GetActionCooldown(action: number):[number, number, boolean] { return [0, 0, false]; }
-export function GetActionTexture(action: number){ return "filepath" }
-export function GetItemIcon(itemId: number){ return "fakeicon"}
-export function GetItemCooldown(itemId: number): [number, number, boolean]{ return [0, 0, false]; }
-export function GetItemSpell(itemId: number): [string, string, number] { return ["spellName", "spellRank", 100]}
-export function GetSpellTexture(spellId: number, bookType?: string){ return "filepath"}
-export function IsActionInRange(action: number, target: string){ return true }
-export function IsCurrentAction(action: number){ return false;}
-export function IsItemInRange(itemId: number, target: string){ return false;}
-export function IsUsableAction(action: number): boolean{ return false;}
-export function IsUsableItem(itemId: number): boolean { return false;}
-export function GetNumGroupMembers(filter: number) {return 0;}
-export function UnitPower(unit: string, type: number, segments?: number) { return 0;}
-export function GetPowerRegen():[number, number] {return [0, 0]}
-export function GetManaRegen():[number, number] { return [0, 0]}
-export function GetSpellPowerCost(spellId:number): LuaArray<{cost:number, type:number}> { return {1:{cost:0, type: 0}}}
-export function UnitPowerType(unit: string):[number,number] { return [0,0]}
-export function IsInGroup(filter?: number){ return false}
-export function IsInGuild() { return false;}
-export function IsInInstance(){return false}
-export function IsInRaid(filter?: number){return false}
-export function UnitLevel(target:string){ return 0;}
-export function GetBuildInfo():any[] { return []}
-export function GetItemCount(item:string, first?: boolean, second?: boolean){ return 0;}
-export function GetNumTrackingTypes() {return 0}
-export function GetTrackingInfo(i:number):any[] {return []}
-export function GetUnitSpeed(unit: string):number { return 0;}
-export function GetWeaponEnchantInfo():any[] {return []}
-export function HasFullControl() {return false}
+export function UnitHasVehicleUI(unit: string) {
+    return false;
+}
+export function UnitIsDead(unit: string) {
+    return fakeUnits.get(unit)?.dead;
+}
+export function UnitName(unitId: string) {
+    return fakeUnits.get(unitId)?.name;
+}
+export function GetActionCooldown(action: number): [number, number, boolean] {
+    return [0, 0, false];
+}
+export function GetActionTexture(action: number) {
+    return "filepath";
+}
+export function GetItemIcon(itemId: number) {
+    return "fakeicon";
+}
+export function GetItemCooldown(itemId: number): [number, number, boolean] {
+    return [0, 0, false];
+}
+export function GetItemSpell(itemId: number): [string, string, number] {
+    return ["spellName", "spellRank", 100];
+}
+export function GetSpellTexture(spellId: number, bookType?: string) {
+    return "filepath";
+}
+export function IsActionInRange(action: number, target: string) {
+    return true;
+}
+export function IsCurrentAction(action: number) {
+    return false;
+}
+export function IsItemInRange(itemId: number, target: string) {
+    return false;
+}
+export function IsUsableAction(action: number): boolean {
+    return false;
+}
+export function IsUsableItem(itemId: number): boolean {
+    return false;
+}
+export function GetNumGroupMembers(filter: number) {
+    return 0;
+}
+export function UnitPower(unit: string, type: number, segments?: number) {
+    return 0;
+}
+export function GetPowerRegen(): [number, number] {
+    return [0, 0];
+}
+export function GetManaRegen(): [number, number] {
+    return [0, 0];
+}
+export function GetSpellPowerCost(
+    spellId: number
+): LuaArray<{ cost: number; type: number }> {
+    return { 1: { cost: 0, type: 0 } };
+}
+export function UnitPowerType(unit: string): [number, number] {
+    return [0, 0];
+}
+export function IsInGroup(filter?: number) {
+    return false;
+}
+export function IsInGuild() {
+    return false;
+}
+export function IsInInstance() {
+    return false;
+}
+export function IsInRaid(filter?: number) {
+    return false;
+}
+export function UnitLevel(target: string) {
+    return 0;
+}
+export function GetBuildInfo(): any[] {
+    return [];
+}
+export function GetItemCount(item: string, first?: boolean, second?: boolean) {
+    return 0;
+}
+export function GetNumTrackingTypes() {
+    return 0;
+}
+export function GetTrackingInfo(i: number): any[] {
+    return [];
+}
+export function GetUnitSpeed(unit: string): number {
+    return 0;
+}
+export function GetWeaponEnchantInfo(): any[] {
+    return [];
+}
+export function HasFullControl() {
+    return false;
+}
 export function IsSpellOverlayed() {}
-export function IsStealthed() { return false; }
-export function UnitCastingInfo(target: string):[string|undefined, string, string, number, number, boolean, string, boolean, number] { return [undefined, "text", "texture", 0, 0, false, "", false, 0] }
-export function UnitChannelInfo(target: string):any[] {return  [] }
-export function UnitClassification(target: string) { return "worldboss";}
-export function UnitCreatureFamily(target: string){return "Bat"}
-export function UnitCreatureType(target: string){return "Beast"}
-export function UnitDetailedThreatSituation(unit: string, target: string):any[]{ return []}
-export function UnitInRaid(unit: string){return false}
-export function UnitIsFriend(unit: string, target: string){return false}
-export function UnitIsPVP(unit: string){return false}
-export function UnitIsUnit(unit1: string, unit2: string) { return true }
-export function UnitInParty(unit: string) { return false;}
-export function UnitPowerMax(unit: string, power: number, segment?: number): number{ return 0}
-export function UnitRace(unit: string):any[]{return []}
-export function UnitStagger(unit: string){return 0}
-export function GetSpellCharges(spellId: number):any[] {return []}
-export function GetSpellCooldown(type:string|number, book?: string):[number, number, boolean]{ return [0, 0, false]}
-export function GetLocale() { return "en-US"}
-export function CreateFrame(type:"GameTooltip", id?:string, parent?:UIFrame, template?:string):UIGameTooltip;
-export function CreateFrame(type:"CheckButton", id?:string, parent?:UIFrame, template?:string):UICheckButton;
-export function CreateFrame(type:"Dropdown", id?:string, parent?:UIFrame, template?:string):UIDropdown;
-export function CreateFrame(type:"Frame", id?:string, parent?:UIFrame, template?:string):UIFrame;
-export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:string):UIFrame {
+export function IsStealthed() {
+    return false;
+}
+export function UnitCastingInfo(
+    target: string
+): [
+    string | undefined,
+    string,
+    string,
+    number,
+    number,
+    boolean,
+    string,
+    boolean,
+    number
+] {
+    return [undefined, "text", "texture", 0, 0, false, "", false, 0];
+}
+export function UnitChannelInfo(target: string): any[] {
+    return [];
+}
+export function UnitClassification(target: string) {
+    return "worldboss";
+}
+export function UnitCreatureFamily(target: string) {
+    return "Bat";
+}
+export function UnitCreatureType(target: string) {
+    return "Beast";
+}
+export function UnitDetailedThreatSituation(
+    unit: string,
+    target: string
+): any[] {
+    return [];
+}
+export function UnitInRaid(unit: string) {
+    return false;
+}
+export function UnitIsFriend(unit: string, target: string) {
+    return false;
+}
+export function UnitIsPVP(unit: string) {
+    return false;
+}
+export function UnitIsUnit(unit1: string, unit2: string) {
+    return true;
+}
+export function UnitInParty(unit: string) {
+    return false;
+}
+export function UnitPowerMax(
+    unit: string,
+    power: number,
+    segment?: number
+): number {
+    return 0;
+}
+export function UnitRace(unit: string): any[] {
+    return [];
+}
+export function UnitStagger(unit: string) {
+    return 0;
+}
+export function GetSpellCharges(spellId: number): any[] {
+    return [];
+}
+export function GetSpellCooldown(
+    type: string | number,
+    book?: string
+): [number, number, boolean] {
+    return [0, 0, false];
+}
+export function GetLocale() {
+    return "en-US";
+}
+export function CreateFrame(
+    type: "GameTooltip",
+    id?: string,
+    parent?: UIFrame,
+    template?: string
+): UIGameTooltip;
+export function CreateFrame(
+    type: "CheckButton",
+    id?: string,
+    parent?: UIFrame,
+    template?: string
+): UICheckButton;
+export function CreateFrame(
+    type: "Dropdown",
+    id?: string,
+    parent?: UIFrame,
+    template?: string
+): UIDropdown;
+export function CreateFrame(
+    type: "Frame",
+    id?: string,
+    parent?: UIFrame,
+    template?: string
+): UIFrame;
+export function CreateFrame(
+    type: string,
+    id?: string,
+    parent?: UIFrame,
+    template?: string
+): UIFrame {
     switch (type) {
         case "GameTooltip":
             return new FakeGameTooltip();
@@ -464,71 +747,218 @@ export function CreateFrame(type:string, id?:string, parent?:UIFrame, template?:
             return new FakeFrame();
     }
 }
-export function EasyMenu(menu:any, menuFrame:UIFrame, cursor:string|UIRegion, x:number, y:number, menuType:string, autoHideDelay?:number) {}
-export function IsShiftKeyDown(){return false}
+export function EasyMenu(
+    menu: any,
+    menuFrame: UIFrame,
+    cursor: string | UIRegion,
+    x: number,
+    y: number,
+    menuType: string,
+    autoHideDelay?: number
+) {}
+export function IsShiftKeyDown() {
+    return false;
+}
 export type SpecializationIndex = 1 | 2 | 3 | 4;
-export function GetSpecialization(): SpecializationIndex {return fakePlayer.specializationIndex;}
-export function GetSpecializationInfo(spec: number){ return 1}
-export function GetNumSpecializations(isInspect: boolean, isPet: boolean):number {return 0;}
-export function GetTalentInfoByID(talent:number, spec:number):any[]{return []}
-export function GetAuctionItemSubClasses(item:number):any[]{return []}
-export function GetInventoryItemID(unit:string, slot:number):number {return 0;}
-export function GetInventoryItemGems(){}
-export function RegisterStateDriver(frame: UIFrame, property: string, state:any){}
-export function UnitHealth(unit:string){return fakeUnits.get(unit)?.health}
-export function UnitHealthMax(unit:string){return fakeUnits.get(unit)?.maxHealth}
-export function UnitGetTotalHealAbsorbs(unit:string){return 0}
-export function UnitGetTotalAbsorbs(unit:string){return 0}
-export function PlaySoundFile(file:string){}
-export function GetCombatRating(combatRatingIdentifier:number){ return 0}
-export function GetCombatRatingBonus(combatRatingIdentifier:number) {return 0;}
-export function GetCritChance(){return 0}
-export function GetMastery(){return 0}
-export function GetMasteryEffect(){return 0}
-export function GetMeleeHaste(){return 0}
-export function GetMultistrike(){return 0}
-export function GetMultistrikeEffect(){return 0}
-export function GetRangedCritChance(){return 0}
-export function GetRangedHaste(){return 0}
-export function GetSpellBonusDamage(school: number){return 0}
-export function GetSpellBonusHealing(){return 0}
-export function GetSpellCritChance(school: number){return 0}
-export function UnitAttackPower(unitId:string){return [0, 0, 0]}
-export function UnitAttackSpeed(unitId:string){return [0, 0]}
-export function UnitDamage(unitId:string):number[]{return []}
-export function UnitRangedAttackPower(unitId:string){return [0, 0, 0]}
-export function UnitSpellHaste(unitId:string){return 0}
-export function UnitStat(unitId:string, stat:number){return 0}
-export function GetRuneCooldown(slot: number){return [0, 0, 0]}
-export function SendAddonMessage(MSG_PREFIX: string, message: string, channel: string){}
-export function print(s: any):void {}
-export function GetActiveSpecGroup() {return 0;}
-export function GetFlyoutInfo(flyoutId: number):any[] {return[]}
-export function GetFlyoutSlotInfo(flyoutId: number, flyoutIndex: number):any[] {return[]}
-export function GetSpellBookItemInfo(index: number|string, bookType?: string):any[] {return[]}
-export function GetSpellCount(index: number|string, bookType?: string): number { return 0}
-export function GetSpellLink(index: number|string, bookType?: string){return "aa"}
-export function GetSpellTabInfo(tab: number):any[] { return []}
-export function GetTalentInfo(i: number, j: number, activeTalentGroup: number):[number, string, string, number, number, number, number, number, number, number, number] {
+export function GetSpecialization(): SpecializationIndex {
+    return fakePlayer.specializationIndex;
+}
+export function GetSpecializationInfo(spec: number) {
+    return 1;
+}
+export function GetNumSpecializations(
+    isInspect: boolean,
+    isPet: boolean
+): number {
+    return 0;
+}
+export function GetTalentInfoByID(talent: number, spec: number): any[] {
+    return [];
+}
+export function GetAuctionItemSubClasses(item: number): any[] {
+    return [];
+}
+export function GetInventoryItemID(unit: string, slot: number): number {
+    return 0;
+}
+export function GetInventoryItemGems() {}
+export function RegisterStateDriver(
+    frame: UIFrame,
+    property: string,
+    state: any
+) {}
+export function UnitHealth(unit: string) {
+    return fakeUnits.get(unit)?.health;
+}
+export function UnitHealthMax(unit: string) {
+    return fakeUnits.get(unit)?.maxHealth;
+}
+export function UnitGetTotalHealAbsorbs(unit: string) {
+    return 0;
+}
+export function UnitGetTotalAbsorbs(unit: string) {
+    return 0;
+}
+export function PlaySoundFile(file: string) {}
+export function GetCombatRating(combatRatingIdentifier: number) {
+    return 0;
+}
+export function GetCombatRatingBonus(combatRatingIdentifier: number) {
+    return 0;
+}
+export function GetCritChance() {
+    return 0;
+}
+export function GetMastery() {
+    return 0;
+}
+export function GetMasteryEffect() {
+    return 0;
+}
+export function GetMeleeHaste() {
+    return 0;
+}
+export function GetMultistrike() {
+    return 0;
+}
+export function GetMultistrikeEffect() {
+    return 0;
+}
+export function GetRangedCritChance() {
+    return 0;
+}
+export function GetRangedHaste() {
+    return 0;
+}
+export function GetSpellBonusDamage(school: number) {
+    return 0;
+}
+export function GetSpellBonusHealing() {
+    return 0;
+}
+export function GetSpellCritChance(school: number) {
+    return 0;
+}
+export function UnitAttackPower(unitId: string) {
+    return [0, 0, 0];
+}
+export function UnitAttackSpeed(unitId: string) {
+    return [0, 0];
+}
+export function UnitDamage(unitId: string): number[] {
+    return [];
+}
+export function UnitRangedAttackPower(unitId: string) {
+    return [0, 0, 0];
+}
+export function UnitSpellHaste(unitId: string) {
+    return 0;
+}
+export function UnitStat(unitId: string, stat: number) {
+    return 0;
+}
+export function GetRuneCooldown(slot: number) {
+    return [0, 0, 0];
+}
+export function SendAddonMessage(
+    MSG_PREFIX: string,
+    message: string,
+    channel: string
+) {}
+export function print(s: any): void {}
+export function GetActiveSpecGroup() {
+    return 0;
+}
+export function GetFlyoutInfo(flyoutId: number): any[] {
+    return [];
+}
+export function GetFlyoutSlotInfo(
+    flyoutId: number,
+    flyoutIndex: number
+): any[] {
+    return [];
+}
+export function GetSpellBookItemInfo(
+    index: number | string,
+    bookType?: string
+): any[] {
+    return [];
+}
+export function GetSpellCount(
+    index: number | string,
+    bookType?: string
+): number {
+    return 0;
+}
+export function GetSpellLink(index: number | string, bookType?: string) {
+    return "aa";
+}
+export function GetSpellTabInfo(tab: number): any[] {
+    return [];
+}
+export function GetTalentInfo(
+    i: number,
+    j: number,
+    activeTalentGroup: number
+): [
+    number,
+    string,
+    string,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+] {
     return [123, "A Talent", "Texture/Path", 1, 1, 12345, 1, 1, 1, 1, 1];
 }
-export function HasPetSpells():[number, string] {return[0, "a"]}
-export function IsHarmfulSpell(index: number|string, bookType?: string){ return false}
-export function IsHelpfulSpell(index: number|string, bookType?: string){return false}
-export function IsSpellInRange(index: number|string, bookType?: string, unitId?: string){return 0;}
-export function IsUsableSpell(index: number|string, bookType?: string):[boolean, boolean] {return [true, false];}
-export function GetNumShapeshiftForms() {return 0}
-export function GetShapeshiftForm(){return 0;}
-export function GetShapeshiftFormInfo(index:number):any[] {return []}
-export function GetTotemInfo(slot: number):any[] {return[]}
-export function IsLoggedIn() { return true; }
+export function HasPetSpells(): [number, string] {
+    return [0, "a"];
+}
+export function IsHarmfulSpell(index: number | string, bookType?: string) {
+    return false;
+}
+export function IsHelpfulSpell(index: number | string, bookType?: string) {
+    return false;
+}
+export function IsSpellInRange(
+    index: number | string,
+    bookType?: string,
+    unitId?: string
+) {
+    return 0;
+}
+export function IsUsableSpell(
+    index: number | string,
+    bookType?: string
+): [boolean, boolean] {
+    return [true, false];
+}
+export function GetNumShapeshiftForms() {
+    return 0;
+}
+export function GetShapeshiftForm() {
+    return 0;
+}
+export function GetShapeshiftFormInfo(index: number): any[] {
+    return [];
+}
+export function GetTotemInfo(slot: number): any[] {
+    return [];
+}
+export function IsLoggedIn() {
+    return true;
+}
 export const UIParent: UIFrame = new FakeFrame();
 
 // WoW global variables
-export const GameTooltip:UIGameTooltip = new FakeGameTooltip();
+export const GameTooltip: UIGameTooltip = new FakeGameTooltip();
 export const MAX_COMBO_POINTS = 5;
 export const UNKNOWN = -1;
-export const DEFAULT_CHAT_FRAME:UIMessageFrame = new FakeMessageFrame();
+export const DEFAULT_CHAT_FRAME: UIMessageFrame = new FakeMessageFrame();
 export const SCHOOL_MASK_NONE = 0;
 export const SCHOOL_MASK_ARCANE = 1;
 export const SCHOOL_MASK_FIRE = 2;
@@ -626,10 +1056,10 @@ export const RAID_CLASS_COLORS = {
     ["DRUID"]: { r: 1.0, g: 0.49, b: 0.04, colorStr: "ffff7d0a" },
     ["SHAMAN"]: { r: 0.0, g: 0.44, b: 0.87, colorStr: "ff0070de" },
     ["WARRIOR"]: { r: 0.78, g: 0.61, b: 0.43, colorStr: "ffc79c6e" },
-    ["DEATHKNIGHT"]: { r: 0.77, g: 0.12 , b: 0.23, colorStr: "ffc41f3b" },
-    ["MONK"]: { r: 0.0, g: 1.00 , b: 0.59, colorStr: "ff00ff96" },
+    ["DEATHKNIGHT"]: { r: 0.77, g: 0.12, b: 0.23, colorStr: "ffc41f3b" },
+    ["MONK"]: { r: 0.0, g: 1.0, b: 0.59, colorStr: "ff00ff96" },
     ["DEMONHUNTER"]: { r: 0.64, g: 0.19, b: 0.79, colorStr: "ffa330c9" },
-  };
+};
 
 export const AIR_TOTEM_SLOT = 1;
 export const EARTH_TOTEM_SLOT = 2;
@@ -662,28 +1092,28 @@ export const Enum = {
         Obsolete2: 15,
         ArcaneCharges: 16,
         Fury: 17,
-        Pain: 18
-    }
+        Pain: 18,
+    },
 };
 
-export interface ItemLocationMixin{
+export interface ItemLocationMixin {
     Clear(): void;
-    SetBagAndSlot(bagID:number, slotIndex:number):void
-    GetBagAndSlot(): [number|null, number|null]
-    SetEquipmentSlot(equipmentSlotIndex:number):void
-    GetEquipmentSlot():number|null
-    IsEquipmentSlot():boolean
-    IsBagAndSlot():boolean
-    HasAnyLocation(): boolean
-    IsEqualToBagAndSlot(otherBagID:number, otherSlotIndex:number): boolean
-    IsEqualToEquipmentSlot(otherEquipmentSlotIndex:number):boolean
-    IsEqualTo(otherItemLocation:ItemLocationMixin): boolean
+    SetBagAndSlot(bagID: number, slotIndex: number): void;
+    GetBagAndSlot(): [number | null, number | null];
+    SetEquipmentSlot(equipmentSlotIndex: number): void;
+    GetEquipmentSlot(): number | null;
+    IsEquipmentSlot(): boolean;
+    IsBagAndSlot(): boolean;
+    HasAnyLocation(): boolean;
+    IsEqualToBagAndSlot(otherBagID: number, otherSlotIndex: number): boolean;
+    IsEqualToEquipmentSlot(otherEquipmentSlotIndex: number): boolean;
+    IsEqualTo(otherItemLocation: ItemLocationMixin): boolean;
 }
 
-export class FakeItemLocation{
-    CreateFromEquipmentSlot(equipmentSlotIndex:number):ItemLocationMixin{
+export class FakeItemLocation {
+    CreateFromEquipmentSlot(equipmentSlotIndex: number): ItemLocationMixin {
         return {
-            Clear() { },
+            Clear() {},
             GetBagAndSlot() {
                 return [null, null];
             },
@@ -708,24 +1138,22 @@ export class FakeItemLocation{
             IsEquipmentSlot() {
                 return true;
             },
-            SetBagAndSlot(bagID: number, slotIndex: number) {
-            },
-            SetEquipmentSlot(equipmentSlotIndex: number) {
-            }
+            SetBagAndSlot(bagID: number, slotIndex: number) {},
+            SetEquipmentSlot(equipmentSlotIndex: number) {},
         };
     }
 }
-export const ItemLocation = new FakeItemLocation()
+export const ItemLocation = new FakeItemLocation();
 
 export const C_Item = {
     DoesItemExist: (emptiableItemLocation: ItemLocationMixin): boolean => {
         return false;
-    }
+    },
 };
 
-export interface AzeritePowerInfo{
+export interface AzeritePowerInfo {
     spellID: number;
-    azeritePowerId:number;
+    azeritePowerId: number;
 }
 
 export interface AzeriteTierInfo {
@@ -733,59 +1161,88 @@ export interface AzeriteTierInfo {
 }
 
 export const C_AzeriteEmpoweredItem = {
-    IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin):boolean =>{
+    IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin): boolean => {
         return false;
     },
-    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin):AzeriteTierInfo[] => {
+    GetAllTierInfo: (
+        azeriteEmpoweredItemLocation: ItemLocationMixin
+    ): AzeriteTierInfo[] => {
         return [];
     },
-    IsPowerSelected: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number):boolean =>{
+    IsPowerSelected: (
+        azeriteEmpoweredItemLocation: ItemLocationMixin,
+        powerID: number
+    ): boolean => {
         return false;
     },
-    GetPowerInfo: (powerId: number):AzeritePowerInfo => {
+    GetPowerInfo: (powerId: number): AzeritePowerInfo => {
         return {
             azeritePowerId: powerId,
-            spellID: 1
+            spellID: 1,
         };
-    }
-}
+    },
+};
 
 export interface AzeriteMilestoneInfo {
-    ID: number,
+    ID: number;
     unlocked: boolean;
     slot: number;
 }
 export interface AzeriteEssenceInfo {
-    name: string,
-    rank: number,
+    name: string;
+    rank: number;
 }
 export const C_AzeriteEssence = {
-    GetMilestones: ():AzeriteMilestoneInfo[] => {
+    GetMilestones: (): AzeriteMilestoneInfo[] => {
         return [];
     },
-    GetMilestoneInfo: (milestoneId: number):AzeriteMilestoneInfo => {
+    GetMilestoneInfo: (milestoneId: number): AzeriteMilestoneInfo => {
         return {
             ID: 1,
             slot: 1,
-            unlocked: false
+            unlocked: false,
         };
     },
-    GetMilestoneEssence: (milestoneId: number):number => {
+    GetMilestoneEssence: (milestoneId: number): number => {
         return 0;
     },
-    GetEssenceInfo: (essenceId: number):AzeriteEssenceInfo => {
+    GetEssenceInfo: (essenceId: number): AzeriteEssenceInfo => {
         return {
             name: "Name",
-            rank: 1
+            rank: 1,
         };
     },
 };
 
 export const C_LossOfControl = {
-    GetEventInfo: (eventIndex: number): [string, number, string, string, number, number, number, number, number, number] => {
-        return ["SCHOOL_INTERRUPT", 33786, "Interrupted", "texture", 0, 7, 8, 1, 0, 2];
+    GetEventInfo: (
+        eventIndex: number
+    ): [
+        string,
+        number,
+        string,
+        string,
+        number,
+        number,
+        number,
+        number,
+        number,
+        number
+    ] => {
+        return [
+            "SCHOOL_INTERRUPT",
+            33786,
+            "Interrupted",
+            "texture",
+            0,
+            7,
+            8,
+            1,
+            0,
+            2,
+        ];
     },
     GetNumEvents: () => {
         return 0;
-    }
-}
+    },
+};
