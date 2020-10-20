@@ -1014,5 +1014,16 @@ exports.C_LossOfControl = {
     GetNumEvents: () => {
         return 0;
     },
+    GetActiveLossOfControlData(eventIndex) {
+        return {
+            locType: "SCHOOL_INTERRUPT",
+            spellID: 19,
+            displayText: "Interrupted",
+            iconTexture: 19,
+            startTime: 100,
+            displayType: 0,
+            priority: 13,
+        };
+    },
 };
 //# sourceMappingURL=index.js.map

@@ -1214,6 +1214,19 @@ export const C_AzeriteEssence = {
     },
 };
 
+export interface LossOfControlData {
+    locType: string;
+    spellID: number;
+    displayText: string;
+    iconTexture: number;
+    startTime?: number;
+    timeRemaining?: number;
+    duration?: number;
+    lockoutSchool?: number;
+    priority: number;
+    displayType: 0 | 1 | 2;
+}
+
 export const C_LossOfControl = {
     GetEventInfo: (
         eventIndex: number
@@ -1244,5 +1257,18 @@ export const C_LossOfControl = {
     },
     GetNumEvents: () => {
         return 0;
+    },
+    GetActiveLossOfControlData(
+        eventIndex: number
+    ): LossOfControlData | undefined {
+        return {
+            locType: "SCHOOL_INTERRUPT",
+            spellID: 19,
+            displayText: "Interrupted",
+            iconTexture: 19,
+            startTime: 100,
+            displayType: 0,
+            priority: 13,
+        };
     },
 };

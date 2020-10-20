@@ -569,7 +569,20 @@ export declare const C_AzeriteEssence: {
     GetMilestoneEssence: (milestoneId: number) => number;
     GetEssenceInfo: (essenceId: number) => AzeriteEssenceInfo;
 };
+export interface LossOfControlData {
+    locType: string;
+    spellID: number;
+    displayText: string;
+    iconTexture: number;
+    startTime?: number;
+    timeRemaining?: number;
+    duration?: number;
+    lockoutSchool?: number;
+    priority: number;
+    displayType: 0 | 1 | 2;
+}
 export declare const C_LossOfControl: {
     GetEventInfo: (eventIndex: number) => [string, number, string, string, number, number, number, number, number, number];
     GetNumEvents: () => number;
+    GetActiveLossOfControlData(eventIndex: number): LossOfControlData | undefined;
 };
