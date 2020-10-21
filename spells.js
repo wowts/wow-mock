@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.spellInfos = void 0;
 exports.spellInfos = {
     [17]: { name: "Power Word: Shield", castTime: 0, minRange: 0, maxRange: 40 },
     [53]: { name: "Backstab", castTime: 0, minRange: 0, maxRange: 5 },

@@ -213,7 +213,15 @@ export declare function GetBonusBarIndex(): void;
 export declare function GetItemInfo(itemId: number | string): any[];
 export declare function GetMacroItem(spellId: number): any[];
 export declare function GetMacroSpell(spellId: number): number;
-export declare function GetSpellInfo(spellId: number | string, bookType?: string): [string | undefined, string | undefined, string, number, number, number, number];
+export declare function GetSpellInfo(spellId: number | string, bookType?: string): [
+    string | undefined,
+    string | undefined,
+    string,
+    number,
+    number,
+    number,
+    number
+];
 export declare function GetTime(): number;
 export declare function InterfaceOptionsFrame_OpenToCategory(frameName: string): void;
 export declare function UnitAura(unitId: string, i: number, filter: string): any[];
@@ -258,7 +266,17 @@ export declare function GetWeaponEnchantInfo(): any[];
 export declare function HasFullControl(): boolean;
 export declare function IsSpellOverlayed(): void;
 export declare function IsStealthed(): boolean;
-export declare function UnitCastingInfo(target: string): [string | undefined, string, string, number, number, boolean, string, boolean, number];
+export declare function UnitCastingInfo(target: string): [
+    string | undefined,
+    string,
+    string,
+    number,
+    number,
+    boolean,
+    string,
+    boolean,
+    number
+];
 export declare function UnitChannelInfo(target: string): any[];
 export declare function UnitClassification(target: string): string;
 export declare function UnitCreatureFamily(target: string): string;
@@ -324,7 +342,19 @@ export declare function GetSpellBookItemInfo(index: number | string, bookType?: 
 export declare function GetSpellCount(index: number | string, bookType?: string): number;
 export declare function GetSpellLink(index: number | string, bookType?: string): string;
 export declare function GetSpellTabInfo(tab: number): any[];
-export declare function GetTalentInfo(i: number, j: number, activeTalentGroup: number): [number, string, string, number, number, number, number, number, number, number, number];
+export declare function GetTalentInfo(i: number, j: number, activeTalentGroup: number): [
+    number,
+    string,
+    string,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+];
 export declare function HasPetSpells(): [number, string];
 export declare function IsHarmfulSpell(index: number | string, bookType?: string): boolean;
 export declare function IsHelpfulSpell(index: number | string, bookType?: string): boolean;
