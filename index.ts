@@ -1228,39 +1228,12 @@ export interface LossOfControlData {
 }
 
 export const C_LossOfControl = {
-    GetEventInfo: (
-        eventIndex: number
-    ): [
-        string,
-        number,
-        string,
-        string,
-        number,
-        number,
-        number,
-        number,
-        number,
-        number
-    ] => {
-        return [
-            "SCHOOL_INTERRUPT",
-            33786,
-            "Interrupted",
-            "texture",
-            0,
-            7,
-            8,
-            1,
-            0,
-            2,
-        ];
-    },
-    GetNumEvents: () => {
+    GetActiveLossOfControlDataCount: () => {
         return 0;
     },
-    GetActiveLossOfControlData(
+    GetActiveLossOfControlData: (
         eventIndex: number
-    ): LossOfControlData | undefined {
+    ) => LossOfControlData | undefined {
         return {
             locType: "SCHOOL_INTERRUPT",
             spellID: 19,
