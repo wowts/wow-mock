@@ -1014,7 +1014,7 @@ exports.C_LossOfControl = {
     GetNumEvents: () => {
         return 0;
     },
-    GetActiveLossOfControlData(eventIndex) {
+    GetActiveLossOfControlData: (eventIndex) => {
         return {
             locType: "SCHOOL_INTERRUPT",
             spellID: 19,

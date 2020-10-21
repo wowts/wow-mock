@@ -1258,9 +1258,9 @@ export const C_LossOfControl = {
     GetNumEvents: () => {
         return 0;
     },
-    GetActiveLossOfControlData(
+    GetActiveLossOfControlData: (
         eventIndex: number
-    ): LossOfControlData | undefined {
+    ) => LossOfControlData | undefined {
         return {
             locType: "SCHOOL_INTERRUPT",
             spellID: 19,
