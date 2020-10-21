@@ -997,7 +997,7 @@ exports.C_AzeriteEssence = {
     },
 };
 exports.C_LossOfControl = {
-    GetNumEvents: () => {
+    GetActiveLossOfControlDataCount: () => {
         return 0;
     },
     GetActiveLossOfControlData: (eventIndex) => {

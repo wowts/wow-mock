@@ -1228,7 +1228,7 @@ export interface LossOfControlData {
 }
 
 export const C_LossOfControl = {
-    GetNumEvents: () => {
+    GetActiveLossOfControlDataCount: () => {
         return 0;
     },
     GetActiveLossOfControlData: (
