@@ -997,20 +997,6 @@ exports.C_AzeriteEssence = {
     },
 };
 exports.C_LossOfControl = {
-    GetEventInfo: (eventIndex) => {
-        return [
-            "SCHOOL_INTERRUPT",
-            33786,
-            "Interrupted",
-            "texture",
-            0,
-            7,
-            8,
-            1,
-            0,
-            2,
-        ];
-    },
     GetNumEvents: () => {
         return 0;
     },

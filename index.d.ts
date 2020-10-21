@@ -582,7 +582,6 @@ export interface LossOfControlData {
     displayType: 0 | 1 | 2;
 }
 export declare const C_LossOfControl: {
-    GetEventInfo: (eventIndex: number) => [string, number, string, string, number, number, number, number, number, number];
     GetNumEvents: () => number;
     GetActiveLossOfControlData: (eventIndex: number) => LossOfControlData | undefined;
 };
