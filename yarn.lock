@@ -356,10 +356,17 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.25.tgz#792c0afb798f1dd681dce9c4b4c431f7245a0a42"
   integrity sha512-nf1LMGZvgFX186geVZR1xMZKKblJiRfiASTHw85zED2kI1yDKHDwTKMdkaCbTlXoRKlGKaDfYywt+V0As30q3w==
 
-"@wowts/lua@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@wowts/lua/-/lua-1.3.2.tgz#5e4103862ab1dd2f08a71da71b252cf1e15abbf3"
-  integrity sha512-nv4WtbflnOJfT7YvxW2pUgvfYIb4jXwo21EvayIiuLK14T6Ta7Cm5KJDjWUVQ40oHnqqddei/6QudtQmbgJclg==
+"@wowts/lua@^1.0.5", "@wowts/lua@^1.3.2":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@wowts/lua/-/lua-1.4.1.tgz#999b6247c35116a8ee856a24810f7cfdd1a70e52"
+  integrity sha512-USMemyOdVnDJgeILN32bOMJB9WuW2KyN1UZbGCmx6cDwQtg2COJbc/qy0jkUqN6SXMPtBJvfxpnZR3VN8o4EGw==
+
+"@wowts/table@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wowts/table/-/table-1.0.1.tgz#21872a8d22c69582d9bdcc2808f1971a5bbeebfc"
+  integrity sha512-j6e2gDajnbPlPG8GvKT+0K/13SolEmDHK2E/BhPTIk+nPDpxrg/wPt2CmajYT1nxj6Ic/+K3UTuPY26tQkNwaA==
+  dependencies:
+    "@wowts/lua" "^1.0.5"
 
 ansi-align@^3.0.0:
   version "3.0.0"
@@ -2479,7 +2486,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4:
+typescript@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
   integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
