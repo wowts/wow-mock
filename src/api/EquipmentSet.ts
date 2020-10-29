@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_EquipmentSet = {
@@ -10,11 +11,11 @@ export const C_EquipmentSet = {
     GetEquipmentSetAssignedSpec: (equipmentSetID: number): number => {return 0},
     GetEquipmentSetForSpec: (specIndex: number): number => {return 0},
     GetEquipmentSetID: (equipmentSetName: string): number => {return 0},
-    GetEquipmentSetIDs: (): any => {return {} as any},
+    GetEquipmentSetIDs: (): LuaArray<number> => {return {} as any},
     GetEquipmentSetInfo: (equipmentSetID: number): [name: string, iconFileID: number, setID: number, isEquipped: boolean, numItems: number, numEquipped: number, numInInventory: number, numLost: number, numIgnored: number] => {return ['', 0, 0, false, 0, 0, 0, 0, 0]},
-    GetIgnoredSlots: (equipmentSetID: number): any => {return {} as any},
-    GetItemIDs: (equipmentSetID: number): any => {return {} as any},
-    GetItemLocations: (equipmentSetID: number): any => {return {} as any},
+    GetIgnoredSlots: (equipmentSetID: number): LuaArray<boolean> => {return {} as any},
+    GetItemIDs: (equipmentSetID: number): LuaArray<number> => {return {} as any},
+    GetItemLocations: (equipmentSetID: number): LuaArray<number> => {return {} as any},
     GetNumEquipmentSets: (): number => {return 0},
     IgnoreSlotForSave: (slot: number): void => {},
     IsSlotIgnoredForSave: (slot: number): boolean => {return false},

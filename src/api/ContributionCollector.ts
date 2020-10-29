@@ -1,4 +1,5 @@
 import { ColorMixin, Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ContributionAppearanceFlags {
     TooltipUseTimeRemaining = 0
@@ -40,10 +41,10 @@ export const C_ContributionCollector = {
     Close: (): void => {},
     Contribute: (contributionID: number): void => {},
     GetActive: (): number => {return 0},
-    GetAtlases: (contributionID: number): any => {return {} as any},
+    GetAtlases: (contributionID: number): LuaArray<string> => {return {} as any},
     GetBuffs: (contributionID: number): number => {return 0},
     GetContributionAppearance: (contributionID: number, contributionState: ContributionState): ContributionAppearance | undefined => {return {stateName: '', stateColor: {} as any, tooltipLine: '', tooltipUseTimeRemaining: false, statusBarAtlas: '', borderAtlas: '', bannerAtlas: ''}},
-    GetContributionCollectorsForMap: (uiMapID: number): any => {return {} as any},
+    GetContributionCollectorsForMap: (uiMapID: number): LuaArray<ContributionMapInfo> => {return {} as any},
     GetContributionResult: (contributionID: number): ContributionResult => {return ContributionResult.Success},
     GetDescription: (contributionID: number): string => {return ''},
     GetManagedContributionsForCreatureID: (creatureID: number): number => {return 0},

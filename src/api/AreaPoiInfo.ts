@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface AreaPOIInfo {
     areaPoiID: number;
@@ -11,7 +12,7 @@ export interface AreaPOIInfo {
     uiTextureKit: string | undefined
 }
 export const C_AreaPoiInfo = {
-    GetAreaPOIForMap: (uiMapID: number): any => {return {} as any},
+    GetAreaPOIForMap: (uiMapID: number): LuaArray<number> => {return {} as any},
     GetAreaPOIInfo: (uiMapID: number, areaPoiID: number): AreaPOIInfo => {return {areaPoiID: 0, position: {} as any, name: '', description: '', textureIndex: 0, widgetSetID: 0, atlasName: '', uiTextureKit: ''}},
     GetAreaPOISecondsLeft: (areaPoiID: number): number => {return 0},
     IsAreaPOITimed: (areaPoiID: number): boolean => {return false},

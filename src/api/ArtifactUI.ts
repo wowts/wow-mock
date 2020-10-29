@@ -1,4 +1,5 @@
 import { ColorMixin, Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ArtifactArtInfo {
     textureKit: string;
@@ -61,8 +62,8 @@ export const C_ArtifactUI = {
     GetPointsRemaining: (): number => {return 0},
     GetPowerHyperlink: (powerID: number): string => {return ''},
     GetPowerInfo: (powerID: number): ArtifactPowerInfo => {return {spellID: 0, cost: 0, currentRank: 0, maxRank: 0, bonusRanks: 0, numMaxRankBonusFromTier: 0, prereqsMet: false, isStart: false, isGoldMedal: false, isFinal: false, tier: 0, position: {} as any, offset: {} as any, linearIndex: 0}},
-    GetPowerLinks: (powerID: number): any => {return {} as any},
-    GetPowers: (): any => {return {} as any},
+    GetPowerLinks: (powerID: number): LuaArray<number> => {return {} as any},
+    GetPowers: (): LuaArray<number> => {return {} as any},
     GetPowersAffectedByRelic: (relicSlotIndex: number): number => {return 0},
     GetPowersAffectedByRelicItemLink: (relicItemInfo: string): number => {return 0},
     GetPreviewAppearance: (): number | undefined => {return 0},

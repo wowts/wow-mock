@@ -1,9 +1,10 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_PaperDollInfo = {
     GetArmorEffectiveness: (armor: number, attackerLevel: number): number => {return 0},
     GetArmorEffectivenessAgainstTarget: (armor: number): number | undefined => {return 0},
-    GetInspectAzeriteItemEmpoweredChoices: (unit: string, equipmentSlotIndex: number): any => {return {} as any},
+    GetInspectAzeriteItemEmpoweredChoices: (unit: string, equipmentSlotIndex: number): LuaArray<number> => {return {} as any},
     GetInspectItemLevel: (unit: string): number => {return 0},
     GetMinItemLevel: (): number | undefined => {return 0},
     GetStaggerPercentage: (unit: string): [stagger: number, staggerAgainstTarget: number | undefined] => {return [0, 0]},

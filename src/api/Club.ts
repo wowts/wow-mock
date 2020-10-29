@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ClubActionType {
     ErrorClubActionSubscribe = 0,
@@ -260,13 +261,13 @@ export interface ClubPrivilegeInfo {
     canDestroyOtherMessage: boolean;
     canEditOwnMessage: boolean;
     canPinMessage: boolean;
-    kickableRoleIds: any
+    kickableRoleIds: LuaArray<number>
 }
 export interface ClubSelfInvitationInfo {
     invitationId: string;
     club: ClubInfo;
     inviter: ClubMemberInfo;
-    leaders: any
+    leaders: LuaArray<ClubMemberInfo>
 }
 export interface ClubStreamInfo {
     streamId: string;
@@ -311,33 +312,33 @@ export const C_Club = {
     EditStream: (clubId: string, streamId: string, name: string | undefined, subject: string | undefined, leadersAndModeratorsOnly: boolean | undefined): void => {},
     Flush: (): void => {},
     FocusStream: (clubId: string, streamId: string): boolean => {return false},
-    GetAssignableRoles: (clubId: string, memberId: number): any => {return {} as any},
-    GetAvatarIdList: (clubType: ClubType): any | undefined => {return {} as any},
+    GetAssignableRoles: (clubId: string, memberId: number): LuaArray<ClubRoleIdentifier> => {return {} as any},
+    GetAvatarIdList: (clubType: ClubType): LuaArray<number> | undefined => {return {} as any},
     GetClubCapacity: (): number => {return 0},
     GetClubInfo: (clubId: string): ClubInfo | undefined => {return {clubId: '', name: '', shortName: '', description: '', broadcast: '', clubType: ClubType.BattleNet, avatarId: 0, memberCount: 0, favoriteTimeStamp: 0, joinTime: 0, socialQueueingEnabled: false}},
     GetClubLimits: (clubType: ClubType): ClubLimits => {return {maximumNumberOfStreams: 0}},
-    GetClubMembers: (clubId: string, streamId: string | undefined): any => {return {} as any},
+    GetClubMembers: (clubId: string, streamId: string | undefined): LuaArray<number> => {return {} as any},
     GetClubPrivileges: (clubId: string): ClubPrivilegeInfo => {return {canDestroy: false, canSetAttribute: false, canSetName: false, canSetDescription: false, canSetAvatar: false, canSetBroadcast: false, canSetPrivacyLevel: false, canSetOwnMemberAttribute: false, canSetOtherMemberAttribute: false, canSetOwnMemberNote: false, canSetOtherMemberNote: false, canSetOwnVoiceState: false, canSetOwnPresenceLevel: false, canUseVoice: false, canVoiceMuteMemberForAll: false, canGetInvitation: false, canSendInvitation: false, canSendGuestInvitation: false, canRevokeOwnInvitation: false, canRevokeOtherInvitation: false, canGetBan: false, canGetSuggestion: false, canSuggestMember: false, canGetTicket: false, canCreateTicket: false, canDestroyTicket: false, canAddBan: false, canRemoveBan: false, canCreateStream: false, canDestroyStream: false, canSetStreamPosition: false, canSetStreamAttribute: false, canSetStreamName: false, canSetStreamSubject: false, canSetStreamAccess: false, canSetStreamVoiceLevel: false, canCreateMessage: false, canDestroyOwnMessage: false, canDestroyOtherMessage: false, canEditOwnMessage: false, canPinMessage: false, kickableRoleIds: {} as any}},
-    GetClubStreamNotificationSettings: (clubId: string): any => {return {} as any},
+    GetClubStreamNotificationSettings: (clubId: string): LuaArray<ClubStreamNotificationSetting> => {return {} as any},
     GetCommunityNameResultText: (result: ValidateNameResult): string | undefined => {return ''},
     GetGuildClubId: (): string | undefined => {return ''},
     GetInfoFromLastCommunityChatLine: (): [messageInfo: ClubMessageInfo, clubId: string, streamId: string, clubType: ClubType] => {return [{messageId: {epoch: 0, position: 0}, content: '', author: {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}, destroyer: {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}, destroyed: false, edited: false}, '', '', ClubType.BattleNet]},
-    GetInvitationCandidates: (filter: string | undefined, maxResults: number | undefined, cursorPosition: number | undefined, allowFullMatch: boolean | undefined, clubId: string): any => {return {} as any},
+    GetInvitationCandidates: (filter: string | undefined, maxResults: number | undefined, cursorPosition: number | undefined, allowFullMatch: boolean | undefined, clubId: string): LuaArray<ClubInvitationCandidateInfo> => {return {} as any},
     GetInvitationInfo: (clubId: string): ClubSelfInvitationInfo | undefined => {return {invitationId: '', club: {clubId: '', name: '', shortName: '', description: '', broadcast: '', clubType: ClubType.BattleNet, avatarId: 0, memberCount: 0, favoriteTimeStamp: 0, joinTime: 0, socialQueueingEnabled: false}, inviter: {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}, leaders: {} as any}},
-    GetInvitationsForClub: (clubId: string): any => {return {} as any},
-    GetInvitationsForSelf: (): any => {return {} as any},
+    GetInvitationsForClub: (clubId: string): LuaArray<ClubInvitationInfo> => {return {} as any},
+    GetInvitationsForSelf: (): LuaArray<ClubSelfInvitationInfo> => {return {} as any},
     GetLastTicketResponse: (ticket: string): [error: ClubErrorType, info: ClubInfo | undefined, showError: boolean] => {return [ClubErrorType.ErrorCommunitiesNone, {clubId: '', name: '', shortName: '', description: '', broadcast: '', clubType: ClubType.BattleNet, avatarId: 0, memberCount: 0, favoriteTimeStamp: 0, joinTime: 0, socialQueueingEnabled: false}, false]},
     GetMemberInfo: (clubId: string, memberId: number): ClubMemberInfo | undefined => {return {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}},
     GetMemberInfoForSelf: (clubId: string): ClubMemberInfo | undefined => {return {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}},
     GetMessageInfo: (clubId: string, streamId: string, messageId: ClubMessageIdentifier): ClubMessageInfo | undefined => {return {messageId: {epoch: 0, position: 0}, content: '', author: {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}, destroyer: {isSelf: false, memberId: 0, name: '', role: ClubRoleIdentifier.Owner, presence: ClubMemberPresence.Unknown, clubType: ClubType.BattleNet, guid: '', bnetAccountId: 0, memberNote: '', officerNote: '', classID: 0, race: 0, level: 0, zone: '', achievementPoints: 0, profession1ID: 0, profession1Rank: 0, profession1Name: '', profession2ID: 0, profession2Rank: 0, profession2Name: '', lastOnlineYear: 0, lastOnlineMonth: 0, lastOnlineDay: 0, lastOnlineHour: 0, guildRank: '', guildRankOrder: 0, isRemoteChat: false}, destroyed: false, edited: false}},
-    GetMessageRanges: (clubId: string, streamId: string): any => {return {} as any},
-    GetMessagesBefore: (clubId: string, streamId: string, newest: ClubMessageIdentifier, count: number): any => {return {} as any},
-    GetMessagesInRange: (clubId: string, streamId: string, oldest: ClubMessageIdentifier, newest: ClubMessageIdentifier): any => {return {} as any},
+    GetMessageRanges: (clubId: string, streamId: string): LuaArray<ClubMessageRange> => {return {} as any},
+    GetMessagesBefore: (clubId: string, streamId: string, newest: ClubMessageIdentifier, count: number): LuaArray<ClubMessageInfo> => {return {} as any},
+    GetMessagesInRange: (clubId: string, streamId: string, oldest: ClubMessageIdentifier, newest: ClubMessageIdentifier): LuaArray<ClubMessageInfo> => {return {} as any},
     GetStreamInfo: (clubId: string, streamId: string): ClubStreamInfo | undefined => {return {streamId: '', name: '', subject: '', leadersAndModeratorsOnly: false, streamType: ClubStreamType.General, creationTime: 0}},
     GetStreamViewMarker: (clubId: string, streamId: string): number | undefined => {return 0},
-    GetStreams: (clubId: string): any => {return {} as any},
-    GetSubscribedClubs: (): any => {return {} as any},
-    GetTickets: (clubId: string): any => {return {} as any},
+    GetStreams: (clubId: string): LuaArray<ClubStreamInfo> => {return {} as any},
+    GetSubscribedClubs: (): LuaArray<ClubInfo> => {return {} as any},
+    GetTickets: (clubId: string): LuaArray<ClubTicketInfo> => {return {} as any},
     IsAccountMuted: (clubId: string): boolean => {return false},
     IsBeginningOfStream: (clubId: string, streamId: string, messageId: ClubMessageIdentifier): boolean => {return false},
     IsEnabled: (): boolean => {return false},
@@ -359,7 +360,7 @@ export const C_Club = {
     SetAvatarTexture: (texture: any, avatarId: number, clubType: ClubType): void => {},
     SetClubMemberNote: (clubId: string, memberId: number, note: string): void => {},
     SetClubPresenceSubscription: (clubId: string): void => {},
-    SetClubStreamNotificationSettings: (clubId: string, settings: any): void => {},
+    SetClubStreamNotificationSettings: (clubId: string, settings: LuaArray<ClubStreamNotificationSetting>): void => {},
     SetFavorite: (clubId: string, isFavorite: boolean): void => {},
     SetSocialQueueingEnabled: (clubId: string, enabled: boolean): void => {},
     ShouldAllowClubType: (clubType: ClubType): boolean => {return false},

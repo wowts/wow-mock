@@ -1,4 +1,5 @@
-import { CharacterAlternateFormData } from '../mixins';
+import { CharacterAlternateFormData, CharCustomizationCategory } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface BarberShopCharacterData {
     raceData: BarberShopRaceData;
@@ -13,7 +14,7 @@ export const C_BarberShop = {
     ApplyCustomizationChoices: (): boolean => {return false},
     Cancel: (): void => {},
     ClearPreviewChoices: (): void => {},
-    GetAvailableCustomizations: (): any => {return {} as any},
+    GetAvailableCustomizations: (): LuaArray<CharCustomizationCategory> => {return {} as any},
     GetCurrentCameraZoom: (): number => {return 0},
     GetCurrentCharacterData: (): BarberShopCharacterData => {return {raceData: {name: '', fileName: '', alternateFormRaceData: {} as any}, sex: 0}},
     GetCurrentCost: (): number => {return 0},

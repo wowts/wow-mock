@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum PhaseReason {
     Phasing = 0,
@@ -65,8 +66,8 @@ export interface UnitPowerBarInfo {
     fractionalCounter: boolean;
     animateNumbers: boolean
 }
-export function GetNegativeCorruptionEffectInfo(): any {return {} as any}
-export function GetUnitChargedPowerPoints(unit: string): any {return {} as any}
+export function GetNegativeCorruptionEffectInfo(): LuaArray<CorruptionEffectInfo> {return {} as any}
+export function GetUnitChargedPowerPoints(unit: string): LuaArray<number> {return {} as any}
 export function GetUnitPowerBarInfo(unitToken: string): UnitPowerBarInfo {return {ID: 0, barType: 0, minPower: 0, startInset: 0, endInset: 0, smooth: false, hideFromOthers: false, showOnRaid: false, opaqueSpark: false, opaqueFlash: false, anchorTop: false, forcePercentage: false, sparkUnderFrame: false, flashAtMinPower: false, fractionalCounter: false, animateNumbers: false}}
 export function GetUnitPowerBarInfoByID(barID: number): UnitPowerBarInfo {return {ID: 0, barType: 0, minPower: 0, startInset: 0, endInset: 0, smooth: false, hideFromOthers: false, showOnRaid: false, opaqueSpark: false, opaqueFlash: false, anchorTop: false, forcePercentage: false, sparkUnderFrame: false, flashAtMinPower: false, fractionalCounter: false, animateNumbers: false}}
 export function GetUnitPowerBarStrings(unitToken: string): [name: string | undefined, tooltip: string | undefined, cost: string | undefined] {return ['', '', '']}

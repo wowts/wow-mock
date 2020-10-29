@@ -1,4 +1,5 @@
 import { Vector3DMixin, ColorMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum TrackedSpellCategory {
     Offensive = 0,
@@ -7,9 +8,9 @@ export const enum TrackedSpellCategory {
     Count = 3
 }
 export interface CommentatorHistory {
-    series: any;
-    teamDirectory: any;
-    overrideNameDirectory: any
+    series: LuaArray<CommentatorSeries>;
+    teamDirectory: LuaArray<CommentatorTeamDirectoryEntry>;
+    overrideNameDirectory: LuaArray<CommentatorOverrideNameEntry>
 }
 export interface CommentatorOverrideNameEntry {
     originalName: string;
@@ -28,7 +29,7 @@ export interface CommentatorPlayerData {
     deaths: number
 }
 export interface CommentatorSeries {
-    teams: any
+    teams: LuaArray<CommentatorSeriesTeam>
 }
 export interface CommentatorSeriesTeam {
     name: string;
@@ -54,11 +55,11 @@ export interface NameOverrideEntry {
 }
 export const C_Commentator = {
     AddPlayerOverrideName: (playerName: string, overrideName: string): void => {},
-    AddTrackedDefensiveAuras: (spellIDs: any): void => {},
-    AddTrackedOffensiveAuras: (spellIDs: any): void => {},
+    AddTrackedDefensiveAuras: (spellIDs: LuaArray<number>): void => {},
+    AddTrackedOffensiveAuras: (spellIDs: LuaArray<number>): void => {},
     AreTeamsSwapped: (): boolean => {return false},
     AssignPlayerToTeam: (playerName: string, teamName: string): void => {},
-    AssignPlayersToTeam: (playerName: any, teamName: string): void => {},
+    AssignPlayersToTeam: (playerName: LuaArray<string>, teamName: string): void => {},
     AssignPlayersToTeamInCurrentInstance: (teamIndex: number, teamName: string): void => {},
     CanUseCommentatorCheats: (): boolean => {return false},
     ClearCameraTarget: (): void => {},
@@ -68,14 +69,14 @@ export const C_Commentator = {
     ExitInstance: (): void => {},
     FindSpectatedUnit: (unitToken: string): [playerIndex: number, teamIndex: number, isPet: boolean] => {return [0, 0, false]},
     FindTeamNameInCurrentInstance: (teamIndex: number): string | undefined => {return ''},
-    FindTeamNameInDirectory: (playerNames: any): string | undefined => {return ''},
+    FindTeamNameInDirectory: (playerNames: LuaArray<string>): string | undefined => {return ''},
     FlushCommentatorHistory: (): void => {},
     FollowPlayer: (factionIndex: number, playerIndex: number, forceInstantTransition: boolean | undefined): void => {},
     FollowUnit: (token: string): void => {},
     ForceFollowTransition: (): void => {},
     GetAdditionalCameraWeight: (): [teamIndex: number, playerIndex: number] => {return [0, 0]},
     GetAdditionalCameraWeightByToken: (unitToken: string): number => {return 0},
-    GetAllPlayerOverrideNames: (): any => {return {} as any},
+    GetAllPlayerOverrideNames: (): LuaArray<NameOverrideEntry> => {return {} as any},
     GetCamera: (): [xPos: number, yPos: number, zPos: number, yaw: number, pitch: number, roll: number, fov: number] => {return [0, 0, 0, 0, 0, 0, 0]},
     GetCameraCollision: (): boolean => {return false},
     GetCameraPosition: (): [xPos: number, yPos: number, zPos: number] => {return [0, 0, 0]},
@@ -123,8 +124,8 @@ export const C_Commentator = {
     GetTeamColorByUnit: (unitToken: string): ColorMixin => {return {} as any},
     GetTimeLeftInMatch: (): number | undefined => {return 0},
     GetTrackedSpellID: (indirectSpellID: number): number => {return 0},
-    GetTrackedSpells: (teamIndex: number, playerIndex: number, category: TrackedSpellCategory): any | undefined => {return {} as any},
-    GetTrackedSpellsByUnit: (unitToken: string, category: TrackedSpellCategory): any | undefined => {return {} as any},
+    GetTrackedSpells: (teamIndex: number, playerIndex: number, category: TrackedSpellCategory): LuaArray<number> | undefined => {return {} as any},
+    GetTrackedSpellsByUnit: (unitToken: string, category: TrackedSpellCategory): LuaArray<number> | undefined => {return {} as any},
     GetUnitData: (unitToken: string): CommentatorUnitData => {return {healthMax: 0, health: 0, absorbTotal: 0, isDeadOrGhost: false, isFeignDeath: false, powerTypeToken: '', power: 0, powerMax: 0}},
     GetWargameInfo: (listID: number): [name: string, minPlayers: number, maxPlayers: number, isArena: boolean] => {return ['', 0, 0, false]},
     HasTrackedAuras: (token: string): [hasOffensiveAura: boolean, hasDefensiveAura: boolean] => {return [false, false]},
@@ -145,8 +146,8 @@ export const C_Commentator = {
     ResetTrackedAuras: (): void => {},
     SetAdditionalCameraWeight: (teamIndex: number, playerIndex: number, weight: number): void => {},
     SetAdditionalCameraWeightByToken: (unitToken: string, weight: number): void => {},
-    SetBlacklistedAuras: (spellIDs: any): void => {},
-    SetBlacklistedCooldowns: (specID: number, spellIDs: any): void => {},
+    SetBlacklistedAuras: (spellIDs: LuaArray<number>): void => {},
+    SetBlacklistedCooldowns: (specID: number, spellIDs: LuaArray<number>): void => {},
     SetCamera: (xPos: number, yPos: number, zPos: number, yaw: number, pitch: number, roll: number, fov: number): void => {},
     SetCameraCollision: (collide: boolean): void => {},
     SetCameraPosition: (xPos: number, yPos: number, zPos: number, snapToLocation: boolean): void => {},
@@ -167,9 +168,9 @@ export const C_Commentator = {
     SetMsToSmoothHorizontalChange: (ms: number): void => {},
     SetMsToSmoothVerticalChange: (ms: number): void => {},
     SetPositionLerpAmount: (amount: number): void => {},
-    SetRequestedDebuffCooldowns: (specID: number, spellIDs: any): void => {},
-    SetRequestedDefensiveCooldowns: (specID: number, spellIDs: any): void => {},
-    SetRequestedOffensiveCooldowns: (specID: number, spellIDs: any): void => {},
+    SetRequestedDebuffCooldowns: (specID: number, spellIDs: LuaArray<number>): void => {},
+    SetRequestedDefensiveCooldowns: (specID: number, spellIDs: LuaArray<number>): void => {},
+    SetRequestedOffensiveCooldowns: (specID: number, spellIDs: LuaArray<number>): void => {},
     SetSeriesScore: (teamName1: string, teamName2: string, scoringTeamName: string, score: number): void => {},
     SetSeriesScores: (teamName1: string, teamName2: string, score1: number, score2: number): void => {},
     SetSmartCameraLocked: (locked: boolean): void => {},

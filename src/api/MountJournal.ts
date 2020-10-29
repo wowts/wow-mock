@@ -1,4 +1,5 @@
 import { ItemLocationMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface MountCreatureDisplayInfo {
     creatureDisplayID: number;
@@ -12,15 +13,15 @@ export const C_MountJournal = {
     Dismiss: (): void => {},
     GetAppliedMountEquipmentID: (): number | undefined => {return 0},
     GetCollectedFilterSetting: (filterIndex: number): boolean => {return false},
-    GetDisplayedMountAllCreatureDisplayInfo: (mountIndex: number): any => {return {} as any},
+    GetDisplayedMountAllCreatureDisplayInfo: (mountIndex: number): LuaArray<MountCreatureDisplayInfo> => {return {} as any},
     GetDisplayedMountInfo: (displayIndex: number): [name: string, spellID: number, icon: number, isActive: boolean, isUsable: boolean, sourceType: number, isFavorite: boolean, isFactionSpecific: boolean, faction: number | undefined, shouldHideOnChar: boolean, isCollected: boolean, mountID: number] => {return ['', 0, 0, false, false, 0, false, false, 0, false, false, 0]},
     GetDisplayedMountInfoExtra: (mountIndex: number): [creatureDisplayInfoID: number | undefined, description: string, source: string, isSelfMount: boolean, mountTypeID: number, uiModelSceneID: number, animID: number, spellVisualKitID: number, disablePlayerMountPreview: boolean] => {return [0, '', '', false, 0, 0, 0, 0, false]},
     GetIsFavorite: (mountIndex: number): [isFavorite: boolean, canSetFavorite: boolean] => {return [false, false]},
-    GetMountAllCreatureDisplayInfoByID: (mountID: number): any => {return {} as any},
+    GetMountAllCreatureDisplayInfoByID: (mountID: number): LuaArray<MountCreatureDisplayInfo> => {return {} as any},
     GetMountEquipmentUnlockLevel: (): number => {return 0},
     GetMountFromItem: (itemID: number): number | undefined => {return 0},
     GetMountFromSpell: (spellID: number): number | undefined => {return 0},
-    GetMountIDs: (): any => {return {} as any},
+    GetMountIDs: (): LuaArray<number> => {return {} as any},
     GetMountInfoByID: (mountID: number): [name: string, spellID: number, icon: number, isActive: boolean, isUsable: boolean, sourceType: number, isFavorite: boolean, isFactionSpecific: boolean, faction: number | undefined, shouldHideOnChar: boolean, isCollected: boolean, mountID: number] => {return ['', 0, 0, false, false, 0, false, false, 0, false, false, 0]},
     GetMountInfoExtraByID: (mountID: number): [creatureDisplayInfoID: number | undefined, description: string, source: string, isSelfMount: boolean, mountTypeID: number, uiModelSceneID: number, animID: number, spellVisualKitID: number, disablePlayerMountPreview: boolean] => {return [0, '', '', false, 0, 0, 0, 0, false]},
     GetMountUsabilityByID: (mountID: number, checkIndoors: boolean): [isUsable: boolean, useError: string | undefined] => {return [false, '']},

@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum CovenantAbilityType {
     Class = 0,
@@ -21,9 +22,9 @@ export interface CovenantPreviewInfo {
     covenantZone: string;
     description: string;
     covenantCrest: string;
-    covenantAbilities: any;
+    covenantAbilities: LuaArray<CovenantAbilityInfo>;
     fromPlayerChoice: boolean;
-    covenantSoulbinds: any;
+    covenantSoulbinds: LuaArray<CovenantSoulbindInfo>;
     featureInfo: CovenantFeatureInfo
 }
 export interface CovenantSoulbindInfo {

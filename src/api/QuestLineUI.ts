@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum QuestLineFloorLocation {
     Above = 0,
@@ -18,9 +19,9 @@ export interface QuestLineInfo {
     floorLocation: QuestLineFloorLocation
 }
 export const C_QuestLine = {
-    GetAvailableQuestLines: (uiMapID: number): any => {return {} as any},
+    GetAvailableQuestLines: (uiMapID: number): LuaArray<QuestLineInfo> => {return {} as any},
     GetQuestLineInfo: (questID: number, uiMapID: number): QuestLineInfo | undefined => {return {questLineName: '', questName: '', questLineID: 0, questID: 0, x: 0, y: 0, isHidden: false, isLegendary: false, isDaily: false, isCampaign: false, floorLocation: QuestLineFloorLocation.Above}},
-    GetQuestLineQuests: (questLineID: number): any => {return {} as any},
+    GetQuestLineQuests: (questLineID: number): LuaArray<number> => {return {} as any},
     IsComplete: (questLineID: number): boolean => {return false},
     RequestQuestLinesForMap: (uiMapID: number): void => {},
 };

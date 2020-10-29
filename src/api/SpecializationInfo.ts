@@ -1,22 +1,23 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface PvpTalentSlotInfo {
     enabled: boolean;
     level: number;
     selectedTalentID: number | undefined;
-    availableTalentIDs: any
+    availableTalentIDs: LuaArray<number>
 }
 export const C_SpecializationInfo = {
     CanPlayerUsePVPTalentUI: (): [canUse: boolean, failureReason: string] => {return [false, '']},
     CanPlayerUseTalentSpecUI: (): [canUse: boolean, failureReason: string] => {return [false, '']},
     CanPlayerUseTalentUI: (): [canUse: boolean, failureReason: string] => {return [false, '']},
-    GetAllSelectedPvpTalentIDs: (): any => {return {} as any},
+    GetAllSelectedPvpTalentIDs: (): LuaArray<number> => {return {} as any},
     GetInspectSelectedPvpTalent: (inspectedUnit: string, talentIndex: number): number | undefined => {return 0},
     GetPvpTalentAlertStatus: (): [hasUnspentSlot: boolean, hasNewTalent: boolean] => {return [false, false]},
     GetPvpTalentSlotInfo: (talentIndex: number): PvpTalentSlotInfo | undefined => {return {enabled: false, level: 0, selectedTalentID: 0, availableTalentIDs: {} as any}},
     GetPvpTalentSlotUnlockLevel: (talentIndex: number): number | undefined => {return 0},
     GetPvpTalentUnlockLevel: (talentID: number): number | undefined => {return 0},
-    GetSpecIDs: (specSetID: number): any => {return {} as any},
-    GetSpellsDisplay: (specializationID: number): any => {return {} as any},
+    GetSpecIDs: (specSetID: number): LuaArray<number> => {return {} as any},
+    GetSpellsDisplay: (specializationID: number): LuaArray<number> => {return {} as any},
     IsInitialized: (): boolean => {return false},
     IsPvpTalentLocked: (talentID: number): boolean => {return false},
     MatchesCurrentSpecSet: (specSetID: number): boolean => {return false},

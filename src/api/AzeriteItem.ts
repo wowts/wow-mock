@@ -1,4 +1,5 @@
 import { ItemLocationMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface UnlockedAzeriteEmpoweredItems {
     unlockedItem: ItemLocationMixin;
@@ -17,4 +18,4 @@ export const C_AzeriteItem = {
 };
 export type AzeriteItemEnabledStateChangedEvent = (frame: UIFrame, e: "AZERITE_ITEM_ENABLED_STATE_CHANGED", enabled: boolean) => void
 export type AzeriteItemExperienceChangedEvent = (frame: UIFrame, e: "AZERITE_ITEM_EXPERIENCE_CHANGED", azeriteItemLocation: ItemLocationMixin, oldExperienceAmount: number, newExperienceAmount: number) => void
-export type AzeriteItemPowerLevelChangedEvent = (frame: UIFrame, e: "AZERITE_ITEM_POWER_LEVEL_CHANGED", azeriteItemLocation: ItemLocationMixin, oldPowerLevel: number, newPowerLevel: number, unlockedEmpoweredItemsInfo: any) => void
+export type AzeriteItemPowerLevelChangedEvent = (frame: UIFrame, e: "AZERITE_ITEM_POWER_LEVEL_CHANGED", azeriteItemLocation: ItemLocationMixin, oldPowerLevel: number, newPowerLevel: number, unlockedEmpoweredItemsInfo: LuaArray<UnlockedAzeriteEmpoweredItems>) => void

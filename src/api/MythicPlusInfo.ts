@@ -1,10 +1,11 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface MapSeasonBestInfo {
     durationSec: number;
     level: number;
     completionDate: MythicPlusDate;
-    affixIDs: any;
-    members: any
+    affixIDs: LuaArray<number>;
+    members: LuaArray<MythicPlusMember>
 }
 export interface MythicPlusDate {
     year: number;
@@ -29,16 +30,16 @@ export interface MythicPlusRunInfo {
     completed: boolean
 }
 export const C_MythicPlus = {
-    GetCurrentAffixes: (): any => {return {} as any},
+    GetCurrentAffixes: (): LuaArray<MythicPlusKeystoneAffix> => {return {} as any},
     GetCurrentSeason: (): number => {return 0},
     GetLastWeeklyBestInformation: (): [challengeMapId: number, level: number] => {return [0, 0]},
     GetOwnedKeystoneChallengeMapID: (): number => {return 0},
     GetOwnedKeystoneLevel: (): number => {return 0},
     GetRewardLevelForDifficultyLevel: (difficultyLevel: number): [weeklyRewardLevel: number, endOfRunRewardLevel: number] => {return [0, 0]},
     GetRewardLevelFromKeystoneLevel: (keystoneLevel: number): number | undefined => {return 0},
-    GetRunHistory: (includePreviousWeeks: boolean, includeIncompleteRuns: boolean): any => {return {} as any},
+    GetRunHistory: (includePreviousWeeks: boolean, includeIncompleteRuns: boolean): LuaArray<MythicPlusRunInfo> => {return {} as any},
     GetSeasonBestForMap: (mapChallengeModeID: number): [intimeInfo: MapSeasonBestInfo | undefined, overtimeInfo: MapSeasonBestInfo | undefined] => {return [{durationSec: 0, level: 0, completionDate: {year: 0, month: 0, day: 0, hour: 0, minute: 0}, affixIDs: {} as any, members: {} as any}, {durationSec: 0, level: 0, completionDate: {year: 0, month: 0, day: 0, hour: 0, minute: 0}, affixIDs: {} as any, members: {} as any}]},
-    GetWeeklyBestForMap: (mapChallengeModeID: number): [durationSec: number, level: number, completionDate: MythicPlusDate, affixIDs: any, members: any] => {return [0, 0, {year: 0, month: 0, day: 0, hour: 0, minute: 0}, {} as any, {} as any]},
+    GetWeeklyBestForMap: (mapChallengeModeID: number): [durationSec: number, level: number, completionDate: MythicPlusDate, affixIDs: LuaArray<number>, members: LuaArray<MythicPlusMember>] => {return [0, 0, {year: 0, month: 0, day: 0, hour: 0, minute: 0}, {} as any, {} as any]},
     GetWeeklyChestRewardLevel: (): [currentWeekBestLevel: number, weeklyRewardLevel: number, nextDifficultyWeeklyRewardLevel: number, nextBestLevel: number] => {return [0, 0, 0, 0]},
     IsMythicPlusActive: (): boolean => {return false},
     IsWeeklyRewardAvailable: (): boolean => {return false},

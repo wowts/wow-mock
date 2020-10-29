@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum AnimaDiversionNodeState {
     Unavailable = 0,
@@ -20,7 +21,7 @@ export interface AnimaDiversionNodeInfo {
     talentID: number;
     name: string;
     description: string;
-    costs: any;
+    costs: LuaArray<AnimaDiversionCostInfo>;
     currencyID: number;
     icon: number;
     normalizedPosition: Vector2DMixin;
@@ -28,7 +29,7 @@ export interface AnimaDiversionNodeInfo {
 }
 export const C_AnimaDiversion = {
     CloseUI: (): void => {},
-    GetAnimaDiversionNodes: (): any => {return {} as any},
+    GetAnimaDiversionNodes: (): LuaArray<AnimaDiversionNodeInfo> => {return {} as any},
     GetOriginPosition: (): Vector2DMixin | undefined => {return {} as any},
     GetReinforceProgress: (): number => {return 0},
     GetTextureKit: (): string => {return ''},

@@ -1,4 +1,5 @@
 import { ItemLocationMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum AzeritePowerLevel {
     Base = 0,
@@ -14,7 +15,7 @@ export interface AzeriteEmpoweredItemPowerText {
     description: string
 }
 export interface AzeriteEmpoweredItemTierInfo {
-    azeritePowerIDs: any;
+    azeritePowerIDs: LuaArray<number>;
     unlockLevel: number
 }
 export interface AzeriteSpecInfo {
@@ -25,12 +26,12 @@ export const C_AzeriteEmpoweredItem = {
     CanSelectPower: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number): boolean => {return false},
     CloseAzeriteEmpoweredItemRespec: (): void => {},
     ConfirmAzeriteEmpoweredItemRespec: (azeriteEmpoweredItemLocation: ItemLocationMixin): void => {},
-    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin): any => {return {} as any},
-    GetAllTierInfoByItemID: (itemInfo: string, classID: number | undefined): any => {return {} as any},
+    GetAllTierInfo: (azeriteEmpoweredItemLocation: ItemLocationMixin): LuaArray<AzeriteEmpoweredItemTierInfo> => {return {} as any},
+    GetAllTierInfoByItemID: (itemInfo: string, classID: number | undefined): LuaArray<AzeriteEmpoweredItemTierInfo> => {return {} as any},
     GetAzeriteEmpoweredItemRespecCost: (): number => {return 0},
     GetPowerInfo: (powerID: number): AzeriteEmpoweredItemPowerInfo => {return {azeritePowerID: 0, spellID: 0}},
     GetPowerText: (azeriteEmpoweredItemLocation: ItemLocationMixin, powerID: number, level: AzeritePowerLevel): AzeriteEmpoweredItemPowerText => {return {name: '', description: ''}},
-    GetSpecsForPower: (powerID: number): any => {return {} as any},
+    GetSpecsForPower: (powerID: number): LuaArray<AzeriteSpecInfo> => {return {} as any},
     HasAnyUnselectedPowers: (azeriteEmpoweredItemLocation: ItemLocationMixin): boolean => {return false},
     HasBeenViewed: (azeriteEmpoweredItemLocation: ItemLocationMixin): boolean => {return false},
     IsAzeriteEmpoweredItem: (itemLocation: ItemLocationMixin): boolean => {return false},

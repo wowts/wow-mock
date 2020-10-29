@@ -1,4 +1,5 @@
 import { GuildTabardInfo } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface GuildNewsInfo {
     isSticky: boolean;
@@ -7,7 +8,7 @@ export interface GuildNewsInfo {
     whoText: string | undefined;
     whatText: string | undefined;
     newsDataID: number;
-    data: any;
+    data: LuaArray<number>;
     weekday: number;
     day: number;
     month: number;
@@ -21,7 +22,7 @@ export const C_GuildInfo = {
     GetGuildNewsInfo: (index: number): GuildNewsInfo => {return {isSticky: false, isHeader: false, newsType: 0, whoText: '', whatText: '', newsDataID: 0, data: {} as any, weekday: 0, day: 0, month: 0, year: 0, guildMembersPresent: 0}},
     GetGuildRankOrder: (guid: string): number => {return 0},
     GetGuildTabardInfo: (unit: string | undefined): GuildTabardInfo | undefined => {return {} as any},
-    GuildControlGetRankFlags: (rankOrder: number): any => {return {} as any},
+    GuildControlGetRankFlags: (rankOrder: number): LuaArray<boolean> => {return {} as any},
     GuildRoster: (): void => {},
     IsGuildOfficer: (): boolean => {return false},
     IsGuildRankAssignmentAllowed: (guid: string, rankOrder: number): boolean => {return false},

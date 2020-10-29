@@ -1,4 +1,5 @@
 import {UIWidgetScale, UIWidgetLayoutDirection, UIWidgetVisualizationType, UIWidgetSetLayoutDirection} from "./common";
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum CaptureBarWidgetFillDirectionType {
     RightToLeft = 0,
@@ -124,7 +125,7 @@ export const enum ZoneControlState {
 export interface BulletTextListWidgetVisualizationInfo {
     shownState: WidgetShownState;
     enabledState: WidgetEnabledState;
-    lines: any;
+    lines: LuaArray<string>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -212,8 +213,8 @@ export interface DoubleIconAndTextWidgetVisualizationInfo {
 }
 export interface DoubleStateIconRowVisualizationInfo {
     shownState: WidgetShownState;
-    leftIcons: any;
-    rightIcons: any;
+    leftIcons: LuaArray<UIWidgetStateIconInfo>;
+    rightIcons: LuaArray<UIWidgetStateIconInfo>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -250,7 +251,7 @@ export interface DoubleStatusBarWidgetVisualizationInfo {
 }
 export interface HorizontalCurrenciesWidgetVisualizationInfo {
     shownState: WidgetShownState;
-    currencies: any;
+    currencies: LuaArray<UIWidgetCurrencyInfo>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -299,7 +300,7 @@ export interface IconTextAndCurrenciesWidgetVisualizationInfo {
     descriptionEnabledState: WidgetEnabledState;
     text: string;
     description: string;
-    currencies: any;
+    currencies: LuaArray<UIWidgetCurrencyInfo>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -313,7 +314,7 @@ export interface IconTextAndCurrenciesWidgetVisualizationInfo {
 }
 export interface ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo {
     shownState: WidgetShownState;
-    currencies: any;
+    currencies: LuaArray<UIWidgetCurrencyInfo>;
     headerText: string;
     widgetSizeSetting: number;
     textureKit: string;
@@ -361,7 +362,7 @@ export interface SpellDisplayVisualizationInfo {
 }
 export interface StackedResourceTrackerWidgetVisualizationInfo {
     shownState: WidgetShownState;
-    resources: any;
+    resources: LuaArray<UIWidgetCurrencyInfo>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -384,7 +385,7 @@ export interface StatusBarWidgetVisualizationInfo {
     overrideBarText: string;
     overrideBarTextShownType: StatusBarOverrideBarTextShownType;
     colorTint: StatusBarColorTintValue;
-    partitionValues: any;
+    partitionValues: LuaArray<number>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -421,7 +422,7 @@ export interface TextureAndTextEntryInfo {
 }
 export interface TextureAndTextRowVisualizationInfo {
     shownState: WidgetShownState;
-    entries: any;
+    entries: LuaArray<TextureAndTextEntryInfo>;
     textSizeType: UIWidgetTextSizeType;
     widgetSizeSetting: number;
     textureKit: string;
@@ -499,7 +500,7 @@ export interface ZoneControlVisualizationInfo {
     mode: ZoneControlMode;
     leadingEdgeType: ZoneControlLeadingEdgeType;
     dangerFlashType: ZoneControlDangerFlashType;
-    zoneEntries: any;
+    zoneEntries: LuaArray<ZoneEntry>;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -522,7 +523,7 @@ export interface ZoneEntry {
     tooltip: string
 }
 export const C_UIWidgetManager = {
-    GetAllWidgetsBySetID: (setID: number): any => {return {} as any},
+    GetAllWidgetsBySetID: (setID: number): LuaArray<UIWidgetInfo> => {return {} as any},
     GetBelowMinimapWidgetSetID: (): number => {return 0},
     GetBulletTextListWidgetVisualizationInfo: (widgetID: number): BulletTextListWidgetVisualizationInfo | undefined => {return {shownState: WidgetShownState.Hidden, enabledState: WidgetEnabledState.Disabled, lines: {} as any, widgetSizeSetting: 0, textureKit: '', frameTextureKit: '', hasTimer: false, orderIndex: 0, widgetTag: '', inAnimType: WidgetAnimationType.None, outAnimType: WidgetAnimationType.None, widgetScale: UIWidgetScale.OneHundred, layoutDirection: UIWidgetLayoutDirection.Default}},
     GetCaptureBarWidgetVisualizationInfo: (widgetID: number): CaptureBarWidgetVisualizationInfo | undefined => {return {shownState: WidgetShownState.Hidden, barValue: 0, barMinValue: 0, barMaxValue: 0, neutralZoneSize: 0, neutralZoneCenter: 0, tooltip: '', glowAnimType: CaptureBarWidgetGlowAnimType.None, fillDirectionType: CaptureBarWidgetFillDirectionType.RightToLeft, widgetSizeSetting: 0, textureKit: '', frameTextureKit: '', hasTimer: false, orderIndex: 0, widgetTag: '', inAnimType: WidgetAnimationType.None, outAnimType: WidgetAnimationType.None, widgetScale: UIWidgetScale.OneHundred, layoutDirection: UIWidgetLayoutDirection.Default}},

@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum SelfResurrectOptionType {
     Spell = 0,
@@ -23,8 +24,8 @@ export interface SelfResurrectOption {
 export const C_DeathInfo = {
     GetCorpseMapPosition: (uiMapID: number): Vector2DMixin | undefined => {return {} as any},
     GetDeathReleasePosition: (uiMapID: number): Vector2DMixin | undefined => {return {} as any},
-    GetGraveyardsForMap: (uiMapID: number): any => {return {} as any},
-    GetSelfResurrectOptions: (): any => {return {} as any},
+    GetGraveyardsForMap: (uiMapID: number): LuaArray<GraveyardMapInfo> => {return {} as any},
+    GetSelfResurrectOptions: (): LuaArray<SelfResurrectOption> => {return {} as any},
     UseSelfResurrectOption: (optionType: SelfResurrectOptionType, id: number): void => {},
 };
 export type AreaSpiritHealerInRangeEvent = (frame: UIFrame, e: "AREA_SPIRIT_HEALER_IN_RANGE") => void

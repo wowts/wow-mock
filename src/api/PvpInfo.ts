@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum BrawlType {
     None = 0,
@@ -67,7 +68,7 @@ export interface PvpBrawlInfo {
     canQueue: boolean;
     timeLeftUntilNextChange: number;
     brawlType: BrawlType;
-    mapNames: any
+    mapNames: LuaArray<string>
 }
 export interface PVPPersonalRatedInfo {
     personalRating: number;
@@ -119,7 +120,7 @@ export interface PVPScoreInfo {
     mmrChange: number;
     talentSpec: string;
     honorLevel: number;
-    stats: any
+    stats: LuaArray<PVPStatInfo>
 }
 export interface PVPStatInfo {
     pvpStatID: number;
@@ -172,29 +173,29 @@ export const C_PvP = {
     GetActiveMatchState: (): PvPMatchState => {return PvPMatchState.Inactive},
     GetActiveMatchWinner: (): number => {return 0},
     GetArenaCrowdControlInfo: (playerToken: string): [spellID: number, startTime: number, duration: number] => {return [0, 0, 0]},
-    GetArenaRewards: (teamSize: number): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined] => {return [0, 0, {} as any, {} as any]},
-    GetArenaSkirmishRewards: (): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined] => {return [0, 0, {} as any, {} as any]},
+    GetArenaRewards: (teamSize: number): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined] => {return [0, 0, {} as any, {} as any]},
+    GetArenaSkirmishRewards: (): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined] => {return [0, 0, {} as any, {} as any]},
     GetAvailableBrawlInfo: (): PvpBrawlInfo | undefined => {return {name: '', shortDescription: '', longDescription: '', canQueue: false, timeLeftUntilNextChange: 0, brawlType: BrawlType.None, mapNames: {} as any}},
     GetBattlefieldVehicleInfo: (vehicleIndex: number, uiMapID: number): BattlefieldVehicleInfo => {return {x: 0, y: 0, name: '', isOccupied: false, atlas: '', textureWidth: 0, textureHeight: 0, facing: 0, isPlayer: false, isAlive: false, shouldDrawBelowPlayerBlips: false}},
-    GetBattlefieldVehicles: (uiMapID: number): any => {return {} as any},
-    GetBrawlRewards: (brawlType: BrawlType): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined, hasWon: boolean] => {return [0, 0, {} as any, {} as any, false]},
-    GetGlobalPvpScalingInfoForSpecID: (specializationID: number): any => {return {} as any},
+    GetBattlefieldVehicles: (uiMapID: number): LuaArray<BattlefieldVehicleInfo> => {return {} as any},
+    GetBrawlRewards: (brawlType: BrawlType): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined, hasWon: boolean] => {return [0, 0, {} as any, {} as any, false]},
+    GetGlobalPvpScalingInfoForSpecID: (specializationID: number): LuaArray<PvpScalingData> => {return {} as any},
     GetHonorRewardInfo: (honorLevel: number): HonorRewardInfo | undefined => {return {honorLevelName: '', badgeFileDataID: 0, achievementRewardedID: 0}},
-    GetLevelUpBattlegrounds: (level: number): any => {return {} as any},
+    GetLevelUpBattlegrounds: (level: number): LuaArray<LevelUpBattlegroundInfo> => {return {} as any},
     GetMatchPVPStatColumn: (pvpStatID: number): MatchPVPStatColumn | undefined => {return {pvpStatID: 0, columnHeaderID: 0, orderIndex: 0, name: '', tooltip: ''}},
-    GetMatchPVPStatColumns: (): any => {return {} as any},
+    GetMatchPVPStatColumns: (): LuaArray<MatchPVPStatColumn> => {return {} as any},
     GetNextHonorLevelForReward: (honorLevel: number): number | undefined => {return 0},
     GetOutdoorPvPWaitTime: (uiMapID: number): number => {return 0},
     GetPVPActiveMatchPersonalRatedInfo: (): PVPPersonalRatedInfo | undefined => {return {personalRating: 0, bestSeasonRating: 0, bestWeeklyRating: 0, seasonPlayed: 0, seasonWon: 0, weeklyPlayed: 0, weeklyWon: 0, lastWeeksBestRating: 0, hasWonBracketToday: false, tier: 0, ranking: 0}},
-    GetPostMatchCurrencyRewards: (): any => {return {} as any},
-    GetPostMatchItemRewards: (): any => {return {} as any},
+    GetPostMatchCurrencyRewards: (): LuaArray<PVPPostMatchCurrencyReward> => {return {} as any},
+    GetPostMatchItemRewards: (): LuaArray<PVPPostMatchItemReward> => {return {} as any},
     GetPvpTierID: (tierEnum: number, bracketEnum: number): number | undefined => {return 0},
     GetPvpTierInfo: (tierID: number): PvpTierInfo | undefined => {return {name: '', descendRating: 0, ascendRating: 0, descendTier: 0, ascendTier: 0, pvpTierEnum: 0, tierIconID: 0}},
     GetRandomBGInfo: (): RandomBGInfo => {return {canQueue: false, bgID: 0, hasRandomWinToday: false, minLevel: 0, maxLevel: 0}},
-    GetRandomBGRewards: (): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined] => {return [0, 0, {} as any, {} as any]},
+    GetRandomBGRewards: (): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined] => {return [0, 0, {} as any, {} as any]},
     GetRandomEpicBGInfo: (): RandomBGInfo => {return {canQueue: false, bgID: 0, hasRandomWinToday: false, minLevel: 0, maxLevel: 0}},
-    GetRandomEpicBGRewards: (): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined] => {return [0, 0, {} as any, {} as any]},
-    GetRatedBGRewards: (): [honor: number, experience: number, itemRewards: any | undefined, currencyRewards: any | undefined] => {return [0, 0, {} as any, {} as any]},
+    GetRandomEpicBGRewards: (): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined] => {return [0, 0, {} as any, {} as any]},
+    GetRatedBGRewards: (): [honor: number, experience: number, itemRewards: LuaArray<BattlefieldItemReward> | undefined, currencyRewards: LuaArray<BattlefieldCurrencyReward> | undefined] => {return [0, 0, {} as any, {} as any]},
     GetRewardItemLevelsByTierEnum: (pvpTierEnum: number): [activityItemLevel: number, weeklyItemLevel: number] => {return [0, 0]},
     GetScoreInfo: (offsetIndex: number): PVPScoreInfo | undefined => {return {name: '', guid: '', killingBlows: 0, honorableKills: 0, deaths: 0, honorGained: 0, faction: 0, raceName: '', className: '', classToken: '', damageDone: 0, healingDone: 0, rating: 0, ratingChange: 0, prematchMMR: 0, mmrChange: 0, talentSpec: '', honorLevel: 0, stats: {} as any}},
     GetScoreInfoByPlayerGuid: (guid: string): PVPScoreInfo | undefined => {return {name: '', guid: '', killingBlows: 0, honorableKills: 0, deaths: 0, honorGained: 0, faction: 0, raceName: '', className: '', classToken: '', damageDone: 0, healingDone: 0, rating: 0, ratingChange: 0, prematchMMR: 0, mmrChange: 0, talentSpec: '', honorLevel: 0, stats: {} as any}},

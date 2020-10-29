@@ -1,4 +1,5 @@
 import { GuildTabardInfo } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ClubFinderApplicationUpdateType {
     None = 0,
@@ -82,7 +83,7 @@ export interface ClubFinderApplicantInfo {
     level: number;
     classID: number;
     ilvl: number;
-    specIds: any;
+    specIds: LuaArray<number>;
     requestStatus: PlayerClubRequestStatus;
     lookupSuccess: boolean;
     lastUpdatedTime: number
@@ -115,7 +116,7 @@ export interface RecruitingClubInfo {
     isGuild: boolean;
     emblemInfo: number;
     tabardInfo: GuildTabardInfo | undefined;
-    recruitingSpecIds: any;
+    recruitingSpecIds: LuaArray<number>;
     recruitmentFlags: number;
     localeSet: boolean;
     recruitmentLocale: number;
@@ -146,7 +147,7 @@ export const C_ClubFinder = {
     GetPostingIDFromClubFinderGUID: (clubFinderGUID: string): number | undefined => {return 0},
     GetRecruitingClubInfoFromClubID: (clubId: string): RecruitingClubInfo | undefined => {return {clubFinderGUID: '', numActiveMembers: 0, name: '', comment: '', guildLeader: '', isGuild: false, emblemInfo: 0, tabardInfo: {} as any, recruitingSpecIds: {} as any, recruitmentFlags: 0, localeSet: false, recruitmentLocale: 0, minILvl: 0, cached: 0, cacheRequested: 0, lastPosterGUID: '', clubId: '', lastUpdatedTime: 0}},
     GetRecruitingClubInfoFromFinderGUID: (clubFinderGUID: string): RecruitingClubInfo => {return {clubFinderGUID: '', numActiveMembers: 0, name: '', comment: '', guildLeader: '', isGuild: false, emblemInfo: 0, tabardInfo: {} as any, recruitingSpecIds: {} as any, recruitmentFlags: 0, localeSet: false, recruitmentLocale: 0, minILvl: 0, cached: 0, cacheRequested: 0, lastPosterGUID: '', clubId: '', lastUpdatedTime: 0}},
-    GetStatusOfPostingFromClubId: (postingID: string): any => {return {} as any},
+    GetStatusOfPostingFromClubId: (postingID: string): LuaArray<ClubFinderClubPostingStatusFlags> => {return {} as any},
     GetTotalMatchingCommunityListSize: (): number => {return 0},
     GetTotalMatchingGuildListSize: (): number => {return 0},
     HasAlreadyAppliedToLinkedPosting: (clubFinderGUID: string): boolean => {return false},
@@ -155,25 +156,25 @@ export const C_ClubFinder = {
     IsListingEnabledFromFlags: (flags: number): boolean => {return false},
     IsPostingBanned: (postingID: string): boolean => {return false},
     LookupClubPostingFromClubFinderGUID: (clubFinderGUID: string, isLinkedPosting: boolean): void => {},
-    PlayerGetClubInvitationList: (): any => {return {} as any},
+    PlayerGetClubInvitationList: (): LuaArray<RecruitingClubInfo> => {return {} as any},
     PlayerRequestPendingClubsList: (type: ClubFinderRequestType): void => {},
-    PlayerReturnPendingCommunitiesList: (): any => {return {} as any},
-    PlayerReturnPendingGuildsList: (): any => {return {} as any},
-    PostClub: (clubId: string, itemLevelRequirement: number, name: string, description: string, specs: any, type: ClubFinderRequestType): boolean => {return false},
+    PlayerReturnPendingCommunitiesList: (): LuaArray<RecruitingClubInfo> => {return {} as any},
+    PlayerReturnPendingGuildsList: (): LuaArray<RecruitingClubInfo> => {return {} as any},
+    PostClub: (clubId: string, itemLevelRequirement: number, name: string, description: string, specs: LuaArray<number>, type: ClubFinderRequestType): boolean => {return false},
     ReportPosting: (reportType: ClubFinderPostingReportType, clubFinderGUID: string, playerGUID: string, complaintNote: string): void => {},
     RequestApplicantList: (type: ClubFinderRequestType): void => {},
-    RequestClubsList: (guildListRequested: boolean, searchString: string, specIDs: any): void => {},
-    RequestMembershipToClub: (clubFinderGUID: string, comment: string, specIDs: any): void => {},
+    RequestClubsList: (guildListRequested: boolean, searchString: string, specIDs: LuaArray<number>): void => {},
+    RequestMembershipToClub: (clubFinderGUID: string, comment: string, specIDs: LuaArray<number>): void => {},
     RequestNextCommunityPage: (startingIndex: number, pageSize: number): void => {},
     RequestNextGuildPage: (startingIndex: number, pageSize: number): void => {},
     RequestPostingInformationFromClubId: (clubId: string): boolean => {return false},
     RequestSubscribedClubPostingIDs: (): void => {},
     ResetClubPostingMapCache: (): void => {},
     RespondToApplicant: (clubFinderGUID: string, playerGUID: string, shouldAccept: boolean, requestType: ClubFinderRequestType, playerName: string, forceAccept: boolean, reported: boolean | undefined): void => {},
-    ReturnClubApplicantList: (clubId: string): any => {return {} as any},
-    ReturnMatchingCommunityList: (): any => {return {} as any},
-    ReturnMatchingGuildList: (): any => {return {} as any},
-    ReturnPendingClubApplicantList: (clubId: string): any => {return {} as any},
+    ReturnClubApplicantList: (clubId: string): LuaArray<ClubFinderApplicantInfo> => {return {} as any},
+    ReturnMatchingCommunityList: (): LuaArray<RecruitingClubInfo> => {return {} as any},
+    ReturnMatchingGuildList: (): LuaArray<RecruitingClubInfo> => {return {} as any},
+    ReturnPendingClubApplicantList: (clubId: string): LuaArray<ClubFinderApplicantInfo> => {return {} as any},
     SetAllRecruitmentSettings: (value: number): void => {},
     SetPlayerApplicantLocaleFlags: (localeFlags: number): void => {},
     SetPlayerApplicantSettings: (index: number, checked: boolean): void => {},
@@ -181,8 +182,8 @@ export const C_ClubFinder = {
     SetRecruitmentSettings: (index: number, checked: boolean): void => {},
     ShouldShowClubFinder: (): boolean => {return false},
 };
-export type ClubFinderApplicantInviteRecievedEvent = (frame: UIFrame, e: "CLUB_FINDER_APPLICANT_INVITE_RECIEVED", clubFinderGUIDs: any) => void
-export type ClubFinderApplicationsUpdatedEvent = (frame: UIFrame, e: "CLUB_FINDER_APPLICATIONS_UPDATED", type: ClubFinderRequestType, clubFinderGUIDs: any) => void
+export type ClubFinderApplicantInviteRecievedEvent = (frame: UIFrame, e: "CLUB_FINDER_APPLICANT_INVITE_RECIEVED", clubFinderGUIDs: LuaArray<string>) => void
+export type ClubFinderApplicationsUpdatedEvent = (frame: UIFrame, e: "CLUB_FINDER_APPLICATIONS_UPDATED", type: ClubFinderRequestType, clubFinderGUIDs: LuaArray<string>) => void
 export type ClubFinderClubListReturnedEvent = (frame: UIFrame, e: "CLUB_FINDER_CLUB_LIST_RETURNED", type: ClubFinderRequestType) => void
 export type ClubFinderClubReportedEvent = (frame: UIFrame, e: "CLUB_FINDER_CLUB_REPORTED", type: ClubFinderRequestType, clubFinderGUID: string) => void
 export type ClubFinderCommunityOfflineJoinEvent = (frame: UIFrame, e: "CLUB_FINDER_COMMUNITY_OFFLINE_JOIN", clubId: string) => void
@@ -190,7 +191,7 @@ export type ClubFinderEnabledOrDisabledEvent = (frame: UIFrame, e: "CLUB_FINDER_
 export type ClubFinderLinkedClubReturnedEvent = (frame: UIFrame, e: "CLUB_FINDER_LINKED_CLUB_RETURNED", clubInfo: RecruitingClubInfo) => void
 export type ClubFinderMembershipListChangedEvent = (frame: UIFrame, e: "CLUB_FINDER_MEMBERSHIP_LIST_CHANGED") => void
 export type ClubFinderPlayerPendingListRecievedEvent = (frame: UIFrame, e: "CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED", type: ClubFinderRequestType) => void
-export type ClubFinderPostUpdatedEvent = (frame: UIFrame, e: "CLUB_FINDER_POST_UPDATED", clubFinderGUIDs: any) => void
+export type ClubFinderPostUpdatedEvent = (frame: UIFrame, e: "CLUB_FINDER_POST_UPDATED", clubFinderGUIDs: LuaArray<string>) => void
 export type ClubFinderRecruitListChangedEvent = (frame: UIFrame, e: "CLUB_FINDER_RECRUIT_LIST_CHANGED") => void
 export type ClubFinderRecruitmentPostReturnedEvent = (frame: UIFrame, e: "CLUB_FINDER_RECRUITMENT_POST_RETURNED", type: ClubFinderRequestType) => void
 export type ClubFinderRecruitsUpdatedEvent = (frame: UIFrame, e: "CLUB_FINDER_RECRUITS_UPDATED", type: ClubFinderRequestType) => void

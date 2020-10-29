@@ -1,5 +1,6 @@
-import {AuctionHouseSortOrder, AuctionHouseTimeLeftBand} from "./common";
+import {AuctionHouseFilter, AuctionHouseSortOrder, AuctionHouseTimeLeftBand} from "./common";
 import { ItemLocationMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum AuctionHouseFilterCategory {
     Uncategorized = 0,
@@ -17,15 +18,15 @@ export const enum ItemCommodityStatus {
 }
 export interface AuctionHouseBrowseQuery {
     searchString: string;
-    sorts: any;
+    sorts: LuaArray<AuctionHouseSortType>;
     minLevel: number | undefined;
     maxLevel: number | undefined;
-    filters: any | undefined;
-    itemClassFilters: any | undefined
+    filters: LuaArray<AuctionHouseFilter> | undefined;
+    itemClassFilters: LuaArray<AuctionHouseItemClassFilter> | undefined
 }
 export interface AuctionHouseFilterGroup {
     category: AuctionHouseFilterCategory;
-    filters: any
+    filters: LuaArray<AuctionHouseFilter>
 }
 export interface AuctionHouseItemClassFilter {
     classID: number;
@@ -58,7 +59,7 @@ export interface CommoditySearchResultInfo {
     quantity: number;
     unitPrice: number;
     auctionID: number;
-    owners: any;
+    owners: LuaArray<string>;
     timeLeftSeconds: number | undefined;
     numOwnerItems: number;
     containsOwnerItem: boolean;
@@ -82,7 +83,7 @@ export interface ItemKeyInfo {
 }
 export interface ItemSearchResultInfo {
     itemKey: ItemKey;
-    owners: any;
+    owners: LuaArray<string>;
     timeLeft: AuctionHouseTimeLeftBand;
     auctionID: number;
     quantity: number;
@@ -118,16 +119,16 @@ export const C_AuctionHouse = {
     CloseAuctionHouse: (): void => {},
     ConfirmCommoditiesPurchase: (itemID: number, quantity: number): void => {},
     FavoritesAreAvailable: (): boolean => {return false},
-    GetAuctionItemSubClasses: (classID: number): any => {return {} as any},
+    GetAuctionItemSubClasses: (classID: number): LuaArray<number> => {return {} as any},
     GetAvailablePostCount: (item: ItemLocationMixin): number => {return 0},
     GetBidInfo: (bidIndex: number): BidInfo | undefined => {return {auctionID: 0, itemKey: {itemID: 0, itemLevel: 0, itemSuffix: 0, battlePetSpeciesID: 0}, itemLink: '', timeLeft: AuctionHouseTimeLeftBand.Short, minBid: 0, bidAmount: 0, buyoutAmount: 0, bidder: ''}},
     GetBidType: (bidTypeIndex: number): ItemKey | undefined => {return {itemID: 0, itemLevel: 0, itemSuffix: 0, battlePetSpeciesID: 0}},
-    GetBrowseResults: (): any => {return {} as any},
+    GetBrowseResults: (): LuaArray<BrowseResultInfo> => {return {} as any},
     GetCancelCost: (ownedAuctionID: number): number => {return 0},
     GetCommoditySearchResultInfo: (itemID: number, commoditySearchResultIndex: number): CommoditySearchResultInfo | undefined => {return {itemID: 0, quantity: 0, unitPrice: 0, auctionID: 0, owners: {} as any, timeLeftSeconds: 0, numOwnerItems: 0, containsOwnerItem: false, containsAccountItem: false}},
     GetCommoditySearchResultsQuantity: (itemID: number): number => {return 0},
     GetExtraBrowseInfo: (itemKey: ItemKey): number => {return 0},
-    GetFilterGroups: (): any => {return {} as any},
+    GetFilterGroups: (): LuaArray<AuctionHouseFilterGroup> => {return {} as any},
     GetItemCommodityStatus: (item: ItemLocationMixin): ItemCommodityStatus => {return ItemCommodityStatus.Unknown},
     GetItemKeyFromItem: (item: ItemLocationMixin): ItemKey => {return {itemID: 0, itemLevel: 0, itemSuffix: 0, battlePetSpeciesID: 0}},
     GetItemKeyInfo: (itemKey: ItemKey, restrictQualityToFilter: boolean): ItemKeyInfo | undefined => {return {itemName: '', battlePetLink: '', appearanceLink: '', quality: 0, iconFileID: 0, isPet: false, isCommodity: false, isEquipment: false}},
@@ -171,8 +172,8 @@ export const C_AuctionHouse = {
     PlaceBid: (auctionID: number, bidAmount: number): void => {},
     PostCommodity: (item: ItemLocationMixin, duration: number, quantity: number, unitPrice: number): void => {},
     PostItem: (item: ItemLocationMixin, duration: number, quantity: number, bid: number | undefined, buyout: number | undefined): void => {},
-    QueryBids: (sorts: any, auctionIDs: any): void => {},
-    QueryOwnedAuctions: (sorts: any): void => {},
+    QueryBids: (sorts: LuaArray<AuctionHouseSortType>, auctionIDs: LuaArray<number>): void => {},
+    QueryOwnedAuctions: (sorts: LuaArray<AuctionHouseSortType>): void => {},
     RefreshCommoditySearchResults: (itemID: number): void => {},
     RefreshItemSearchResults: (itemKey: ItemKey): void => {},
     ReplicateItems: (): void => {},
@@ -180,18 +181,18 @@ export const C_AuctionHouse = {
     RequestMoreCommoditySearchResults: (itemID: number): boolean => {return false},
     RequestMoreItemSearchResults: (itemKey: ItemKey): boolean => {return false},
     RequestOwnedAuctionBidderInfo: (auctionID: number): string | undefined => {return ''},
-    SearchForFavorites: (sorts: any): void => {},
-    SearchForItemKeys: (itemKeys: any, sorts: any): void => {},
+    SearchForFavorites: (sorts: LuaArray<AuctionHouseSortType>): void => {},
+    SearchForItemKeys: (itemKeys: LuaArray<ItemKey>, sorts: LuaArray<AuctionHouseSortType>): void => {},
     SendBrowseQuery: (query: AuctionHouseBrowseQuery): void => {},
-    SendSearchQuery: (itemKey: ItemKey, sorts: any, separateOwnerItems: boolean): void => {},
-    SendSellSearchQuery: (itemKey: ItemKey, sorts: any, separateOwnerItems: boolean): void => {},
+    SendSearchQuery: (itemKey: ItemKey, sorts: LuaArray<AuctionHouseSortType>, separateOwnerItems: boolean): void => {},
+    SendSellSearchQuery: (itemKey: ItemKey, sorts: LuaArray<AuctionHouseSortType>, separateOwnerItems: boolean): void => {},
     SetFavoriteItem: (itemKey: ItemKey, setFavorite: boolean): void => {},
     StartCommoditiesPurchase: (itemID: number, quantity: number): void => {},
 };
 export type AuctionCanceledEvent = (frame: UIFrame, e: "AUCTION_CANCELED", auctionID: number) => void
 export type AuctionHouseAuctionCreatedEvent = (frame: UIFrame, e: "AUCTION_HOUSE_AUCTION_CREATED", auctionID: number) => void
 export type AuctionHouseBrowseFailureEvent = (frame: UIFrame, e: "AUCTION_HOUSE_BROWSE_FAILURE") => void
-export type AuctionHouseBrowseResultsAddedEvent = (frame: UIFrame, e: "AUCTION_HOUSE_BROWSE_RESULTS_ADDED", addedBrowseResults: any) => void
+export type AuctionHouseBrowseResultsAddedEvent = (frame: UIFrame, e: "AUCTION_HOUSE_BROWSE_RESULTS_ADDED", addedBrowseResults: LuaArray<BrowseResultInfo>) => void
 export type AuctionHouseBrowseResultsUpdatedEvent = (frame: UIFrame, e: "AUCTION_HOUSE_BROWSE_RESULTS_UPDATED") => void
 export type AuctionHouseClosedEvent = (frame: UIFrame, e: "AUCTION_HOUSE_CLOSED") => void
 export type AuctionHouseDisabledEvent = (frame: UIFrame, e: "AUCTION_HOUSE_DISABLED") => void

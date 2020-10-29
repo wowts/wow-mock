@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum AzeriteEssence {
     MainSlot = 0,
@@ -30,11 +31,11 @@ export const C_AzeriteEssence = {
     CloseForge: (): void => {},
     GetEssenceHyperlink: (essenceID: number, rank: number): string => {return ''},
     GetEssenceInfo: (essenceID: number): AzeriteEssenceInfo => {return {ID: 0, name: '', rank: 0, unlocked: false, valid: false, icon: 0}},
-    GetEssences: (): any => {return {} as any},
+    GetEssences: (): LuaArray<AzeriteEssenceInfo> => {return {} as any},
     GetMilestoneEssence: (milestoneID: number): number => {return 0},
     GetMilestoneInfo: (milestoneID: number): AzeriteMilestoneInfo => {return {ID: 0, requiredLevel: 0, canUnlock: false, unlocked: false, rank: 0, slot: AzeriteEssence.MainSlot}},
     GetMilestoneSpell: (milestoneID: number): number => {return 0},
-    GetMilestones: (): any => {return {} as any},
+    GetMilestones: (): LuaArray<AzeriteMilestoneInfo> => {return {} as any},
     GetNumUnlockedEssences: (): number => {return 0},
     GetNumUsableEssences: (): number => {return 0},
     GetPendingActivationEssence: (): number => {return 0},

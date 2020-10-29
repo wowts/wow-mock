@@ -1,4 +1,5 @@
 import { WeeklyRewardChestThresholdType, CachedRewardType } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ConquestProgressBarDisplayType {
     FirstChest = 0,
@@ -20,7 +21,7 @@ export interface WeeklyRewardActivityInfo {
     progress: number;
     id: number;
     level: number;
-    rewards: any
+    rewards: LuaArray<WeeklyRewardActivityRewardInfo>
 }
 export interface WeeklyRewardActivityRewardInfo {
     type: CachedRewardType;
@@ -32,7 +33,7 @@ export const C_WeeklyRewards = {
     CanClaimRewards: (): boolean => {return false},
     ClaimReward: (id: number): void => {},
     CloseInteraction: (): void => {},
-    GetActivities: (type: WeeklyRewardChestThresholdType | undefined): any => {return {} as any},
+    GetActivities: (type: WeeklyRewardChestThresholdType | undefined): LuaArray<WeeklyRewardActivityInfo> => {return {} as any},
     GetConquestWeeklyProgress: (): ConquestWeeklyProgress => {return {progress: 0, maxProgress: 0, displayType: ConquestProgressBarDisplayType.FirstChest, unlocksCompleted: 0, maxUnlocks: 0, sampleItemHyperlink: ''}},
     GetExampleRewardItemHyperlinks: (id: number): [hyperlink: string, upgradeHyperlink: string] => {return ['', '']},
     GetItemHyperlink: (itemDBID: string): string => {return ''},

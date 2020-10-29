@@ -1,7 +1,8 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_System = {
-    GetFrameStack: (): any => {return {} as any},
+    GetFrameStack: (): LuaArray<any> => {return {} as any},
 };
 export type CaptureframesFailedEvent = (frame: UIFrame, e: "CAPTUREFRAMES_FAILED") => void
 export type CaptureframesSucceededEvent = (frame: UIFrame, e: "CAPTUREFRAMES_SUCCEEDED") => void

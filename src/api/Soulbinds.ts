@@ -1,4 +1,5 @@
 import { SoulbindConduitType, SoulbindNodeState, SoulbindConduitTransactionType } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ConduitCollectionData {
     conduitID: number;
@@ -6,7 +7,7 @@ export interface ConduitCollectionData {
     conduitItemLevel: number;
     conduitType: SoulbindConduitType;
     conduitSpecSetID: number;
-    conduitSpecIDs: any;
+    conduitSpecIDs: LuaArray<number>;
     conduitSpecName: string | undefined;
     covenantID: number | undefined;
     conduitItemID: number
@@ -42,11 +43,11 @@ export interface SoulbindNode {
     conduitRank: number;
     state: SoulbindNodeState;
     conduitType: SoulbindConduitType | undefined;
-    parentNodeIDs: any
+    parentNodeIDs: LuaArray<number>
 }
 export interface SoulbindTree {
     editable: boolean;
-    nodes: any
+    nodes: LuaArray<SoulbindNode>
 }
 export const C_Soulbinds = {
     ActivateSoulbind: (soulbindID: number): void => {},
@@ -63,7 +64,7 @@ export const C_Soulbinds = {
     GetActiveSoulbindID: (): number => {return 0},
     GetConduitCharges: (): number => {return 0},
     GetConduitChargesCapacity: (): number => {return 0},
-    GetConduitCollection: (conduitType: SoulbindConduitType): any => {return {} as any},
+    GetConduitCollection: (conduitType: SoulbindConduitType): LuaArray<ConduitCollectionData> => {return {} as any},
     GetConduitCollectionCount: (): number => {return 0},
     GetConduitCollectionData: (conduitID: number): ConduitCollectionData | undefined => {return {conduitID: 0, conduitRank: 0, conduitItemLevel: 0, conduitType: {} as any, conduitSpecSetID: 0, conduitSpecIDs: {} as any, conduitSpecName: '', covenantID: 0, conduitItemID: 0}},
     GetConduitCollectionDataAtCursor: (): ConduitCollectionData | undefined => {return {conduitID: 0, conduitRank: 0, conduitItemLevel: 0, conduitType: {} as any, conduitSpecSetID: 0, conduitSpecIDs: {} as any, conduitSpecName: '', covenantID: 0, conduitItemID: 0}},

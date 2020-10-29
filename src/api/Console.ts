@@ -1,4 +1,5 @@
 import { ColorMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ConsoleCategory {
     Debug = 0,
@@ -40,7 +41,7 @@ export interface ConsoleCommandInfo {
     scriptContents: string
 }
 export const C_Console = {
-    GetAllCommands: (): any => {return {} as any},
+    GetAllCommands: (): LuaArray<ConsoleCommandInfo> => {return {} as any},
     GetColorFromType: (colorType: ConsoleColorType): ColorMixin => {return {} as any},
     GetFontHeight: (): number => {return 0},
     PrintAllMatchingCommands: (partialCommandText: string): void => {},

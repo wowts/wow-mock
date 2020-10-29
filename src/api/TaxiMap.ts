@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum FlightPathFaction {
     Neutral = 0,
@@ -27,8 +28,8 @@ export interface TaxiNodeInfo {
     textureKit: string
 }
 export const C_TaxiMap = {
-    GetAllTaxiNodes: (uiMapID: number): any => {return {} as any},
-    GetTaxiNodesForMap: (uiMapID: number): any => {return {} as any},
+    GetAllTaxiNodes: (uiMapID: number): LuaArray<TaxiNodeInfo> => {return {} as any},
+    GetTaxiNodesForMap: (uiMapID: number): LuaArray<MapTaxiNodeInfo> => {return {} as any},
     ShouldMapShowTaxiNodes: (uiMapID: number): boolean => {return false},
 };
 export type TaximapClosedEvent = (frame: UIFrame, e: "TAXIMAP_CLOSED") => void

@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface GamePadAxisConfig {
     axis: string;
@@ -14,10 +15,10 @@ export interface GamePadConfig {
     name: string | undefined;
     configID: GamePadConfigID;
     labelStyle: string | undefined;
-    rawButtonMappings: any;
-    rawAxisMappings: any;
-    axisConfigs: any;
-    stickConfigs: any
+    rawButtonMappings: LuaArray<GamePadRawButtonMapping>;
+    rawAxisMappings: LuaArray<GamePadRawAxisMapping>;
+    axisConfigs: LuaArray<GamePadAxisConfig>;
+    stickConfigs: LuaArray<GamePadStickConfig>
 }
 export interface GamePadConfigID {
     vendorID: number | undefined;
@@ -29,9 +30,9 @@ export interface GamePadMappedState {
     buttonCount: number;
     axisCount: number;
     stickCount: number;
-    buttons: any;
-    axes: any;
-    sticks: any
+    buttons: LuaArray<boolean>;
+    axes: LuaArray<number>;
+    sticks: LuaArray<GamePadStick>
 }
 export interface GamePadRawAxisMapping {
     rawIndex: number;
@@ -51,8 +52,8 @@ export interface GamePadRawState {
     productID: number;
     rawButtonCount: number;
     rawAxisCount: number;
-    rawButtons: any;
-    rawAxes: any
+    rawButtons: LuaArray<boolean>;
+    rawAxes: LuaArray<number>
 }
 export interface GamePadStick {
     x: number;
@@ -74,8 +75,8 @@ export const C_GamePad = {
     ButtonIndexToConfigName: (buttonIndex: number): string | undefined => {return ''},
     DeleteConfig: (configID: GamePadConfigID): void => {},
     GetActiveDeviceID: (): number => {return 0},
-    GetAllConfigIDs: (): any => {return {} as any},
-    GetAllDeviceIDs: (): any => {return {} as any},
+    GetAllConfigIDs: (): LuaArray<GamePadConfigID> => {return {} as any},
+    GetAllDeviceIDs: (): LuaArray<number> => {return {} as any},
     GetCombinedDeviceID: (): number => {return 0},
     GetConfig: (configID: GamePadConfigID): GamePadConfig | undefined => {return {comment: '', name: '', configID: {vendorID: 0, productID: 0}, labelStyle: '', rawButtonMappings: {} as any, rawAxisMappings: {} as any, axisConfigs: {} as any, stickConfigs: {} as any}},
     GetDeviceMappedState: (deviceID: number | undefined): GamePadMappedState | undefined => {return {name: '', labelStyle: '', buttonCount: 0, axisCount: 0, stickCount: 0, buttons: {} as any, axes: {} as any, sticks: {} as any}},

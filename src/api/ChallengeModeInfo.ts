@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ChallengeModeGuildAttemptMember {
     name: string;
@@ -9,21 +10,21 @@ export interface ChallengeModeGuildTopAttempt {
     keystoneLevel: number;
     mapChallengeModeID: number;
     isYou: boolean;
-    members: any
+    members: LuaArray<ChallengeModeGuildAttemptMember>
 }
 export const C_ChallengeMode = {
     ClearKeystone: (): void => {},
     CloseKeystoneFrame: (): void => {},
     GetActiveChallengeMapID: (): number | undefined => {return 0},
-    GetActiveKeystoneInfo: (): [activeKeystoneLevel: number, activeAffixIDs: any, wasActiveKeystoneCharged: boolean] => {return [0, {} as any, false]},
+    GetActiveKeystoneInfo: (): [activeKeystoneLevel: number, activeAffixIDs: LuaArray<number>, wasActiveKeystoneCharged: boolean] => {return [0, {} as any, false]},
     GetAffixInfo: (affixID: number): [name: string, description: string, filedataid: number] => {return ['', '', 0]},
     GetCompletionInfo: (): [mapChallengeModeID: number, level: number, time: number, onTime: boolean, keystoneUpgradeLevels: number, practiceRun: boolean] => {return [0, 0, 0, false, 0, false]},
     GetDeathCount: (): [numDeaths: number, timeLost: number] => {return [0, 0]},
-    GetGuildLeaders: (): any => {return {} as any},
-    GetMapTable: (): any => {return {} as any},
+    GetGuildLeaders: (): LuaArray<ChallengeModeGuildTopAttempt> => {return {} as any},
+    GetMapTable: (): LuaArray<number> => {return {} as any},
     GetMapUIInfo: (mapChallengeModeID: number): [name: string, id: number, timeLimit: number, texture: number | undefined, backgroundTexture: number] => {return ['', 0, 0, 0, 0]},
     GetPowerLevelDamageHealthMod: (powerLevel: number): [damageMod: number, healthMod: number] => {return [0, 0]},
-    GetSlottedKeystoneInfo: (): [mapChallengeModeID: number, affixIDs: any, keystoneLevel: number] => {return [0, {} as any, 0]},
+    GetSlottedKeystoneInfo: (): [mapChallengeModeID: number, affixIDs: LuaArray<number>, keystoneLevel: number] => {return [0, {} as any, 0]},
     HasSlottedKeystone: (): boolean => {return false},
     IsChallengeModeActive: (): boolean => {return false},
     RemoveKeystone: (): boolean => {return false},

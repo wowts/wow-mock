@@ -1,3 +1,5 @@
+import { QueueSpecificInfo } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum PartyRequestJoinRelation {
     None = 0,
@@ -17,8 +19,8 @@ export const C_PartyInfo = {
     ConvertToParty: (): void => {},
     ConvertToRaid: (): void => {},
     DoCountdown: (seconds: number): void => {},
-    GetActiveCategories: (): any => {return {} as any},
-    GetInviteConfirmationInvalidQueues: (inviteGUID: string): any => {return {} as any},
+    GetActiveCategories: (): LuaArray<number> => {return {} as any},
+    GetInviteConfirmationInvalidQueues: (inviteGUID: string): LuaArray<QueueSpecificInfo> => {return {} as any},
     GetInviteReferralInfo: (inviteGUID: string): [outReferredByGuid: string, outReferredByName: string, outRelationType: PartyRequestJoinRelation, outIsQuickJoin: boolean, outClubId: string] => {return ['', '', PartyRequestJoinRelation.None, false, '']},
     GetMinLevel: (category: number | undefined): number => {return 0},
     InviteUnit: (targetName: string): void => {},

@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum GossipOptionRewardType {
     Item = 0,
@@ -18,7 +19,7 @@ export interface GossipOptionRewardInfo {
 export interface GossipOptionUIInfo {
     name: string;
     type: string;
-    rewards: any;
+    rewards: LuaArray<GossipOptionRewardInfo>;
     status: GossipOptionStatus;
     spellID: number | undefined
 }
@@ -42,12 +43,12 @@ export interface GossipQuestUIInfo {
 export const C_GossipInfo = {
     CloseGossip: (): void => {},
     ForceGossip: (): boolean => {return false},
-    GetActiveQuests: (): any => {return {} as any},
-    GetAvailableQuests: (): any => {return {} as any},
+    GetActiveQuests: (): LuaArray<GossipQuestUIInfo> => {return {} as any},
+    GetAvailableQuests: (): LuaArray<GossipQuestUIInfo> => {return {} as any},
     GetNumActiveQuests: (): number => {return 0},
     GetNumAvailableQuests: (): number => {return 0},
     GetNumOptions: (): number => {return 0},
-    GetOptions: (): any => {return {} as any},
+    GetOptions: (): LuaArray<GossipOptionUIInfo> => {return {} as any},
     GetPoiForUiMapID: (uiMapID: number): number | undefined => {return 0},
     GetPoiInfo: (uiMapID: number, gossipPoiID: number): GossipPoiInfo | undefined => {return {name: '', textureIndex: 0, position: {} as any, inBattleMap: false}},
     GetText: (): string => {return ''},

@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ItemSlotFilterType {
     Head = 0,
@@ -59,11 +60,11 @@ export interface EncounterJournalSectionInfo {
     startsOpen: boolean
 }
 export const C_EncounterJournal = {
-    GetDungeonEntrancesForMap: (uiMapID: number): any => {return {} as any},
-    GetEncountersOnMap: (uiMapID: number): any => {return {} as any},
+    GetDungeonEntrancesForMap: (uiMapID: number): LuaArray<DungeonEntranceMapInfo> => {return {} as any},
+    GetEncountersOnMap: (uiMapID: number): LuaArray<EncounterJournalMapEncounterInfo> => {return {} as any},
     GetLootInfo: (id: number): EncounterJournalItemInfo => {return {itemID: 0, encounterID: 0, name: '', itemQuality: '', filterType: ItemSlotFilterType.Head, icon: 0, slot: '', armorType: '', link: '', handError: false, weaponTypeError: false}},
     GetLootInfoByIndex: (index: number, encounterIndex: number | undefined): EncounterJournalItemInfo => {return {itemID: 0, encounterID: 0, name: '', itemQuality: '', filterType: ItemSlotFilterType.Head, icon: 0, slot: '', armorType: '', link: '', handError: false, weaponTypeError: false}},
-    GetSectionIconFlags: (sectionID: number): any | undefined => {return {} as any},
+    GetSectionIconFlags: (sectionID: number): LuaArray<number> | undefined => {return {} as any},
     GetSectionInfo: (sectionID: number): EncounterJournalSectionInfo => {return {spellID: 0, title: '', description: '', headerType: 0, abilityIcon: 0, creatureDisplayID: 0, uiModelSceneID: 0, siblingSectionID: 0, firstChildSectionID: 0, filteredByDifficulty: false, link: '', startsOpen: false}},
     GetSlotFilter: (): ItemSlotFilterType => {return ItemSlotFilterType.Head},
     InstanceHasLoot: (instanceID: number | undefined): boolean => {return false},

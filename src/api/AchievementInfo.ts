@@ -1,8 +1,9 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_AchievementInfo = {
     GetRewardItemID: (achievementID: number): number | undefined => {return 0},
-    GetSupercedingAchievements: (achievementID: number): any => {return {} as any},
+    GetSupercedingAchievements: (achievementID: number): LuaArray<number> => {return {} as any},
     IsValidAchievement: (achievementId: number): boolean => {return false},
     SetPortraitTexture: (textureObject: any): void => {},
 };

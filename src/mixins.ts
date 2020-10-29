@@ -55,6 +55,10 @@ export function CreateColor(
     };
 }
 export interface Vector3DMixin {}
+export interface OptionalReagentInfo {}
+export interface BountyInfo {}
+export interface CharCustomizationCategory {}
+export interface CurrencyCost {}
 
 export class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex: number): ItemLocationMixin {

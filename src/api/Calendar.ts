@@ -1,5 +1,6 @@
 import {CalendarEventType, CalendarStatus} from "./common";
 import { CalendarTime } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface CalendarDayEvent {
     eventID: string;
@@ -155,10 +156,10 @@ export const C_Calendar = {
     EventGetInviteResponseTime: (eventIndex: number): CalendarTime => {return {} as any},
     EventGetInviteSortCriterion: (): [criterion: string, reverse: boolean] => {return ['', false]},
     EventGetSelectedInvite: (): number | undefined => {return 0},
-    EventGetStatusOptions: (eventIndex: number): any => {return {} as any},
-    EventGetTextures: (eventType: CalendarEventType): any => {return {} as any},
-    EventGetTypes: (): any => {return {} as any},
-    EventGetTypesDisplayOrdered: (): any => {return {} as any},
+    EventGetStatusOptions: (eventIndex: number): LuaArray<CalendarEventStatusOption> => {return {} as any},
+    EventGetTextures: (eventType: CalendarEventType): LuaArray<CalendarEventTextureInfo> => {return {} as any},
+    EventGetTypes: (): LuaArray<string> => {return {} as any},
+    EventGetTypesDisplayOrdered: (): LuaArray<CalendarEventTypeDisplayInfo> => {return {} as any},
     EventHasPendingInvite: (): boolean => {return false},
     EventHaveSettingsChanged: (): boolean => {return false},
     EventInvite: (name: string): void => {},
@@ -179,7 +180,7 @@ export const C_Calendar = {
     EventSignUp: (): void => {},
     EventSortInvites: (criterion: string, reverse: boolean): void => {},
     EventTentative: (): void => {},
-    GetClubCalendarEvents: (clubId: string, startTime: CalendarTime, endTime: CalendarTime): any => {return {} as any},
+    GetClubCalendarEvents: (clubId: string, startTime: CalendarTime, endTime: CalendarTime): LuaArray<CalendarDayEvent> => {return {} as any},
     GetDayEvent: (monthOffset: number, monthDay: number, index: number): CalendarDayEvent => {return {eventID: '', title: '', isCustomTitle: false, startTime: {} as any, endTime: {} as any, calendarType: '', sequenceType: '', eventType: CalendarEventType.Raid, iconTexture: 0, modStatus: '', inviteStatus: 0, invitedBy: '', difficulty: 0, inviteType: 0, sequenceIndex: 0, numSequenceDays: 0, difficultyName: '', dontDisplayBanner: false, dontDisplayEnd: false, clubID: '', isLocked: false}},
     GetDefaultGuildFilter: (): CalendarGuildFilterInfo => {return {minLevel: 0, maxLevel: 0, rank: 0}},
     GetEventIndex: (): CalendarEventIndexInfo => {return {offsetMonths: 0, monthDay: 0, eventIndex: 0}},

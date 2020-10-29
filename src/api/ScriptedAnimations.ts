@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ScriptedAnimationBehavior {
     None = 0,
@@ -36,5 +37,5 @@ export interface ScriptedAnimationEffect {
     finishSoundKitID: number | undefined
 }
 export const C_ScriptedAnimations = {
-    GetAllScriptedAnimationEffects: (): any => {return {} as any},
+    GetAllScriptedAnimationEffects: (): LuaArray<ScriptedAnimationEffect> => {return {} as any},
 };

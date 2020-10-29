@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface PetTamerMapInfo {
     areaPoiID: number;
@@ -8,7 +9,7 @@ export interface PetTamerMapInfo {
     textureIndex: number | undefined
 }
 export const C_PetInfo = {
-    GetPetTamersForMap: (uiMapID: number): any => {return {} as any},
+    GetPetTamersForMap: (uiMapID: number): LuaArray<PetTamerMapInfo> => {return {} as any},
 };
 export type PetAttackStartEvent = (frame: UIFrame, e: "PET_ATTACK_START") => void
 export type PetAttackStopEvent = (frame: UIFrame, e: "PET_ATTACK_STOP") => void

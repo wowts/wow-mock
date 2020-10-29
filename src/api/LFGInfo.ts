@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface LFGLockInfo {
     lfgID: number;
@@ -11,8 +12,8 @@ export const C_LFGInfo = {
     CanPlayerUsePVP: (): [canUse: boolean, failureReason: string] => {return [false, '']},
     CanPlayerUsePremadeGroup: (): [canUse: boolean, failureReason: string] => {return [false, '']},
     ConfirmLfgExpandSearch: (): void => {},
-    GetAllEntriesForCategory: (category: number): any => {return {} as any},
-    GetLFDLockStates: (): any => {return {} as any},
+    GetAllEntriesForCategory: (category: number): LuaArray<number> => {return {} as any},
+    GetLFDLockStates: (): LuaArray<LFGLockInfo> => {return {} as any},
     GetRoleCheckDifficultyDetails: (): [maxLevel: number | undefined, isLevelReduced: boolean] => {return [0, false]},
     HideNameFromUI: (dungeonID: number): boolean => {return false},
 };

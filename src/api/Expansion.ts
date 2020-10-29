@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum SubscriptionInterstitialResponseType {
     Clicked = 0,
@@ -12,7 +13,7 @@ export const enum SubscriptionInterstitialType {
 export interface ExpansionDisplayInfo {
     logo: number;
     banner: string;
-    features: any
+    features: LuaArray<ExpansionDisplayInfoFeature>
 }
 export interface ExpansionDisplayInfoFeature {
     icon: number;

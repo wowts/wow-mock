@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ZoneAbilityInfo {
     zoneAbilityID: number;
@@ -7,5 +8,5 @@ export interface ZoneAbilityInfo {
     tutorialText: string | undefined
 }
 export const C_ZoneAbility = {
-    GetActiveAbilities: (): any => {return {} as any},
+    GetActiveAbilities: (): LuaArray<ZoneAbilityInfo> => {return {} as any},
 };

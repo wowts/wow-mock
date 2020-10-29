@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface IslandsQueueDifficultyInfo {
     difficultyId: number;
@@ -5,7 +6,7 @@ export interface IslandsQueueDifficultyInfo {
 }
 export const C_IslandsQueue = {
     CloseIslandsQueueScreen: (): void => {},
-    GetIslandDifficultyInfo: (): any => {return {} as any},
+    GetIslandDifficultyInfo: (): LuaArray<IslandsQueueDifficultyInfo> => {return {} as any},
     GetIslandsMaxGroupSize: (): number => {return 0},
     GetIslandsWeeklyQuestID: (): number | undefined => {return 0},
     QueueForIsland: (difficultyID: number): void => {},

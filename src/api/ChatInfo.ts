@@ -1,4 +1,5 @@
 import {ChatChannelRuleset, ChatChannelType} from "./common";
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_ChatInfo = {
@@ -7,12 +8,12 @@ export const C_ChatInfo = {
     GetChannelRulesetForChannelID: (channelID: number): ChatChannelRuleset => {return ChatChannelRuleset.None},
     GetChannelShortcut: (channelIndex: number): string => {return ''},
     GetChannelShortcutForChannelID: (channelID: number): string => {return ''},
-    GetClubStreamIDs: (clubID: string): any => {return {} as any},
+    GetClubStreamIDs: (clubID: string): LuaArray<string> => {return {} as any},
     GetGeneralChannelID: (): number => {return 0},
     GetGeneralChannelLocalID: (): number | undefined => {return 0},
     GetMentorChannelID: (): number => {return 0},
     GetNumActiveChannels: (): number => {return 0},
-    GetRegisteredAddonMessagePrefixes: (): any => {return {} as any},
+    GetRegisteredAddonMessagePrefixes: (): LuaArray<string> => {return {} as any},
     IsAddonMessagePrefixRegistered: (prefix: string): boolean => {return false},
     IsChannelRegional: (channelIndex: number): boolean => {return false},
     IsChannelRegionalForChannelID: (channelID: number): boolean => {return false},

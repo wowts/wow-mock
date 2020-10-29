@@ -1,11 +1,12 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 
 export const C_ActionBar = {
-    FindFlyoutActionButtons: (flyoutID: number): any => {return {} as any},
-    FindPetActionButtons: (petActionID: number): any => {return {} as any},
-    FindSpellActionButtons: (spellID: number): any => {return {} as any},
+    FindFlyoutActionButtons: (flyoutID: number): LuaArray<number> => {return {} as any},
+    FindPetActionButtons: (petActionID: number): LuaArray<number> => {return {} as any},
+    FindSpellActionButtons: (spellID: number): LuaArray<number> => {return {} as any},
     GetBonusBarIndexForSlot: (slotID: number): number | undefined => {return 0},
-    GetPetActionPetBarIndices: (petActionID: number): any => {return {} as any},
+    GetPetActionPetBarIndices: (petActionID: number): LuaArray<number> => {return {} as any},
     HasFlyoutActionButtons: (flyoutID: number): boolean => {return false},
     HasPetActionButtons: (petActionID: number): boolean => {return false},
     HasPetActionPetBarIndices: (petActionID: number): boolean => {return false},

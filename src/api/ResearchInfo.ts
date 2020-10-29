@@ -1,4 +1,5 @@
 import { Vector2DMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface DigSiteMapInfo {
     researchSiteID: number;
@@ -7,7 +8,7 @@ export interface DigSiteMapInfo {
     textureIndex: number
 }
 export const C_ResearchInfo = {
-    GetDigSitesForMap: (uiMapID: number): any => {return {} as any},
+    GetDigSitesForMap: (uiMapID: number): LuaArray<DigSiteMapInfo> => {return {} as any},
 };
 export type ArchaeologyClosedEvent = (frame: UIFrame, e: "ARCHAEOLOGY_CLOSED") => void
 export type ArchaeologyFindCompleteEvent = (frame: UIFrame, e: "ARCHAEOLOGY_FIND_COMPLETE", numFindsCompleted: number, totalFinds: number, researchBranchID: number) => void

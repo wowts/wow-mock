@@ -1,4 +1,5 @@
 import { QueueSpecificInfo } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface SocialQueueConfig {
     TOASTS_DISABLED: boolean;
@@ -39,12 +40,12 @@ export interface SocialQueuePlayerInfo {
     clubId: string | undefined
 }
 export const C_SocialQueue = {
-    GetAllGroups: (allowNonJoinable: boolean, allowNonQueuedGroups: boolean): any => {return {} as any},
+    GetAllGroups: (allowNonJoinable: boolean, allowNonQueuedGroups: boolean): LuaArray<string> => {return {} as any},
     GetConfig: (): SocialQueueConfig => {return {TOASTS_DISABLED: false, TOAST_DURATION: 0, DELAY_DURATION: 0, QUEUE_MULTIPLIER: 0, PLAYER_MULTIPLIER: 0, PLAYER_FRIEND_VALUE: 0, PLAYER_GUILD_VALUE: 0, THROTTLE_INITIAL_THRESHOLD: 0, THROTTLE_DECAY_TIME: 0, THROTTLE_PRIORITY_SPIKE: 0, THROTTLE_MIN_THRESHOLD: 0, THROTTLE_PVP_PRIORITY_NORMAL: 0, THROTTLE_PVP_PRIORITY_LOW: 0, THROTTLE_PVP_HONOR_THRESHOLD: 0, THROTTLE_LFGLIST_PRIORITY_DEFAULT: 0, THROTTLE_LFGLIST_PRIORITY_ABOVE: 0, THROTTLE_LFGLIST_PRIORITY_BELOW: 0, THROTTLE_LFGLIST_ILVL_SCALING_ABOVE: 0, THROTTLE_LFGLIST_ILVL_SCALING_BELOW: 0, THROTTLE_RF_PRIORITY_ABOVE: 0, THROTTLE_RF_ILVL_SCALING_ABOVE: 0, THROTTLE_DF_MAX_ITEM_LEVEL: 0, THROTTLE_DF_BEST_PRIORITY: 0}},
     GetGroupForPlayer: (playerGUID: string): [groupGUID: string, isSoloQueueParty: boolean] => {return ['', false]},
     GetGroupInfo: (groupGUID: string): [canJoin: boolean, numQueues: number, needTank: boolean, needHealer: boolean, needDamage: boolean, isSoloQueueParty: boolean, questSessionActive: boolean, leaderGUID: string] => {return [false, 0, false, false, false, false, false, '']},
-    GetGroupMembers: (groupGUID: string): any => {return {} as any},
-    GetGroupQueues: (groupGUID: string): any => {return {} as any},
+    GetGroupMembers: (groupGUID: string): LuaArray<SocialQueuePlayerInfo> => {return {} as any},
+    GetGroupQueues: (groupGUID: string): LuaArray<SocialQueueGroupQueueInfo> => {return {} as any},
     RequestToJoin: (groupGUID: string, applyAsTank: boolean, applyAsHealer: boolean, applyAsDamage: boolean): boolean => {return false},
     SignalToastDisplayed: (groupGUID: string, priority: number): void => {},
 };

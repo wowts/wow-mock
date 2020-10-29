@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ChromieTimeExpansionInfo {
     id: number;
@@ -11,7 +12,7 @@ export interface ChromieTimeExpansionInfo {
 export const C_ChromieTime = {
     CloseUI: (): void => {},
     GetChromieTimeExpansionOption: (expansionRecID: number): ChromieTimeExpansionInfo | undefined => {return {id: 0, name: '', description: '', mapAtlas: '', previewAtlas: '', completed: false, alreadyOn: false}},
-    GetChromieTimeExpansionOptions: (): any => {return {} as any},
+    GetChromieTimeExpansionOptions: (): LuaArray<ChromieTimeExpansionInfo> => {return {} as any},
     SelectChromieTimeOption: (chromieTimeExpansionInfoId: number): void => {},
 };
 export type ChromieTimeCloseEvent = (frame: UIFrame, e: "CHROMIE_TIME_CLOSE") => void

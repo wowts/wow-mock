@@ -1,3 +1,5 @@
+import { BountyInfo } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum MapOverlayDisplayLocation {
     Default = 0,
@@ -91,10 +93,10 @@ export const C_QuestLog = {
     AddWorldQuestWatch: (questID: number, watchType: QuestWatchType | undefined): boolean => {return false},
     CanAbandonQuest: (questID: number): boolean => {return false},
     GetAbandonQuest: (): number => {return 0},
-    GetAbandonQuestItems: (): any => {return {} as any},
-    GetActiveThreatMaps: (): any => {return {} as any},
-    GetAllCompletedQuestIDs: (): any => {return {} as any},
-    GetBountiesForMapID: (uiMapID: number): any | undefined => {return {} as any},
+    GetAbandonQuestItems: (): LuaArray<number> => {return {} as any},
+    GetActiveThreatMaps: (): LuaArray<number> => {return {} as any},
+    GetAllCompletedQuestIDs: (): LuaArray<number> => {return {} as any},
+    GetBountiesForMapID: (uiMapID: number): LuaArray<BountyInfo> | undefined => {return {} as any},
     GetBountySetInfoForMapID: (uiMapID: number): [displayLocation: MapOverlayDisplayLocation, lockQuestID: number, bountySetID: number] => {return [MapOverlayDisplayLocation.Default, 0, 0]},
     GetDistanceSqToQuest: (questID: number): [distanceSq: number, onContinent: boolean] => {return [0, false]},
     GetInfo: (questLogIndex: number): QuestInfo | undefined => {return {title: '', questLogIndex: 0, questID: 0, campaignID: 0, level: 0, difficultyLevel: 0, suggestedGroup: 0, frequency: QuestFrequency.Default, isHeader: false, isCollapsed: false, startEvent: false, isTask: false, isBounty: false, isStory: false, isScaling: false, isOnMap: false, hasLocalPOI: false, isHidden: false, isAutoComplete: false, overridesSortOrder: false, readyForTranslation: false}},
@@ -115,10 +117,10 @@ export const C_QuestLog = {
     GetQuestIDForLogIndex: (questLogIndex: number): number | undefined => {return 0},
     GetQuestIDForQuestWatchIndex: (questWatchIndex: number): number | undefined => {return 0},
     GetQuestIDForWorldQuestWatchIndex: (questWatchIndex: number): number | undefined => {return 0},
-    GetQuestObjectives: (questID: number): any => {return {} as any},
+    GetQuestObjectives: (questID: number): LuaArray<QuestObjectiveInfo> => {return {} as any},
     GetQuestTagInfo: (questID: number): QuestTagInfo | undefined => {return {tagName: '', tagID: 0, worldQuestType: 0, quality: WorldQuestQuality.Common, tradeskillLineID: 0, isElite: false, displayExpiration: false}},
     GetQuestWatchType: (questID: number): QuestWatchType | undefined => {return QuestWatchType.Automatic},
-    GetQuestsOnMap: (uiMapID: number): any => {return {} as any},
+    GetQuestsOnMap: (uiMapID: number): LuaArray<QuestOnMapInfo> => {return {} as any},
     GetRequiredMoney: (questID: number | undefined): number => {return 0},
     GetSelectedQuest: (): number => {return 0},
     GetSuggestedGroupSize: (questID: number): number => {return 0},

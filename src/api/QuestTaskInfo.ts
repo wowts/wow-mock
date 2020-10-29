@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface TaskPOIData {
     questId: number;
@@ -19,8 +20,8 @@ export const C_TaskQuest = {
     GetQuestTimeLeftMinutes: (questID: number): number => {return 0},
     GetQuestTimeLeftSeconds: (questID: number): number => {return 0},
     GetQuestZoneID: (questID: number): number => {return 0},
-    GetQuestsForPlayerByMapID: (uiMapID: number): any => {return {} as any},
-    GetThreatQuests: (): any => {return {} as any},
+    GetQuestsForPlayerByMapID: (uiMapID: number): LuaArray<TaskPOIData> => {return {} as any},
+    GetThreatQuests: (): LuaArray<number> => {return {} as any},
     IsActive: (questID: number): boolean => {return false},
     RequestPreloadRewardData: (questID: number): void => {},
 };

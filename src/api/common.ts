@@ -1,4 +1,5 @@
 import { ColorMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 export const enum AuctionHouseCommoditySortOrder {
     UnitPrice = 0,
     Quantity = 1
@@ -240,7 +241,7 @@ export interface CharCustomizationOption {
     name: string;
     orderIndex: number;
     optionType: ChrCustomizationOptionType;
-    choices: any;
+    choices: LuaArray<CharCustomizationChoice>;
     currentChoiceIndex: number
 }
 export const enum ChatChannelRuleset {
@@ -660,7 +661,7 @@ export interface GarrisonFollowerAbilityInfo {
     isSpecialization: boolean;
     temporary: boolean;
     category: string | undefined;
-    counters: any;
+    counters: LuaArray<GarrisonAbilityEffect>;
     isEmptySlot: boolean
 }
 export interface GarrisonTalentCurrencyCostInfo {
@@ -682,7 +683,7 @@ export interface GarrisonTalentInfo {
     startTime: number;
     timeRemaining: number;
     researchGoldCost: number;
-    researchCurrencyCosts: any;
+    researchCurrencyCosts: LuaArray<GarrisonTalentCurrencyCostInfo>;
     talentAvailability: GarrisonTalentAvailability;
     talentRank: number;
     talentMaxRank: number;

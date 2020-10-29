@@ -1,5 +1,6 @@
 import {ChatChannelType} from "./common";
 import { PlayerLocationMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum CommunicationMode {
     PushToTalk = 0,
@@ -54,7 +55,7 @@ export interface VoiceChatChannel {
     isMuted: boolean;
     isTransmitting: boolean;
     isLocalProcess: boolean;
-    members: any
+    members: LuaArray<VoiceChatMember>
 }
 export interface VoiceChatMember {
     energy: number;
@@ -66,7 +67,7 @@ export interface VoiceChatMember {
 }
 export interface VoiceChatProcess {
     name: string;
-    channels: any
+    channels: LuaArray<VoiceChatChannel>
 }
 export const C_VoiceChat = {
     ActivateChannel: (channelID: number): void => {},
@@ -77,8 +78,8 @@ export const C_VoiceChat = {
     EndLocalCapture: (): void => {},
     GetActiveChannelID: (): number | undefined => {return 0},
     GetActiveChannelType: (): ChatChannelType | undefined => {return ChatChannelType.None},
-    GetAvailableInputDevices: (): any | undefined => {return {} as any},
-    GetAvailableOutputDevices: (): any | undefined => {return {} as any},
+    GetAvailableInputDevices: (): LuaArray<VoiceAudioDevice> | undefined => {return {} as any},
+    GetAvailableOutputDevices: (): LuaArray<VoiceAudioDevice> | undefined => {return {} as any},
     GetChannel: (channelID: number): VoiceChatChannel | undefined => {return {name: '', channelID: 0, channelType: ChatChannelType.None, clubId: '', streamId: '', volume: 0, isActive: false, isMuted: false, isTransmitting: false, isLocalProcess: false, members: {} as any}},
     GetChannelForChannelType: (channelType: ChatChannelType): VoiceChatChannel | undefined => {return {name: '', channelID: 0, channelType: ChatChannelType.None, clubId: '', streamId: '', volume: 0, isActive: false, isMuted: false, isTransmitting: false, isLocalProcess: false, members: {} as any}},
     GetChannelForCommunityStream: (clubId: string, streamId: string): VoiceChatChannel | undefined => {return {name: '', channelID: 0, channelType: ChatChannelType.None, clubId: '', streamId: '', volume: 0, isActive: false, isMuted: false, isTransmitting: false, isLocalProcess: false, members: {} as any}},
@@ -96,8 +97,8 @@ export const C_VoiceChat = {
     GetMemberVolume: (playerLocation: PlayerLocationMixin): number | undefined => {return 0},
     GetOutputVolume: (): number | undefined => {return 0},
     GetPTTButtonPressedState: (): boolean | undefined => {return false},
-    GetProcesses: (): any => {return {} as any},
-    GetPushToTalkBinding: (): any | undefined => {return {} as any},
+    GetProcesses: (): LuaArray<VoiceChatProcess> => {return {} as any},
+    GetPushToTalkBinding: (): LuaArray<string> | undefined => {return {} as any},
     GetVADSensitivity: (): number | undefined => {return 0},
     IsChannelJoinPending: (channelType: ChatChannelType, clubId: string | undefined, streamId: string | undefined): boolean => {return false},
     IsDeafened: (): boolean | undefined => {return false},
@@ -129,7 +130,7 @@ export const C_VoiceChat = {
     SetOutputDevice: (deviceID: string): void => {},
     SetOutputVolume: (volume: number): void => {},
     SetPortraitTexture: (textureObject: any, memberID: number, channelID: number): void => {},
-    SetPushToTalkBinding: (keys: any): void => {},
+    SetPushToTalkBinding: (keys: LuaArray<string>): void => {},
     SetVADSensitivity: (sensitivity: number): void => {},
     ShouldDiscoverChannels: (): boolean => {return false},
     ToggleDeafened: (): void => {},

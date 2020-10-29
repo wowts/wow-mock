@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface GxAdapterInfoDetails {
     name: string;
@@ -5,7 +6,7 @@ export interface GxAdapterInfoDetails {
     isExternal: boolean
 }
 export const C_VideoOptions = {
-    GetGxAdapterInfo: (): any => {return {} as any},
+    GetGxAdapterInfo: (): LuaArray<GxAdapterInfoDetails> => {return {} as any},
 };
 export type AdapterListChangedEvent = (frame: UIFrame, e: "ADAPTER_LIST_CHANGED") => void
 export type DisplaySizeChangedEvent = (frame: UIFrame, e: "DISPLAY_SIZE_CHANGED") => void

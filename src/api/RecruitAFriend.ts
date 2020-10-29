@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum RafRecruitActivityState {
     Incomplete = 0,
@@ -25,7 +26,7 @@ export interface RafAppearanceInfo {
 export interface RafAppearanceSetInfo {
     setID: number;
     setName: string;
-    appearanceIDs: any
+    appearanceIDs: LuaArray<number>
 }
 export interface RafIllusionInfo {
     spellItemEnchantmentID: number
@@ -35,10 +36,10 @@ export interface RafInfo {
     spentMonths: number;
     availableMonths: number;
     claimInProgress: boolean;
-    rewards: any;
+    rewards: LuaArray<RafReward>;
     nextReward: RafReward | undefined;
     recruitmentInfo: RafRecruitmentinfo | undefined;
-    recruits: any
+    recruits: LuaArray<RafRecruit>
 }
 export interface RafMountInfo {
     spellID: number;
@@ -58,7 +59,7 @@ export interface RafRecruit {
     monthsRemaining: number;
     subStatus: RafRecruitSubStatus;
     acceptanceID: string;
-    activities: any
+    activities: LuaArray<RafRecruitActivity>
 }
 export interface RafRecruitActivity {
     activityID: number;
@@ -109,7 +110,7 @@ export const C_RecruitAFriend = {
     GenerateRecruitmentLink: (): boolean => {return false},
     GetRAFInfo: (): RafInfo => {return {lifetimeMonths: 0, spentMonths: 0, availableMonths: 0, claimInProgress: false, rewards: {} as any, nextReward: {rewardID: 0, itemID: 0, rewardType: RafRewardType.Pet, petInfo: {creatureID: 0, speciesID: 0, displayID: 0, speciesName: '', description: ''}, mountInfo: {spellID: 0, mountID: 0}, appearanceInfo: {appearanceID: 0}, titleInfo: {titleMaskID: 0}, appearanceSetInfo: {setID: 0, setName: '', appearanceIDs: {} as any}, illusionInfo: {spellItemEnchantmentID: 0}, canClaim: false, claimed: false, repeatable: false, repeatableClaimCount: 0, monthsRequired: 0, monthCost: 0, availableInMonths: 0, iconID: 0}, recruitmentInfo: {recruitmentCode: '', recruitmentURL: '', expireTime: 0, remainingTimeSeconds: 0, totalUses: 0, remainingUses: 0, sourceRealm: '', sourceFaction: ''}, recruits: {} as any}},
     GetRAFSystemInfo: (): RafSystemInfo => {return {maxRecruits: 0, maxRecruitMonths: 0, maxRecruitmentUses: 0, daysInCycle: 0}},
-    GetRecruitActivityRequirementsText: (activityID: number, acceptanceID: string): any => {return {} as any},
+    GetRecruitActivityRequirementsText: (activityID: number, acceptanceID: string): LuaArray<string> => {return {} as any},
     GetRecruitInfo: (): [active: boolean, faction: number] => {return [false, 0]},
     IsEnabled: (): boolean => {return false},
     IsRecruitingEnabled: (): boolean => {return false},

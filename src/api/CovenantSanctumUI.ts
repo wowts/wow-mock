@@ -1,4 +1,5 @@
 import {GarrTalentFeatureSubtype} from "./common";
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface CovenantSanctumFeatureInfo {
     garrTalentTreeID: number;
@@ -33,12 +34,12 @@ export const C_CovenantSanctumUI = {
     EndInteraction: (): void => {},
     GetAnimaInfo: (): [currencyID: number, maxDisplayableValue: number] => {return [0, 0]},
     GetCurrentTalentTreeID: (): number | undefined => {return 0},
-    GetFeatures: (): any => {return {} as any},
+    GetFeatures: (): LuaArray<CovenantSanctumFeatureInfo> => {return {} as any},
     GetRenownLevel: (): number => {return 0},
-    GetRenownLevels: (covenantID: number): any => {return {} as any},
-    GetRenownRewardsForLevel: (covenantID: number, renownLevel: number): any => {return {} as any},
+    GetRenownLevels: (covenantID: number): LuaArray<CovenantSanctumRenownLevelInfo> => {return {} as any},
+    GetRenownRewardsForLevel: (covenantID: number, renownLevel: number): LuaArray<CovenantSanctumRenownRewardInfo> => {return {} as any},
     GetSanctumType: (): GarrTalentFeatureSubtype | undefined => {return GarrTalentFeatureSubtype.Generic},
-    GetSoulCurrencies: (): any => {return {} as any},
+    GetSoulCurrencies: (): LuaArray<number> => {return {} as any},
 };
 export type CovenantRenownInteractionEndedEvent = (frame: UIFrame, e: "COVENANT_RENOWN_INTERACTION_ENDED") => void
 export type CovenantRenownInteractionStartedEvent = (frame: UIFrame, e: "COVENANT_RENOWN_INTERACTION_STARTED") => void

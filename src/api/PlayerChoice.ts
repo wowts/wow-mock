@@ -1,4 +1,5 @@
 import { ColorMixin } from '../mixins';
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum PlayerChoiceRarity {
     Common = 0,
@@ -49,9 +50,9 @@ export interface PlayerChoiceRewardCurrencyInfo {
 export interface PlayerChoiceRewardInfo {
     money: number | undefined;
     xp: number | undefined;
-    itemRewards: any;
-    currencyRewards: any;
-    repRewards: any
+    itemRewards: LuaArray<PlayerChoiceRewardItemInfo>;
+    currencyRewards: LuaArray<PlayerChoiceRewardCurrencyInfo>;
+    repRewards: LuaArray<PlayerChoiceRewardReputationInfo>
 }
 export interface PlayerChoiceRewardItemInfo {
     itemId: number;
