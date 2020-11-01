@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { BarberShopRaceData } from "./api";
 
 export interface WeeklyRewardChestThresholdType {}
@@ -12,7 +13,18 @@ export interface QueueSpecificInfo {}
 export interface RuneforgeLegendaryCraftDescription {}
 export interface RuneforgeItemPreviewInfo {}
 export interface RuneforgeLegendaryComponentInfo {}
-export interface RuneforgePower {}
+export interface RuneforgePower {
+    runeforgePowerID: number;
+    descriptionSpellID: number;
+    slots: LuaArray<number>;
+    iconFileID: number;
+    state: number;
+    name: string;
+    specName: string;
+    matchesSpec: boolean;
+    source: string;
+    description: string;
+}
 export interface GarrisonTalentTreeInfo {}
 export interface CalendarTime {}
 export interface CharacterAlternateFormData {
