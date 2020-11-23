@@ -1,11 +1,11 @@
 {
     "name": "@wowts/wow-mock",
-    "version": "1.23.0",
+    "version": "1.24.3",
     "description": "",
     "main": "dist/index.js",
     "scripts": {
-        "test": "ava dist/index.spec.js",
-        "test:watch": "ava -w dist/index.spec.js",
+        "test": "ava",
+        "test:watch": "ava -w",
         "prepare": "tsc",
         "watch": "tsc -w"
     },

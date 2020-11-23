@@ -5,6 +5,7 @@ import { UIFrame } from "./ui";
 export * from "./ui";
 export * from "./api";
 export * from "./mixins";
+export { SpellId } from "./spells";
 
 export interface ItemStats {
     ITEM_MOD_DAMAGE_PER_SECOND_SHORT?: number;
