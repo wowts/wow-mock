@@ -81,6 +81,7 @@ export interface UIMessageFrame extends UIFrame {
     GetNumMessages(): number;
     GetMessageInfo(messageIndex: number): string;
     SetMaxLines(howMany: number): void;
+    Clear(): void;
 }
 
 export interface UIFontString extends UIFrame {
@@ -352,6 +353,9 @@ export class FakeMessageFrame extends FakeFrame implements UIMessageFrame {
     }
     GetMessageInfo(i: number) {
         return this.messages[i];
+    }
+    Clear() {
+        this.messages.splice(0);
     }
 }
 
