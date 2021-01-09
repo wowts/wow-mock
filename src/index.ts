@@ -1,4 +1,5 @@
 import { LuaArray } from "@wowts/lua";
+import { ItemQuality } from "./api";
 import { spellInfos } from "./spells";
 import { UIFrame } from "./ui";
 
@@ -47,16 +48,114 @@ export const fakeUnits = new Map<string, FakeUnit>();
 fakeUnits.set("player", fakePlayer);
 fakeUnits.set("target", fakeTarget);
 
+type ArenaUnitIndex = "1" | "2" | "3" | "4" | "5";
+type PartyUnitIndex = "1" | "2" | "3" | "4";
+type BossUnitIndex = "1" | "2" | "3" | "4";
+type RaidUnitIndex =
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "7"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "13"
+    | "14"
+    | "15"
+    | "16"
+    | "17"
+    | "18"
+    | "19"
+    | "20"
+    | "21"
+    | "22"
+    | "23"
+    | "24"
+    | "25"
+    | "26"
+    | "27"
+    | "28"
+    | "29"
+    | "30"
+    | "31"
+    | "32"
+    | "33"
+    | "34"
+    | "35"
+    | "36"
+    | "37"
+    | "38"
+    | "39"
+    | "40";
+type BaseUnitId =
+    | `arena${ArenaUnitIndex}`
+    | `boss${BossUnitIndex}`
+    | "focus"
+    | "mouseover"
+    | "none"
+    | `party${PartyUnitIndex}`
+    | `partypet${PartyUnitIndex}`
+    | "pet"
+    | "player"
+    | `raid${RaidUnitIndex}`
+    | `raidpet${RaidUnitIndex}`
+    | "target"
+    | "vehicle"
+    | `nameplate${RaidUnitIndex}`
+    | "npc";
+export type UnitId =
+    | BaseUnitId
+    | `${BaseUnitId}target`
+    | `${BaseUnitId}targettarget`
+    | string;
+
+export type InventorySlotName =
+    | "AMMOSLOT"
+    | "HEADSLOT"
+    | "NECKSLOT"
+    | "SHOULDERSLOT"
+    | "SHIRTSLOT"
+    | "CHESTSLOT"
+    | "WAISTSLOT"
+    | "LEGSSLOT"
+    | "FEETSLOT"
+    | "WRISTSLOT"
+    | "HANDSSLOT"
+    | "FINGER0SLOT"
+    | "FINGER1SLOT"
+    | "TRINKET0SLOT"
+    | "TRINKET1SLOT"
+    | "BACKSLOT"
+    | "MAINHANDSLOT"
+    | "SECONDARYHANDSLOT"
+    | "RANGEDSLOT"
+    | "TABARDSLOT";
+
 // WOW global functions
-export function GetInventorySlotInfo(slotName: string): [number, string] {
+export function GetInventorySlotInfo(
+    slotName: InventorySlotName
+): [number, string] {
     return [0, ""];
 }
 export function GetItemStats(itemLink: string, statTable?: any[]): ItemStats {
     return {};
 }
-export function GetInventoryItemLink(unitId: string, slotId: number): string {
+export function GetInventoryItemLink(unitId: UnitId, slotId: number): string {
     return "";
 }
+
+export function GetInventoryItemQuality(
+    unitId: UnitId,
+    slotId: number
+): ItemQuality {
+    return ItemQuality.Common;
+}
+
 export function GetHaste(): number {
     return 0;
 }
