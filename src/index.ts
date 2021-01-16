@@ -600,6 +600,9 @@ export function IsUsableSpell(
 ): [boolean, boolean] {
     return [true, false];
 }
+export function IsSpellKnown(spellId: number, isPetSpell?: boolean) {
+    return false;
+}
 export function GetNumShapeshiftForms() {
     return 0;
 }
