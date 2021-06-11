@@ -1,13 +1,14 @@
 {
     "name": "@wowts/wow-mock",
-    "version": "1.30.0",
+    "version": "1.30.1",
     "description": "",
     "main": "dist/index.js",
     "scripts": {
         "test": "jest",
         "build": "tsc",
         "watch": "tsc -w",
-        "prettier": "prettier --write src"
+        "prettier": "prettier --write src",
+        "release": "standard-version"
     },
     "repository": {
         "type": "git",
