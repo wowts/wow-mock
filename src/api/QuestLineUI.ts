@@ -3,7 +3,7 @@ import { UIFrame } from "../ui";
 export const enum QuestLineFloorLocation {
     Above = 0,
     Below = 1,
-    Same = 2
+    Same = 2,
 }
 export interface QuestLineInfo {
     questLineName: string;
@@ -16,12 +16,35 @@ export interface QuestLineInfo {
     isLegendary: boolean;
     isDaily: boolean;
     isCampaign: boolean;
-    floorLocation: QuestLineFloorLocation
+    floorLocation: QuestLineFloorLocation;
 }
 export const C_QuestLine = {
-    GetAvailableQuestLines: (uiMapID: number): LuaArray<QuestLineInfo> => {return {} as any},
-    GetQuestLineInfo: (questID: number, uiMapID: number): QuestLineInfo | undefined => {return {questLineName: '', questName: '', questLineID: 0, questID: 0, x: 0, y: 0, isHidden: false, isLegendary: false, isDaily: false, isCampaign: false, floorLocation: QuestLineFloorLocation.Above}},
-    GetQuestLineQuests: (questLineID: number): LuaArray<number> => {return {} as any},
-    IsComplete: (questLineID: number): boolean => {return false},
+    GetAvailableQuestLines: (uiMapID: number): LuaArray<QuestLineInfo> => {
+        return {} as any;
+    },
+    GetQuestLineInfo: (
+        questID: number,
+        uiMapID: number
+    ): QuestLineInfo | undefined => {
+        return {
+            questLineName: "",
+            questName: "",
+            questLineID: 0,
+            questID: 0,
+            x: 0,
+            y: 0,
+            isHidden: false,
+            isLegendary: false,
+            isDaily: false,
+            isCampaign: false,
+            floorLocation: QuestLineFloorLocation.Above,
+        };
+    },
+    GetQuestLineQuests: (questLineID: number): LuaArray<number> => {
+        return {} as any;
+    },
+    IsComplete: (questLineID: number): boolean => {
+        return false;
+    },
     RequestQuestLinesForMap: (uiMapID: number): void => {},
 };

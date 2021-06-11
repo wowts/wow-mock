@@ -7,13 +7,33 @@ export interface ChromieTimeExpansionInfo {
     mapAtlas: string;
     previewAtlas: string;
     completed: boolean;
-    alreadyOn: boolean
+    alreadyOn: boolean;
 }
 export const C_ChromieTime = {
     CloseUI: (): void => {},
-    GetChromieTimeExpansionOption: (expansionRecID: number): ChromieTimeExpansionInfo | undefined => {return {id: 0, name: '', description: '', mapAtlas: '', previewAtlas: '', completed: false, alreadyOn: false}},
-    GetChromieTimeExpansionOptions: (): LuaArray<ChromieTimeExpansionInfo> => {return {} as any},
+    GetChromieTimeExpansionOption: (
+        expansionRecID: number
+    ): ChromieTimeExpansionInfo | undefined => {
+        return {
+            id: 0,
+            name: "",
+            description: "",
+            mapAtlas: "",
+            previewAtlas: "",
+            completed: false,
+            alreadyOn: false,
+        };
+    },
+    GetChromieTimeExpansionOptions: (): LuaArray<ChromieTimeExpansionInfo> => {
+        return {} as any;
+    },
     SelectChromieTimeOption: (chromieTimeExpansionInfoId: number): void => {},
 };
-export type ChromieTimeCloseEvent = (frame: UIFrame, e: "CHROMIE_TIME_CLOSE") => void
-export type ChromieTimeOpenEvent = (frame: UIFrame, e: "CHROMIE_TIME_OPEN") => void
+export type ChromieTimeCloseEvent = (
+    frame: UIFrame,
+    e: "CHROMIE_TIME_CLOSE"
+) => void;
+export type ChromieTimeOpenEvent = (
+    frame: UIFrame,
+    e: "CHROMIE_TIME_OPEN"
+) => void;

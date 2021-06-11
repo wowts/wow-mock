@@ -1,11 +1,11 @@
-import { Vector2DMixin } from '../mixins';
+import { Vector2DMixin } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface UiMapExplorationHitRect {
     top: number;
     bottom: number;
     left: number;
-    right: number
+    right: number;
 }
 export interface UiMapExplorationInfo {
     textureWidth: number;
@@ -14,10 +14,22 @@ export interface UiMapExplorationInfo {
     offsetY: number;
     isShownByMouseOver: boolean;
     fileDataIDs: LuaArray<number>;
-    hitRect: UiMapExplorationHitRect
+    hitRect: UiMapExplorationHitRect;
 }
 export const C_MapExplorationInfo = {
-    GetExploredAreaIDsAtPosition: (uiMapID: number, normalizedPosition: Vector2DMixin): LuaArray<number> | undefined => {return {} as any},
-    GetExploredMapTextures: (uiMapID: number): LuaArray<UiMapExplorationInfo> => {return {} as any},
+    GetExploredAreaIDsAtPosition: (
+        uiMapID: number,
+        normalizedPosition: Vector2DMixin
+    ): LuaArray<number> | undefined => {
+        return {} as any;
+    },
+    GetExploredMapTextures: (
+        uiMapID: number
+    ): LuaArray<UiMapExplorationInfo> => {
+        return {} as any;
+    },
 };
-export type MapExplorationUpdatedEvent = (frame: UIFrame, e: "MAP_EXPLORATION_UPDATED") => void
+export type MapExplorationUpdatedEvent = (
+    frame: UIFrame,
+    e: "MAP_EXPLORATION_UPDATED"
+) => void;

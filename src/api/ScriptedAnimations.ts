@@ -6,7 +6,7 @@ export const enum ScriptedAnimationBehavior {
     TargetKnockBack = 2,
     SourceRecoil = 3,
     SourceCollideWithTarget = 4,
-    UIParentShake = 5
+    UIParentShake = 5,
 }
 export const enum ScriptedAnimationTrajectory {
     AtSource = 0,
@@ -15,7 +15,7 @@ export const enum ScriptedAnimationTrajectory {
     CurveLeft = 3,
     CurveRight = 4,
     CurveRandom = 5,
-    HalfwayBetween = 6
+    HalfwayBetween = 6,
 }
 export interface ScriptedAnimationEffect {
     id: number;
@@ -34,8 +34,10 @@ export interface ScriptedAnimationEffect {
     startSoundKitID: number | undefined;
     finishEffectID: number | undefined;
     finishBehavior: ScriptedAnimationBehavior | undefined;
-    finishSoundKitID: number | undefined
+    finishSoundKitID: number | undefined;
 }
 export const C_ScriptedAnimations = {
-    GetAllScriptedAnimationEffects: (): LuaArray<ScriptedAnimationEffect> => {return {} as any},
+    GetAllScriptedAnimationEffects: (): LuaArray<ScriptedAnimationEffect> => {
+        return {} as any;
+    },
 };

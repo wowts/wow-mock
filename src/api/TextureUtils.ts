@@ -9,8 +9,21 @@ export interface AtlasInfo {
     tilesHorizontally: boolean;
     tilesVertically: boolean;
     file: number | undefined;
-    filename: string | undefined
+    filename: string | undefined;
 }
 export const C_Texture = {
-    GetAtlasInfo: (atlas: string): AtlasInfo => {return {width: 0, height: 0, leftTexCoord: 0, rightTexCoord: 0, topTexCoord: 0, bottomTexCoord: 0, tilesHorizontally: false, tilesVertically: false, file: 0, filename: ''}},
+    GetAtlasInfo: (atlas: string): AtlasInfo => {
+        return {
+            width: 0,
+            height: 0,
+            leftTexCoord: 0,
+            rightTexCoord: 0,
+            topTexCoord: 0,
+            bottomTexCoord: 0,
+            tilesHorizontally: false,
+            tilesVertically: false,
+            file: 0,
+            filename: "",
+        };
+    },
 };

@@ -1,4 +1,4 @@
-import { ItemLocationMixin } from '../mixins';
+import { ItemLocationMixin } from "../mixins";
 import { UIFrame } from "../ui";
 export const enum UICursorType {
     Default = 0,
@@ -21,16 +21,36 @@ export const enum UICursorType {
     Mount = 17,
     Toy = 18,
     CommunitiesStream = 19,
-    ConduitCollectionItem = 20
+    ConduitCollectionItem = 20,
 }
 export const C_Cursor = {
     DropCursorCommunitiesStream: (): void => {},
-    GetCursorCommunitiesStream: (): [clubId: string, streamId: string] => {return ['', '']},
-    GetCursorItem: (): ItemLocationMixin => {return {} as any},
+    GetCursorCommunitiesStream: (): [clubId: string, streamId: string] => {
+        return ["", ""];
+    },
+    GetCursorItem: (): ItemLocationMixin => {
+        return {} as any;
+    },
     SetCursorCommunitiesStream: (clubId: string, streamId: string): void => {},
 };
-export type BattlePetCursorClearEvent = (frame: UIFrame, e: "BATTLE_PET_CURSOR_CLEAR") => void
-export type CommunitiesStreamCursorClearEvent = (frame: UIFrame, e: "COMMUNITIES_STREAM_CURSOR_CLEAR") => void
-export type CursorChangedEvent = (frame: UIFrame, e: "CURSOR_CHANGED", isDefault: boolean, newCursorType: UICursorType, oldCursorType: UICursorType, oldCursorVirtualID: number) => void
-export type CursorUpdateEvent = (frame: UIFrame, e: "CURSOR_UPDATE") => void
-export type MountCursorClearEvent = (frame: UIFrame, e: "MOUNT_CURSOR_CLEAR") => void
+export type BattlePetCursorClearEvent = (
+    frame: UIFrame,
+    e: "BATTLE_PET_CURSOR_CLEAR"
+) => void;
+export type CommunitiesStreamCursorClearEvent = (
+    frame: UIFrame,
+    e: "COMMUNITIES_STREAM_CURSOR_CLEAR"
+) => void;
+export type CursorChangedEvent = (
+    frame: UIFrame,
+    e: "CURSOR_CHANGED",
+    isDefault: boolean,
+    newCursorType: UICursorType,
+    oldCursorType: UICursorType,
+    oldCursorVirtualID: number
+) => void;
+export type CursorUpdateEvent = (frame: UIFrame, e: "CURSOR_UPDATE") => void;
+export type MountCursorClearEvent = (
+    frame: UIFrame,
+    e: "MOUNT_CURSOR_CLEAR"
+) => void;

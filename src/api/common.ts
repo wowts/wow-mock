@@ -1,8 +1,8 @@
-import { ColorMixin } from '../mixins';
+import { ColorMixin } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 export const enum AuctionHouseCommoditySortOrder {
     UnitPrice = 0,
-    Quantity = 1
+    Quantity = 1,
 }
 export const enum AuctionHouseFilter {
     UncollectedOnly = 0,
@@ -16,11 +16,11 @@ export const enum AuctionHouseFilter {
     EpicQuality = 8,
     LegendaryQuality = 9,
     ArtifactQuality = 10,
-    LegendaryCraftedItemOnly = 11
+    LegendaryCraftedItemOnly = 11,
 }
 export const enum AuctionHouseItemSortOrder {
     Bid = 0,
-    Buyout = 1
+    Buyout = 1,
 }
 export const enum AuctionHouseSortOrder {
     Price = 0,
@@ -28,13 +28,13 @@ export const enum AuctionHouseSortOrder {
     Level = 2,
     Bid = 3,
     Buyout = 4,
-    TimeRemaining = 5
+    TimeRemaining = 5,
 }
 export const enum AuctionHouseTimeLeftBand {
     Short = 0,
     Medium = 1,
     Long = 2,
-    VeryLong = 3
+    VeryLong = 3,
 }
 export const enum CalendarCommandType {
     CalendarCommandCreate = 0,
@@ -48,7 +48,7 @@ export const enum CalendarCommandType {
     CalendarCommandGetEvent = 8,
     CalendarCommandUpdateEvent = 9,
     CalendarCommandComplain = 10,
-    CalendarCommandNotes = 11
+    CalendarCommandNotes = 11,
 }
 export const enum CalendarErrorType {
     CalendarErrorSuccess = 0,
@@ -101,7 +101,7 @@ export const enum CalendarErrorType {
     CalendarErrorEventThrottled = 47,
     CalendarErrorInviteThrottled = 48,
     CalendarErrorInternal = 49,
-    CalendarErrorComplaintAdded = 50
+    CalendarErrorComplaintAdded = 50,
 }
 export const enum CalendarEventBits {
     CalendarEventBitPlayer = 1,
@@ -118,13 +118,13 @@ export const enum CalendarEventBits {
     CalendarEventBitGuildSignup = 2048,
     CommunityWide = 3136,
     PlayerCreated = 3395,
-    CantComplain = 3788
+    CantComplain = 3788,
 }
 export const enum CalendarEventRepeatOptions {
     CalendarRepeatNever = 0,
     CalendarRepeatWeekly = 1,
     CalendarRepeatBiweekly = 2,
-    CalendarRepeatMonthly = 3
+    CalendarRepeatMonthly = 3,
 }
 export const enum CalendarEventType {
     Raid = 0,
@@ -132,31 +132,31 @@ export const enum CalendarEventType {
     PvP = 2,
     Meeting = 3,
     Other = 4,
-    HeroicDeprecated = 5
+    HeroicDeprecated = 5,
 }
 export const enum CalendarFilterFlags {
     WeeklyHoliday = 1,
     Darkmoon = 2,
     Battleground = 4,
     RaidLockout = 8,
-    RaidReset = 16
+    RaidReset = 16,
 }
 export const enum CalendarGetEventType {
     Get = 0,
     Add = 1,
     Copy = 2,
-    DefaultCalendarGetEventType = 0
+    DefaultCalendarGetEventType = 0,
 }
 export const enum CalendarHolidayFilterType {
     Weekly = 0,
     Darkmoon = 1,
-    Battleground = 2
+    Battleground = 2,
 }
 export const enum CalendarInviteBits {
     CalendarInviteBitPendingInvite = 1,
     CalendarInviteBitModerator = 2,
     CalendarInviteBitCreator = 4,
-    CalendarInviteBitSignup = 8
+    CalendarInviteBitSignup = 8,
 }
 export const enum CalendarInviteSortType {
     CalendarInviteSortName = 0,
@@ -164,16 +164,16 @@ export const enum CalendarInviteSortType {
     CalendarInviteSortClass = 2,
     CalendarInviteSortStatus = 3,
     CalendarInviteSortParty = 4,
-    CalendarInviteSortNotes = 5
+    CalendarInviteSortNotes = 5,
 }
 export const enum CalendarInviteType {
     Normal = 0,
-    Signup = 1
+    Signup = 1,
 }
 export const enum CalendarModeratorStatus {
     CalendarModeratorNone = 0,
     CalendarModeratorModerator = 1,
-    CalendarModeratorCreator = 2
+    CalendarModeratorCreator = 2,
 }
 export const enum CalendarStatus {
     Invited = 0,
@@ -184,7 +184,7 @@ export const enum CalendarStatus {
     Standby = 5,
     Signedup = 6,
     NotSignedup = 7,
-    Tentative = 8
+    Tentative = 8,
 }
 export const enum CalendarType {
     Player = 0,
@@ -194,7 +194,7 @@ export const enum CalendarType {
     Holiday = 4,
     HolidayWeekly = 5,
     HolidayDarkmoon = 6,
-    HolidayBattleground = 7
+    HolidayBattleground = 7,
 }
 export const enum CalendarWebActionType {
     Accept = 0,
@@ -203,38 +203,38 @@ export const enum CalendarWebActionType {
     ReportSpam = 3,
     Signup = 4,
     Tentative = 5,
-    TentativeSignup = 6
+    TentativeSignup = 6,
 }
 export const enum HolidayCalendarFlags {
     Alliance = 1,
-    Horde = 2
+    Horde = 2,
 }
 export const enum HolidayFlags {
     IsRegionwide = 1,
     DontShowInCalendar = 2,
     DontDisplayEnd = 4,
     DontDisplayBanner = 8,
-    NotAvailableClientSide = 16
+    NotAvailableClientSide = 16,
 }
 export const enum ChrCustomizationCategoryFlag {
-    UndressModel = 1
+    UndressModel = 1,
 }
 export const enum ChrCustomizationOptionType {
     SelectionPopout = 0,
     Checkbox = 1,
-    Slider = 2
+    Slider = 2,
 }
 export const enum Unitsex {
     Male = 0,
     Female = 1,
-    None = 2
+    None = 2,
 }
 export interface CharCustomizationChoice {
     id: number;
     name: string;
     ineligibleChoice: boolean;
     swatchColor1: ColorMixin | undefined;
-    swatchColor2: ColorMixin | undefined
+    swatchColor2: ColorMixin | undefined;
 }
 export interface CharCustomizationOption {
     id: number;
@@ -242,24 +242,24 @@ export interface CharCustomizationOption {
     orderIndex: number;
     optionType: ChrCustomizationOptionType;
     choices: LuaArray<CharCustomizationChoice>;
-    currentChoiceIndex: number
+    currentChoiceIndex: number;
 }
 export const enum ChatChannelRuleset {
     None = 0,
     Mentor = 1,
-    Disabled = 2
+    Disabled = 2,
 }
 export const enum ChatChannelType {
     None = 0,
     Custom = 1,
     PrivateParty = 2,
     PublicParty = 3,
-    Communities = 4
+    Communities = 4,
 }
 export const enum CallingStates {
     QuestOffer = 0,
     QuestActive = 1,
-    QuestCompleted = 2
+    QuestCompleted = 2,
 }
 export const MaxCallings = 3;
 export const enum CurrencyDestroyReason {
@@ -274,7 +274,7 @@ export const enum CurrencyDestroyReason {
     DroppedToCorpse = 8,
     BonusRoll = 9,
     FactionConversion = 10,
-    Last = 11
+    Last = 11,
 }
 export const enum CurrencyFlags {
     CurrencyTradable = 1,
@@ -308,16 +308,16 @@ export const enum CurrencyFlags {
     CurrencyIsAllianceOnly = 268435456,
     CurrencyIsHordeOnly = 536870912,
     CurrencyLimitWarmodeBonusOncePerTooltip = 1073741824,
-    DeprecatedCurrencyFlag = -2147483648
+    DeprecatedCurrencyFlag = -2147483648,
 }
 export const enum CurrencyFlagsB {
     CurrencyBUseTotalEarnedForMaxQty = 1,
-    CurrencyBShowQuestXpGainInTooltip = 2
+    CurrencyBShowQuestXpGainInTooltip = 2,
 }
 export const enum CurrencyGainFlags {
     BonusAward = 1,
     DroppedFromDeath = 2,
-    FromAccountServer = 4
+    FromAccountServer = 4,
 }
 export const enum CurrencySource {
     ConvertOldItem = 0,
@@ -365,24 +365,24 @@ export const enum CurrencySource {
     AccountCopy = 42,
     WeeklyRewardChest = 43,
     GarrisonTalentTreeReset = 44,
-    Last = 45
+    Last = 45,
 }
 export const enum CurrencyTokenCategoryFlags {
     FlagSortLast = 1,
     FlagPlayerItemAssignment = 2,
     Hidden = 4,
-    Virtual = 8
+    Virtual = 8,
 }
 export const enum PlayerCurrencyFlags {
     Incremented = 1,
-    Loading = 2
+    Loading = 2,
 }
 export const enum PlayerCurrencyFlagsDbFlags {
     IgnoreMaxQtyOnload = 1,
     Reuse1 = 2,
     InBackpack = 4,
     UnusedInUI = 8,
-    Reuse2 = 16
+    Reuse2 = 16,
 }
 export const PLAYER_CURRENCY_CLIENT_FLAGS = 3;
 export const MAX_CURRENCY_QUANTITY = 100000000;
@@ -448,15 +448,15 @@ export const enum Damageclass {
     MaskElemental = 28,
     MaskChromatic = 62,
     MaskMagical = 126,
-    MaskChaos = 124
+    MaskChaos = 124,
 }
 export const enum DamageclassType {
     Physical = 0,
-    Magical = 1
+    Magical = 1,
 }
 export const enum EnvironmentalDamageFlags {
     OneTime = 1,
-    DmgIsPct = 2
+    DmgIsPct = 2,
 }
 export const enum Environmentaldamagetype {
     Fatigue = 0,
@@ -464,14 +464,14 @@ export const enum Environmentaldamagetype {
     Falling = 2,
     Lava = 3,
     Slime = 4,
-    Fire = 5
+    Fire = 5,
 }
 export const enum CovenantType {
     None = 0,
     Kyrian = 1,
     Venthyr = 2,
     NightFae = 3,
-    Necrolord = 4
+    Necrolord = 4,
 }
 export const enum FollowerAbilityCastResult {
     Success = 0,
@@ -488,7 +488,7 @@ export const enum FollowerAbilityCastResult {
     CannotTargetLimitedUseFollower = 11,
     MustTargetLimitedUseFollower = 12,
     AlreadyAtMaxDurability = 13,
-    CannotTargetNonAutoMissionFollower = 14
+    CannotTargetNonAutoMissionFollower = 14,
 }
 export const enum GarrAutoBoardIndex {
     None = -1,
@@ -504,14 +504,14 @@ export const enum GarrAutoBoardIndex {
     EnemyLeftBack = 9,
     EnemyCenterLeftBack = 10,
     EnemyCenterRightBack = 11,
-    EnemyRightBack = 12
+    EnemyRightBack = 12,
 }
 export const enum GarrAutoCombatSpellTutorialFlag {
     None = 0,
     Single = 1,
     Column = 2,
     Row = 3,
-    All = 4
+    All = 4,
 }
 export const enum GarrAutoCombatTutorial {
     SelectMission = 1,
@@ -524,7 +524,7 @@ export const enum GarrAutoCombatTutorial {
     AttackRow = 128,
     AttackAll = 256,
     TroopTutorial = 512,
-    EnvironmentalEffect = 1024
+    EnvironmentalEffect = 1024,
 }
 export const enum GarrAutoCombatantRole {
     None = 0,
@@ -532,13 +532,13 @@ export const enum GarrAutoCombatantRole {
     RangedPhysical = 2,
     RangedMagic = 3,
     HealSupport = 4,
-    Tank = 5
+    Tank = 5,
 }
 export const enum GarrAutoEventFlags {
     None = 0,
     AutoAttack = 1,
     Passive = 2,
-    Environment = 4
+    Environment = 4,
 }
 export const enum GarrAutoMissionEventType {
     MeleeDamage = 0,
@@ -550,20 +550,20 @@ export const enum GarrAutoMissionEventType {
     PeriodicHeal = 6,
     ApplyAura = 7,
     RemoveAura = 8,
-    Died = 9
+    Died = 9,
 }
 export const enum GarrAutoPreviewTargetType {
     None = 0,
     Damage = 1,
     Heal = 2,
     Buff = 4,
-    Debuff = 8
+    Debuff = 8,
 }
 export const enum GarrFollowerMissionCompleteState {
     Alive = 0,
     KilledByMissionFailure = 1,
     SavedByPreventDeath = 2,
-    OutOfDurability = 3
+    OutOfDurability = 3,
 }
 export const enum GarrFollowerQuality {
     Common = 1,
@@ -571,20 +571,20 @@ export const enum GarrFollowerQuality {
     Rare = 3,
     Epic = 4,
     Legendary = 5,
-    Title = 6
+    Title = 6,
 }
 export const enum GarrTalentCostType {
     Initial = 0,
     Respec = 1,
     MakePermanent = 2,
-    TreeReset = 3
+    TreeReset = 3,
 }
 export const enum GarrTalentFeatureSubtype {
     Generic = 0,
     Bastion = 1,
     Revendreth = 2,
     Ardenweald = 3,
-    Maldraxxus = 4
+    Maldraxxus = 4,
 }
 export const enum GarrTalentFeatureType {
     Generic = 0,
@@ -594,39 +594,39 @@ export const enum GarrTalentFeatureType {
     ReservoirUpgrades = 4,
     SanctumUnique = 5,
     SoulBinds = 6,
-    AnimaDiversionMap = 7
+    AnimaDiversionMap = 7,
 }
 export const enum GarrTalentResearchCostSource {
     Talent = 0,
-    Tree = 1
+    Tree = 1,
 }
 export const enum GarrTalentSocketType {
     None = 0,
     Spell = 1,
-    Conduit = 2
+    Conduit = 2,
 }
 export const enum GarrTalentTreeType {
     Tiers = 0,
-    Classic = 1
+    Classic = 1,
 }
 export const enum GarrTalentType {
     Standard = 0,
     Minor = 1,
     Major = 2,
-    Socket = 3
+    Socket = 3,
 }
 export const enum GarrTalentUI {
     Generic = 0,
     CovenantSanctum = 1,
     SoulBinds = 2,
-    AnimaDiversionMap = 3
+    AnimaDiversionMap = 3,
 }
 export const enum GarrisonFollowerType {
     FollowerType_6_0 = 1,
     FollowerType_6_2 = 2,
     FollowerType_7_0 = 4,
     FollowerType_8_0 = 22,
-    FollowerType_9_0 = 123
+    FollowerType_9_0 = 123,
 }
 export const enum GarrisonTalentAvailability {
     Available = 0,
@@ -637,20 +637,20 @@ export const enum GarrisonTalentAvailability {
     UnavailableTierUnavailable = 5,
     UnavailablePlayerCondition = 6,
     UnavailableAlreadyHave = 7,
-    UnavailableRequiresPrerequisiteTalent = 8
+    UnavailableRequiresPrerequisiteTalent = 8,
 }
 export const enum GarrisonType {
     Type_6_0 = 2,
     Type_7_0 = 3,
     Type_8_0 = 9,
-    Type_9_0 = 111
+    Type_9_0 = 111,
 }
 export const GARRISON_AUTO_COMBATANT_FULL_HEAL_COST = 100;
 export interface GarrisonAbilityEffect {
     name: string;
     description: string;
     icon: number;
-    factor: number
+    factor: number;
 }
 export interface GarrisonFollowerAbilityInfo {
     id: number;
@@ -662,11 +662,11 @@ export interface GarrisonFollowerAbilityInfo {
     temporary: boolean;
     category: string | undefined;
     counters: LuaArray<GarrisonAbilityEffect>;
-    isEmptySlot: boolean
+    isEmptySlot: boolean;
 }
 export interface GarrisonTalentCurrencyCostInfo {
     currencyType: number;
-    currencyQuantity: number
+    currencyQuantity: number;
 }
 export interface GarrisonTalentInfo {
     id: number;
@@ -692,13 +692,13 @@ export interface GarrisonTalentInfo {
     perkSpellID: number;
     researchDescription: string | undefined;
     playerConditionReason: string | undefined;
-    socketInfo: GarrisonTalentSocketInfo
+    socketInfo: GarrisonTalentSocketInfo;
 }
 export interface GarrisonTalentSocketInfo {
     socketType: number;
     socketSubtype: number;
     misc0: number;
-    misc1: number
+    misc1: number;
 }
 export const enum InventoryType {
     IndexNonEquipType = 0,
@@ -729,7 +729,7 @@ export const enum InventoryType {
     IndexThrownType = 25,
     IndexRangedrightType = 26,
     IndexQuiverType = 27,
-    IndexRelicType = 28
+    IndexRelicType = 28,
 }
 export const enum ItemQuality {
     Poor = 0,
@@ -740,23 +740,23 @@ export const enum ItemQuality {
     Legendary = 5,
     Artifact = 6,
     Heirloom = 7,
-    WoWToken = 8
+    WoWToken = 8,
 }
 export const enum RuneforgePowerState {
     Available = 0,
     Unavailable = 1,
-    Invalid = 2
+    Invalid = 2,
 }
 export const MIN_RES_SICKNESS_LEVEL = 10;
 export const enum PlayerMentorshipApplicationResult {
     Success = 0,
     AlreadyMentor = 1,
-    Ineligible = 2
+    Ineligible = 2,
 }
 export const enum PlayerMentorshipStatus {
     None = 0,
     Newcomer = 1,
-    Mentor = 2
+    Mentor = 2,
 }
 export const enum QuestTagType {
     Tag = 0,
@@ -774,14 +774,14 @@ export const enum QuestTagType {
     FactionAssault = 12,
     Islands = 13,
     Threat = 14,
-    CovenantCalling = 15
+    CovenantCalling = 15,
 }
 export const enum RelativeContentDifficulty {
     Trivial = 0,
     Easy = 1,
     Fair = 2,
     Difficult = 3,
-    Impossible = 4
+    Impossible = 4,
 }
 export const MAX_QUEST_WATCHES = 25;
 export const MAX_WORLD_QUEST_WATCHES_AUTOMATIC = 1;
@@ -790,7 +790,7 @@ export const enum QuestSessionCommand {
     None = 0,
     Start = 1,
     Stop = 2,
-    SessionActiveNoCommand = 3
+    SessionActiveNoCommand = 3,
 }
 export const enum QuestSessionResult {
     Ok = 0,
@@ -825,26 +825,26 @@ export const enum QuestSessionResult {
     InPetBattle = 29,
     InvalidPublicParty = 30,
     Unknown = 31,
-    InCombat = 32
+    InCombat = 32,
 }
 export const enum RafLinkType {
     None = 0,
     Recruit = 1,
     Friend = 2,
-    Both = 3
+    Both = 3,
 }
 export const enum SuperTrackingType {
     Quest = 0,
     UserWaypoint = 1,
     Corpse = 2,
-    Scenario = 3
+    Scenario = 3,
 }
 export const enum UIWidgetLayoutDirection {
     Default = 0,
     Vertical = 1,
     Horizontal = 2,
     Overlap = 3,
-    HorizontalForceNewRow = 4
+    HorizontalForceNewRow = 4,
 }
 export const enum UIWidgetScale {
     OneHundred = 0,
@@ -852,11 +852,11 @@ export const enum UIWidgetScale {
     Eighty = 2,
     Seventy = 3,
     Sixty = 4,
-    Fifty = 5
+    Fifty = 5,
 }
 export const enum UIWidgetSetLayoutDirection {
     Vertical = 0,
-    Horizontal = 1
+    Horizontal = 1,
 }
 export const enum UIWidgetVisualizationType {
     IconAndText = 0,
@@ -879,5 +879,5 @@ export const enum UIWidgetVisualizationType {
     CaptureZone = 17,
     TextureWithAnimation = 18,
     DiscreteProgressSteps = 19,
-    ScenarioHeaderTimer = 20
+    ScenarioHeaderTimer = 20,
 }

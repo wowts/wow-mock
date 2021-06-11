@@ -8,11 +8,25 @@ export const enum ConfigurationWarning {
     DriverOutOfDate = 4,
     DeviceBlacklisted = 5,
     GraphicsApiWillBeOutdated = 6,
-    OsBitsWillBeOutdated = 7
+    OsBitsWillBeOutdated = 7,
 }
 export const C_ConfigurationWarnings = {
-    GetConfigurationWarningSeen: (configurationWarning: ConfigurationWarning): boolean => {return false},
-    GetConfigurationWarningString: (configurationWarning: ConfigurationWarning): string => {return ''},
-    GetConfigurationWarnings: (includeSeenWarnings: boolean): LuaArray<ConfigurationWarning> => {return {} as any},
-    SetConfigurationWarningSeen: (configurationWarning: ConfigurationWarning): void => {},
+    GetConfigurationWarningSeen: (
+        configurationWarning: ConfigurationWarning
+    ): boolean => {
+        return false;
+    },
+    GetConfigurationWarningString: (
+        configurationWarning: ConfigurationWarning
+    ): string => {
+        return "";
+    },
+    GetConfigurationWarnings: (
+        includeSeenWarnings: boolean
+    ): LuaArray<ConfigurationWarning> => {
+        return {} as any;
+    },
+    SetConfigurationWarningSeen: (
+        configurationWarning: ConfigurationWarning
+    ): void => {},
 };

@@ -1,9 +1,9 @@
-import test from "ava";
+import { expect, test } from "@jest/globals";
 import { SpellId } from "./spells";
 
-test("spells", (t) => {
-    t.is(SpellId.agony, 980);
-    t.is(SpellId.judgment, 20271);
-    t.is(SpellId.judgment_holy, 275773);
-    t.is(SpellId.judgment_protection, 275779);
+test("spells", () => {
+    expect(SpellId.agony).toBe(980);
+    expect(SpellId.judgment).toBe(20271);
+    expect(SpellId.judgment_holy).toBe(275773);
+    expect(SpellId.judgment_protection).toBe(275779);
 });

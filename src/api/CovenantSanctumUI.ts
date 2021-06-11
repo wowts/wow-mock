@@ -1,16 +1,16 @@
-import {GarrTalentFeatureSubtype} from "./common";
+import { GarrTalentFeatureSubtype } from "./common";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface CovenantSanctumFeatureInfo {
     garrTalentTreeID: number;
     featureType: number;
-    uiOrder: number
+    uiOrder: number;
 }
 export interface CovenantSanctumRenownLevelInfo {
     level: number;
     locked: boolean;
     isMilestone: boolean;
-    isCapstone: boolean
+    isCapstone: boolean;
 }
 export interface CovenantSanctumRenownRewardInfo {
     uiOrder: number;
@@ -25,24 +25,66 @@ export interface CovenantSanctumRenownRewardInfo {
     icon: number | undefined;
     name: string | undefined;
     description: string | undefined;
-    toastDescription: string | undefined
+    toastDescription: string | undefined;
 }
 export const C_CovenantSanctumUI = {
-    CanAccessReservoir: (): boolean => {return false},
-    CanDepositAnima: (): boolean => {return false},
+    CanAccessReservoir: (): boolean => {
+        return false;
+    },
+    CanDepositAnima: (): boolean => {
+        return false;
+    },
     DepositAnima: (): void => {},
     EndInteraction: (): void => {},
-    GetAnimaInfo: (): [currencyID: number, maxDisplayableValue: number] => {return [0, 0]},
-    GetCurrentTalentTreeID: (): number | undefined => {return 0},
-    GetFeatures: (): LuaArray<CovenantSanctumFeatureInfo> => {return {} as any},
-    GetRenownLevel: (): number => {return 0},
-    GetRenownLevels: (covenantID: number): LuaArray<CovenantSanctumRenownLevelInfo> => {return {} as any},
-    GetRenownRewardsForLevel: (covenantID: number, renownLevel: number): LuaArray<CovenantSanctumRenownRewardInfo> => {return {} as any},
-    GetSanctumType: (): GarrTalentFeatureSubtype | undefined => {return GarrTalentFeatureSubtype.Generic},
-    GetSoulCurrencies: (): LuaArray<number> => {return {} as any},
+    GetAnimaInfo: (): [currencyID: number, maxDisplayableValue: number] => {
+        return [0, 0];
+    },
+    GetCurrentTalentTreeID: (): number | undefined => {
+        return 0;
+    },
+    GetFeatures: (): LuaArray<CovenantSanctumFeatureInfo> => {
+        return {} as any;
+    },
+    GetRenownLevel: (): number => {
+        return 0;
+    },
+    GetRenownLevels: (
+        covenantID: number
+    ): LuaArray<CovenantSanctumRenownLevelInfo> => {
+        return {} as any;
+    },
+    GetRenownRewardsForLevel: (
+        covenantID: number,
+        renownLevel: number
+    ): LuaArray<CovenantSanctumRenownRewardInfo> => {
+        return {} as any;
+    },
+    GetSanctumType: (): GarrTalentFeatureSubtype | undefined => {
+        return GarrTalentFeatureSubtype.Generic;
+    },
+    GetSoulCurrencies: (): LuaArray<number> => {
+        return {} as any;
+    },
 };
-export type CovenantRenownInteractionEndedEvent = (frame: UIFrame, e: "COVENANT_RENOWN_INTERACTION_ENDED") => void
-export type CovenantRenownInteractionStartedEvent = (frame: UIFrame, e: "COVENANT_RENOWN_INTERACTION_STARTED") => void
-export type CovenantSanctumInteractionEndedEvent = (frame: UIFrame, e: "COVENANT_SANCTUM_INTERACTION_ENDED") => void
-export type CovenantSanctumInteractionStartedEvent = (frame: UIFrame, e: "COVENANT_SANCTUM_INTERACTION_STARTED") => void
-export type CovenantSanctumRenownLevelChangedEvent = (frame: UIFrame, e: "COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED", newRenownLevel: number, oldRenownLevel: number) => void
+export type CovenantRenownInteractionEndedEvent = (
+    frame: UIFrame,
+    e: "COVENANT_RENOWN_INTERACTION_ENDED"
+) => void;
+export type CovenantRenownInteractionStartedEvent = (
+    frame: UIFrame,
+    e: "COVENANT_RENOWN_INTERACTION_STARTED"
+) => void;
+export type CovenantSanctumInteractionEndedEvent = (
+    frame: UIFrame,
+    e: "COVENANT_SANCTUM_INTERACTION_ENDED"
+) => void;
+export type CovenantSanctumInteractionStartedEvent = (
+    frame: UIFrame,
+    e: "COVENANT_SANCTUM_INTERACTION_STARTED"
+) => void;
+export type CovenantSanctumRenownLevelChangedEvent = (
+    frame: UIFrame,
+    e: "COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED",
+    newRenownLevel: number,
+    oldRenownLevel: number
+) => void;

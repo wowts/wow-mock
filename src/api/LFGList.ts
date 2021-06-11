@@ -6,7 +6,7 @@ export interface LfgApplicantData {
     numMembers: number;
     isNew: boolean;
     comment: string;
-    displayOrderID: number
+    displayOrderID: number;
 }
 export interface LfgEntryData {
     activityID: number;
@@ -18,7 +18,7 @@ export interface LfgEntryData {
     duration: number;
     autoAccept: boolean;
     privateGroup: boolean;
-    questID: number | undefined
+    questID: number | undefined;
 }
 export interface LfgSearchResultData {
     searchResultID: number;
@@ -36,7 +36,7 @@ export interface LfgSearchResultData {
     isDelisted: boolean;
     autoAccept: boolean;
     age: number;
-    questID: number | undefined
+    questID: number | undefined;
 }
 export interface WowLocale {
     enUS: boolean;
@@ -49,34 +49,142 @@ export interface WowLocale {
     esMX: boolean;
     ruRU: boolean;
     ptBR: boolean;
-    itIT: boolean
+    itIT: boolean;
 }
 export const C_LFGList = {
-    CanActiveEntryUseAutoAccept: (): boolean => {return false},
-    CanCreateQuestGroup: (questID: number): boolean => {return false},
+    CanActiveEntryUseAutoAccept: (): boolean => {
+        return false;
+    },
+    CanCreateQuestGroup: (questID: number): boolean => {
+        return false;
+    },
     ClearApplicationTextFields: (): void => {},
     ClearCreationTextFields: (): void => {},
     ClearSearchTextFields: (): void => {},
     CopyActiveEntryInfoToCreationFields: (): void => {},
-    GetActiveEntryInfo: (): LfgEntryData => {return {activityID: 0, requiredItemLevel: 0, requiredHonorLevel: 0, name: '', comment: '', voiceChat: '', duration: 0, autoAccept: false, privateGroup: false, questID: 0}},
-    GetApplicantInfo: (applicantID: number): LfgApplicantData => {return {applicantID: 0, applicationStatus: '', pendingApplicationStatus: '', numMembers: 0, isNew: false, comment: '', displayOrderID: 0}},
-    GetSearchResultInfo: (searchResultID: number): LfgSearchResultData => {return {searchResultID: 0, activityID: 0, leaderName: '', name: '', comment: '', voiceChat: '', requiredItemLevel: 0, requiredHonorLevel: 0, numMembers: 0, numBNetFriends: 0, numCharFriends: 0, numGuildMates: 0, isDelisted: false, autoAccept: false, age: 0, questID: 0}},
-    HasActiveEntryInfo: (): boolean => {return false},
-    HasSearchResultInfo: (searchResultID: number): boolean => {return false},
-    Search: (categoryID: number, filter: number, preferredFilters: number, languageFilter: WowLocale | undefined): void => {},
+    GetActiveEntryInfo: (): LfgEntryData => {
+        return {
+            activityID: 0,
+            requiredItemLevel: 0,
+            requiredHonorLevel: 0,
+            name: "",
+            comment: "",
+            voiceChat: "",
+            duration: 0,
+            autoAccept: false,
+            privateGroup: false,
+            questID: 0,
+        };
+    },
+    GetApplicantInfo: (applicantID: number): LfgApplicantData => {
+        return {
+            applicantID: 0,
+            applicationStatus: "",
+            pendingApplicationStatus: "",
+            numMembers: 0,
+            isNew: false,
+            comment: "",
+            displayOrderID: 0,
+        };
+    },
+    GetSearchResultInfo: (searchResultID: number): LfgSearchResultData => {
+        return {
+            searchResultID: 0,
+            activityID: 0,
+            leaderName: "",
+            name: "",
+            comment: "",
+            voiceChat: "",
+            requiredItemLevel: 0,
+            requiredHonorLevel: 0,
+            numMembers: 0,
+            numBNetFriends: 0,
+            numCharFriends: 0,
+            numGuildMates: 0,
+            isDelisted: false,
+            autoAccept: false,
+            age: 0,
+            questID: 0,
+        };
+    },
+    HasActiveEntryInfo: (): boolean => {
+        return false;
+    },
+    HasSearchResultInfo: (searchResultID: number): boolean => {
+        return false;
+    },
+    Search: (
+        categoryID: number,
+        filter: number,
+        preferredFilters: number,
+        languageFilter: WowLocale | undefined
+    ): void => {},
     SetSearchToActivity: (activityID: number): void => {},
     SetSearchToQuestID: (questID: number): void => {},
 };
-export type LfgGroupDelistedLeadershipChangeEvent = (frame: UIFrame, e: "LFG_GROUP_DELISTED_LEADERSHIP_CHANGE", listingName: string, automaticDelistTimeRemaining: number) => void
-export type LfgListActiveEntryUpdateEvent = (frame: UIFrame, e: "LFG_LIST_ACTIVE_ENTRY_UPDATE", created: boolean | undefined) => void
-export type LfgListApplicantListUpdatedEvent = (frame: UIFrame, e: "LFG_LIST_APPLICANT_LIST_UPDATED", newPendingEntry: boolean | undefined, newPendingEntryWithData: boolean | undefined) => void
-export type LfgListApplicantUpdatedEvent = (frame: UIFrame, e: "LFG_LIST_APPLICANT_UPDATED", applicantID: number) => void
-export type LfgListApplicationStatusUpdatedEvent = (frame: UIFrame, e: "LFG_LIST_APPLICATION_STATUS_UPDATED", searchResultID: number, newStatus: string, oldStatus: string, groupName: string) => void
-export type LfgListAvailabilityUpdateEvent = (frame: UIFrame, e: "LFG_LIST_AVAILABILITY_UPDATE") => void
-export type LfgListEntryCreationFailedEvent = (frame: UIFrame, e: "LFG_LIST_ENTRY_CREATION_FAILED") => void
-export type LfgListEntryExpiredTimeoutEvent = (frame: UIFrame, e: "LFG_LIST_ENTRY_EXPIRED_TIMEOUT") => void
-export type LfgListEntryExpiredTooManyPlayersEvent = (frame: UIFrame, e: "LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS") => void
-export type LfgListJoinedGroupEvent = (frame: UIFrame, e: "LFG_LIST_JOINED_GROUP", searchResultID: number, groupName: string) => void
-export type LfgListSearchFailedEvent = (frame: UIFrame, e: "LFG_LIST_SEARCH_FAILED", reason: string | undefined) => void
-export type LfgListSearchResultUpdatedEvent = (frame: UIFrame, e: "LFG_LIST_SEARCH_RESULT_UPDATED", searchResultID: number) => void
-export type LfgListSearchResultsReceivedEvent = (frame: UIFrame, e: "LFG_LIST_SEARCH_RESULTS_RECEIVED") => void
+export type LfgGroupDelistedLeadershipChangeEvent = (
+    frame: UIFrame,
+    e: "LFG_GROUP_DELISTED_LEADERSHIP_CHANGE",
+    listingName: string,
+    automaticDelistTimeRemaining: number
+) => void;
+export type LfgListActiveEntryUpdateEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_ACTIVE_ENTRY_UPDATE",
+    created: boolean | undefined
+) => void;
+export type LfgListApplicantListUpdatedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_APPLICANT_LIST_UPDATED",
+    newPendingEntry: boolean | undefined,
+    newPendingEntryWithData: boolean | undefined
+) => void;
+export type LfgListApplicantUpdatedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_APPLICANT_UPDATED",
+    applicantID: number
+) => void;
+export type LfgListApplicationStatusUpdatedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_APPLICATION_STATUS_UPDATED",
+    searchResultID: number,
+    newStatus: string,
+    oldStatus: string,
+    groupName: string
+) => void;
+export type LfgListAvailabilityUpdateEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_AVAILABILITY_UPDATE"
+) => void;
+export type LfgListEntryCreationFailedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_ENTRY_CREATION_FAILED"
+) => void;
+export type LfgListEntryExpiredTimeoutEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_ENTRY_EXPIRED_TIMEOUT"
+) => void;
+export type LfgListEntryExpiredTooManyPlayersEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS"
+) => void;
+export type LfgListJoinedGroupEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_JOINED_GROUP",
+    searchResultID: number,
+    groupName: string
+) => void;
+export type LfgListSearchFailedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_SEARCH_FAILED",
+    reason: string | undefined
+) => void;
+export type LfgListSearchResultUpdatedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_SEARCH_RESULT_UPDATED",
+    searchResultID: number
+) => void;
+export type LfgListSearchResultsReceivedEvent = (
+    frame: UIFrame,
+    e: "LFG_LIST_SEARCH_RESULTS_RECEIVED"
+) => void;

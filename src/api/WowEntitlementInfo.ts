@@ -9,10 +9,24 @@ export const enum WoWEntitlementType {
     GameTime = 6,
     Title = 7,
     Illusion = 8,
-    Invalid = 9
+    Invalid = 9,
 }
-export const C_WowEntitlementInfo = {
-
-};
-export type EntitlementDeliveredEvent = (frame: UIFrame, e: "ENTITLEMENT_DELIVERED", entitlementType: WoWEntitlementType, textureID: number, name: string, payloadID: number | undefined, showFancyToast: boolean) => void
-export type RafEntitlementDeliveredEvent = (frame: UIFrame, e: "RAF_ENTITLEMENT_DELIVERED", entitlementType: WoWEntitlementType, textureID: number, name: string, payloadID: number | undefined, showFancyToast: boolean) => void
+export const C_WowEntitlementInfo = {};
+export type EntitlementDeliveredEvent = (
+    frame: UIFrame,
+    e: "ENTITLEMENT_DELIVERED",
+    entitlementType: WoWEntitlementType,
+    textureID: number,
+    name: string,
+    payloadID: number | undefined,
+    showFancyToast: boolean
+) => void;
+export type RafEntitlementDeliveredEvent = (
+    frame: UIFrame,
+    e: "RAF_ENTITLEMENT_DELIVERED",
+    entitlementType: WoWEntitlementType,
+    textureID: number,
+    name: string,
+    payloadID: number | undefined,
+    showFancyToast: boolean
+) => void;

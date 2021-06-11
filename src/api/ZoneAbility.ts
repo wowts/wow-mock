@@ -5,8 +5,10 @@ export interface ZoneAbilityInfo {
     uiPriority: number;
     spellID: number;
     textureKit: string;
-    tutorialText: string | undefined
+    tutorialText: string | undefined;
 }
 export const C_ZoneAbility = {
-    GetActiveAbilities: (): LuaArray<ZoneAbilityInfo> => {return {} as any},
+    GetActiveAbilities: (): LuaArray<ZoneAbilityInfo> => {
+        return {} as any;
+    },
 };

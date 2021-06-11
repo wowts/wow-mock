@@ -1,14 +1,14 @@
-import { Vector3DMixin } from '../mixins';
+import { Vector3DMixin } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ItemTryOnReason {
     Success = 0,
     WrongRace = 1,
     NotEquippable = 2,
-    DataPending = 3
+    DataPending = 3,
 }
 export const enum ModelSceneSetting {
-    AlignLightToOrbitDelta = 1
+    AlignLightToOrbitDelta = 1,
 }
 export const enum ModelSceneType {
     MountJournal = 0,
@@ -30,7 +30,7 @@ export const enum ModelSceneType {
     HeartOfAzeroth = 16,
     WorldMapThreat = 17,
     Soulbinds = 18,
-    JailersTowerAnimaGlow = 19
+    JailersTowerAnimaGlow = 19,
 }
 export interface UIModelSceneActorDisplayInfo {
     animation: number;
@@ -39,7 +39,7 @@ export interface UIModelSceneActorDisplayInfo {
     animationKitID: number | undefined;
     spellVisualKitID: number | undefined;
     alpha: number;
-    scale: number
+    scale: number;
 }
 export interface UIModelSceneActorInfo {
     modelActorID: number;
@@ -52,7 +52,7 @@ export interface UIModelSceneActorInfo {
     useCenterForOriginX: boolean;
     useCenterForOriginY: boolean;
     useCenterForOriginZ: boolean;
-    modelActorDisplayID: number | undefined
+    modelActorDisplayID: number | undefined;
 }
 export interface UIModelSceneCameraInfo {
     modelSceneCameraID: number;
@@ -69,16 +69,81 @@ export interface UIModelSceneCameraInfo {
     zoomedYawOffset: number;
     zoomedPitchOffset: number;
     zoomedRollOffset: number;
-    flags: ModelSceneSetting
+    flags: ModelSceneSetting;
 }
 export const C_ModelInfo = {
-    AddActiveModelScene: (modelSceneFrame: any, modelSceneID: number): void => {},
-    AddActiveModelSceneActor: (modelSceneFrameActor: any, modelSceneActorID: number): void => {},
+    AddActiveModelScene: (
+        modelSceneFrame: any,
+        modelSceneID: number
+    ): void => {},
+    AddActiveModelSceneActor: (
+        modelSceneFrameActor: any,
+        modelSceneActorID: number
+    ): void => {},
     ClearActiveModelScene: (modelSceneFrame: any): void => {},
     ClearActiveModelSceneActor: (modelSceneFrameActor: any): void => {},
-    GetModelSceneActorDisplayInfoByID: (modelActorDisplayID: number): UIModelSceneActorDisplayInfo => {return {animation: 0, animationVariation: 0, animSpeed: 0, animationKitID: 0, spellVisualKitID: 0, alpha: 0, scale: 0}},
-    GetModelSceneActorInfoByID: (modelActorID: number): UIModelSceneActorInfo => {return {modelActorID: 0, scriptTag: '', position: {} as any, yaw: 0, pitch: 0, roll: 0, normalizeScaleAggressiveness: 0, useCenterForOriginX: false, useCenterForOriginY: false, useCenterForOriginZ: false, modelActorDisplayID: 0}},
-    GetModelSceneCameraInfoByID: (modelSceneCameraID: number): UIModelSceneCameraInfo => {return {modelSceneCameraID: 0, scriptTag: '', cameraType: '', target: {} as any, yaw: 0, pitch: 0, roll: 0, zoomDistance: 0, minZoomDistance: 0, maxZoomDistance: 0, zoomedTargetOffset: {} as any, zoomedYawOffset: 0, zoomedPitchOffset: 0, zoomedRollOffset: 0, flags: ModelSceneSetting.AlignLightToOrbitDelta}},
-    GetModelSceneInfoByID: (modelSceneID: number): [modelSceneType: ModelSceneType, modelCameraIDs: LuaArray<number>, modelActorsIDs: LuaArray<number>] => {return [ModelSceneType.MountJournal, {} as any, {} as any]},
+    GetModelSceneActorDisplayInfoByID: (
+        modelActorDisplayID: number
+    ): UIModelSceneActorDisplayInfo => {
+        return {
+            animation: 0,
+            animationVariation: 0,
+            animSpeed: 0,
+            animationKitID: 0,
+            spellVisualKitID: 0,
+            alpha: 0,
+            scale: 0,
+        };
+    },
+    GetModelSceneActorInfoByID: (
+        modelActorID: number
+    ): UIModelSceneActorInfo => {
+        return {
+            modelActorID: 0,
+            scriptTag: "",
+            position: {} as any,
+            yaw: 0,
+            pitch: 0,
+            roll: 0,
+            normalizeScaleAggressiveness: 0,
+            useCenterForOriginX: false,
+            useCenterForOriginY: false,
+            useCenterForOriginZ: false,
+            modelActorDisplayID: 0,
+        };
+    },
+    GetModelSceneCameraInfoByID: (
+        modelSceneCameraID: number
+    ): UIModelSceneCameraInfo => {
+        return {
+            modelSceneCameraID: 0,
+            scriptTag: "",
+            cameraType: "",
+            target: {} as any,
+            yaw: 0,
+            pitch: 0,
+            roll: 0,
+            zoomDistance: 0,
+            minZoomDistance: 0,
+            maxZoomDistance: 0,
+            zoomedTargetOffset: {} as any,
+            zoomedYawOffset: 0,
+            zoomedPitchOffset: 0,
+            zoomedRollOffset: 0,
+            flags: ModelSceneSetting.AlignLightToOrbitDelta,
+        };
+    },
+    GetModelSceneInfoByID: (
+        modelSceneID: number
+    ): [
+        modelSceneType: ModelSceneType,
+        modelCameraIDs: LuaArray<number>,
+        modelActorsIDs: LuaArray<number>
+    ] => {
+        return [ModelSceneType.MountJournal, {} as any, {} as any];
+    },
 };
-export type UiModelSceneInfoUpdatedEvent = (frame: UIFrame, e: "UI_MODEL_SCENE_INFO_UPDATED") => void
+export type UiModelSceneInfoUpdatedEvent = (
+    frame: UIFrame,
+    e: "UI_MODEL_SCENE_INFO_UPDATED"
+) => void;
