@@ -12,7 +12,10 @@ export interface GuildTabardInfo {}
 export interface QueueSpecificInfo {}
 export interface RuneforgeLegendaryCraftDescription {}
 export interface RuneforgeItemPreviewInfo {}
-export interface RuneforgeLegendaryComponentInfo {}
+export interface RuneforgeLegendaryComponentInfo {
+    powerID: number;
+    modifiers: LuaArray<number>;
+}
 export interface RuneforgePower {
     runeforgePowerID: number;
     descriptionSpellID: number;
