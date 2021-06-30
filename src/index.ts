@@ -622,14 +622,6 @@ export function IsLoggedIn() {
 // WoW global variables
 export const MAX_COMBO_POINTS = 5;
 export const UNKNOWN = -1;
-export const SCHOOL_MASK_NONE = 0;
-export const SCHOOL_MASK_ARCANE = 1;
-export const SCHOOL_MASK_FIRE = 2;
-export const SCHOOL_MASK_FROST = 4;
-export const SCHOOL_MASK_HOLY = 8;
-export const SCHOOL_MASK_NATURE = 16;
-export const SCHOOL_MASK_SHADOW = 32;
-export const SCHOOL_MASK_PHYSICAL = 64;
 
 export const INVSLOT_AMMO = 0;
 export const INVSLOT_BACK = 15;
