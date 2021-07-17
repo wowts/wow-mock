@@ -1658,6 +1658,12 @@ export const Enum = {
         Endurance: 2,
         Flex: 3,
     },
+    SoulbindNodeState: {
+        Unavailable: 0,
+        Unselected: 1,
+        Selectable: 2,
+        Selected: 3,
+    },
     SuperTrackingType: {
         Quest: 0,
         UserWaypoint: 1,
