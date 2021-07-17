@@ -1652,6 +1652,12 @@ export const Enum = {
         Friend: 2,
         Both: 3,
     },
+    SoulbindConduitType: {
+        Finesse: 0,
+        Potency: 1,
+        Endurance: 2,
+        Flex: 3,
+    },
     SuperTrackingType: {
         Quest: 0,
         UserWaypoint: 1,
