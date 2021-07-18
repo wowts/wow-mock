@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.31.0](https://github.com/wowts/wow-mock/compare/v1.30.2...v1.31.0) (2021-07-18)
+
+
+### Features
+
+* add soulbind tables to Enum ([#13](https://github.com/wowts/wow-mock/issues/13)) ([c1fd880](https://github.com/wowts/wow-mock/commit/c1fd880a720a3a9f06c0c5bebe831689c9f9b827))
+
 ### [1.30.2](https://github.com/wowts/wow-mock/compare/v1.30.1...v1.30.2) (2021-06-30)
 
 
