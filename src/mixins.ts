@@ -46,6 +46,7 @@ export interface ItemLocationMixin {
     IsEqualToBagAndSlot(otherBagID: number, otherSlotIndex: number): boolean;
     IsEqualToEquipmentSlot(otherEquipmentSlotIndex: number): boolean;
     IsEqualTo(otherItemLocation: ItemLocationMixin): boolean;
+    IsValid(): boolean;
 }
 export interface PlayerLocationMixin {}
 export interface Vector2DMixin {}
@@ -101,6 +102,9 @@ export class FakeItemLocation {
                 return false;
             },
             IsEquipmentSlot() {
+                return true;
+            },
+            IsValid() {
                 return true;
             },
             SetBagAndSlot(bagID: number, slotIndex: number) {},
