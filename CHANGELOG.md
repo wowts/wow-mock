@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.31.1](https://github.com/wowts/wow-mock/compare/v1.31.0...v1.31.1) (2021-07-23)
+
+
+### Bug Fixes
+
+* add IsValid() method to ItemLocationMixin ([#15](https://github.com/wowts/wow-mock/issues/15)) ([a969353](https://github.com/wowts/wow-mock/commit/a969353f9d046d740ba1b7a7c11306b1435822f2))
+
 ## [1.31.0](https://github.com/wowts/wow-mock/compare/v1.30.2...v1.31.0) (2021-07-18)
 
 
