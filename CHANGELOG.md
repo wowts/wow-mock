@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.32.0](https://github.com/wowts/wow-mock/compare/v1.31.1...v1.32.0) (2021-08-09)
+
+
+### Features
+
+* add GetUnitName() global API function ([#16](https://github.com/wowts/wow-mock/issues/16)) ([f8cabb9](https://github.com/wowts/wow-mock/commit/f8cabb90bd04809e007ceb79936bf064af23b187))
+
 ### [1.31.1](https://github.com/wowts/wow-mock/compare/v1.31.0...v1.31.1) (2021-07-23)
 
 
