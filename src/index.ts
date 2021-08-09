@@ -226,7 +226,7 @@ export function GetSpellInfo(
 export function GetTime() {
     return 10;
 }
-export function GetUnitName(unitId: string) {
+export function GetUnitName(unitId: string, showServerName: boolean) {
     return fakeUnits.get(unitId)?.name;
 }
 export function InterfaceOptionsFrame_OpenToCategory(frameName: string) {}
