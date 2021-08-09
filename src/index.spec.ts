@@ -1,5 +1,6 @@
 import { test, expect } from "@jest/globals";
+import { GetUnitName } from ".";
 
-test("need to write tests", () => {
-    expect(true).toBeTruthy();
+test("GetUnitName for player returns the player's name", () => {
+    expect(GetUnitName("player", false)).toBe("Player");
 });
