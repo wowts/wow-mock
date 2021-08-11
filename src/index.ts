@@ -19,6 +19,7 @@ export interface FakeUnit {
     guid: string;
     unitId: string;
     name: string;
+    realm: string;
     dead: boolean;
     health: number;
     maxHealth: number;
@@ -28,6 +29,7 @@ export const fakePlayer: FakeUnit = {
     classId: "WARRIOR",
     guid: "dza849844",
     name: "Player",
+    realm: "PlayerRealm",
     unitId: "player",
     specializationIndex: 1,
     dead: false,
@@ -38,6 +40,7 @@ export const fakeTarget: FakeUnit = {
     classId: "SHAMAN",
     guid: "adzdaza9898",
     name: "Target",
+    realm: "TargetRealm",
     unitId: "target",
     dead: false,
     specializationIndex: 1,
@@ -227,7 +230,15 @@ export function GetTime() {
     return 10;
 }
 export function GetUnitName(unitId: string, showServerName: boolean) {
-    return fakeUnits.get(unitId)?.name;
+	const [name, realm] = UnitName(unitId);
+	if (realm) {
+		if (showServerName) {
+			return `${name}-${realm}`;
+		} else {
+			return `${name}(*)`;
+		}
+	}
+    return name;
 }
 export function InterfaceOptionsFrame_OpenToCategory(frameName: string) {}
 export function UnitAura(unitId: string, i: number, filter: string): any[] {
@@ -253,8 +264,14 @@ export function UnitHasVehicleUI(unit: string) {
 export function UnitIsDead(unit: string) {
     return fakeUnits.get(unit)?.dead;
 }
-export function UnitName(unitId: string) {
-    return fakeUnits.get(unitId)?.name;
+export function UnitName(unitId: string): [string | undefined, string | undefined] {
+	const name = fakeUnits.get(unitId)?.name;
+	const realm = fakeUnits.get(unitId)?.realm;
+	const playerRealm = fakePlayer.realm;
+	if (realm == playerRealm) {
+		return [name, undefined];
+	}
+    return [name, realm];
 }
 export function GetActionCooldown(action: number): [number, number, boolean] {
     return [0, 0, false];
