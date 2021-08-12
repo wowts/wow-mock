@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.1](https://github.com/wowts/wow-mock/compare/v1.32.0...v1.32.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* the correct return value for UnitName() is [name, realm] ([#17](https://github.com/wowts/wow-mock/issues/17)) ([55a8587](https://github.com/wowts/wow-mock/commit/55a8587b0c708cc2a38f674003754fa275c2ec40))
+
 ## [1.32.0](https://github.com/wowts/wow-mock/compare/v1.31.1...v1.32.0) (2021-08-09)
 
 
