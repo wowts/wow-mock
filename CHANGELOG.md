@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.2](https://github.com/wowts/wow-mock/compare/v1.32.1...v1.32.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* add COMBATLOG_OBJECT_* constants used by CLEU event handlers ([#18](https://github.com/wowts/wow-mock/issues/18)) ([11a9c07](https://github.com/wowts/wow-mock/commit/11a9c0768b2bcc830d3282697ec7b6e28200ac6f))
+
 ### [1.32.1](https://github.com/wowts/wow-mock/compare/v1.32.0...v1.32.1) (2021-08-12)
 
 
