@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.3](https://github.com/wowts/wow-mock/compare/v1.32.2...v1.32.3) (2021-08-31)
+
+
+### Bug Fixes
+
+* update spells and talents ([#19](https://github.com/wowts/wow-mock/issues/19)) ([698af79](https://github.com/wowts/wow-mock/commit/698af791b136586d33a299048cf347d2b04c34b3))
+
 ### [1.32.2](https://github.com/wowts/wow-mock/compare/v1.32.1...v1.32.2) (2021-08-23)
 
 
