@@ -230,14 +230,14 @@ export function GetTime() {
     return 10;
 }
 export function GetUnitName(unitId: string, showServerName: boolean) {
-	const [name, realm] = UnitName(unitId);
-	if (realm) {
-		if (showServerName) {
-			return `${name}-${realm}`;
-		} else {
-			return `${name}(*)`;
-		}
-	}
+    const [name, realm] = UnitName(unitId);
+    if (realm) {
+        if (showServerName) {
+            return `${name}-${realm}`;
+        } else {
+            return `${name}(*)`;
+        }
+    }
     return name;
 }
 export function InterfaceOptionsFrame_OpenToCategory(frameName: string) {}
@@ -264,13 +264,15 @@ export function UnitHasVehicleUI(unit: string) {
 export function UnitIsDead(unit: string) {
     return fakeUnits.get(unit)?.dead;
 }
-export function UnitName(unitId: string): [string | undefined, string | undefined] {
-	const name = fakeUnits.get(unitId)?.name;
-	const realm = fakeUnits.get(unitId)?.realm;
-	const playerRealm = fakePlayer.realm;
-	if (realm == playerRealm) {
-		return [name, undefined];
-	}
+export function UnitName(
+    unitId: string
+): [string | undefined, string | undefined] {
+    const name = fakeUnits.get(unitId)?.name;
+    const realm = fakeUnits.get(unitId)?.realm;
+    const playerRealm = fakePlayer.realm;
+    if (realm == playerRealm) {
+        return [name, undefined];
+    }
     return [name, realm];
 }
 export function GetActionCooldown(action: number): [number, number, boolean] {
@@ -745,7 +747,7 @@ export const FIRE_TOTEM_SLOT = 3;
 export const WATER_TOTEM_SLOT = 4;
 export const MAX_TOTEMS = 4;
 
-export const COMBATLOG_OBJECT_TYPE_MASK = 0xFC00;
+export const COMBATLOG_OBJECT_TYPE_MASK = 0xfc00;
 export const COMBATLOG_OBJECT_TYPE_OBJECT = 0x4000;
 export const COMBATLOG_OBJECT_TYPE_GUARDIAN = 0x2000;
 export const COMBATLOG_OBJECT_TYPE_PET = 0x1000;
@@ -756,18 +758,18 @@ export const COMBATLOG_OBJECT_CONTROLLER_MASK = 0x0300;
 export const COMBATLOG_OBJECT_CONTROLLER_NPC = 0x0200;
 export const COMBATLOG_OBJECT_CONTROLLER_PLAYER = 0x0100;
 
-export const COMBATLOG_OBJECT_REACTION_MASK = 0x00F0;
+export const COMBATLOG_OBJECT_REACTION_MASK = 0x00f0;
 export const COMBATLOG_OBJECT_REACTION_HOSTILE = 0x0040;
 export const COMBATLOG_OBJECT_REACTION_NEUTRAL = 0x0020;
 export const COMBATLOG_OBJECT_REACTION_FRIENDLY = 0x0010;
 
-export const COMBATLOG_OBJECT_AFFILIATION_MASK = 0x000F;
+export const COMBATLOG_OBJECT_AFFILIATION_MASK = 0x000f;
 export const COMBATLOG_OBJECT_AFFILIATION_OUTSIDER = 0x0008;
 export const COMBATLOG_OBJECT_AFFILIATION_RAID = 0x0004;
 export const COMBATLOG_OBJECT_AFFILIATION_PARTY = 0x0002;
 export const COMBATLOG_OBJECT_AFFILIATION_MINE = 0x0001;
 
-export const COMBATLOG_OBJECT_RAIDTARGET_MASK = 0xFF;
+export const COMBATLOG_OBJECT_RAIDTARGET_MASK = 0xff;
 export const COMBATLOG_OBJECT_RAIDTARGET1 = 0x80;
 export const COMBATLOG_OBJECT_RAIDTARGET2 = 0x40;
 export const COMBATLOG_OBJECT_RAIDTARGET3 = 0x20;
