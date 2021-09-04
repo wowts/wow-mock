@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.4](https://github.com/wowts/wow-mock/compare/v1.32.3...v1.32.4) (2021-09-04)
+
+
+### Bug Fixes
+
+* update spells from simc shadowlands branch from 2021-09-03 ([#20](https://github.com/wowts/wow-mock/issues/20)) ([261fcba](https://github.com/wowts/wow-mock/commit/261fcbac96d10dfbd5caffdc1dc9ffe52bf90e52))
+
 ### [1.32.3](https://github.com/wowts/wow-mock/compare/v1.32.2...v1.32.3) (2021-08-31)
 
 
