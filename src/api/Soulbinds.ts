@@ -172,7 +172,7 @@ export const C_Soulbinds = {
     GetConduitQuality: (conduitID: number, rank: number): number => {
         return 0;
     },
-    GetConduitRankFromCollection: (conduitID: number): number => {
+    GetConduitRank: (conduitID: number): number => {
         return 0;
     },
     GetConduitSpellID: (conduitID: number, conduitRank: number): number => {
