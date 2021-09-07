@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.32.5](https://github.com/wowts/wow-mock/compare/v1.32.4...v1.32.5) (2021-09-07)
+
+
+### Bug Fixes
+
+* GetConduitRankFromCollection() was renamed in 9.1.0 ([#21](https://github.com/wowts/wow-mock/issues/21)) ([7181254](https://github.com/wowts/wow-mock/commit/718125453b9913c0fdea6cef36a600dbea62c26e))
+
 ### [1.32.4](https://github.com/wowts/wow-mock/compare/v1.32.3...v1.32.4) (2021-09-04)
 
 
