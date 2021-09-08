@@ -1,12 +1,29 @@
 import { LuaArray } from "@wowts/lua";
 import { BarberShopRaceData } from "./api";
 
-export interface WeeklyRewardChestThresholdType {}
+export const enum WeeklyRewardChestThresholdType {
+    None = 0,
+    MythicPlus = 1,
+    RankedPvP = 2,
+    Raid = 3,
+    AlsoReceive = 4,
+    Concession = 5,
+}
 export interface CachedRewardType {}
 export interface AppearanceSourceInfo {}
 export interface TradeSkillRecipeInfo {}
-export interface SoulbindConduitType {}
-export interface SoulbindNodeState {}
+export const enum SoulbindConduitType {
+    Finesse = 0,
+    Potency = 1,
+    Endurance = 2,
+    Flex = 3,
+}
+export const enum SoulbindNodeState {
+    Unavailable = 0,
+    Unselected = 1,
+    Selectable = 2,
+    Selected = 3,
+}
 export interface SoulbindConduitTransactionType {}
 export interface GuildTabardInfo {}
 export interface QueueSpecificInfo {}
