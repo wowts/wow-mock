@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.33.1](https://github.com/wowts/wow-mock/compare/v1.33.0...v1.33.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* define missing enums ([f8abfb3](https://github.com/wowts/wow-mock/commit/f8abfb39cce05eb67e3b91f195ff393c86bc3b66))
+
 ## [1.33.0](https://github.com/wowts/wow-mock/compare/v1.32.5...v1.33.0) (2021-09-08)
 
 
