@@ -202,6 +202,7 @@ export interface ClubMemberInfo {
     guildRank: string | undefined;
     guildRankOrder: number | undefined;
     isRemoteChat: boolean | undefined;
+    overallDungeonScore: number | undefined;
 }
 export interface ClubMessageIdentifier {
     epoch: number;
@@ -503,6 +504,7 @@ export const C_Club = {
                     guildRank: "",
                     guildRankOrder: 0,
                     isRemoteChat: false,
+                    overallDungeonScore: 0,
                 },
                 destroyer: {
                     isSelf: false,
@@ -533,6 +535,7 @@ export const C_Club = {
                     guildRank: "",
                     guildRankOrder: 0,
                     isRemoteChat: false,
+                    overallDungeonScore: 0,
                 },
                 destroyed: false,
                 edited: false,
@@ -596,6 +599,7 @@ export const C_Club = {
                 guildRank: "",
                 guildRankOrder: 0,
                 isRemoteChat: false,
+                overallDungeonScore: 0,
             },
             leaders: {} as any,
         };
@@ -664,6 +668,7 @@ export const C_Club = {
             guildRank: "",
             guildRankOrder: 0,
             isRemoteChat: false,
+            overallDungeonScore: 0,
         };
     },
     GetMemberInfoForSelf: (clubId: string): ClubMemberInfo | undefined => {
@@ -696,6 +701,7 @@ export const C_Club = {
             guildRank: "",
             guildRankOrder: 0,
             isRemoteChat: false,
+            overallDungeonScore: 0,
         };
     },
     GetMessageInfo: (
@@ -735,6 +741,7 @@ export const C_Club = {
                 guildRank: "",
                 guildRankOrder: 0,
                 isRemoteChat: false,
+                overallDungeonScore: 0,
             },
             destroyer: {
                 isSelf: false,
@@ -765,6 +772,7 @@ export const C_Club = {
                 guildRank: "",
                 guildRankOrder: 0,
                 isRemoteChat: false,
+                overallDungeonScore: 0,
             },
             destroyed: false,
             edited: false,

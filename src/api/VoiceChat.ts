@@ -37,12 +37,37 @@ export const enum VoiceChatStatusCode {
     InvalidInputDevice = 23,
     InvalidOutputDevice = 24,
 }
+export const enum VoiceTtsDestination {
+    RemoteTransmission = 0,
+    LocalPlayback = 1,
+    RemoteTransmissionWithLocalPlayback = 2,
+    QueuedRemoteTransmission = 3,
+    QueuedLocalPlayback = 4,
+    QueuedRemoteTransmissionWithLocalPlayback = 5,
+    ScreenReader = 6,
+}
+export const enum VoiceTtsStatusCode {
+    Success = 0,
+    InvalidEngineType = 1,
+    EngineAllocationFailed = 2,
+    NotSupported = 3,
+    MaxCharactersExceeded = 4,
+    UtteranceBelowMinimumDuration = 5,
+    InputTextEnqueued = 6,
+    SdkNotInitialized = 7,
+    DestinationQueueFull = 8,
+    EnqueueNotNecessary = 9,
+    UtteranceNotFound = 10,
+    ManagerNotFound = 11,
+    InvalidArgument = 12,
+    InternalError = 13,
+}
 export interface VoiceAudioDevice {
     deviceID: string;
     displayName: string;
-    power: number;
     isActive: boolean;
     isSystemDefault: boolean;
+    isCommsDefault: boolean;
 }
 export interface VoiceChatChannel {
     name: string;
@@ -54,7 +79,7 @@ export interface VoiceChatChannel {
     isActive: boolean;
     isMuted: boolean;
     isTransmitting: boolean;
-    isLocalProcess: boolean;
+    isTranscribing: boolean;
     members: LuaArray<VoiceChatMember>;
 }
 export interface VoiceChatMember {
@@ -69,8 +94,13 @@ export interface VoiceChatProcess {
     name: string;
     channels: LuaArray<VoiceChatChannel>;
 }
+export interface VoiceTtsVoiceType {
+    voiceID: number;
+    name: string;
+}
 export const C_VoiceChat = {
     ActivateChannel: (channelID: number): void => {},
+    ActivateChannelTranscription: (channelID: number): void => {},
     BeginLocalCapture: (listenToLocalUser: boolean): void => {},
     CanPlayerUseVoiceChat: (): boolean => {
         return false;
@@ -79,6 +109,7 @@ export const C_VoiceChat = {
         return VoiceChatStatusCode.Success;
     },
     DeactivateChannel: (channelID: number): void => {},
+    DeactivateChannelTranscription: (channelID: number): void => {},
     EndLocalCapture: (): void => {},
     GetActiveChannelID: (): number | undefined => {
         return 0;
@@ -103,7 +134,7 @@ export const C_VoiceChat = {
             isActive: false,
             isMuted: false,
             isTransmitting: false,
-            isLocalProcess: false,
+            isTranscribing: false,
             members: {} as any,
         };
     },
@@ -120,7 +151,7 @@ export const C_VoiceChat = {
             isActive: false,
             isMuted: false,
             isTransmitting: false,
-            isLocalProcess: false,
+            isTranscribing: false,
             members: {} as any,
         };
     },
@@ -138,7 +169,7 @@ export const C_VoiceChat = {
             isActive: false,
             isMuted: false,
             isTransmitting: false,
-            isLocalProcess: false,
+            isTranscribing: false,
             members: {} as any,
         };
     },
@@ -217,6 +248,12 @@ export const C_VoiceChat = {
     GetPushToTalkBinding: (): LuaArray<string> | undefined => {
         return {} as any;
     },
+    GetRemoteTtsVoices: (): LuaArray<VoiceTtsVoiceType> => {
+        return {} as any;
+    },
+    GetTtsVoices: (): LuaArray<VoiceTtsVoiceType> => {
+        return {} as any;
+    },
     GetVADSensitivity: (): number | undefined => {
         return 0;
     },
@@ -271,6 +308,15 @@ export const C_VoiceChat = {
     IsSilenced: (): boolean | undefined => {
         return false;
     },
+    IsSpeakForMeActive: (): boolean => {
+        return false;
+    },
+    IsSpeakForMeAllowed: (): boolean => {
+        return false;
+    },
+    IsTranscriptionAllowed: (): boolean => {
+        return false;
+    },
     LeaveChannel: (channelID: number): void => {},
     Login: (): VoiceChatStatusCode => {
         return VoiceChatStatusCode.Success;
@@ -313,6 +359,15 @@ export const C_VoiceChat = {
     ShouldDiscoverChannels: (): boolean => {
         return false;
     },
+    SpeakRemoteTextSample: (text: string): void => {},
+    SpeakText: (
+        voiceID: number,
+        text: string,
+        destination: VoiceTtsDestination,
+        rate: number,
+        volume: number
+    ): void => {},
+    StopSpeakingText: (): void => {},
     ToggleDeafened: (): void => {},
     ToggleMemberMuted: (playerLocation: PlayerLocationMixin): void => {},
     ToggleMuted: (): void => {},
@@ -424,6 +479,14 @@ export type VoiceChatChannelMemberSpeakingStateChangedEvent = (
     channelID: number,
     isSpeaking: boolean
 ) => void;
+export type VoiceChatChannelMemberSttMessageEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_CHANNEL_MEMBER_STT_MESSAGE",
+    memberID: number,
+    channelID: number,
+    message: string,
+    language: string
+) => void;
 export type VoiceChatChannelMemberVolumeChangedEvent = (
     frame: UIFrame,
     e: "VOICE_CHAT_CHANNEL_MEMBER_VOLUME_CHANGED",
@@ -447,6 +510,12 @@ export type VoiceChatChannelRemovedEvent = (
     frame: UIFrame,
     e: "VOICE_CHAT_CHANNEL_REMOVED",
     channelID: number
+) => void;
+export type VoiceChatChannelTranscribingChangedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_CHANNEL_TRANSCRIBING_CHANGED",
+    channelID: number,
+    isTranscribing: boolean
 ) => void;
 export type VoiceChatChannelTransmitChangedEvent = (
     frame: UIFrame,
@@ -520,4 +589,44 @@ export type VoiceChatSilencedChangedEvent = (
     frame: UIFrame,
     e: "VOICE_CHAT_SILENCED_CHANGED",
     isSilenced: boolean
+) => void;
+export type VoiceChatSpeakForMeActiveStatusUpdatedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_SPEAK_FOR_ME_ACTIVE_STATUS_UPDATED"
+) => void;
+export type VoiceChatSpeakForMeFeatureStatusUpdatedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_SPEAK_FOR_ME_FEATURE_STATUS_UPDATED"
+) => void;
+export type VoiceChatTtsPlaybackFailedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_TTS_PLAYBACK_FAILED",
+    status: VoiceTtsStatusCode,
+    utteranceID: number,
+    destination: VoiceTtsDestination
+) => void;
+export type VoiceChatTtsPlaybackFinishedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_TTS_PLAYBACK_FINISHED",
+    numConsumers: number,
+    utteranceID: number,
+    destination: VoiceTtsDestination
+) => void;
+export type VoiceChatTtsPlaybackStartedEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_TTS_PLAYBACK_STARTED",
+    numConsumers: number,
+    utteranceID: number,
+    durationMS: number,
+    destination: VoiceTtsDestination
+) => void;
+export type VoiceChatTtsSpeakTextUpdateEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE",
+    status: VoiceTtsStatusCode,
+    utteranceID: number
+) => void;
+export type VoiceChatTtsVoicesUpdateEvent = (
+    frame: UIFrame,
+    e: "VOICE_CHAT_TTS_VOICES_UPDATE"
 ) => void;

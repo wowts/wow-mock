@@ -64,6 +64,7 @@ export interface CommoditySearchResultInfo {
     unitPrice: number;
     auctionID: number;
     owners: LuaArray<string>;
+    totalNumberOfOwners: number;
     timeLeftSeconds: number | undefined;
     numOwnerItems: number;
     containsOwnerItem: boolean;
@@ -88,6 +89,7 @@ export interface ItemKeyInfo {
 export interface ItemSearchResultInfo {
     itemKey: ItemKey;
     owners: LuaArray<string>;
+    totalNumberOfOwners: number;
     timeLeft: AuctionHouseTimeLeftBand;
     auctionID: number;
     quantity: number;
@@ -186,6 +188,7 @@ export const C_AuctionHouse = {
             unitPrice: 0,
             auctionID: 0,
             owners: {} as any,
+            totalNumberOfOwners: 0,
             timeLeftSeconds: 0,
             numOwnerItems: 0,
             containsOwnerItem: false,
@@ -242,6 +245,7 @@ export const C_AuctionHouse = {
                 battlePetSpeciesID: 0,
             },
             owners: {} as any,
+            totalNumberOfOwners: 0,
             timeLeft: AuctionHouseTimeLeftBand.Short,
             auctionID: 0,
             quantity: 0,
@@ -463,7 +467,11 @@ export const C_AuctionHouse = {
     ): void => {},
     QueryOwnedAuctions: (sorts: LuaArray<AuctionHouseSortType>): void => {},
     RefreshCommoditySearchResults: (itemID: number): void => {},
-    RefreshItemSearchResults: (itemKey: ItemKey): void => {},
+    RefreshItemSearchResults: (
+        itemKey: ItemKey,
+        minLevelFilter: number | undefined,
+        maxLevelFilter: number | undefined
+    ): void => {},
     ReplicateItems: (): void => {},
     RequestMoreBrowseResults: (): void => {},
     RequestMoreCommoditySearchResults: (itemID: number): boolean => {
@@ -484,7 +492,9 @@ export const C_AuctionHouse = {
     SendSearchQuery: (
         itemKey: ItemKey,
         sorts: LuaArray<AuctionHouseSortType>,
-        separateOwnerItems: boolean
+        separateOwnerItems: boolean,
+        minLevelFilter: number,
+        maxLevelFilter: number
     ): void => {},
     SendSellSearchQuery: (
         itemKey: ItemKey,

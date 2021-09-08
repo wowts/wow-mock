@@ -31,6 +31,7 @@ export interface SoulbindData {
     tree: SoulbindTree;
     modelSceneData: SoulbindModelSceneData;
     activationSoundKitID: number;
+    playerConditionReason: string | undefined;
 }
 export interface SoulbindModelSceneData {
     creatureDisplayInfoID: number;
@@ -48,6 +49,8 @@ export interface SoulbindNode {
     state: SoulbindNodeState;
     conduitType: SoulbindConduitType | undefined;
     parentNodeIDs: LuaArray<number>;
+    failureRenownRequirement: number | undefined;
+    socketEnhanced: boolean | undefined;
 }
 export interface SoulbindTree {
     editable: boolean;
@@ -166,9 +169,6 @@ export const C_Soulbinds = {
     GetConduitIDPendingInstall: (nodeID: number): number => {
         return 0;
     },
-    GetConduitItemLevel: (conduitID: number, rank: number): number => {
-        return 0;
-    },
     GetConduitQuality: (conduitID: number, rank: number): number => {
         return 0;
     },
@@ -194,6 +194,8 @@ export const C_Soulbinds = {
             state: {} as any,
             conduitType: {} as any,
             parentNodeIDs: {} as any,
+            failureRenownRequirement: 0,
+            socketEnhanced: false,
         };
     },
     GetSoulbindData: (soulbindID: number): SoulbindData => {
@@ -208,7 +210,11 @@ export const C_Soulbinds = {
             tree: { editable: false, nodes: {} as any },
             modelSceneData: { creatureDisplayInfoID: 0, modelSceneActorID: 0 },
             activationSoundKitID: 0,
+            playerConditionReason: "",
         };
+    },
+    GetSpecsAssignedToSoulbind: (soulbindID: number): LuaArray<number> => {
+        return {} as any;
     },
     GetTotalConduitChargesPending: (): number => {
         return 0;

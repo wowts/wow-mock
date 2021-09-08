@@ -90,6 +90,12 @@ export type UiErrorMessageEvent = (
     errorType: number,
     message: string
 ) => void;
+export type UiErrorPopupEvent = (
+    frame: UIFrame,
+    e: "UI_ERROR_POPUP",
+    errorType: number,
+    message: string
+) => void;
 export type UiInfoMessageEvent = (
     frame: UIFrame,
     e: "UI_INFO_MESSAGE",

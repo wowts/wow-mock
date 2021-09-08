@@ -1,3 +1,4 @@
+import { ContributionState } from "./common";
 import { ColorMixin, Vector2DMixin } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
@@ -13,13 +14,6 @@ export const enum ContributionResult {
     FailedConditionCheck = 5,
     UnableToCompleteTurnIn = 6,
     InternalError = 7,
-}
-export const enum ContributionState {
-    None = 0,
-    Building = 1,
-    Active = 2,
-    UnderAttack = 3,
-    Destroyed = 4,
 }
 export interface ContributionAppearance {
     stateName: string;

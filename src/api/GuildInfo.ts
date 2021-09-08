@@ -66,6 +66,13 @@ export const C_GuildInfo = {
         guildMemberGUID: string,
         skillLineID: number
     ): void => {},
+    QueryGuildMembersForRecipe: (
+        skillLineID: number,
+        recipeSpellID: number,
+        recipeLevel: number | undefined
+    ): number => {
+        return 0;
+    },
     RemoveFromGuild: (guid: string): void => {},
     SetGuildRankOrder: (guid: string, rankOrder: number): void => {},
     SetNote: (guid: string, note: string, isPublic: boolean): void => {},

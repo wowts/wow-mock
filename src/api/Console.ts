@@ -31,7 +31,8 @@ export const enum ConsoleColorType {
 export const enum ConsoleCommandType {
     Cvar = 0,
     Command = 1,
-    Script = 2,
+    Macro = 2,
+    Script = 3,
 }
 export interface ConsoleCommandInfo {
     command: string;
@@ -39,6 +40,7 @@ export interface ConsoleCommandInfo {
     category: ConsoleCategory;
     commandType: ConsoleCommandType;
     scriptContents: string;
+    scriptParameters: string;
 }
 export const C_Console = {
     GetAllCommands: (): LuaArray<ConsoleCommandInfo> => {

@@ -6,6 +6,7 @@ export const enum OptionalReagentItemFlag {
 }
 export interface OptionalReagentSlot {
     requiredSkillRank: number;
+    lockedReason: string | undefined;
     slotText: string | undefined;
     options: LuaArray<number>;
 }

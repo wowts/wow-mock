@@ -38,6 +38,8 @@ export interface BNetGameAccountInfo {
     isWowMobile: boolean;
     canSummon: boolean;
     hasFocus: boolean;
+    regionID: number;
+    isInCurrentRegion: boolean;
 }
 export const C_BattleNet = {
     GetAccountInfoByGUID: (guid: string): BNetAccountInfo | undefined => {
@@ -77,6 +79,8 @@ export const C_BattleNet = {
                 isWowMobile: false,
                 canSummon: false,
                 hasFocus: false,
+                regionID: 0,
+                isInCurrentRegion: false,
             },
         };
     },
@@ -120,6 +124,8 @@ export const C_BattleNet = {
                 isWowMobile: false,
                 canSummon: false,
                 hasFocus: false,
+                regionID: 0,
+                isInCurrentRegion: false,
             },
         };
     },
@@ -163,6 +169,8 @@ export const C_BattleNet = {
                 isWowMobile: false,
                 canSummon: false,
                 hasFocus: false,
+                regionID: 0,
+                isInCurrentRegion: false,
             },
         };
     },
@@ -191,6 +199,8 @@ export const C_BattleNet = {
             isWowMobile: false,
             canSummon: false,
             hasFocus: false,
+            regionID: 0,
+            isInCurrentRegion: false,
         };
     },
     GetFriendNumGameAccounts: (friendIndex: number): number => {
@@ -220,6 +230,8 @@ export const C_BattleNet = {
             isWowMobile: false,
             canSummon: false,
             hasFocus: false,
+            regionID: 0,
+            isInCurrentRegion: false,
         };
     },
     GetGameAccountInfoByID: (id: number): BNetGameAccountInfo | undefined => {
@@ -244,6 +256,8 @@ export const C_BattleNet = {
             isWowMobile: false,
             canSummon: false,
             hasFocus: false,
+            regionID: 0,
+            isInCurrentRegion: false,
         };
     },
 };

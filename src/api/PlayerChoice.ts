@@ -10,118 +10,83 @@ export const enum PlayerChoiceRarity {
 export interface PlayerChoiceInfo {
     choiceID: number;
     questionText: string;
-    numOptions: number;
     uiTextureKit: string;
-    soundKitID: number | undefined;
     hideWarboardHeader: boolean;
     keepOpenAfterChoice: boolean;
+    options: LuaArray<PlayerChoiceOptionInfo>;
+    soundKitID: number | undefined;
+}
+export interface PlayerChoiceOptionButtonInfo {
+    id: number;
+    text: string;
+    disabled: boolean;
+    confirmation: string | undefined;
+    tooltip: string | undefined;
+    rewardQuestID: number | undefined;
+    soundKitID: number | undefined;
 }
 export interface PlayerChoiceOptionInfo {
     id: number;
-    responseIdentifier: number;
-    buttonText: string;
     description: string;
     header: string;
     choiceArtID: number;
-    confirmation: string | undefined;
-    widgetSetID: number | undefined;
-    disabledButton: boolean;
     desaturatedArt: boolean;
     disabledOption: boolean;
-    groupID: number | undefined;
-    headerIconAtlasElement: string | undefined;
-    subHeader: string | undefined;
-    buttonTooltip: string | undefined;
-    rewardQuestID: number | undefined;
-    soundKitID: number | undefined;
     hasRewards: boolean;
+    rewardInfo: PlayerChoiceOptionRewardInfo;
     rarity: PlayerChoiceRarity;
+    uiTextureKit: string;
+    maxStacks: number;
+    buttons: LuaArray<PlayerChoiceOptionButtonInfo>;
+    widgetSetID: number | undefined;
+    spellID: number | undefined;
     rarityColor: ColorMixin | undefined;
     typeArtID: number | undefined;
-    uiTextureKit: string | undefined;
-    spellID: number | undefined;
-    maxStacks: number;
+    headerIconAtlasElement: string | undefined;
+    subHeader: string | undefined;
+}
+export interface PlayerChoiceOptionRewardInfo {
+    currencyRewards: LuaArray<PlayerChoiceRewardCurrencyInfo>;
+    itemRewards: LuaArray<PlayerChoiceRewardItemInfo>;
+    repRewards: LuaArray<PlayerChoiceRewardReputationInfo>;
 }
 export interface PlayerChoiceRewardCurrencyInfo {
     currencyId: number;
+    name: string;
     currencyTexture: number;
     quantity: number;
-}
-export interface PlayerChoiceRewardInfo {
-    money: number | undefined;
-    xp: number | undefined;
-    itemRewards: LuaArray<PlayerChoiceRewardItemInfo>;
-    currencyRewards: LuaArray<PlayerChoiceRewardCurrencyInfo>;
-    repRewards: LuaArray<PlayerChoiceRewardReputationInfo>;
+    isCurrencyContainer: boolean;
 }
 export interface PlayerChoiceRewardItemInfo {
     itemId: number;
     name: string;
-    quality: number;
-    textureFileId: number;
     quantity: number;
-    itemLink: string;
 }
 export interface PlayerChoiceRewardReputationInfo {
     factionId: number;
     quantity: number;
 }
 export const C_PlayerChoice = {
-    GetPlayerChoiceInfo: (): PlayerChoiceInfo => {
+    GetCurrentPlayerChoiceInfo: (): PlayerChoiceInfo => {
         return {
             choiceID: 0,
             questionText: "",
-            numOptions: 0,
             uiTextureKit: "",
-            soundKitID: 0,
             hideWarboardHeader: false,
             keepOpenAfterChoice: false,
-        };
-    },
-    GetPlayerChoiceOptionInfo: (
-        optionIndex: number
-    ): PlayerChoiceOptionInfo => {
-        return {
-            id: 0,
-            responseIdentifier: 0,
-            buttonText: "",
-            description: "",
-            header: "",
-            choiceArtID: 0,
-            confirmation: "",
-            widgetSetID: 0,
-            disabledButton: false,
-            desaturatedArt: false,
-            disabledOption: false,
-            groupID: 0,
-            headerIconAtlasElement: "",
-            subHeader: "",
-            buttonTooltip: "",
-            rewardQuestID: 0,
+            options: {} as any,
             soundKitID: 0,
-            hasRewards: false,
-            rarity: PlayerChoiceRarity.Common,
-            rarityColor: {} as any,
-            typeArtID: 0,
-            uiTextureKit: "",
-            spellID: 0,
-            maxStacks: 0,
         };
     },
-    GetPlayerChoiceRewardInfo: (
-        rewardIndex: number
-    ): PlayerChoiceRewardInfo => {
-        return {
-            money: 0,
-            xp: 0,
-            itemRewards: {} as any,
-            currencyRewards: {} as any,
-            repRewards: {} as any,
-        };
+    GetNumRerolls: (): number => {
+        return 0;
     },
     IsWaitingForPlayerChoiceResponse: (): boolean => {
         return false;
     },
+    OnUIClosed: (): void => {},
+    RequestRerollPlayerChoice: (): void => {},
+    SendPlayerChoiceResponse: (responseID: number): void => {},
 };
 export type PlayerChoiceCloseEvent = (
     frame: UIFrame,

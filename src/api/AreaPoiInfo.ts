@@ -10,6 +10,7 @@ export interface AreaPOIInfo {
     widgetSetID: number | undefined;
     atlasName: string | undefined;
     uiTextureKit: string | undefined;
+    shouldGlow: boolean;
 }
 export const C_AreaPoiInfo = {
     GetAreaPOIForMap: (uiMapID: number): LuaArray<number> => {
@@ -25,6 +26,7 @@ export const C_AreaPoiInfo = {
             widgetSetID: 0,
             atlasName: "",
             uiTextureKit: "",
+            shouldGlow: false,
         };
     },
     GetAreaPOISecondsLeft: (areaPoiID: number): number => {

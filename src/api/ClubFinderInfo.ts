@@ -300,6 +300,7 @@ export const C_ClubFinder = {
         itemLevelRequirement: number,
         name: string,
         description: string,
+        avatarId: number,
         specs: LuaArray<number>,
         type: ClubFinderRequestType
     ): boolean => {

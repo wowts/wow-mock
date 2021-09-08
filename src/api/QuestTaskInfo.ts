@@ -50,6 +50,9 @@ export const C_TaskQuest = {
     GetThreatQuests: (): LuaArray<number> => {
         return {} as any;
     },
+    GetUIWidgetSetIDFromQuestID: (questID: number): number => {
+        return 0;
+    },
     IsActive: (questID: number): boolean => {
         return false;
     },

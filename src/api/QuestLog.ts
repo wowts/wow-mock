@@ -86,6 +86,7 @@ export interface QuestTheme {
     background: string;
     seal: string;
     signature: string;
+    poiIcon: string;
 }
 export const C_QuestLog = {
     AbandonQuest: (): void => {},
@@ -210,7 +211,7 @@ export const C_QuestLog = {
         return [0, false, false, false, false];
     },
     GetQuestDetailsTheme: (questID: number): QuestTheme | undefined => {
-        return { background: "", seal: "", signature: "" };
+        return { background: "", seal: "", signature: "", poiIcon: "" };
     },
     GetQuestDifficultyLevel: (questID: number): number => {
         return 0;
@@ -228,6 +229,17 @@ export const C_QuestLog = {
     ): number | undefined => {
         return 0;
     },
+    GetQuestLogPortraitGiver: (
+        questLogIndex: number | undefined
+    ): [
+        portraitGiver: number,
+        portraitGiverText: string,
+        portraitGiverName: string,
+        portraitGiverMount: number,
+        portraitGiverModelSceneID: number | undefined
+    ] => {
+        return [0, "", "", 0, 0];
+    },
     GetQuestObjectives: (questID: number): LuaArray<QuestObjectiveInfo> => {
         return {} as any;
     },
@@ -241,6 +253,9 @@ export const C_QuestLog = {
             isElite: false,
             displayExpiration: false,
         };
+    },
+    GetQuestType: (questID: number): number | undefined => {
+        return 0;
     },
     GetQuestWatchType: (questID: number): QuestWatchType | undefined => {
         return QuestWatchType.Automatic;
@@ -364,6 +379,9 @@ export const C_QuestLog = {
     SetAbandonQuest: (): void => {},
     SetMapForQuestPOIs: (uiMapID: number): void => {},
     SetSelectedQuest: (questID: number): void => {},
+    ShouldDisplayTimeRemaining: (questID: number): boolean => {
+        return false;
+    },
     ShouldShowQuestRewards: (questID: number): boolean => {
         return false;
     },

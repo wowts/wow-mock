@@ -1,4 +1,11 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
+export interface BestDungeonScoreMapInfo {
+    mapScore: number;
+    mapName: string;
+    bestRunLevel: number;
+    finishedSuccess: boolean;
+}
 export interface LfgApplicantData {
     applicantID: number;
     applicationStatus: string;
@@ -35,8 +42,11 @@ export interface LfgSearchResultData {
     numGuildMates: number;
     isDelisted: boolean;
     autoAccept: boolean;
+    isWarMode: boolean;
     age: number;
     questID: number | undefined;
+    leaderOverallDungeonScore: number | undefined;
+    leaderDungeonScoreInfo: BestDungeonScoreMapInfo | undefined;
 }
 export interface WowLocale {
     enUS: boolean;
@@ -76,6 +86,18 @@ export const C_LFGList = {
             questID: 0,
         };
     },
+    GetApplicantDungeonScoreForListing: (
+        localID: number,
+        applicantIndex: number,
+        activityID: number
+    ): BestDungeonScoreMapInfo => {
+        return {
+            mapScore: 0,
+            mapName: "",
+            bestRunLevel: 0,
+            finishedSuccess: false,
+        };
+    },
     GetApplicantInfo: (applicantID: number): LfgApplicantData => {
         return {
             applicantID: 0,
@@ -86,6 +108,12 @@ export const C_LFGList = {
             comment: "",
             displayOrderID: 0,
         };
+    },
+    GetFilteredSearchResults: (): [
+        totalResultsFound: number,
+        filteredResults: LuaArray<number>
+    ] => {
+        return [0, {} as any];
     },
     GetSearchResultInfo: (searchResultID: number): LfgSearchResultData => {
         return {
@@ -103,9 +131,23 @@ export const C_LFGList = {
             numGuildMates: 0,
             isDelisted: false,
             autoAccept: false,
+            isWarMode: false,
             age: 0,
             questID: 0,
+            leaderOverallDungeonScore: 0,
+            leaderDungeonScoreInfo: {
+                mapScore: 0,
+                mapName: "",
+                bestRunLevel: 0,
+                finishedSuccess: false,
+            },
         };
+    },
+    GetSearchResults: (): [
+        totalResultsFound: number,
+        results: LuaArray<number>
+    ] => {
+        return [0, {} as any];
     },
     HasActiveEntryInfo: (): boolean => {
         return false;

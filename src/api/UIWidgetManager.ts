@@ -73,11 +73,27 @@ export const enum UIWidgetFontType {
     Shadow = 1,
     Outline = 2,
 }
+export const enum UIWidgetModelSceneLayer {
+    None = 0,
+    Front = 1,
+    Back = 2,
+}
 export const enum UIWidgetTextSizeType {
     Small = 0,
     Medium = 1,
     Large = 2,
     Huge = 3,
+}
+export const enum UIWidgetTooltipLocation {
+    Default = 0,
+    BottomLeft = 1,
+    Left = 2,
+    TopLeft = 3,
+    Top = 4,
+    TopRight = 5,
+    Right = 6,
+    BottomRight = 7,
+    Bottom = 8,
 }
 export const enum WidgetAnimationType {
     None = 0,
@@ -91,11 +107,18 @@ export const enum WidgetEnabledState {
     Disabled = 0,
     Enabled = 1,
     Red = 2,
-    Highlight = 3,
+    White = 3,
+    Green = 4,
+    Gold = 5,
 }
 export const enum WidgetShownState {
     Hidden = 0,
     Shown = 1,
+}
+export const enum WidgetTextHorizontalAlignmentType {
+    Left = 0,
+    Center = 1,
+    Right = 2,
 }
 export const enum ZoneControlActiveState {
     Inactive = 0,
@@ -141,6 +164,8 @@ export interface BulletTextListWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface CaptureBarWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -152,6 +177,7 @@ export interface CaptureBarWidgetVisualizationInfo {
     tooltip: string;
     glowAnimType: CaptureBarWidgetGlowAnimType;
     fillDirectionType: CaptureBarWidgetFillDirectionType;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -162,6 +188,8 @@ export interface CaptureBarWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface CaptureZoneVisualizationInfo {
     shownState: WidgetShownState;
@@ -169,6 +197,7 @@ export interface CaptureZoneVisualizationInfo {
     leadingEdgeType: ZoneControlLeadingEdgeType;
     dangerFlashType: ZoneControlDangerFlashType;
     zoneInfo: ZoneEntry;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -179,6 +208,8 @@ export interface CaptureZoneVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface DiscreteProgressStepsVisualizationInfo {
     shownState: WidgetShownState;
@@ -187,6 +218,7 @@ export interface DiscreteProgressStepsVisualizationInfo {
     progressMax: number;
     progressVal: number;
     numSteps: number;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -197,6 +229,8 @@ export interface DiscreteProgressStepsVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface DoubleIconAndTextWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -205,6 +239,7 @@ export interface DoubleIconAndTextWidgetVisualizationInfo {
     leftTooltip: string;
     rightText: string;
     rightTooltip: string;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -215,11 +250,14 @@ export interface DoubleIconAndTextWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface DoubleStateIconRowVisualizationInfo {
     shownState: WidgetShownState;
     leftIcons: LuaArray<UIWidgetStateIconInfo>;
     rightIcons: LuaArray<UIWidgetStateIconInfo>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -230,6 +268,8 @@ export interface DoubleStateIconRowVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface DoubleStatusBarWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -243,6 +283,8 @@ export interface DoubleStatusBarWidgetVisualizationInfo {
     rightBarTooltip: string;
     barValueTextType: StatusBarValueTextType;
     text: string;
+    leftBarTooltipLoc: UIWidgetTooltipLocation;
+    rightBarTooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -253,10 +295,13 @@ export interface DoubleStatusBarWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface HorizontalCurrenciesWidgetVisualizationInfo {
     shownState: WidgetShownState;
     currencies: LuaArray<UIWidgetCurrencyInfo>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -267,12 +312,15 @@ export interface HorizontalCurrenciesWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface IconAndTextWidgetVisualizationInfo {
     state: IconAndTextWidgetState;
     text: string;
     tooltip: string;
     dynamicTooltip: string;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -283,6 +331,8 @@ export interface IconAndTextWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface IconTextAndBackgroundWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -297,6 +347,8 @@ export interface IconTextAndBackgroundWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface IconTextAndCurrenciesWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -306,6 +358,7 @@ export interface IconTextAndCurrenciesWidgetVisualizationInfo {
     text: string;
     description: string;
     currencies: LuaArray<UIWidgetCurrencyInfo>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -316,6 +369,8 @@ export interface IconTextAndCurrenciesWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -331,6 +386,8 @@ export interface ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface ScenarioHeaderTimerWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -349,11 +406,31 @@ export interface ScenarioHeaderTimerWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
+}
+export interface SpacerVisualizationInfo {
+    shownState: WidgetShownState;
+    widgetWidth: number;
+    widgetHeight: number;
+    widgetSizeSetting: number;
+    textureKit: string;
+    frameTextureKit: string;
+    hasTimer: boolean;
+    orderIndex: number;
+    widgetTag: string;
+    inAnimType: WidgetAnimationType;
+    outAnimType: WidgetAnimationType;
+    widgetScale: UIWidgetScale;
+    layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface SpellDisplayVisualizationInfo {
     shownState: WidgetShownState;
     enabledState: WidgetEnabledState;
     spellInfo: UIWidgetSpellInfo;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -364,10 +441,13 @@ export interface SpellDisplayVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface StackedResourceTrackerWidgetVisualizationInfo {
     shownState: WidgetShownState;
     resources: LuaArray<UIWidgetCurrencyInfo>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -378,6 +458,8 @@ export interface StackedResourceTrackerWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface StatusBarWidgetVisualizationInfo {
     shownState: WidgetShownState;
@@ -391,6 +473,7 @@ export interface StatusBarWidgetVisualizationInfo {
     overrideBarTextShownType: StatusBarOverrideBarTextShownType;
     colorTint: StatusBarColorTintValue;
     partitionValues: LuaArray<number>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -401,14 +484,22 @@ export interface StatusBarWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
-export interface TextWithStateWidgetVisualizationInfo {
-    shownState: WidgetShownState;
-    enabledState: WidgetEnabledState;
+export interface TextColumnRowEntryInfo {
     text: string;
-    tooltip: string;
+    enabledState: WidgetEnabledState;
+    hAlign: WidgetTextHorizontalAlignmentType;
+    columnWidth: number;
+}
+export interface TextColumnRowVisualizationInfo {
+    shownState: WidgetShownState;
+    entries: LuaArray<TextColumnRowEntryInfo>;
     textSizeType: UIWidgetTextSizeType;
     fontType: UIWidgetFontType;
+    tooltip: string;
+    tooltipLoc: UIWidgetTooltipLocation;
     bottomPadding: number;
     widgetSizeSetting: number;
     textureKit: string;
@@ -420,6 +511,31 @@ export interface TextWithStateWidgetVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
+}
+export interface TextWithStateWidgetVisualizationInfo {
+    shownState: WidgetShownState;
+    enabledState: WidgetEnabledState;
+    text: string;
+    tooltip: string;
+    textSizeType: UIWidgetTextSizeType;
+    fontType: UIWidgetFontType;
+    bottomPadding: number;
+    tooltipLoc: UIWidgetTooltipLocation;
+    hAlign: WidgetTextHorizontalAlignmentType;
+    widgetSizeSetting: number;
+    textureKit: string;
+    frameTextureKit: string;
+    hasTimer: boolean;
+    orderIndex: number;
+    widgetTag: string;
+    inAnimType: WidgetAnimationType;
+    outAnimType: WidgetAnimationType;
+    widgetScale: UIWidgetScale;
+    layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface TextureAndTextEntryInfo {
     text: string;
@@ -429,6 +545,7 @@ export interface TextureAndTextRowVisualizationInfo {
     shownState: WidgetShownState;
     entries: LuaArray<TextureAndTextEntryInfo>;
     textSizeType: UIWidgetTextSizeType;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -439,11 +556,14 @@ export interface TextureAndTextRowVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface TextureAndTextVisualizationInfo {
     shownState: WidgetShownState;
     text: string;
     tooltip: string;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -454,10 +574,13 @@ export interface TextureAndTextVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface TextureWithAnimationVisualizationInfo {
     shownState: WidgetShownState;
     tooltip: string;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -468,6 +591,8 @@ export interface TextureWithAnimationVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface UIWidgetCurrencyInfo {
     iconFileID: number;
@@ -506,6 +631,7 @@ export interface ZoneControlVisualizationInfo {
     leadingEdgeType: ZoneControlLeadingEdgeType;
     dangerFlashType: ZoneControlDangerFlashType;
     zoneEntries: LuaArray<ZoneEntry>;
+    tooltipLoc: UIWidgetTooltipLocation;
     widgetSizeSetting: number;
     textureKit: string;
     frameTextureKit: string;
@@ -516,6 +642,8 @@ export interface ZoneControlVisualizationInfo {
     outAnimType: WidgetAnimationType;
     widgetScale: UIWidgetScale;
     layoutDirection: UIWidgetLayoutDirection;
+    modelSceneLayer: UIWidgetModelSceneLayer;
+    scriptedAnimationEffectID: number;
 }
 export interface ZoneEntry {
     state: ZoneControlState;
@@ -551,6 +679,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetCaptureBarWidgetVisualizationInfo: (
@@ -566,6 +696,7 @@ export const C_UIWidgetManager = {
             tooltip: "",
             glowAnimType: CaptureBarWidgetGlowAnimType.None,
             fillDirectionType: CaptureBarWidgetFillDirectionType.RightToLeft,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -576,6 +707,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetCaptureZoneVisualizationInfo: (
@@ -596,6 +729,7 @@ export const C_UIWidgetManager = {
                 capturePoint: 0,
                 tooltip: "",
             },
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -606,6 +740,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetDiscreteProgressStepsVisualizationInfo: (
@@ -618,6 +754,7 @@ export const C_UIWidgetManager = {
             progressMax: 0,
             progressVal: 0,
             numSteps: 0,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -628,6 +765,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetDoubleIconAndTextWidgetVisualizationInfo: (
@@ -640,6 +779,7 @@ export const C_UIWidgetManager = {
             leftTooltip: "",
             rightText: "",
             rightTooltip: "",
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -650,6 +790,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetDoubleStateIconRowVisualizationInfo: (
@@ -659,6 +801,7 @@ export const C_UIWidgetManager = {
             shownState: WidgetShownState.Hidden,
             leftIcons: {} as any,
             rightIcons: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -669,6 +812,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetDoubleStatusBarWidgetVisualizationInfo: (
@@ -686,6 +831,8 @@ export const C_UIWidgetManager = {
             rightBarTooltip: "",
             barValueTextType: StatusBarValueTextType.Hidden,
             text: "",
+            leftBarTooltipLoc: UIWidgetTooltipLocation.Default,
+            rightBarTooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -696,6 +843,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetHorizontalCurrenciesWidgetVisualizationInfo: (
@@ -704,6 +853,7 @@ export const C_UIWidgetManager = {
         return {
             shownState: WidgetShownState.Hidden,
             currencies: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -714,6 +864,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetIconAndTextWidgetVisualizationInfo: (
@@ -724,6 +876,7 @@ export const C_UIWidgetManager = {
             text: "",
             tooltip: "",
             dynamicTooltip: "",
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -734,6 +887,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetIconTextAndBackgroundWidgetVisualizationInfo: (
@@ -752,6 +907,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetIconTextAndCurrenciesWidgetVisualizationInfo: (
@@ -765,6 +922,7 @@ export const C_UIWidgetManager = {
             text: "",
             description: "",
             currencies: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -775,6 +933,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetObjectiveTrackerWidgetSetID: (): number => {
@@ -802,6 +962,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetScenarioHeaderTimerWidgetVisualizationInfo: (
@@ -824,6 +986,29 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
+        };
+    },
+    GetSpacerVisualizationInfo: (
+        widgetID: number
+    ): SpacerVisualizationInfo | undefined => {
+        return {
+            shownState: WidgetShownState.Hidden,
+            widgetWidth: 0,
+            widgetHeight: 0,
+            widgetSizeSetting: 0,
+            textureKit: "",
+            frameTextureKit: "",
+            hasTimer: false,
+            orderIndex: 0,
+            widgetTag: "",
+            inAnimType: WidgetAnimationType.None,
+            outAnimType: WidgetAnimationType.None,
+            widgetScale: UIWidgetScale.OneHundred,
+            layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetSpellDisplayVisualizationInfo: (
@@ -841,6 +1026,7 @@ export const C_UIWidgetManager = {
                 iconDisplayType: SpellDisplayIconDisplayType.Buff,
                 textShownState: SpellDisplayTextShownStateType.Shown,
             },
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -851,6 +1037,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetStackedResourceTrackerWidgetVisualizationInfo: (
@@ -859,6 +1047,7 @@ export const C_UIWidgetManager = {
         return {
             shownState: WidgetShownState.Hidden,
             resources: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -869,6 +1058,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetStatusBarWidgetVisualizationInfo: (
@@ -886,6 +1077,7 @@ export const C_UIWidgetManager = {
             overrideBarTextShownType: StatusBarOverrideBarTextShownType.Never,
             colorTint: StatusBarColorTintValue.None,
             partitionValues: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -896,6 +1088,33 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
+        };
+    },
+    GetTextColumnRowVisualizationInfo: (
+        widgetID: number
+    ): TextColumnRowVisualizationInfo | undefined => {
+        return {
+            shownState: WidgetShownState.Hidden,
+            entries: {} as any,
+            textSizeType: UIWidgetTextSizeType.Small,
+            fontType: UIWidgetFontType.Normal,
+            tooltip: "",
+            tooltipLoc: UIWidgetTooltipLocation.Default,
+            bottomPadding: 0,
+            widgetSizeSetting: 0,
+            textureKit: "",
+            frameTextureKit: "",
+            hasTimer: false,
+            orderIndex: 0,
+            widgetTag: "",
+            inAnimType: WidgetAnimationType.None,
+            outAnimType: WidgetAnimationType.None,
+            widgetScale: UIWidgetScale.OneHundred,
+            layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetTextWithStateWidgetVisualizationInfo: (
@@ -909,6 +1128,8 @@ export const C_UIWidgetManager = {
             textSizeType: UIWidgetTextSizeType.Small,
             fontType: UIWidgetFontType.Normal,
             bottomPadding: 0,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
+            hAlign: WidgetTextHorizontalAlignmentType.Left,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -919,6 +1140,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetTextureAndTextRowVisualizationInfo: (
@@ -928,6 +1151,7 @@ export const C_UIWidgetManager = {
             shownState: WidgetShownState.Hidden,
             entries: {} as any,
             textSizeType: UIWidgetTextSizeType.Small,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -938,6 +1162,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetTextureAndTextVisualizationInfo: (
@@ -947,6 +1173,7 @@ export const C_UIWidgetManager = {
             shownState: WidgetShownState.Hidden,
             text: "",
             tooltip: "",
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -957,6 +1184,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetTextureWithAnimationVisualizationInfo: (
@@ -965,6 +1194,7 @@ export const C_UIWidgetManager = {
         return {
             shownState: WidgetShownState.Hidden,
             tooltip: "",
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -975,6 +1205,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     GetTopCenterWidgetSetID: (): number => {
@@ -995,6 +1227,7 @@ export const C_UIWidgetManager = {
             leadingEdgeType: ZoneControlLeadingEdgeType.NoLeadingEdge,
             dangerFlashType: ZoneControlDangerFlashType.ShowOnGoodStates,
             zoneEntries: {} as any,
+            tooltipLoc: UIWidgetTooltipLocation.Default,
             widgetSizeSetting: 0,
             textureKit: "",
             frameTextureKit: "",
@@ -1005,6 +1238,8 @@ export const C_UIWidgetManager = {
             outAnimType: WidgetAnimationType.None,
             widgetScale: UIWidgetScale.OneHundred,
             layoutDirection: UIWidgetLayoutDirection.Default,
+            modelSceneLayer: UIWidgetModelSceneLayer.None,
+            scriptedAnimationEffectID: 0,
         };
     },
     RegisterUnitForWidgetUpdates: (unitToken: string): void => {},

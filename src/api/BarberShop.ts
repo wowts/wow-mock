@@ -18,7 +18,7 @@ export const C_BarberShop = {
         return false;
     },
     Cancel: (): void => {},
-    ClearPreviewChoices: (): void => {},
+    ClearPreviewChoices: (clearSavedChoices: boolean): void => {},
     GetAvailableCustomizations: (): LuaArray<CharCustomizationCategory> => {
         return {} as any;
     },
@@ -44,11 +44,11 @@ export const C_BarberShop = {
     IsViewingAlteredForm: (): boolean => {
         return false;
     },
-    OldBarberShopLoaded: (): void => {},
     PreviewCustomizationChoice: (
         optionID: number,
         choiceID: number
     ): void => {},
+    RandomizeCustomizationChoices: (): void => {},
     ResetCameraRotation: (): void => {},
     ResetCustomizationChoices: (): void => {},
     RotateCamera: (diffDegrees: number): void => {},

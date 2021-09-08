@@ -9,9 +9,9 @@ export interface AlliedRaceInfo {
     maleName: string;
     femaleName: string;
     description: string;
+    raceFileString: string;
     crestAtlas: string;
     modelBackgroundAtlas: string;
-    raceFileString: string;
     bannerColor: ColorMixin;
 }
 export interface AlliedRaceRacialAbility {
@@ -35,9 +35,9 @@ export const C_AlliedRaces = {
             maleName: "",
             femaleName: "",
             description: "",
+            raceFileString: "",
             crestAtlas: "",
             modelBackgroundAtlas: "",
-            raceFileString: "",
             bannerColor: {} as any,
         };
     },

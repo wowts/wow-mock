@@ -28,7 +28,9 @@ export interface CurrencyInfo {
     isTradeable: boolean;
     quality: ItemQuality;
     maxWeeklyQuantity: number;
+    totalEarned: number;
     discovered: boolean;
+    useTotalEarnedForMaxQty: boolean;
 }
 export const C_CurrencyInfo = {
     DoesWarModeBonusApply: (
@@ -90,7 +92,9 @@ export const C_CurrencyInfo = {
             isTradeable: false,
             quality: ItemQuality.Poor,
             maxWeeklyQuantity: 0,
+            totalEarned: 0,
             discovered: false,
+            useTotalEarnedForMaxQty: false,
         };
     },
     GetCurrencyInfoFromLink: (link: string): CurrencyInfo => {
@@ -108,7 +112,9 @@ export const C_CurrencyInfo = {
             isTradeable: false,
             quality: ItemQuality.Poor,
             maxWeeklyQuantity: 0,
+            totalEarned: 0,
             discovered: false,
+            useTotalEarnedForMaxQty: false,
         };
     },
     GetCurrencyLink: (type: number, amount: number): string => {
@@ -129,7 +135,9 @@ export const C_CurrencyInfo = {
             isTradeable: false,
             quality: ItemQuality.Poor,
             maxWeeklyQuantity: 0,
+            totalEarned: 0,
             discovered: false,
+            useTotalEarnedForMaxQty: false,
         };
     },
     GetCurrencyListLink: (index: number): string => {

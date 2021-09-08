@@ -1,3 +1,4 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum PetJournalError {
     None = 0,
@@ -7,6 +8,30 @@ export const enum PetJournalError {
     NoFavoritesToSummon = 4,
     NoValidRandomSummon = 5,
     InvalidCovenant = 6,
+}
+export interface PetAbilityLevelInfo {
+    abilityID: number;
+    level: number;
+}
+export interface PetJournalPetInfo {
+    speciesID: number;
+    customName: string | undefined;
+    petLevel: number;
+    xp: number;
+    maxXP: number;
+    displayID: number;
+    isFavorite: boolean;
+    icon: number;
+    petType: number;
+    creatureID: number;
+    name: string | undefined;
+    sourceText: string;
+    description: string;
+    isWild: boolean;
+    canBattle: boolean;
+    tradable: boolean;
+    unique: boolean;
+    obtainable: boolean;
 }
 export const C_PetJournal = {
     GetDisplayIDByIndex: (
@@ -23,6 +48,49 @@ export const C_PetJournal = {
     },
     GetNumDisplays: (speciesID: number): number | undefined => {
         return 0;
+    },
+    GetPetAbilityInfo: (
+        abilityID: number
+    ): [name: string, icon: number, petType: number] => {
+        return ["", 0, 0];
+    },
+    GetPetAbilityListTable: (
+        speciesID: number
+    ): LuaArray<PetAbilityLevelInfo> => {
+        return {} as any;
+    },
+    GetPetInfoTableByPetID: (petID: string): PetJournalPetInfo => {
+        return {
+            speciesID: 0,
+            customName: "",
+            petLevel: 0,
+            xp: 0,
+            maxXP: 0,
+            displayID: 0,
+            isFavorite: false,
+            icon: 0,
+            petType: 0,
+            creatureID: 0,
+            name: "",
+            sourceText: "",
+            description: "",
+            isWild: false,
+            canBattle: false,
+            tradable: false,
+            unique: false,
+            obtainable: false,
+        };
+    },
+    GetPetLoadOutInfo: (
+        slot: number
+    ): [
+        petID: string | undefined,
+        ability1ID: number,
+        ability2ID: number,
+        ability3ID: number,
+        locked: boolean
+    ] => {
+        return ["", 0, 0, 0, false];
     },
     GetPetSummonInfo: (
         battlePetGUID: string

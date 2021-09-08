@@ -1,8 +1,31 @@
-import { ChatChannelRuleset, ChatChannelType } from "./common";
+import {
+    PermanentChatChannelType,
+    ChatChannelRuleset,
+    ChatChannelType,
+} from "./common";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
-
+export interface ChatChannelInfo {
+    name: string;
+    shortcut: string;
+    localID: number;
+    instanceID: number;
+    zoneChannelID: number;
+    channelType: PermanentChatChannelType;
+}
 export const C_ChatInfo = {
+    GetChannelInfoFromIdentifier: (
+        channelIdentifier: string
+    ): ChatChannelInfo | undefined => {
+        return {
+            name: "",
+            shortcut: "",
+            localID: 0,
+            instanceID: 0,
+            zoneChannelID: 0,
+            channelType: PermanentChatChannelType.None,
+        };
+    },
     GetChannelRosterInfo: (
         channelIndex: number,
         rosterIndex: number
@@ -21,6 +44,9 @@ export const C_ChatInfo = {
     GetChannelShortcutForChannelID: (channelID: number): string => {
         return "";
     },
+    GetChatTypeName: (typeID: number): string | undefined => {
+        return "";
+    },
     GetClubStreamIDs: (clubID: string): LuaArray<string> => {
         return {} as any;
     },
@@ -34,6 +60,9 @@ export const C_ChatInfo = {
         return 0;
     },
     GetNumActiveChannels: (): number => {
+        return 0;
+    },
+    GetNumReservedChatWindows: (): number => {
         return 0;
     },
     GetRegisteredAddonMessagePrefixes: (): LuaArray<string> => {
@@ -1433,6 +1462,27 @@ export type ChatMsgTextEmoteEvent = (
 export type ChatMsgTradeskillsEvent = (
     frame: UIFrame,
     e: "CHAT_MSG_TRADESKILLS",
+    text: string,
+    playerName: string,
+    languageName: string,
+    channelName: string,
+    playerName2: string,
+    specialFlags: string,
+    zoneChannelID: number,
+    channelIndex: number,
+    channelBaseName: string,
+    unused: number,
+    lineID: number,
+    guid: string,
+    bnSenderID: number,
+    isMobile: boolean,
+    isSubtitle: boolean,
+    hideSenderInLetterbox: boolean,
+    supressRaidIcons: boolean
+) => void;
+export type ChatMsgVoiceTextEvent = (
+    frame: UIFrame,
+    e: "CHAT_MSG_VOICE_TEXT",
     text: string,
     playerName: string,
     languageName: string,

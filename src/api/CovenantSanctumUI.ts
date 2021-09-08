@@ -65,7 +65,21 @@ export const C_CovenantSanctumUI = {
     GetSoulCurrencies: (): LuaArray<number> => {
         return {} as any;
     },
+    HasMaximumRenown: (): boolean => {
+        return false;
+    },
+    IsPlayerInRenownCatchUpMode: (): boolean => {
+        return false;
+    },
+    IsWeeklyRenownCapped: (): boolean => {
+        return false;
+    },
+    RequestCatchUpState: (): void => {},
 };
+export type CovenantRenownCatchUpStateUpdateEvent = (
+    frame: UIFrame,
+    e: "COVENANT_RENOWN_CATCH_UP_STATE_UPDATE"
+) => void;
 export type CovenantRenownInteractionEndedEvent = (
     frame: UIFrame,
     e: "COVENANT_RENOWN_INTERACTION_ENDED"

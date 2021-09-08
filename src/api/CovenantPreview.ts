@@ -32,6 +32,7 @@ export interface CovenantSoulbindInfo {
     uiTextureKit: string;
     name: string;
     description: string;
+    sortOrder: number;
 }
 export const C_CovenantPreview = {
     CloseFromUI: (): void => {},

@@ -6,6 +6,14 @@ export interface MapSeasonBestInfo {
     completionDate: MythicPlusDate;
     affixIDs: LuaArray<number>;
     members: LuaArray<MythicPlusMember>;
+    dungeonScore: number;
+}
+export interface MythicPlusAffixScoreInfo {
+    name: string;
+    score: number;
+    level: number;
+    durationSec: number;
+    overTime: boolean;
 }
 export interface MythicPlusDate {
     year: number;
@@ -28,6 +36,7 @@ export interface MythicPlusRunInfo {
     level: number;
     thisWeek: boolean;
     completed: boolean;
+    runScore: number;
 }
 export const C_MythicPlus = {
     GetCurrentAffixes: (): LuaArray<MythicPlusKeystoneAffix> => {
@@ -64,6 +73,14 @@ export const C_MythicPlus = {
     ): LuaArray<MythicPlusRunInfo> => {
         return {} as any;
     },
+    GetSeasonBestAffixScoreInfoForMap: (
+        mapChallengeModeID: number
+    ): [
+        affixScores: LuaArray<MythicPlusAffixScoreInfo>,
+        bestOverAllScore: number
+    ] => {
+        return [{} as any, 0];
+    },
     GetSeasonBestForMap: (
         mapChallengeModeID: number
     ): [
@@ -83,6 +100,7 @@ export const C_MythicPlus = {
                 },
                 affixIDs: {} as any,
                 members: {} as any,
+                dungeonScore: 0,
             },
             {
                 durationSec: 0,
@@ -96,6 +114,7 @@ export const C_MythicPlus = {
                 },
                 affixIDs: {} as any,
                 members: {} as any,
+                dungeonScore: 0,
             },
         ];
     },
@@ -106,7 +125,8 @@ export const C_MythicPlus = {
         level: number,
         completionDate: MythicPlusDate,
         affixIDs: LuaArray<number>,
-        members: LuaArray<MythicPlusMember>
+        members: LuaArray<MythicPlusMember>,
+        dungeonScore: number
     ] => {
         return [
             0,
@@ -114,6 +134,7 @@ export const C_MythicPlus = {
             { year: 0, month: 0, day: 0, hour: 0, minute: 0 },
             {} as any,
             {} as any,
+            0,
         ];
     },
     GetWeeklyChestRewardLevel: (): [
@@ -137,13 +158,6 @@ export const C_MythicPlus = {
 export type MythicPlusCurrentAffixUpdateEvent = (
     frame: UIFrame,
     e: "MYTHIC_PLUS_CURRENT_AFFIX_UPDATE"
-) => void;
-export type MythicPlusNewSeasonRecordEvent = (
-    frame: UIFrame,
-    e: "MYTHIC_PLUS_NEW_SEASON_RECORD",
-    mapChallengeModeID: number,
-    completionMilliseconds: number,
-    level: number
 ) => void;
 export type MythicPlusNewWeeklyRecordEvent = (
     frame: UIFrame,

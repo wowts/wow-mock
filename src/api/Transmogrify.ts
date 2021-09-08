@@ -1,39 +1,16 @@
-import { TransmogLocationMixin } from "../mixins";
+import { TransmogCollectionType, TransmogSearchType } from "./common";
+import { TransmogLocationMixin, TransmogPendingInfoMixin } from "../mixins";
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
-export const enum TransmogCollectionType {
-    Head = 0,
-    Shoulder = 1,
-    Back = 2,
-    Chest = 3,
-    Shirt = 4,
-    Tabard = 5,
-    Wrist = 6,
-    Hands = 7,
-    Waist = 8,
-    Legs = 9,
-    Feet = 10,
-    Wand = 11,
-    OneHAxe = 12,
-    OneHSword = 13,
-    OneHMace = 14,
-    Dagger = 15,
-    Fist = 16,
-    Shield = 17,
-    Holdable = 18,
-    TwoHAxe = 19,
-    TwoHSword = 20,
-    TwoHMace = 21,
-    Staff = 22,
-    Polearm = 23,
-    Bow = 24,
-    Gun = 25,
-    Crossbow = 26,
-    Warglaives = 27,
-    Paired = 28,
-}
 export const enum TransmogModification {
-    None = 0,
-    RightShoulder = 1,
+    Main = 0,
+    Secondary = 1,
+}
+export const enum TransmogPendingType {
+    Apply = 0,
+    Revert = 1,
+    ToggleOn = 2,
+    ToggleOff = 3,
 }
 export const enum TransmogSource {
     None = 0,
@@ -51,11 +28,44 @@ export const enum TransmogType {
     Appearance = 0,
     Illusion = 1,
 }
+export interface TransmogApplyWarningInfo {
+    itemLink: string;
+    text: string;
+}
 export const C_Transmog = {
+    ApplyAllPending: (currentSpecOnly: boolean): boolean => {
+        return false;
+    },
+    CanHaveSecondaryAppearanceForSlotID: (slotID: number): boolean => {
+        return false;
+    },
+    CanTransmogItem: (
+        itemInfo: string
+    ): [
+        canBeTransmogged: boolean,
+        selfFailureReason: string | undefined,
+        canTransmogOthers: boolean,
+        othersFailureReason: string | undefined
+    ] => {
+        return [false, "", false, ""];
+    },
+    CanTransmogItemWithItem: (
+        targetItemInfo: string,
+        sourceItemInfo: string
+    ): [canTransmog: boolean, failureReason: string | undefined] => {
+        return [false, ""];
+    },
     ClearAllPending: (): void => {},
     ClearPending: (transmogLocation: TransmogLocationMixin): void => {},
-    GetBaseCategory: (transmogID: number): number => {
+    Close: (): void => {},
+    GetApplyCost: (): number | undefined => {
         return 0;
+    },
+    GetApplyWarnings: (): LuaArray<TransmogApplyWarningInfo> => {
+        return {} as any;
+    },
+    GetBaseCategory: (transmogID: number): TransmogCollectionType => {
+        return TransmogCollectionType.None;
     },
     GetCreatureDisplayIDForSource: (
         itemModifiedAppearanceID: number
@@ -66,6 +76,16 @@ export const C_Transmog = {
         itemModifiedAppearanceID: number
     ): number | undefined => {
         return 0;
+    },
+    GetPending: (
+        transmogLocation: TransmogLocationMixin
+    ): TransmogPendingInfoMixin => {
+        return {} as any;
+    },
+    GetSlotEffectiveCategory: (
+        transmogLocation: TransmogLocationMixin
+    ): TransmogCollectionType => {
+        return TransmogCollectionType.None;
     },
     GetSlotForInventoryType: (inventoryType: number): number => {
         return 0;
@@ -96,20 +116,26 @@ export const C_Transmog = {
         baseVisualID: number,
         appliedSourceID: number,
         appliedVisualID: number,
-        appliedCategoryID: number,
         pendingSourceID: number,
         pendingVisualID: number,
-        pendingCategoryID: number,
         hasUndo: boolean,
         isHideVisual: boolean,
         itemSubclass: number
     ] => {
-        return [0, 0, 0, 0, 0, 0, 0, 0, false, false, 0];
+        return [0, 0, 0, 0, 0, 0, false, false, 0];
     },
+    IsAtTransmogNPC: (): boolean => {
+        return false;
+    },
+    IsSlotBeingCollapsed: (
+        transmogLocation: TransmogLocationMixin
+    ): boolean => {
+        return false;
+    },
+    LoadOutfit: (outfitID: number): void => {},
     SetPending: (
         transmogLocation: TransmogLocationMixin,
-        transmogID: number,
-        categoryID: number | undefined
+        pendingInfo: TransmogPendingInfoMixin
     ): void => {},
 };
 export type TransmogCollectionCameraUpdateEvent = (
@@ -141,8 +167,8 @@ export type TransmogCollectionUpdatedEvent = (
 export type TransmogSearchUpdatedEvent = (
     frame: UIFrame,
     e: "TRANSMOG_SEARCH_UPDATED",
-    searchType: number,
-    collectionType: number | undefined
+    searchType: TransmogSearchType,
+    collectionType: TransmogCollectionType | undefined
 ) => void;
 export type TransmogSetsUpdateFavoriteEvent = (
     frame: UIFrame,

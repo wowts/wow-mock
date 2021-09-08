@@ -24,6 +24,7 @@ export interface AutoCombatSpellInfo {
     previewMask: number;
     icon: number;
     spellTutorialFlag: number;
+    hasThornsEffect: boolean;
 }
 export interface AutoCombatTroopInfo {
     name: string;
@@ -51,9 +52,9 @@ export interface AutoCombatTroopInfo {
     maxHealth: number;
     role: number;
     isAutoTroop: boolean;
+    isSoulbind: boolean;
     isCollected: boolean;
     autoCombatStats: FollowerAutoCombatStatsInfo;
-    autoCombatSpells: LuaArray<AutoCombatSpellInfo>;
 }
 export interface AutoMissionCombatEventInfo {
     boardIndex: number;
@@ -81,12 +82,16 @@ export interface AutoMissionRound {
 export interface AutoMissionTargetingInfo {
     targetIndex: number;
     previewType: number;
+    spellID: number;
+    effectIndex: number;
 }
 export interface FollowerAutoCombatStatsInfo {
     currentHealth: number;
     maxHealth: number;
     attack: number;
     healingTimestamp: number;
+    healCost: number;
+    minutesHealingRemaining: number;
 }
 export interface FollowerDisplayID {
     id: number;
@@ -148,11 +153,13 @@ export interface GarrisonEnemyEncounterInfo {
     height: number;
     mechanics: LuaArray<GarrisonMechanicInfo>;
     autoCombatSpells: LuaArray<AutoCombatSpellInfo>;
+    autoCombatAutoAttack: AutoCombatSpellInfo | undefined;
     role: number;
     health: number;
     maxHealth: number;
     attack: number;
     boardIndex: number;
+    isElite: boolean;
 }
 export interface GarrisonFollowerDeathInfo {
     followerID: string;
@@ -184,6 +191,7 @@ export interface MissionDeploymentInfo {
 }
 export interface MissionEncounterIconInfo {
     portraitFileDataID: number;
+    missionScalar: number;
     isElite: boolean;
     isRare: boolean;
 }
@@ -219,12 +227,20 @@ export const C_Garrison = {
                 previewMask: 0,
                 icon: 0,
                 spellTutorialFlag: 0,
+                hasThornsEffect: false,
             },
         };
     },
     GetAutoMissionTargetingInfo: (
         missionID: number,
         followerID: string,
+        casterBoardIndex: number
+    ): LuaArray<AutoMissionTargetingInfo> => {
+        return {} as any;
+    },
+    GetAutoMissionTargetingInfoForSpell: (
+        missionID: number,
+        autoCombatSpellID: number,
         casterBoardIndex: number
     ): LuaArray<AutoMissionTargetingInfo> => {
         return {} as any;
@@ -245,6 +261,7 @@ export const C_Garrison = {
             previewMask: 0,
             icon: 0,
             spellTutorialFlag: 0,
+            hasThornsEffect: false,
         };
     },
     GetCurrentGarrTalentTreeFriendshipFactionID: (): number | undefined => {
@@ -256,8 +273,25 @@ export const C_Garrison = {
     GetFollowerAutoCombatSpells: (
         garrFollowerID: string,
         followerLevel: number
-    ): LuaArray<AutoCombatSpellInfo> => {
-        return {} as any;
+    ): [
+        autoCombatSpells: LuaArray<AutoCombatSpellInfo>,
+        autoCombatAutoAttack: AutoCombatSpellInfo | undefined
+    ] => {
+        return [
+            {} as any,
+            {
+                autoCombatSpellID: 0,
+                name: "",
+                description: "",
+                cooldown: 0,
+                duration: 0,
+                schoolMask: 0,
+                previewMask: 0,
+                icon: 0,
+                spellTutorialFlag: 0,
+                hasThornsEffect: false,
+            },
+        ];
     },
     GetFollowerAutoCombatStats: (
         garrFollowerID: string
@@ -267,6 +301,8 @@ export const C_Garrison = {
             maxHealth: 0,
             attack: 0,
             healingTimestamp: 0,
+            healCost: 0,
+            minutesHealingRemaining: 0,
         };
     },
     GetFollowerMissionCompleteInfo: (
@@ -333,7 +369,12 @@ export const C_Garrison = {
     GetMissionEncounterIconInfo: (
         missionID: number
     ): MissionEncounterIconInfo => {
-        return { portraitFileDataID: 0, isElite: false, isRare: false };
+        return {
+            portraitFileDataID: 0,
+            missionScalar: 0,
+            isElite: false,
+            isRare: false,
+        };
     },
     GetTalentInfo: (talentID: number): GarrisonTalentInfo => {
         return {
@@ -417,12 +458,17 @@ export const C_Garrison = {
     IsEnvironmentCountered: (missionID: number): boolean => {
         return false;
     },
+    IsFollowerOnCompletedMission: (followerID: string): boolean => {
+        return false;
+    },
     IsTalentConditionMet: (
         talentID: number
     ): [isMet: boolean, failureString: string | undefined] => {
         return [false, ""];
     },
-    RegenerateCombatLog: (missionID: number): void => {},
+    RegenerateCombatLog: (missionID: number): boolean => {
+        return false;
+    },
     RemoveFollowerFromMission: (
         missionID: number,
         followerID: string,
@@ -502,6 +548,11 @@ export type GarrisonFollowerDurabilityChangedEvent = (
     garrFollowerTypeID: number,
     followerDbID: string,
     followerDurability: number
+) => void;
+export type GarrisonFollowerHealedEvent = (
+    frame: UIFrame,
+    e: "GARRISON_FOLLOWER_HEALED",
+    followerID: string
 ) => void;
 export type GarrisonFollowerListUpdateEvent = (
     frame: UIFrame,
@@ -674,6 +725,17 @@ export type GarrisonShipyardNpcOpenedEvent = (
 export type GarrisonShowLandingPageEvent = (
     frame: UIFrame,
     e: "GARRISON_SHOW_LANDING_PAGE"
+) => void;
+export type GarrisonSpecGroupUpdatedEvent = (
+    frame: UIFrame,
+    e: "GARRISON_SPEC_GROUP_UPDATED",
+    garrTypeID: number,
+    specID: number
+) => void;
+export type GarrisonSpecGroupsClearedEvent = (
+    frame: UIFrame,
+    e: "GARRISON_SPEC_GROUPS_CLEARED",
+    garrTypeID: number
 ) => void;
 export type GarrisonTalentCompleteEvent = (
     frame: UIFrame,

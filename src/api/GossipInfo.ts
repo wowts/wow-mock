@@ -51,6 +51,9 @@ export const C_GossipInfo = {
     GetAvailableQuests: (): LuaArray<GossipQuestUIInfo> => {
         return {} as any;
     },
+    GetCustomGossipDescriptionString: (): string | undefined => {
+        return "";
+    },
     GetNumActiveQuests: (): number => {
         return 0;
     },

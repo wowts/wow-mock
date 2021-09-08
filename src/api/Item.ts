@@ -1,8 +1,13 @@
 import { InventoryType, ItemQuality } from "./common";
-import { ItemLocationMixin } from "../mixins";
+import { ItemLocationMixin, ItemTransmogInfoMixin } from "../mixins";
 import { UIFrame } from "../ui";
 
 export const C_Item = {
+    CanItemTransmogAppearance: (
+        itemLoc: ItemLocationMixin
+    ): [canTransmog: boolean, errorCode: number] => {
+        return [false, 0];
+    },
     CanScrapItem: (itemLoc: ItemLocationMixin): boolean => {
         return false;
     },
@@ -19,6 +24,16 @@ export const C_Item = {
         itemLoc: ItemLocationMixin
     ): boolean => {
         return false;
+    },
+    GetAppliedItemTransmogInfo: (
+        itemLoc: ItemLocationMixin
+    ): ItemTransmogInfoMixin | undefined => {
+        return {} as any;
+    },
+    GetBaseItemTransmogInfo: (
+        itemLoc: ItemLocationMixin
+    ): ItemTransmogInfoMixin | undefined => {
+        return {} as any;
     },
     GetCurrentItemLevel: (
         itemLocation: ItemLocationMixin
@@ -65,7 +80,13 @@ export const C_Item = {
     GetStackCount: (itemLocation: ItemLocationMixin): number => {
         return 0;
     },
+    IsAnimaItemByID: (itemInfo: string): boolean => {
+        return false;
+    },
     IsBound: (itemLocation: ItemLocationMixin): boolean => {
+        return false;
+    },
+    IsDressableItemByID: (itemInfo: string): boolean => {
         return false;
     },
     IsItemConduit: (itemLoc: ItemLocationMixin): boolean => {

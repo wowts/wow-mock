@@ -1,6 +1,17 @@
 import { RelativeContentDifficulty } from "./common";
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
-
+export interface MythicPlusRatingMapSummary {
+    challengeModeID: number;
+    mapScore: number;
+    bestRunLevel: number;
+    bestRunDurationMS: number;
+    finishedSuccess: boolean;
+}
+export interface MythicPlusRatingSummary {
+    currentSeasonScore: number;
+    runs: LuaArray<MythicPlusRatingMapSummary>;
+}
 export const C_PlayerInfo = {
     CanPlayerEnterChromieTime: (): boolean => {
         return false;
@@ -14,6 +25,12 @@ export const C_PlayerInfo = {
     ] => {
         return [false, ""];
     },
+    GetAlternateFormInfo: (): [
+        hasAlternateForm: boolean,
+        inAlternateForm: boolean
+    ] => {
+        return [false, false];
+    },
     GetContentDifficultyCreatureForPlayer: (
         unitToken: string
     ): RelativeContentDifficulty => {
@@ -23,6 +40,17 @@ export const C_PlayerInfo = {
         questID: number
     ): RelativeContentDifficulty => {
         return RelativeContentDifficulty.Trivial;
+    },
+    GetInstancesUnlockedAtLevel: (
+        level: number,
+        isRaid: boolean
+    ): LuaArray<number> => {
+        return {} as any;
+    },
+    GetPlayerMythicPlusRatingSummary: (
+        playerToken: string
+    ): MythicPlusRatingSummary => {
+        return { currentSeasonScore: 0, runs: {} as any };
     },
     IsPlayerEligibleForNPE: (): [
         isEligible: boolean,

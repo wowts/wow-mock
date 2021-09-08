@@ -9,6 +9,10 @@ export interface CovenantData {
     animaGemsFullSoundKit: number;
     animaNewGemSoundKit: number;
     animaReinforceSelectSoundKit: number;
+    upgradeTabSelectSoundKitID: number;
+    reservoirFullSoundKitID: number;
+    beginResearchSoundKitID: number;
+    renownFanfareSoundKitID: number;
     name: string;
     soulbindIDs: LuaArray<number>;
 }
@@ -26,6 +30,10 @@ export const C_Covenants = {
             animaGemsFullSoundKit: 0,
             animaNewGemSoundKit: 0,
             animaReinforceSelectSoundKit: 0,
+            upgradeTabSelectSoundKitID: 0,
+            reservoirFullSoundKitID: 0,
+            beginResearchSoundKitID: 0,
+            renownFanfareSoundKitID: 0,
             name: "",
             soulbindIDs: {} as any,
         };

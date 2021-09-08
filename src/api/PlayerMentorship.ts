@@ -22,6 +22,10 @@ export const C_PlayerMentorship = {
         return false;
     },
 };
+export type MentorshipStatusChangedEvent = (
+    frame: UIFrame,
+    e: "MENTORSHIP_STATUS_CHANGED"
+) => void;
 export type NewcomerGraduationEvent = (
     frame: UIFrame,
     e: "NEWCOMER_GRADUATION"

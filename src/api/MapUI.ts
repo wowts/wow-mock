@@ -25,6 +25,7 @@ export const enum UIMapFlag {
     FlightMapShowZoomOut = 8192,
     FlightMapAutoZoom = 16384,
     ForceOnNavbar = 32768,
+    AlwaysAllowUserWaypoints = 65536,
 }
 export const enum UIMapSystem {
     World = 0,

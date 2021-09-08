@@ -10,7 +10,6 @@ export interface CampaignChapterInfo {
     name: string;
     description: string;
     rewardQuestID: number;
-    orderIndex: number;
 }
 export interface CampaignFailureReason {
     text: string;
@@ -30,7 +29,7 @@ export const C_CampaignInfo = {
     GetCampaignChapterInfo: (
         campaignChapterID: number
     ): CampaignChapterInfo | undefined => {
-        return { name: "", description: "", rewardQuestID: 0, orderIndex: 0 };
+        return { name: "", description: "", rewardQuestID: 0 };
     },
     GetCampaignID: (questID: number): number => {
         return 0;

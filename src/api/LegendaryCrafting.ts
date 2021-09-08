@@ -1,3 +1,4 @@
+import { RuneforgePowerFilter } from "./common";
 import {
     RuneforgeLegendaryCraftDescription,
     ItemLocationMixin,
@@ -61,13 +62,19 @@ export const C_LegendaryCrafting = {
         return {} as any;
     },
     GetRuneforgePowers: (
-        baseItem: ItemLocationMixin | undefined
-    ): LuaArray<number> => {
-        return {} as any;
+        baseItem: ItemLocationMixin | undefined,
+        filter: RuneforgePowerFilter | undefined
+    ): [
+        primaryRuneforgePowerIDs: LuaArray<number>,
+        otherRuneforgePowerIDs: LuaArray<number>
+    ] => {
+        return [{} as any, {} as any];
     },
-    GetRuneforgePowersByClassAndSpec: (
+    GetRuneforgePowersByClassSpecAndCovenant: (
         classID: number | undefined,
-        specID: number | undefined
+        specID: number | undefined,
+        covenantID: number | undefined,
+        filter: RuneforgePowerFilter | undefined
     ): LuaArray<number> => {
         return {} as any;
     },

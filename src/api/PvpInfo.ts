@@ -157,7 +157,7 @@ export interface SpecialEventDetails {
     name: string;
     shortDescription: string;
     longDescription: string;
-    achievementID: number;
+    questID: number | undefined;
     isActive: boolean;
 }
 export const C_PvP = {
@@ -459,7 +459,7 @@ export const C_PvP = {
             name: "",
             shortDescription: "",
             longDescription: "",
-            achievementID: 0,
+            questID: 0,
             isActive: false,
         };
     },

@@ -1,8 +1,24 @@
+import { ItemLocationMixin } from "../mixins";
 import { UIFrame } from "../ui";
 
 export const C_ItemUpgrade = {
+    CanUpgradeItem: (baseItem: ItemLocationMixin): boolean => {
+        return false;
+    },
     GetItemHyperlink: (): string => {
         return "";
+    },
+    GetItemLevelIncrement: (numUpgradeLevels: number): number => {
+        return 0;
+    },
+    GetItemUpgradeEffect: (
+        effectIndex: number,
+        numUpgradeLevels: number | undefined
+    ): [outBaseEffect: string, outUpgradedEffect: string] => {
+        return ["", ""];
+    },
+    GetNumItemUpgradeEffects: (): number => {
+        return 0;
     },
 };
 export type ItemUpgradeMasterClosedEvent = (

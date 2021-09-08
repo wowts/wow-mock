@@ -1,11 +1,35 @@
+import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
-
+export interface SpellInfo {
+    name: string;
+    iconID: number;
+    castTime: number;
+    minRange: number;
+    maxRange: number;
+    spellID: number;
+}
 export const C_SpellBook = {
     ContainsAnyDisenchantSpell: (): boolean => {
         return false;
     },
+    GetCurrentLevelSpells: (level: number): LuaArray<number> => {
+        return {} as any;
+    },
     GetSkillLineIndexByID: (skillLineID: number): number | undefined => {
         return 0;
+    },
+    GetSpellInfo: (spellID: number): SpellInfo => {
+        return {
+            name: "",
+            iconID: 0,
+            castTime: 0,
+            minRange: 0,
+            maxRange: 0,
+            spellID: 0,
+        };
+    },
+    GetSpellLinkFromSpellID: (spellID: number): string => {
+        return "";
     },
     IsSpellDisabled: (spellID: number): boolean => {
         return false;

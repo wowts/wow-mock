@@ -1,5 +1,10 @@
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
+export interface LFGDungeonInfo {
+    name: string;
+    iconID: number;
+    link: string | undefined;
+}
 export interface LFGLockInfo {
     lfgID: number;
     reason: number;
@@ -24,6 +29,9 @@ export const C_LFGInfo = {
     ConfirmLfgExpandSearch: (): void => {},
     GetAllEntriesForCategory: (category: number): LuaArray<number> => {
         return {} as any;
+    },
+    GetDungeonInfo: (lfgDungeonID: number): LFGDungeonInfo => {
+        return { name: "", iconID: 0, link: "" };
     },
     GetLFDLockStates: (): LuaArray<LFGLockInfo> => {
         return {} as any;

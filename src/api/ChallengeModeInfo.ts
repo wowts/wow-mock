@@ -1,5 +1,10 @@
+import { ItemLocationMixin, ColorMixin } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
+export interface ChallengeModeCompletionMemberInfo {
+    memberGUID: string;
+    name: string;
+}
 export interface ChallengeModeGuildAttemptMember {
     name: string;
     classFileName: string;
@@ -13,6 +18,9 @@ export interface ChallengeModeGuildTopAttempt {
     members: LuaArray<ChallengeModeGuildAttemptMember>;
 }
 export const C_ChallengeMode = {
+    CanUseKeystoneInCurrentMap: (itemLocation: ItemLocationMixin): boolean => {
+        return false;
+    },
     ClearKeystone: (): void => {},
     CloseKeystoneFrame: (): void => {},
     GetActiveChallengeMapID: (): number | undefined => {
@@ -36,14 +44,26 @@ export const C_ChallengeMode = {
         time: number,
         onTime: boolean,
         keystoneUpgradeLevels: number,
-        practiceRun: boolean
+        practiceRun: boolean,
+        oldOverallDungeonScore: number,
+        newOverallDungeonScore: number,
+        IsMapRecord: boolean,
+        IsAffixRecord: boolean,
+        PrimaryAffix: number,
+        members: LuaArray<ChallengeModeCompletionMemberInfo>
     ] => {
-        return [0, 0, 0, false, 0, false];
+        return [0, 0, 0, false, 0, false, 0, 0, false, false, 0, {} as any];
     },
     GetDeathCount: (): [numDeaths: number, timeLost: number] => {
         return [0, 0];
     },
+    GetDungeonScoreRarityColor: (dungeonScore: number): ColorMixin => {
+        return {} as any;
+    },
     GetGuildLeaders: (): LuaArray<ChallengeModeGuildTopAttempt> => {
+        return {} as any;
+    },
+    GetKeystoneLevelRarityColor: (level: number): ColorMixin => {
         return {} as any;
     },
     GetMapTable: (): LuaArray<number> => {
@@ -60,6 +80,9 @@ export const C_ChallengeMode = {
     ] => {
         return ["", 0, 0, 0, 0];
     },
+    GetOverallDungeonScore: (): number => {
+        return 0;
+    },
     GetPowerLevelDamageHealthMod: (
         powerLevel: number
     ): [damageMod: number, healthMod: number] => {
@@ -71,6 +94,16 @@ export const C_ChallengeMode = {
         keystoneLevel: number
     ] => {
         return [0, {} as any, 0];
+    },
+    GetSpecificDungeonOverallScoreRarityColor: (
+        specificDungeonOverallScore: number
+    ): ColorMixin => {
+        return {} as any;
+    },
+    GetSpecificDungeonScoreRarityColor: (
+        specificDungeonScore: number
+    ): ColorMixin => {
+        return {} as any;
     },
     HasSlottedKeystone: (): boolean => {
         return false;

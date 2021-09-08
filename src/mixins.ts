@@ -75,6 +75,8 @@ export interface OptionalReagentInfo {}
 export interface BountyInfo {}
 export interface CharCustomizationCategory {}
 export interface CurrencyCost {}
+export interface ItemTransmogInfoMixin {}
+export interface TransmogPendingInfoMixin {}
 
 export class FakeItemLocation {
     CreateFromEquipmentSlot(equipmentSlotIndex: number): ItemLocationMixin {
