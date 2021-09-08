@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.33.0](https://github.com/wowts/wow-mock/compare/v1.32.5...v1.33.0) (2021-09-08)
+
+
+### Features
+
+* update to 9.1 interface ([9aa916d](https://github.com/wowts/wow-mock/commit/9aa916d63c346dbab3dda3f9f73c2345883c6bcd))
+
 ### [1.32.5](https://github.com/wowts/wow-mock/compare/v1.32.4...v1.32.5) (2021-09-07)
 
 
