@@ -1,4 +1,3 @@
-import { WeeklyRewardChestThresholdType, CachedRewardType } from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export const enum ConquestProgressBarDisplayType {
@@ -21,7 +20,7 @@ export interface WeeklyRewardActivityEncounterInfo {
     instanceID: number;
 }
 export interface WeeklyRewardActivityInfo {
-    type: WeeklyRewardChestThresholdType;
+    type: number; // Enum.WeeklyRewardChestThresholdType
     index: number;
     threshold: number;
     progress: number;
@@ -31,7 +30,7 @@ export interface WeeklyRewardActivityInfo {
     rewards: LuaArray<WeeklyRewardActivityRewardInfo>;
 }
 export interface WeeklyRewardActivityRewardInfo {
-    type: CachedRewardType;
+    type: number; // Enum.CachedRewardType
     id: number;
     quantity: number;
     itemDBID: string | undefined;
@@ -46,12 +45,12 @@ export const C_WeeklyRewards = {
     ClaimReward: (id: number): void => {},
     CloseInteraction: (): void => {},
     GetActivities: (
-        type: WeeklyRewardChestThresholdType | undefined
+        type: number | undefined // Enum.WeeklyRewardChestThresholdType | undefined
     ): LuaArray<WeeklyRewardActivityInfo> => {
         return {} as any;
     },
     GetActivityEncounterInfo: (
-        type: WeeklyRewardChestThresholdType,
+        type: number, // Enum.WeeklyRewardChestThresholdType
         index: number
     ): LuaArray<WeeklyRewardActivityEncounterInfo> => {
         return {} as any;

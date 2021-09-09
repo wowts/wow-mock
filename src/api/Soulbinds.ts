@@ -1,15 +1,10 @@
-import {
-    SoulbindConduitType,
-    SoulbindNodeState,
-    SoulbindConduitTransactionType,
-} from "../mixins";
 import { LuaArray } from "@wowts/lua";
 import { UIFrame } from "../ui";
 export interface ConduitCollectionData {
     conduitID: number;
     conduitRank: number;
     conduitItemLevel: number;
-    conduitType: SoulbindConduitType;
+    conduitType: number; // Enum.SoulbindConduitType
     conduitSpecSetID: number;
     conduitSpecIDs: LuaArray<number>;
     conduitSpecName: string | undefined;
@@ -46,8 +41,8 @@ export interface SoulbindNode {
     playerConditionReason: string | undefined;
     conduitID: number;
     conduitRank: number;
-    state: SoulbindNodeState;
-    conduitType: SoulbindConduitType | undefined;
+    state: number; // Enum.SoulbindNodeState
+    conduitType: number | undefined; // Enum.SoulbindConduitType | undefined
     parentNodeIDs: LuaArray<number>;
     failureRenownRequirement: number | undefined;
     socketEnhanced: boolean | undefined;
@@ -110,7 +105,7 @@ export const C_Soulbinds = {
         return 0;
     },
     GetConduitCollection: (
-        conduitType: SoulbindConduitType
+        conduitType: number // Enum.SoulbindConduitType
     ): LuaArray<ConduitCollectionData> => {
         return {} as any;
     },
@@ -255,7 +250,7 @@ export const C_Soulbinds = {
     ModifyNode: (
         nodeID: number,
         conduitID: number,
-        type: SoulbindConduitTransactionType
+        type: number // Enum.SoulbindConduitTransactionType
     ): void => {},
     SelectNode: (nodeID: number): void => {},
     UnmodifyNode: (nodeID: number): void => {},

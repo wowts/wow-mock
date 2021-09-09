@@ -2365,4 +2365,34 @@ export const Enum = {
         Mainhand: 11,
         Offhand: 12,
     },
+    SoulbindConduitTransactionType: {
+		Install: 0,
+		Uninstall: 1,
+	},
+    SoulbindConduitType: {
+		Finesse: 0,
+		Potency: 1,
+		Endurance: 2,
+		Flex: 3,
+	},
+	SoulbindNodeState: {
+		Unavailable: 0,
+		Unselected: 1,
+		Selectable: 2,
+		Selected: 3,
+	},
+	CachedRewardType: {
+		None: 0,
+		Item: 1,
+		Currency: 2,
+		Quest: 3,
+	},
+	WeeklyRewardChestThresholdType: {
+		None: 0,
+		MythicPlus: 1,
+		RankedPvP: 2,
+		Raid: 3,
+		AlsoReceive: 4,
+		Concession: 5,
+	},
 };
